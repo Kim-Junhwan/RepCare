@@ -19,6 +19,10 @@
 		C7D152952AC7F9E40064D59F /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = C7D152942AC7F9E40064D59F /* RxRelay */; };
 		C7D152992AC7F9E40064D59F /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C7D152982AC7F9E40064D59F /* RxSwift */; };
 		C7D1529E2AC7FAE80064D59F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C7D1529D2AC7FAE80064D59F /* SnapKit */; };
+		C7D152A22AC855F60064D59F /* PetClassObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152A12AC855F60064D59F /* PetClassObject.swift */; };
+		C7D152A82AC8F9D60064D59F /* PetSpeciesObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152A72AC8F9D60064D59F /* PetSpeciesObject.swift */; };
+		C7D152AA2AC91E320064D59F /* PetObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152A92AC91E320064D59F /* PetObject.swift */; };
+		C7D152D12AC93B3D0064D59F /* WeightObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152D02AC93B3D0064D59F /* WeightObject.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +34,10 @@
 		C7D152532AC51B280064D59F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C7D1525D2AC6E7AC0064D59F /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		C7D152612AC70B3E0064D59F /* PetListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetListViewController.swift; sourceTree = "<group>"; };
+		C7D152A12AC855F60064D59F /* PetClassObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetClassObject.swift; sourceTree = "<group>"; };
+		C7D152A72AC8F9D60064D59F /* PetSpeciesObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSpeciesObject.swift; sourceTree = "<group>"; };
+		C7D152A92AC91E320064D59F /* PetObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetObject.swift; sourceTree = "<group>"; };
+		C7D152D02AC93B3D0064D59F /* WeightObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightObject.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +95,8 @@
 		C7D1525A2AC6D17B0064D59F /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				C7D152A32AC8566C0064D59F /* Domain */,
+				C7D1529F2AC8234F0064D59F /* Data */,
 				C7D1525B2AC6E7580064D59F /* Application */,
 				C7D1525C2AC6E7910064D59F /* Presentation */,
 			);
@@ -125,6 +135,32 @@
 				C7D152612AC70B3E0064D59F /* PetListViewController.swift */,
 			);
 			path = PetList;
+			sourceTree = "<group>";
+		};
+		C7D1529F2AC8234F0064D59F /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				C7D152A02AC823540064D59F /* Object */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		C7D152A02AC823540064D59F /* Object */ = {
+			isa = PBXGroup;
+			children = (
+				C7D152A12AC855F60064D59F /* PetClassObject.swift */,
+				C7D152A72AC8F9D60064D59F /* PetSpeciesObject.swift */,
+				C7D152A92AC91E320064D59F /* PetObject.swift */,
+				C7D152D02AC93B3D0064D59F /* WeightObject.swift */,
+			);
+			path = Object;
+			sourceTree = "<group>";
+		};
+		C7D152A32AC8566C0064D59F /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domain;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -210,9 +246,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7D152A22AC855F60064D59F /* PetClassObject.swift in Sources */,
 				C7D152462AC51B270064D59F /* AppDelegate.swift in Sources */,
+				C7D152AA2AC91E320064D59F /* PetObject.swift in Sources */,
 				C7D152482AC51B270064D59F /* SceneDelegate.swift in Sources */,
+				C7D152D12AC93B3D0064D59F /* WeightObject.swift in Sources */,
 				C7D152622AC70B3E0064D59F /* PetListViewController.swift in Sources */,
+				C7D152A82AC8F9D60064D59F /* PetSpeciesObject.swift in Sources */,
 				C7D1525E2AC6E7AC0064D59F /* Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
