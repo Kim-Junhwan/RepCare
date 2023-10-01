@@ -7,7 +7,7 @@
 
 import RealmSwift
 
-enum PetClass: String, PersistableEnum {
+enum PetClassType: String, PersistableEnum {
     case reptile
     case arthropod
     case amphibia
@@ -16,6 +16,6 @@ enum PetClass: String, PersistableEnum {
 }
 
 class PetClassObject: Object {
-    @Persisted var petClass: PetClass
+    @Persisted var petClass: PetClassType
     @Persisted var species: List<PetSpeciesObject>
 }

@@ -11,13 +11,13 @@ import Foundation
 class PetObject: Object {
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var name: String
-    @Persisted var gender: Gender
+    @Persisted var gender: GenderType
     @Persisted var species: PetSpeciesObject?
     @Persisted var adoptionDate: Date
     @Persisted var birthDate: Date
     @Persisted var weights: List<WeightObject>
     
-    convenience init(name: String, gender: Gender, species: PetSpeciesObject, birthDate: Date, adoptionDate: Date) {
+    convenience init(name: String, gender: GenderType, species: PetSpeciesObject, birthDate: Date, adoptionDate: Date) {
         self.init()
         self.name = name
         self.gender = gender
@@ -27,7 +27,7 @@ class PetObject: Object {
     }
 }
 
-enum Gender: String, PersistableEnum {
+enum GenderType: String, PersistableEnum {
     case female
     case male
     case miss
