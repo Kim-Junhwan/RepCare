@@ -7,7 +7,14 @@
 
 import Foundation
 
+struct PetPage {
+    var currentPage: Int
+    var totalPage: Int
+    var petList: [Pet]
+}
+
 struct Pet {
+    var id: Int
     var name: String
     var petClass: PetClass
     var petSpecies: PetSpecies

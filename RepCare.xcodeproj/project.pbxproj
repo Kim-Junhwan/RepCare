@@ -30,8 +30,8 @@
 		C7D152DF2AC99BF90064D59F /* Morph.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152DE2AC99BF90064D59F /* Morph.swift */; };
 		C7D152E12AC99F980064D59F /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152E02AC99F980064D59F /* Gender.swift */; };
 		C7D152E42AC9A7F00064D59F /* PetWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152E32AC9A7F00064D59F /* PetWeight.swift */; };
-		C7D152E62AC9B5100064D59F /* PetListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152E52AC9B5100064D59F /* PetListRepository.swift */; };
-		C7D152EA2AC9BAB90064D59F /* PetQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152E92AC9BAB90064D59F /* PetQuery.swift */; };
+		C7D152E62AC9B5100064D59F /* PetRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152E52AC9B5100064D59F /* PetRepository.swift */; };
+		C7D152EC2ACA5EA70064D59F /* Rule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152EB2ACA5EA70064D59F /* Rule.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,8 +54,8 @@
 		C7D152DE2AC99BF90064D59F /* Morph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Morph.swift; sourceTree = "<group>"; };
 		C7D152E02AC99F980064D59F /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
 		C7D152E32AC9A7F00064D59F /* PetWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetWeight.swift; sourceTree = "<group>"; };
-		C7D152E52AC9B5100064D59F /* PetListRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetListRepository.swift; sourceTree = "<group>"; };
-		C7D152E92AC9BAB90064D59F /* PetQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetQuery.swift; sourceTree = "<group>"; };
+		C7D152E52AC9B5100064D59F /* PetRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetRepository.swift; sourceTree = "<group>"; };
+		C7D152EB2ACA5EA70064D59F /* Rule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rule.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +180,7 @@
 				C7D152D72AC999190064D59F /* Entities */,
 				C7D152D62AC998AC0064D59F /* Repositories */,
 				C7D152D32AC995150064D59F /* UseCases */,
+				C7D152EB2ACA5EA70064D59F /* Rule.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -195,7 +196,7 @@
 		C7D152D62AC998AC0064D59F /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				C7D152E52AC9B5100064D59F /* PetListRepository.swift */,
+				C7D152E52AC9B5100064D59F /* PetRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -203,7 +204,6 @@
 		C7D152D72AC999190064D59F /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				C7D152E82AC9BAAC0064D59F /* Query */,
 				C7D152E72AC9BA660064D59F /* Pet */,
 			);
 			path = Entities;
@@ -220,14 +220,6 @@
 				C7D152E32AC9A7F00064D59F /* PetWeight.swift */,
 			);
 			path = Pet;
-			sourceTree = "<group>";
-		};
-		C7D152E82AC9BAAC0064D59F /* Query */ = {
-			isa = PBXGroup;
-			children = (
-				C7D152E92AC9BAB90064D59F /* PetQuery.swift */,
-			);
-			path = Query;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -316,12 +308,12 @@
 				C7D152DB2AC999AB0064D59F /* PetSpecies.swift in Sources */,
 				C7D152A22AC855F60064D59F /* PetClassObject.swift in Sources */,
 				C7D152462AC51B270064D59F /* AppDelegate.swift in Sources */,
+				C7D152EC2ACA5EA70064D59F /* Rule.swift in Sources */,
 				C7D152D92AC999350064D59F /* PetClass.swift in Sources */,
-				C7D152EA2AC9BAB90064D59F /* PetQuery.swift in Sources */,
 				C7D152D52AC998900064D59F /* FetchPetSpeciesOfClassUseCase.swift in Sources */,
 				C7D152AA2AC91E320064D59F /* PetObject.swift in Sources */,
 				C7D152E12AC99F980064D59F /* Gender.swift in Sources */,
-				C7D152E62AC9B5100064D59F /* PetListRepository.swift in Sources */,
+				C7D152E62AC9B5100064D59F /* PetRepository.swift in Sources */,
 				C7D152482AC51B270064D59F /* SceneDelegate.swift in Sources */,
 				C7D152D12AC93B3D0064D59F /* WeightObject.swift in Sources */,
 				C7D152DF2AC99BF90064D59F /* Morph.swift in Sources */,
