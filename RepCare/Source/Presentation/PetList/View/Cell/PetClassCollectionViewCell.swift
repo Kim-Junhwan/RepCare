@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class PetClassCell: UICollectionViewCell {
+final class PetClassCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "PetClassCell"
     
@@ -43,8 +43,8 @@ final class PetClassCell: UICollectionViewCell {
     
     private func configureView() {
         classImageBackgroundView.addSubview(classImageView)
-        addSubview(classImageBackgroundView)
-        addSubview(classLabel)
+        contentView.addSubview(classImageBackgroundView)
+        contentView.addSubview(classLabel)
     }
     
     private func setConstraints() {
