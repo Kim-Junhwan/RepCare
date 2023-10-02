@@ -32,6 +32,7 @@
 		C7D152E42AC9A7F00064D59F /* PetWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152E32AC9A7F00064D59F /* PetWeight.swift */; };
 		C7D152E62AC9B5100064D59F /* PetRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152E52AC9B5100064D59F /* PetRepository.swift */; };
 		C7D152EC2ACA5EA70064D59F /* Rule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152EB2ACA5EA70064D59F /* Rule.swift */; };
+		C7D152EF2ACAA4250064D59F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152EE2ACAA4250064D59F /* BaseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		C7D152E32AC9A7F00064D59F /* PetWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetWeight.swift; sourceTree = "<group>"; };
 		C7D152E52AC9B5100064D59F /* PetRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetRepository.swift; sourceTree = "<group>"; };
 		C7D152EB2ACA5EA70064D59F /* Rule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rule.swift; sourceTree = "<group>"; };
+		C7D152EE2ACAA4250064D59F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 		C7D1525C2AC6E7910064D59F /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				C7D152ED2ACAA4160064D59F /* Base */,
 				C7D152602AC70B100064D59F /* PetList */,
 				C7D1525F2AC70B080064D59F /* Utils */,
 			);
@@ -220,6 +223,14 @@
 				C7D152E32AC9A7F00064D59F /* PetWeight.swift */,
 			);
 			path = Pet;
+			sourceTree = "<group>";
+		};
+		C7D152ED2ACAA4160064D59F /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				C7D152EE2ACAA4250064D59F /* BaseViewController.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -310,6 +321,7 @@
 				C7D152462AC51B270064D59F /* AppDelegate.swift in Sources */,
 				C7D152EC2ACA5EA70064D59F /* Rule.swift in Sources */,
 				C7D152D92AC999350064D59F /* PetClass.swift in Sources */,
+				C7D152EF2ACAA4250064D59F /* BaseViewController.swift in Sources */,
 				C7D152D52AC998900064D59F /* FetchPetSpeciesOfClassUseCase.swift in Sources */,
 				C7D152AA2AC91E320064D59F /* PetObject.swift in Sources */,
 				C7D152E12AC99F980064D59F /* Gender.swift in Sources */,

@@ -9,12 +9,9 @@ import UIKit
 import RealmSwift
 
 class PetListViewController: UIViewController {
-    
-    let realm = try! Realm()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
     }
 
 }
