@@ -8,10 +8,17 @@
 import UIKit
 import RealmSwift
 
-class PetListViewController: UIViewController {
+final class PetListViewController: BaseViewController {
+    
+    let mainView = PetListView()
+    
+    override func loadView() {
+        view = mainView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
 
 }
