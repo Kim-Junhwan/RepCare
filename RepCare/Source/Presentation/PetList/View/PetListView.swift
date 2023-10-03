@@ -21,23 +21,13 @@ final class PetListView: UIView {
         static let sectionInset = 10.0
     }
     
-    let searchBar: UISearchBar = {
-       let searchBar = UISearchBar()
-        searchBar.searchBarStyle = .minimal
-        return searchBar
-    }()
+    static let searchHeaderElementKind = "searchHeaderElementKind"
     
-    let filterButton: UIButton = {
-        var config = UIButton.Configuration.plain()
-        config.image = UIImage(systemName: "slider.horizontal.3")
-        config.baseForegroundColor = .black
-            
-       return UIButton(configuration: config)
-    }()
+    
     
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: createCollectionViewLayout())
-        
+        collectionView.minimumZoomScale = 0
         return collectionView
     }()
 
@@ -59,8 +49,9 @@ final class PetListView: UIView {
         setConstraints()
         configureDatasource()
         var snapshot = NSDiffableDataSourceSnapshot<Section, Int>()
-        snapshot.appendSections([.petClass])
-        snapshot.appendItems([1,2,3])
+        snapshot.appendSections([.petClass, .petList])
+        snapshot.appendItems([1,2,3], toSection: .petClass)
+        snapshot.appendItems([4,5,6,7], toSection: .petList)
         dataSource?.apply(snapshot)
     }
     
@@ -74,28 +65,17 @@ final class PetListView: UIView {
     }
     
     private func configureView() {
-        addSubview(searchBar)
-        addSubview(filterButton)
         addSubview(collectionView)
         addSubview(addPetButton)
     }
     
     private func setConstraints() {
-        filterButton.snp.makeConstraints { make in
-            make.width.height.equalTo(50)
-            make.top.trailing.equalTo(safeAreaLayoutGuide)
-        }
-        searchBar.snp.makeConstraints { make in
-            make.top.leading.equalTo(safeAreaLayoutGuide)
-            make.trailing.equalTo(filterButton.snp_leadingMargin)
-        }
         addPetButton.snp.makeConstraints { make in
             make.width.height.equalTo(70)
             make.bottom.trailing.equalTo(safeAreaLayoutGuide).inset(20)
         }
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(searchBar.snp.bottom).offset(10)
-            make.leading.trailing.bottom.equalTo(safeAreaLayoutGuide)
+            make.edges.equalTo(safeAreaLayoutGuide)
         }
     }
     
@@ -108,16 +88,22 @@ final class PetListView: UIView {
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(80.0), heightDimension: .absolute(100.0))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(70.0))
+                let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: PetListView.searchHeaderElementKind, alignment: .top)
                 section = NSCollectionLayoutSection(group: group)
                 section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                 section.interGroupSpacing = 10.0
+                section.boundarySupplementaryItems = [sectionHeader]
                 section.contentInsets = .init(top: .zero, leading: 10.0, bottom: .zero, trailing: 10.0)
             } else if sectionKind == .petList {
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .fractionalHeight(1.0))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(100.0))
-                let group = NSCollectionLayoutGroup(layoutSize: groupSize)
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.6))
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                group.interItemSpacing = .flexible(20)
                 section = NSCollectionLayoutSection(group: group)
+                section.interGroupSpacing = 10.0
+                section.contentInsets = .init(top: 20, leading: 10, bottom: 20, trailing: 10)
             } else {
                 fatalError("Unknown section")
             }
@@ -132,8 +118,22 @@ final class PetListView: UIView {
         }
     }
     
+    func createPetListCellRegistration() -> UICollectionView.CellRegistration<PetCollectionViewCell, Int> {
+        return UICollectionView.CellRegistration<PetCollectionViewCell, Int> { cell, indexPath, itemIdentifier in
+            cell.nameLabel.text = "\(indexPath.row)"
+        }
+    }
+    
+    func createHeaderViewRegistration() -> UICollectionView.SupplementaryRegistration<SearchHeaderView> {
+        return UICollectionView.SupplementaryRegistration<SearchHeaderView>(elementKind: PetListView.searchHeaderElementKind) { supplementaryView, elementKind, indexPath in
+            
+        }
+    }
+    
     func configureDatasource() {
         let petClassRegistration = createPetClassCellRegistration()
+        let headerRegistration = createHeaderViewRegistration()
+        let petListRegistration = createPetListCellRegistration()
         
         dataSource = UICollectionViewDiffableDataSource<Section, Int>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             guard let section = Section(rawValue: indexPath.section) else { return UICollectionViewCell()}
@@ -141,8 +141,12 @@ final class PetListView: UIView {
             case .petClass:
                 return collectionView.dequeueConfiguredReusableCell(using: petClassRegistration, for: indexPath, item: itemIdentifier)
             case .petList:
-                return collectionView.dequeueConfiguredReusableCell(using: petClassRegistration, for: indexPath, item: itemIdentifier)
+                return collectionView.dequeueConfiguredReusableCell(using: petListRegistration, for: indexPath, item: itemIdentifier)
             }
         })
+        
+        dataSource?.supplementaryViewProvider = { (view, kind, index) in
+            return self.collectionView.dequeueConfiguredReusableSupplementary(using: headerRegistration, for: index)
+        }
     }
 }

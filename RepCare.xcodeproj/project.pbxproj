@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C7A4C3042ACAFCD400E299B0 /* PetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A4C3032ACAFCD400E299B0 /* PetCollectionViewCell.swift */; };
+		C7A4C3062ACBEBA900E299B0 /* SearchHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A4C3052ACBEBA900E299B0 /* SearchHeaderView.swift */; };
 		C7D152462AC51B270064D59F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152452AC51B270064D59F /* AppDelegate.swift */; };
 		C7D152482AC51B270064D59F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152472AC51B270064D59F /* SceneDelegate.swift */; };
 		C7D1524F2AC51B280064D59F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7D1524E2AC51B280064D59F /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		C7A4C3032ACAFCD400E299B0 /* PetCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetCollectionViewCell.swift; sourceTree = "<group>"; };
+		C7A4C3052ACBEBA900E299B0 /* SearchHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeaderView.swift; sourceTree = "<group>"; };
 		C7D152422AC51B270064D59F /* RepCare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RepCare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7D152452AC51B270064D59F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7D152472AC51B270064D59F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 			children = (
 				C7D152F32ACAA8520064D59F /* Cell */,
 				C7D152F12ACAA5B90064D59F /* PetListView.swift */,
+				C7A4C3052ACBEBA900E299B0 /* SearchHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 				C7D152DB2AC999AB0064D59F /* PetSpecies.swift in Sources */,
 				C7D152A22AC855F60064D59F /* PetClassObject.swift in Sources */,
 				C7D152462AC51B270064D59F /* AppDelegate.swift in Sources */,
+				C7A4C3062ACBEBA900E299B0 /* SearchHeaderView.swift in Sources */,
 				C7D152EC2ACA5EA70064D59F /* Rule.swift in Sources */,
 				C7D152F52ACAA9EA0064D59F /* PetClassCollectionViewCell.swift in Sources */,
 				C7A4C3042ACAFCD400E299B0 /* PetCollectionViewCell.swift in Sources */,
