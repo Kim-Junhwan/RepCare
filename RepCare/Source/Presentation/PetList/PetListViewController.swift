@@ -18,6 +18,7 @@ final class PetListViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "개체 목록"
     }
     
 
