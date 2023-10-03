@@ -73,9 +73,13 @@ final class PetListView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        petListCollectionView.collectionViewLayout = makePetListCollectionViewLayout()
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
-        petListCollectionView.collectionViewLayout = makePetListCollectionViewLayout()
         addPetButton.layer.cornerRadius = addPetButton.frame.height/2
     }
     
