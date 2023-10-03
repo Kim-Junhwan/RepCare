@@ -13,7 +13,7 @@ final class PetClassCollectionViewCell: UICollectionViewCell {
     
     let classImageBackgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemGray4
+        view.backgroundColor = .systemGray5
         view.clipsToBounds = true
         return view
     }()
