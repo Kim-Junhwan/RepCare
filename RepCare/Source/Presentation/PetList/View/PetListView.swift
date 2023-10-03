@@ -16,6 +16,14 @@ final class PetListView: UIView {
         static let sectionInset = 10.0
     }
     
+    let searchBarStackView: UIStackView = {
+       let stackView = UIStackView()
+        stackView.spacing = 0
+        stackView.distribution = .fill
+        stackView.alignment = .center
+        return stackView
+    }()
+    
     let searchBar: UISearchBar = {
        let searchBar = UISearchBar()
         searchBar.searchBarStyle = .minimal
@@ -32,15 +40,16 @@ final class PetListView: UIView {
     
     lazy var petClassCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: makePetClassCollectionViewLayout())
-        collectionView.register(PetClassCell.self, forCellWithReuseIdentifier: PetClassCell.identifier)
+        collectionView.register(PetClassCollectionViewCell.self, forCellWithReuseIdentifier: PetClassCollectionViewCell.identifier)
         collectionView.dataSource = self
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
     
     lazy var petListCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: makePetListCollectionViewLayout())
-        collectionView.backgroundColor = .yellow
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
+        collectionView.register(PetCollectionViewCell.self, forCellWithReuseIdentifier: PetCollectionViewCell.identifier)
+        collectionView.dataSource = self
         return collectionView
     }()
     
@@ -66,25 +75,23 @@ final class PetListView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        petListCollectionView.collectionViewLayout = makePetListCollectionViewLayout()
         addPetButton.layer.cornerRadius = addPetButton.frame.height/2
     }
     
     private func configureView() {
-        addSubview(searchBar)
-        addSubview(filterButton)
+        addSubview(searchBarStackView)
+        searchBarStackView.addArrangedSubview(searchBar)
+        searchBarStackView.addArrangedSubview(filterButton)
         addSubview(petClassCollectionView)
         addSubview(petListCollectionView)
         addSubview(addPetButton)
     }
     
     private func setConstraints() {
-        filterButton.snp.makeConstraints { make in
-            make.width.height.equalTo(50)
-            make.top.trailing.equalTo(safeAreaLayoutGuide)
-        }
-        searchBar.snp.makeConstraints { make in
-            make.top.leading.equalTo(safeAreaLayoutGuide)
-            make.trailing.equalTo(filterButton.snp_leadingMargin)
+        searchBarStackView.snp.makeConstraints { make in
+            make.top.leading.trailing.equalTo(safeAreaLayoutGuide)
+            make.height.equalTo(50)
         }
         petClassCollectionView.snp.makeConstraints { make in
             make.top.equalTo(searchBar.snp_bottomMargin).offset(10)
@@ -113,7 +120,15 @@ final class PetListView: UIView {
     }
     
     private func makePetListCollectionViewLayout() -> UICollectionViewLayout {
-        return UICollectionViewFlowLayout()
+        let flowLayout = UICollectionViewFlowLayout()
+        let viewWidth = frame.width
+        let itemWidth = (viewWidth/2) - 20.0
+        flowLayout.itemSize = CGSize(width: itemWidth, height: itemWidth * 1.5)
+        flowLayout.scrollDirection = .vertical
+        flowLayout.minimumInteritemSpacing = 10.0
+        flowLayout.sectionInset = .init(top: .zero, left: 10.0, bottom: .zero, right: 10.0)
+        flowLayout.minimumLineSpacing = 10.0
+        return flowLayout
     }
 }
 
@@ -123,9 +138,16 @@ extension PetListView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PetClassCell.identifier, for: indexPath) as? PetClassCell else { return .init() }
+        if collectionView == petClassCollectionView {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PetClassCollectionViewCell.identifier, for: indexPath) as? PetClassCollectionViewCell else { return .init() }
+            
+            return cell
+        } else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PetCollectionViewCell.identifier, for: indexPath) as? PetCollectionViewCell else { return .init() }
+            
+            return cell
+        }
         
-        return cell
     }
     
     
