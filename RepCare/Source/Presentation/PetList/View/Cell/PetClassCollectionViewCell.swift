@@ -63,8 +63,9 @@ final class PetClassCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func configureCell() {
-        
+    func configureCell(petClass: PetClassItemViewModel) {
+        classImageView.image = petClass.image
+        classLabel.text = petClass.title
     }
     
     override var isSelected: Bool {

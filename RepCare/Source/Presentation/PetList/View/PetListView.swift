@@ -41,7 +41,6 @@ final class PetListView: UIView {
     lazy var petClassCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: makePetClassCollectionViewLayout())
         collectionView.register(PetClassCollectionViewCell.self, forCellWithReuseIdentifier: PetClassCollectionViewCell.identifier)
-        collectionView.dataSource = self
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
@@ -49,7 +48,6 @@ final class PetListView: UIView {
     lazy var petListCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
         collectionView.register(PetCollectionViewCell.self, forCellWithReuseIdentifier: PetCollectionViewCell.identifier)
-        collectionView.dataSource = self
         return collectionView
     }()
     
@@ -134,25 +132,4 @@ final class PetListView: UIView {
         flowLayout.minimumLineSpacing = 10.0
         return flowLayout
     }
-}
-
-extension PetListView: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        5
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == petClassCollectionView {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PetClassCollectionViewCell.identifier, for: indexPath) as? PetClassCollectionViewCell else { return .init() }
-            
-            return cell
-        } else {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PetCollectionViewCell.identifier, for: indexPath) as? PetCollectionViewCell else { return .init() }
-            
-            return cell
-        }
-        
-    }
-    
-    
 }
