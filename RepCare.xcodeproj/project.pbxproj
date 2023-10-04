@@ -36,6 +36,9 @@
 		C7D152EC2ACA5EA70064D59F /* Rule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152EB2ACA5EA70064D59F /* Rule.swift */; };
 		C7D152EF2ACAA4250064D59F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152EE2ACAA4250064D59F /* BaseViewController.swift */; };
 		C7D152F22ACAA5B90064D59F /* PetListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152F12ACAA5B90064D59F /* PetListView.swift */; };
+		C7F5F4132ACD400700ACFC76 /* PetListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F5F4122ACD400700ACFC76 /* PetListViewModel.swift */; };
+		C7F5F4162ACD403200ACFC76 /* PetClassItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F5F4152ACD403200ACFC76 /* PetClassItemViewModel.swift */; };
+		C7F5F4192ACD54F900ACFC76 /* PetListItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F5F4182ACD54F900ACFC76 /* PetListItemViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +67,9 @@
 		C7D152EB2ACA5EA70064D59F /* Rule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rule.swift; sourceTree = "<group>"; };
 		C7D152EE2ACAA4250064D59F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C7D152F12ACAA5B90064D59F /* PetListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetListView.swift; sourceTree = "<group>"; };
+		C7F5F4122ACD400700ACFC76 /* PetListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetListViewModel.swift; sourceTree = "<group>"; };
+		C7F5F4152ACD403200ACFC76 /* PetClassItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetClassItemViewModel.swift; sourceTree = "<group>"; };
+		C7F5F4182ACD54F900ACFC76 /* PetListItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetListItemViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +165,7 @@
 		C7D152602AC70B100064D59F /* PetList */ = {
 			isa = PBXGroup;
 			children = (
+				C7F5F4112ACD3FE600ACFC76 /* ViewModel */,
 				C7D152F02ACAA5AA0064D59F /* View */,
 				C7D152612AC70B3E0064D59F /* PetListViewController.swift */,
 			);
@@ -258,6 +265,16 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		C7F5F4112ACD3FE600ACFC76 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C7F5F4122ACD400700ACFC76 /* PetListViewModel.swift */,
+				C7F5F4152ACD403200ACFC76 /* PetClassItemViewModel.swift */,
+				C7F5F4182ACD54F900ACFC76 /* PetListItemViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -345,6 +362,9 @@
 				C7D152A22AC855F60064D59F /* PetClassObject.swift in Sources */,
 				C7D152462AC51B270064D59F /* AppDelegate.swift in Sources */,
 				C7D152EC2ACA5EA70064D59F /* Rule.swift in Sources */,
+				C7F5F4132ACD400700ACFC76 /* PetListViewModel.swift in Sources */,
+				C7F5F4192ACD54F900ACFC76 /* PetListItemViewModel.swift in Sources */,
+				C7F5F4162ACD403200ACFC76 /* PetClassItemViewModel.swift in Sources */,
 				C7D152D92AC999350064D59F /* PetClass.swift in Sources */,
 				C7A4C30A2ACC18A300E299B0 /* PetCollectionViewCell.swift in Sources */,
 				C7D152EF2ACAA4250064D59F /* BaseViewController.swift in Sources */,
