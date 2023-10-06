@@ -12,16 +12,16 @@ class PetObject: Object {
     @Persisted(primaryKey: true) var id: ObjectId
     @Persisted var name: String
     @Persisted var gender: GenderType
-    @Persisted var species: PetSpeciesObject?
+    @Persisted var detailSpecies: DetailSpeciesObject?
     @Persisted var adoptionDate: Date
     @Persisted var birthDate: Date
     @Persisted var weights: List<WeightObject>
     
-    convenience init(name: String, gender: GenderType, species: PetSpeciesObject, birthDate: Date, adoptionDate: Date) {
+    convenience init(name: String, gender: GenderType, detailSpecies: DetailSpeciesObject, birthDate: Date, adoptionDate: Date) {
         self.init()
         self.name = name
         self.gender = gender
-        self.species = species
+        self.detailSpecies = detailSpecies
         self.adoptionDate = adoptionDate
         self.birthDate = birthDate
     }

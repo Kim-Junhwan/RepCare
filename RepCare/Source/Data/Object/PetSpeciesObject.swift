@@ -9,10 +9,11 @@ import RealmSwift
 
 class PetSpeciesObject: Object {
     @Persisted(originProperty: "species") var petClass: LinkingObjects<PetClassObject>
-    @Persisted var species: String
+    @Persisted var title: String
+    @Persisted var detailSpecies: List<DetailSpeciesObject>
     
     convenience init(species: String) {
         self.init()
-        self.species = species
+        self.title = species
     }
 }

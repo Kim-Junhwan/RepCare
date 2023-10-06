@@ -16,6 +16,11 @@ enum PetClassType: String, PersistableEnum {
 }
 
 class PetClassObject: Object {
-    @Persisted var petClass: PetClassType
+    @Persisted var title: PetClassType
     @Persisted var species: List<PetSpeciesObject>
+    
+    convenience init(petClass: PetClassType) {
+        self.init()
+        self.title = petClass
+    }
 }
