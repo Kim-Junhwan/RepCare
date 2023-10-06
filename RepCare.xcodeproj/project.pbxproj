@@ -25,13 +25,13 @@
 		C7D152A82AC8F9D60064D59F /* PetSpeciesObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152A72AC8F9D60064D59F /* PetSpeciesObject.swift */; };
 		C7D152AA2AC91E320064D59F /* PetObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152A92AC91E320064D59F /* PetObject.swift */; };
 		C7D152D12AC93B3D0064D59F /* WeightObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152D02AC93B3D0064D59F /* WeightObject.swift */; };
-		C7D152D52AC998900064D59F /* FetchPetSpeciesOfClassUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152D42AC998900064D59F /* FetchPetSpeciesOfClassUseCase.swift */; };
+		C7D152D52AC998900064D59F /* FetchPetListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152D42AC998900064D59F /* FetchPetListUseCase.swift */; };
 		C7D152D92AC999350064D59F /* PetClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152D82AC999350064D59F /* PetClass.swift */; };
-		C7D152DB2AC999AB0064D59F /* PetSpecies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152DA2AC999AB0064D59F /* PetSpecies.swift */; };
+		C7D152DB2AC999AB0064D59F /* Species.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152DA2AC999AB0064D59F /* Species.swift */; };
 		C7D152DD2AC99B950064D59F /* Pet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152DC2AC99B950064D59F /* Pet.swift */; };
 		C7D152DF2AC99BF90064D59F /* Morph.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152DE2AC99BF90064D59F /* Morph.swift */; };
 		C7D152E12AC99F980064D59F /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152E02AC99F980064D59F /* Gender.swift */; };
-		C7D152E42AC9A7F00064D59F /* PetWeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152E32AC9A7F00064D59F /* PetWeight.swift */; };
+		C7D152E42AC9A7F00064D59F /* Weight.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152E32AC9A7F00064D59F /* Weight.swift */; };
 		C7D152E62AC9B5100064D59F /* PetRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152E52AC9B5100064D59F /* PetRepository.swift */; };
 		C7D152EC2ACA5EA70064D59F /* Rule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152EB2ACA5EA70064D59F /* Rule.swift */; };
 		C7D152EF2ACAA4250064D59F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152EE2ACAA4250064D59F /* BaseViewController.swift */; };
@@ -39,6 +39,19 @@
 		C7F5F4132ACD400700ACFC76 /* PetListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F5F4122ACD400700ACFC76 /* PetListViewModel.swift */; };
 		C7F5F4162ACD403200ACFC76 /* PetClassItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F5F4152ACD403200ACFC76 /* PetClassItemViewModel.swift */; };
 		C7F5F4192ACD54F900ACFC76 /* PetListItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F5F4182ACD54F900ACFC76 /* PetListItemViewModel.swift */; };
+		C7F5F41C2ACD680400ACFC76 /* RegisterNewPetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F5F41B2ACD680400ACFC76 /* RegisterNewPetViewController.swift */; };
+		C7F5F41F2ACE372D00ACFC76 /* RegisterPetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F5F41E2ACE372D00ACFC76 /* RegisterPetView.swift */; };
+		C7F5F4212ACE551600ACFC76 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F5F4202ACE551600ACFC76 /* ActionButton.swift */; };
+		C7F5F4232ACE5A2500ACFC76 /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F5F4222ACE5A2500ACFC76 /* CustomTextField.swift */; };
+		C7F5F4252ACE5BA500ACFC76 /* RegisterInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F5F4242ACE5BA500ACFC76 /* RegisterInputView.swift */; };
+		C7F5F42A2ACE870300ACFC76 /* RegisterPetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F5F4292ACE870300ACFC76 /* RegisterPetViewModel.swift */; };
+		C7F5F42D2ACE873F00ACFC76 /* ClassSpeciesMorphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F5F42C2ACE873F00ACFC76 /* ClassSpeciesMorphViewController.swift */; };
+		C7F5F4302ACE875900ACFC76 /* ClassSpeciesMorphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F5F42F2ACE875900ACFC76 /* ClassSpeciesMorphViewModel.swift */; };
+		C7F5F4332ACE87AA00ACFC76 /* SpeciesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F5F4322ACE87AA00ACFC76 /* SpeciesRepository.swift */; };
+		C7F5F4362ACE8A6400ACFC76 /* SpeciesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F5F4352ACE8A6400ACFC76 /* SpeciesView.swift */; };
+		C7F5F4392ACEEA9200ACFC76 /* DetailSpeciesObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F5F4382ACEEA9200ACFC76 /* DetailSpeciesObject.swift */; };
+		C7F5F43B2ACF112700ACFC76 /* MorphObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F5F43A2ACF112700ACFC76 /* MorphObject.swift */; };
+		C7F5F4982ACFC9BA00ACFC76 /* repcare.realm in Resources */ = {isa = PBXBuildFile; fileRef = C7F5F4972ACFC9BA00ACFC76 /* repcare.realm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,13 +69,13 @@
 		C7D152A72AC8F9D60064D59F /* PetSpeciesObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSpeciesObject.swift; sourceTree = "<group>"; };
 		C7D152A92AC91E320064D59F /* PetObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetObject.swift; sourceTree = "<group>"; };
 		C7D152D02AC93B3D0064D59F /* WeightObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightObject.swift; sourceTree = "<group>"; };
-		C7D152D42AC998900064D59F /* FetchPetSpeciesOfClassUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPetSpeciesOfClassUseCase.swift; sourceTree = "<group>"; };
+		C7D152D42AC998900064D59F /* FetchPetListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPetListUseCase.swift; sourceTree = "<group>"; };
 		C7D152D82AC999350064D59F /* PetClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetClass.swift; sourceTree = "<group>"; };
-		C7D152DA2AC999AB0064D59F /* PetSpecies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSpecies.swift; sourceTree = "<group>"; };
+		C7D152DA2AC999AB0064D59F /* Species.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Species.swift; sourceTree = "<group>"; };
 		C7D152DC2AC99B950064D59F /* Pet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pet.swift; sourceTree = "<group>"; };
 		C7D152DE2AC99BF90064D59F /* Morph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Morph.swift; sourceTree = "<group>"; };
 		C7D152E02AC99F980064D59F /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
-		C7D152E32AC9A7F00064D59F /* PetWeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetWeight.swift; sourceTree = "<group>"; };
+		C7D152E32AC9A7F00064D59F /* Weight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weight.swift; sourceTree = "<group>"; };
 		C7D152E52AC9B5100064D59F /* PetRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetRepository.swift; sourceTree = "<group>"; };
 		C7D152EB2ACA5EA70064D59F /* Rule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rule.swift; sourceTree = "<group>"; };
 		C7D152EE2ACAA4250064D59F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -70,6 +83,19 @@
 		C7F5F4122ACD400700ACFC76 /* PetListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetListViewModel.swift; sourceTree = "<group>"; };
 		C7F5F4152ACD403200ACFC76 /* PetClassItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetClassItemViewModel.swift; sourceTree = "<group>"; };
 		C7F5F4182ACD54F900ACFC76 /* PetListItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetListItemViewModel.swift; sourceTree = "<group>"; };
+		C7F5F41B2ACD680400ACFC76 /* RegisterNewPetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterNewPetViewController.swift; sourceTree = "<group>"; };
+		C7F5F41E2ACE372D00ACFC76 /* RegisterPetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPetView.swift; sourceTree = "<group>"; };
+		C7F5F4202ACE551600ACFC76 /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
+		C7F5F4222ACE5A2500ACFC76 /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		C7F5F4242ACE5BA500ACFC76 /* RegisterInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterInputView.swift; sourceTree = "<group>"; };
+		C7F5F4292ACE870300ACFC76 /* RegisterPetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPetViewModel.swift; sourceTree = "<group>"; };
+		C7F5F42C2ACE873F00ACFC76 /* ClassSpeciesMorphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassSpeciesMorphViewController.swift; sourceTree = "<group>"; };
+		C7F5F42F2ACE875900ACFC76 /* ClassSpeciesMorphViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassSpeciesMorphViewModel.swift; sourceTree = "<group>"; };
+		C7F5F4322ACE87AA00ACFC76 /* SpeciesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesRepository.swift; sourceTree = "<group>"; };
+		C7F5F4352ACE8A6400ACFC76 /* SpeciesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesView.swift; sourceTree = "<group>"; };
+		C7F5F4382ACEEA9200ACFC76 /* DetailSpeciesObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSpeciesObject.swift; sourceTree = "<group>"; };
+		C7F5F43A2ACF112700ACFC76 /* MorphObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorphObject.swift; sourceTree = "<group>"; };
+		C7F5F4972ACFC9BA00ACFC76 /* repcare.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = repcare.realm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +143,7 @@
 		C7D152592AC6D16C0064D59F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				C7F5F4972ACFC9BA00ACFC76 /* repcare.realm */,
 				C7D1524E2AC51B280064D59F /* Assets.xcassets */,
 				C7D152502AC51B280064D59F /* LaunchScreen.storyboard */,
 				C7D152532AC51B280064D59F /* Info.plist */,
@@ -147,6 +174,8 @@
 		C7D1525C2AC6E7910064D59F /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				C7F5F42B2ACE870D00ACFC76 /* ClassSpeciesMorph */,
+				C7F5F41A2ACD67E100ACFC76 /* RegisterPet */,
 				C7D152ED2ACAA4160064D59F /* Base */,
 				C7D152602AC70B100064D59F /* PetList */,
 				C7D1525F2AC70B080064D59F /* Utils */,
@@ -185,7 +214,9 @@
 			children = (
 				C7D152A12AC855F60064D59F /* PetClassObject.swift */,
 				C7D152A72AC8F9D60064D59F /* PetSpeciesObject.swift */,
+				C7F5F4382ACEEA9200ACFC76 /* DetailSpeciesObject.swift */,
 				C7D152A92AC91E320064D59F /* PetObject.swift */,
+				C7F5F43A2ACF112700ACFC76 /* MorphObject.swift */,
 				C7D152D02AC93B3D0064D59F /* WeightObject.swift */,
 			);
 			path = Object;
@@ -205,7 +236,7 @@
 		C7D152D32AC995150064D59F /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
-				C7D152D42AC998900064D59F /* FetchPetSpeciesOfClassUseCase.swift */,
+				C7D152D42AC998900064D59F /* FetchPetListUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -214,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				C7D152E52AC9B5100064D59F /* PetRepository.swift */,
+				C7F5F4322ACE87AA00ACFC76 /* SpeciesRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -230,11 +262,11 @@
 			isa = PBXGroup;
 			children = (
 				C7D152D82AC999350064D59F /* PetClass.swift */,
-				C7D152DA2AC999AB0064D59F /* PetSpecies.swift */,
+				C7D152DA2AC999AB0064D59F /* Species.swift */,
 				C7D152DC2AC99B950064D59F /* Pet.swift */,
 				C7D152DE2AC99BF90064D59F /* Morph.swift */,
 				C7D152E02AC99F980064D59F /* Gender.swift */,
-				C7D152E32AC9A7F00064D59F /* PetWeight.swift */,
+				C7D152E32AC9A7F00064D59F /* Weight.swift */,
 			);
 			path = Pet;
 			sourceTree = "<group>";
@@ -273,6 +305,61 @@
 				C7F5F4182ACD54F900ACFC76 /* PetListItemViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C7F5F41A2ACD67E100ACFC76 /* RegisterPet */ = {
+			isa = PBXGroup;
+			children = (
+				C7F5F4282ACE86E800ACFC76 /* ViewModel */,
+				C7F5F41D2ACE371700ACFC76 /* View */,
+				C7F5F41B2ACD680400ACFC76 /* RegisterNewPetViewController.swift */,
+			);
+			path = RegisterPet;
+			sourceTree = "<group>";
+		};
+		C7F5F41D2ACE371700ACFC76 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C7F5F4222ACE5A2500ACFC76 /* CustomTextField.swift */,
+				C7F5F41E2ACE372D00ACFC76 /* RegisterPetView.swift */,
+				C7F5F4202ACE551600ACFC76 /* ActionButton.swift */,
+				C7F5F4242ACE5BA500ACFC76 /* RegisterInputView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C7F5F4282ACE86E800ACFC76 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C7F5F4292ACE870300ACFC76 /* RegisterPetViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C7F5F42B2ACE870D00ACFC76 /* ClassSpeciesMorph */ = {
+			isa = PBXGroup;
+			children = (
+				C7F5F4342ACE8A5400ACFC76 /* View */,
+				C7F5F42E2ACE874700ACFC76 /* ViewModel */,
+				C7F5F42C2ACE873F00ACFC76 /* ClassSpeciesMorphViewController.swift */,
+			);
+			path = ClassSpeciesMorph;
+			sourceTree = "<group>";
+		};
+		C7F5F42E2ACE874700ACFC76 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C7F5F42F2ACE875900ACFC76 /* ClassSpeciesMorphViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C7F5F4342ACE8A5400ACFC76 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C7F5F4352ACE8A6400ACFC76 /* SpeciesView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -346,6 +433,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7F5F4982ACFC9BA00ACFC76 /* repcare.realm in Resources */,
 				C7D152522AC51B280064D59F /* LaunchScreen.storyboard in Resources */,
 				C7D1524F2AC51B280064D59F /* Assets.xcassets in Resources */,
 			);
@@ -358,29 +446,41 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7D152DB2AC999AB0064D59F /* PetSpecies.swift in Sources */,
+				C7F5F4232ACE5A2500ACFC76 /* CustomTextField.swift in Sources */,
+				C7F5F43B2ACF112700ACFC76 /* MorphObject.swift in Sources */,
+				C7D152DB2AC999AB0064D59F /* Species.swift in Sources */,
+				C7F5F4252ACE5BA500ACFC76 /* RegisterInputView.swift in Sources */,
 				C7D152A22AC855F60064D59F /* PetClassObject.swift in Sources */,
+				C7F5F41C2ACD680400ACFC76 /* RegisterNewPetViewController.swift in Sources */,
 				C7D152462AC51B270064D59F /* AppDelegate.swift in Sources */,
+				C7F5F4332ACE87AA00ACFC76 /* SpeciesRepository.swift in Sources */,
 				C7D152EC2ACA5EA70064D59F /* Rule.swift in Sources */,
+				C7F5F41F2ACE372D00ACFC76 /* RegisterPetView.swift in Sources */,
 				C7F5F4132ACD400700ACFC76 /* PetListViewModel.swift in Sources */,
 				C7F5F4192ACD54F900ACFC76 /* PetListItemViewModel.swift in Sources */,
 				C7F5F4162ACD403200ACFC76 /* PetClassItemViewModel.swift in Sources */,
 				C7D152D92AC999350064D59F /* PetClass.swift in Sources */,
+				C7F5F4392ACEEA9200ACFC76 /* DetailSpeciesObject.swift in Sources */,
 				C7A4C30A2ACC18A300E299B0 /* PetCollectionViewCell.swift in Sources */,
 				C7D152EF2ACAA4250064D59F /* BaseViewController.swift in Sources */,
-				C7D152D52AC998900064D59F /* FetchPetSpeciesOfClassUseCase.swift in Sources */,
+				C7D152D52AC998900064D59F /* FetchPetListUseCase.swift in Sources */,
 				C7D152AA2AC91E320064D59F /* PetObject.swift in Sources */,
+				C7F5F4212ACE551600ACFC76 /* ActionButton.swift in Sources */,
 				C7D152E12AC99F980064D59F /* Gender.swift in Sources */,
 				C7D152E62AC9B5100064D59F /* PetRepository.swift in Sources */,
 				C7D152482AC51B270064D59F /* SceneDelegate.swift in Sources */,
+				C7F5F42D2ACE873F00ACFC76 /* ClassSpeciesMorphViewController.swift in Sources */,
 				C7D152D12AC93B3D0064D59F /* WeightObject.swift in Sources */,
 				C7D152DF2AC99BF90064D59F /* Morph.swift in Sources */,
 				C7D152622AC70B3E0064D59F /* PetListViewController.swift in Sources */,
 				C7A4C3092ACC18A300E299B0 /* PetClassCollectionViewCell.swift in Sources */,
-				C7D152E42AC9A7F00064D59F /* PetWeight.swift in Sources */,
+				C7D152E42AC9A7F00064D59F /* Weight.swift in Sources */,
 				C7D152DD2AC99B950064D59F /* Pet.swift in Sources */,
 				C7D152A82AC8F9D60064D59F /* PetSpeciesObject.swift in Sources */,
+				C7F5F4362ACE8A6400ACFC76 /* SpeciesView.swift in Sources */,
+				C7F5F42A2ACE870300ACFC76 /* RegisterPetViewModel.swift in Sources */,
 				C7D1525E2AC6E7AC0064D59F /* Color.swift in Sources */,
+				C7F5F4302ACE875900ACFC76 /* ClassSpeciesMorphViewModel.swift in Sources */,
 				C7D152F22ACAA5B90064D59F /* PetListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

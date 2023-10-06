@@ -16,10 +16,12 @@ struct PetRepositoryResponse {
 
 struct PetQuery {
     let petClass: PetClass
-    let species: PetSpecies?
+    let species: Species?
     let searchKeyword: String?
 }
 
 protocol PetRepository {
+    func registerPet(pet: Pet) throws
+    func deletePet(pet: Pet)
     func fetchPetList(query: PetQuery, start: Int) -> PetRepositoryResponse
 }

@@ -17,7 +17,7 @@ struct Pet {
     var id: Int
     var name: String
     var petClass: PetClass
-    var petSpecies: PetSpecies
+    var petSpecies: Species
     var morph: Morph
     var adoptionDate: Date
     var birthDate: Date
