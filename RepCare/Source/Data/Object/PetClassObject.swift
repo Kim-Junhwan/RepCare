@@ -16,11 +16,27 @@ enum PetClassType: String, PersistableEnum {
 }
 
 class PetClassObject: Object {
+    @Persisted(primaryKey: true) var _id: ObjectId
     @Persisted var title: PetClassType
     @Persisted var species: List<PetSpeciesObject>
     
     convenience init(petClass: PetClassType) {
         self.init()
         self.title = petClass
+    }
+    
+    func toDomain() -> PetClass {
+        switch title {
+        case .reptile:
+            return .reptile
+        case .arthropod:
+            return .arthropod
+        case .amphibia:
+            return .amphibia
+        case .mammalia:
+            return .mammalia
+        case .etc:
+            return .etc
+        }
     }
 }

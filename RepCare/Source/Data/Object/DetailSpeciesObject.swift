@@ -8,6 +8,7 @@
 import RealmSwift
 
 class DetailSpeciesObject: Object {
+    @Persisted(primaryKey: true) var _id: ObjectId
     @Persisted(originProperty: "detailSpecies") var petClass: LinkingObjects<PetSpeciesObject>
     @Persisted var title: String
     @Persisted var morph: List<MorphObject>

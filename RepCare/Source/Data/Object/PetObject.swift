@@ -9,7 +9,7 @@ import RealmSwift
 import Foundation
 
 class PetObject: Object {
-    @Persisted(primaryKey: true) var id: ObjectId
+    @Persisted(primaryKey: true) var _id: ObjectId
     @Persisted var name: String
     @Persisted var gender: GenderType
     @Persisted var detailSpecies: DetailSpeciesObject?

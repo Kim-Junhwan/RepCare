@@ -9,6 +9,7 @@ import RealmSwift
 import Foundation
 
 class WeightObject: Object {
+    @Persisted(primaryKey: true) var _id: ObjectId
     @Persisted(originProperty: "weights") var pet: LinkingObjects<PetObject>
     @Persisted var date: Date
     @Persisted var weight: Double
