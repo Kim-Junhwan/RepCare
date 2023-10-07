@@ -6,5 +6,6 @@
 //
 
 struct Morph {
-    var morphName: String
+    let id: String
+    let morphName: String
 }

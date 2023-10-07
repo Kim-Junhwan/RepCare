@@ -14,7 +14,7 @@ struct PetPage {
 }
 
 struct Pet {
-    var id: Int
+    var id: String
     var name: String
     var petClass: PetClass
     var petSpecies: Species

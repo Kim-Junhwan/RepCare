@@ -8,5 +8,6 @@
 import Foundation
 
 struct Species {
-    var species: String
+    let id: String
+    let species: String
 }

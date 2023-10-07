@@ -7,8 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C7273B9B2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273B9A2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift */; };
+		C76A01EA2AD264FC0024D008 /* RealmSpeciesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76A01E92AD264FC0024D008 /* RealmSpeciesStorage.swift */; };
+		C76A01EC2AD265FB0024D008 /* SpeciesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76A01EB2AD265FB0024D008 /* SpeciesStorage.swift */; };
+		C76A01EE2AD2676B0024D008 /* PetClassResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76A01ED2AD2676B0024D008 /* PetClassResponseDTO.swift */; };
+		C76A01F22AD26E550024D008 /* DetailSpecies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76A01F12AD26E550024D008 /* DetailSpecies.swift */; };
+		C76A01F42AD26E940024D008 /* DetailSpeciesRequest+ResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76A01F32AD26E940024D008 /* DetailSpeciesRequest+ResponseDTO.swift */; };
 		C7A4C3092ACC18A300E299B0 /* PetClassCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A4C3072ACC18A300E299B0 /* PetClassCollectionViewCell.swift */; };
 		C7A4C30A2ACC18A300E299B0 /* PetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A4C3082ACC18A300E299B0 /* PetCollectionViewCell.swift */; };
+		C7B499DA2AD2819B00DD325F /* MorphReqeust+ResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B499D92AD2819B00DD325F /* MorphReqeust+ResponseDTO.swift */; };
 		C7D152462AC51B270064D59F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152452AC51B270064D59F /* AppDelegate.swift */; };
 		C7D152482AC51B270064D59F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152472AC51B270064D59F /* SceneDelegate.swift */; };
 		C7D1524F2AC51B280064D59F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7D1524E2AC51B280064D59F /* Assets.xcassets */; };
@@ -51,12 +58,23 @@
 		C7F5F4362ACE8A6400ACFC76 /* SpeciesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F5F4352ACE8A6400ACFC76 /* SpeciesView.swift */; };
 		C7F5F4392ACEEA9200ACFC76 /* DetailSpeciesObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F5F4382ACEEA9200ACFC76 /* DetailSpeciesObject.swift */; };
 		C7F5F43B2ACF112700ACFC76 /* MorphObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F5F43A2ACF112700ACFC76 /* MorphObject.swift */; };
-		C7F5F4982ACFC9BA00ACFC76 /* repcare.realm in Resources */ = {isa = PBXBuildFile; fileRef = C7F5F4972ACFC9BA00ACFC76 /* repcare.realm */; };
+		C7F5F49C2ACFFB7000ACFC76 /* SpeciesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F5F49B2ACFFB7000ACFC76 /* SpeciesCell.swift */; };
+		C7F5F49F2AD03A2E00ACFC76 /* SpeciesHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F5F49E2AD03A2E00ACFC76 /* SpeciesHeaderView.swift */; };
+		C7F5F4A72AD1025300ACFC76 /* DefaultSpeciesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F5F4A62AD1025300ACFC76 /* DefaultSpeciesRepository.swift */; };
+		C7F5F4AA2AD18FC200ACFC76 /* SpeciesRequest+ResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F5F4A92AD18FC200ACFC76 /* SpeciesRequest+ResponseDTO.swift */; };
+		C7F5F4AC2AD1986200ACFC76 /* repcare.realm in Resources */ = {isa = PBXBuildFile; fileRef = C7F5F4AB2AD1986200ACFC76 /* repcare.realm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C7273B9A2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterCollectionViewCell.swift; sourceTree = "<group>"; };
+		C76A01E92AD264FC0024D008 /* RealmSpeciesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmSpeciesStorage.swift; sourceTree = "<group>"; };
+		C76A01EB2AD265FB0024D008 /* SpeciesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesStorage.swift; sourceTree = "<group>"; };
+		C76A01ED2AD2676B0024D008 /* PetClassResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetClassResponseDTO.swift; sourceTree = "<group>"; };
+		C76A01F12AD26E550024D008 /* DetailSpecies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSpecies.swift; sourceTree = "<group>"; };
+		C76A01F32AD26E940024D008 /* DetailSpeciesRequest+ResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailSpeciesRequest+ResponseDTO.swift"; sourceTree = "<group>"; };
 		C7A4C3072ACC18A300E299B0 /* PetClassCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetClassCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7A4C3082ACC18A300E299B0 /* PetCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetCollectionViewCell.swift; sourceTree = "<group>"; };
+		C7B499D92AD2819B00DD325F /* MorphReqeust+ResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MorphReqeust+ResponseDTO.swift"; sourceTree = "<group>"; };
 		C7D152422AC51B270064D59F /* RepCare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RepCare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7D152452AC51B270064D59F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7D152472AC51B270064D59F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,7 +113,11 @@
 		C7F5F4352ACE8A6400ACFC76 /* SpeciesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesView.swift; sourceTree = "<group>"; };
 		C7F5F4382ACEEA9200ACFC76 /* DetailSpeciesObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSpeciesObject.swift; sourceTree = "<group>"; };
 		C7F5F43A2ACF112700ACFC76 /* MorphObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorphObject.swift; sourceTree = "<group>"; };
-		C7F5F4972ACFC9BA00ACFC76 /* repcare.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = repcare.realm; sourceTree = "<group>"; };
+		C7F5F49B2ACFFB7000ACFC76 /* SpeciesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesCell.swift; sourceTree = "<group>"; };
+		C7F5F49E2AD03A2E00ACFC76 /* SpeciesHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesHeaderView.swift; sourceTree = "<group>"; };
+		C7F5F4A62AD1025300ACFC76 /* DefaultSpeciesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSpeciesRepository.swift; sourceTree = "<group>"; };
+		C7F5F4A92AD18FC200ACFC76 /* SpeciesRequest+ResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SpeciesRequest+ResponseDTO.swift"; sourceTree = "<group>"; };
+		C7F5F4AB2AD1986200ACFC76 /* repcare.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = repcare.realm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +137,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C76A01E82AD264D00024D008 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				C76A01E92AD264FC0024D008 /* RealmSpeciesStorage.swift */,
+				C76A01EB2AD265FB0024D008 /* SpeciesStorage.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
 		C7D152392AC51B270064D59F = {
 			isa = PBXGroup;
 			children = (
@@ -143,7 +174,7 @@
 		C7D152592AC6D16C0064D59F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				C7F5F4972ACFC9BA00ACFC76 /* repcare.realm */,
+				C7F5F4AB2AD1986200ACFC76 /* repcare.realm */,
 				C7D1524E2AC51B280064D59F /* Assets.xcassets */,
 				C7D152502AC51B280064D59F /* LaunchScreen.storyboard */,
 				C7D152532AC51B280064D59F /* Info.plist */,
@@ -204,6 +235,9 @@
 		C7D1529F2AC8234F0064D59F /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				C76A01E82AD264D00024D008 /* Storage */,
+				C7F5F4A82AD1073000ACFC76 /* DTO */,
+				C7F5F4A52AD1024300ACFC76 /* RealmRepository */,
 				C7D152A02AC823540064D59F /* Object */,
 			);
 			path = Data;
@@ -263,6 +297,7 @@
 			children = (
 				C7D152D82AC999350064D59F /* PetClass.swift */,
 				C7D152DA2AC999AB0064D59F /* Species.swift */,
+				C76A01F12AD26E550024D008 /* DetailSpecies.swift */,
 				C7D152DC2AC99B950064D59F /* Pet.swift */,
 				C7D152DE2AC99BF90064D59F /* Morph.swift */,
 				C7D152E02AC99F980064D59F /* Gender.swift */,
@@ -320,10 +355,8 @@
 		C7F5F41D2ACE371700ACFC76 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C7F5F4222ACE5A2500ACFC76 /* CustomTextField.swift */,
+				C7F5F4992ACFD1C700ACFC76 /* CustomView */,
 				C7F5F41E2ACE372D00ACFC76 /* RegisterPetView.swift */,
-				C7F5F4202ACE551600ACFC76 /* ActionButton.swift */,
-				C7F5F4242ACE5BA500ACFC76 /* RegisterInputView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -357,9 +390,49 @@
 		C7F5F4342ACE8A5400ACFC76 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C7F5F49D2AD03A0600ACFC76 /* ReusableView */,
 				C7F5F4352ACE8A6400ACFC76 /* SpeciesView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		C7F5F4992ACFD1C700ACFC76 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				C7F5F4202ACE551600ACFC76 /* ActionButton.swift */,
+				C7F5F4222ACE5A2500ACFC76 /* CustomTextField.swift */,
+				C7F5F4242ACE5BA500ACFC76 /* RegisterInputView.swift */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
+		C7F5F49D2AD03A0600ACFC76 /* ReusableView */ = {
+			isa = PBXGroup;
+			children = (
+				C7F5F49B2ACFFB7000ACFC76 /* SpeciesCell.swift */,
+				C7273B9A2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift */,
+				C7F5F49E2AD03A2E00ACFC76 /* SpeciesHeaderView.swift */,
+			);
+			path = ReusableView;
+			sourceTree = "<group>";
+		};
+		C7F5F4A52AD1024300ACFC76 /* RealmRepository */ = {
+			isa = PBXGroup;
+			children = (
+				C7F5F4A62AD1025300ACFC76 /* DefaultSpeciesRepository.swift */,
+			);
+			path = RealmRepository;
+			sourceTree = "<group>";
+		};
+		C7F5F4A82AD1073000ACFC76 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				C7F5F4A92AD18FC200ACFC76 /* SpeciesRequest+ResponseDTO.swift */,
+				C76A01ED2AD2676B0024D008 /* PetClassResponseDTO.swift */,
+				C76A01F32AD26E940024D008 /* DetailSpeciesRequest+ResponseDTO.swift */,
+				C7B499D92AD2819B00DD325F /* MorphReqeust+ResponseDTO.swift */,
+			);
+			path = DTO;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -433,7 +506,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7F5F4982ACFC9BA00ACFC76 /* repcare.realm in Resources */,
+				C7F5F4AC2AD1986200ACFC76 /* repcare.realm in Resources */,
 				C7D152522AC51B280064D59F /* LaunchScreen.storyboard in Resources */,
 				C7D1524F2AC51B280064D59F /* Assets.xcassets in Resources */,
 			);
@@ -455,6 +528,7 @@
 				C7D152462AC51B270064D59F /* AppDelegate.swift in Sources */,
 				C7F5F4332ACE87AA00ACFC76 /* SpeciesRepository.swift in Sources */,
 				C7D152EC2ACA5EA70064D59F /* Rule.swift in Sources */,
+				C7B499DA2AD2819B00DD325F /* MorphReqeust+ResponseDTO.swift in Sources */,
 				C7F5F41F2ACE372D00ACFC76 /* RegisterPetView.swift in Sources */,
 				C7F5F4132ACD400700ACFC76 /* PetListViewModel.swift in Sources */,
 				C7F5F4192ACD54F900ACFC76 /* PetListItemViewModel.swift in Sources */,
@@ -462,10 +536,13 @@
 				C7D152D92AC999350064D59F /* PetClass.swift in Sources */,
 				C7F5F4392ACEEA9200ACFC76 /* DetailSpeciesObject.swift in Sources */,
 				C7A4C30A2ACC18A300E299B0 /* PetCollectionViewCell.swift in Sources */,
+				C7F5F4AA2AD18FC200ACFC76 /* SpeciesRequest+ResponseDTO.swift in Sources */,
 				C7D152EF2ACAA4250064D59F /* BaseViewController.swift in Sources */,
 				C7D152D52AC998900064D59F /* FetchPetListUseCase.swift in Sources */,
+				C76A01F42AD26E940024D008 /* DetailSpeciesRequest+ResponseDTO.swift in Sources */,
 				C7D152AA2AC91E320064D59F /* PetObject.swift in Sources */,
 				C7F5F4212ACE551600ACFC76 /* ActionButton.swift in Sources */,
+				C7273B9B2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift in Sources */,
 				C7D152E12AC99F980064D59F /* Gender.swift in Sources */,
 				C7D152E62AC9B5100064D59F /* PetRepository.swift in Sources */,
 				C7D152482AC51B270064D59F /* SceneDelegate.swift in Sources */,
@@ -474,11 +551,18 @@
 				C7D152DF2AC99BF90064D59F /* Morph.swift in Sources */,
 				C7D152622AC70B3E0064D59F /* PetListViewController.swift in Sources */,
 				C7A4C3092ACC18A300E299B0 /* PetClassCollectionViewCell.swift in Sources */,
+				C76A01EE2AD2676B0024D008 /* PetClassResponseDTO.swift in Sources */,
+				C76A01EC2AD265FB0024D008 /* SpeciesStorage.swift in Sources */,
+				C76A01F22AD26E550024D008 /* DetailSpecies.swift in Sources */,
 				C7D152E42AC9A7F00064D59F /* Weight.swift in Sources */,
 				C7D152DD2AC99B950064D59F /* Pet.swift in Sources */,
+				C76A01EA2AD264FC0024D008 /* RealmSpeciesStorage.swift in Sources */,
+				C7F5F49F2AD03A2E00ACFC76 /* SpeciesHeaderView.swift in Sources */,
 				C7D152A82AC8F9D60064D59F /* PetSpeciesObject.swift in Sources */,
+				C7F5F49C2ACFFB7000ACFC76 /* SpeciesCell.swift in Sources */,
 				C7F5F4362ACE8A6400ACFC76 /* SpeciesView.swift in Sources */,
 				C7F5F42A2ACE870300ACFC76 /* RegisterPetViewModel.swift in Sources */,
+				C7F5F4A72AD1025300ACFC76 /* DefaultSpeciesRepository.swift in Sources */,
 				C7D1525E2AC6E7AC0064D59F /* Color.swift in Sources */,
 				C7F5F4302ACE875900ACFC76 /* ClassSpeciesMorphViewModel.swift in Sources */,
 				C7D152F22ACAA5B90064D59F /* PetListView.swift in Sources */,
