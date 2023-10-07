@@ -10,7 +10,8 @@ import Foundation
 protocol SpeciesRepository {
     func fetchPetClass() -> [PetClass]
     func fetchSpecies(petClass: PetClass) -> [Species]
-    func fetchMorph(petSpecies: Species) -> [Morph]
+    func fetchDetailSpecies(species: Species) -> [DetailSpecies]
+    func fetchMorph(detailSpecies: DetailSpecies) -> [Morph]
     func registerNewSpecies(petSpecies: Species) throws
     func registerNewMorph(petMorph: Morph) throws
 }
