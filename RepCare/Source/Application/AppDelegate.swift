@@ -13,8 +13,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        copyRealm()
         return true
+    }
+    
+    func copyRealm() {
+        guard let realmURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("repcare.realm", conformingTo: .data) else { return }
+        let realmPath: String
+        if #available(iOS 16.0, *) {
+            realmPath = realmURL.path()
+        } else {
+            realmPath = realmURL.path
+        }
+        if !FileManager.default.fileExists(atPath: realmPath) {
+            guard let bundleRealmURL = Bundle.main.url(forResource: "repcare", withExtension: ".realm") else {return}
+            do {
+                try FileManager.default.copyItem(at: bundleRealmURL, to: realmURL)
+            } catch {
+                fatalError()
+            }
+        }
     }
 
     // MARK: UISceneSession Lifecycle
