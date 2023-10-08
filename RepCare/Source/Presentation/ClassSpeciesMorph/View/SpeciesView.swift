@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol SpeciesViewDelegate: AnyObject {
+    func getSectionItemCount(section: Section) -> Int
+}
+
 class SpeciesView: UIView {
     
     private enum Metric {
@@ -17,14 +21,16 @@ class SpeciesView: UIView {
     private enum ElementKind {
         static let sectionHeader = "SpeciesHeaderView"
     }
-
+    
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: makeCollectionViewLayout())
-        
+        collectionView.allowsMultipleSelection = true
+        collectionView.register(RegisterCollectionViewCell.self, forCellWithReuseIdentifier: RegisterCollectionViewCell.identifier)
         return collectionView
     }()
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, Item>?
+    weak var delegate: SpeciesViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -61,6 +67,7 @@ class SpeciesView: UIView {
     }
     
     private func configureDataSource() {
+        
         let cellRegistration = UICollectionView.CellRegistration<SpeciesCell, Item> { cell, indexPath, itemIdentifier in
             cell.titleLabel.text = itemIdentifier.title
         }
@@ -70,6 +77,10 @@ class SpeciesView: UIView {
         }
         
         dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+            guard let section = Section(rawValue: indexPath.section), let delegate = self.delegate else { return .init() }
+            if indexPath.row == delegate.getSectionItemCount(section: section) {
+                return collectionView.dequeueReusableCell(withReuseIdentifier: RegisterCollectionViewCell.identifier, for: indexPath)
+            }
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
         })
         
@@ -83,9 +94,17 @@ class SpeciesView: UIView {
         var snapShot = NSDiffableDataSourceSnapshot<Section, Item>()
         snapShot.appendSections(Section.allCases)
         for i in section {
-            snapShot.appendItems(i.value, toSection: i.key)
+            if i.value.count != 0 {
+                var speciesList = i.value
+                if i.key != .petClass {
+                    speciesList.append(Item(title: "", id: ""))
+                }
+                snapShot.appendItems(speciesList, toSection: i.key)
+            } else {
+                snapShot.appendItems([], toSection: i.key)
+            }
         }
         dataSource?.apply(snapShot, animatingDifferences: true)
     }
-
+    
 }
