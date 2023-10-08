@@ -37,4 +37,38 @@ enum PetClassItemViewModel: Int, CaseIterable {
     var image: UIImage? {
         return UIImage(systemName: "star")
     }
+    
+    init(petClass: PetClass) {
+        switch petClass {
+        case .all:
+            self = .all
+        case .reptile:
+            self = .reptile
+        case .arthropod:
+            self = .arthropod
+        case .amphibia:
+            self = .arthropod
+        case .mammalia:
+            self = .mammalia
+        case .etc:
+            self = .etc
+        }
+    }
+    
+    func toDomain() -> PetClass {
+        switch self {
+        case .all:
+            return .all
+        case .reptile:
+            return .reptile
+        case .arthropod:
+            return .arthropod
+        case .amphibia:
+            return .amphibia
+        case .mammalia:
+            return .mammalia
+        case .etc:
+            return .etc
+        }
+    }
 }
