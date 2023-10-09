@@ -36,7 +36,6 @@ class ClassSpeciesMorphViewController: UIViewController {
     
     func configureCollectionView() {
         mainView.collectionView.delegate = self
-        mainView.delegate = self
     }
     
     @objc func tapRegisterButton() {
@@ -47,14 +46,16 @@ class ClassSpeciesMorphViewController: UIViewController {
 
 extension ClassSpeciesMorphViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectSectionArr = viewModel.speciesList.value[Section(rawValue: indexPath.section)!]
+        guard let selectSection = Section(rawValue: indexPath.section) else { return }
+        let selectSectionArr = viewModel.speciesList.value[selectSection]
         
         if indexPath.section != 0 && indexPath.row+1 == selectSectionArr?.count {
             
             return
         }
         if indexPath.section == 0 {
-            viewModel.selectPetClass.accept(.init(rawValue: indexPath.row+1)!)
+            guard let selectPetClass = PetClassItemViewModel(rawValue: indexPath.row+1) else { return }
+            viewModel.selectPetClass.accept(selectPetClass)
         } else if indexPath.section == 1 {
             viewModel.selectSpecies.accept(indexPath.row)
         }
@@ -70,12 +71,4 @@ extension ClassSpeciesMorphViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         viewModel.removeSection(sectionIndex: indexPath.section)
     }
-}
-
-extension ClassSpeciesMorphViewController: SpeciesViewDelegate {
-    func getSectionItemCount(section: Section) -> Int {
-        guard let sectionItem = viewModel.speciesList.value[section] else { return 0 }
-        return sectionItem.count
-    }
-    
 }

@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol SpeciesViewDelegate: AnyObject {
-    func getSectionItemCount(section: Section) -> Int
-}
-
 class SpeciesView: UIView {
     
     private enum Metric {
@@ -30,7 +26,6 @@ class SpeciesView: UIView {
     }()
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, Item>?
-    weak var delegate: SpeciesViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -77,7 +72,6 @@ class SpeciesView: UIView {
         }
         
         dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
-            guard let section = Section(rawValue: indexPath.section), let delegate = self.delegate else { return .init() }
             if itemIdentifier.isRegisterCell {
                 return collectionView.dequeueReusableCell(withReuseIdentifier: RegisterCollectionViewCell.identifier, for: indexPath)
             }
