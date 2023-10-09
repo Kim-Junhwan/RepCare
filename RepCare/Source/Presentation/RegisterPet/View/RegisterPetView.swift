@@ -7,7 +7,20 @@
 
 import UIKit
 
+protocol RegisterPetViewDelegate: AnyObject {
+    func setDateTime() -> Date 
+}
+
 class RegisterPetView: UIView {
+    
+    let datePicker: UIDatePicker = {
+       let datePicker = UIDatePicker()
+        datePicker.translatesAutoresizingMaskIntoConstraints = false
+        datePicker.locale = .init(identifier: "ko-KR")
+        datePicker.datePickerMode = .date
+        datePicker.preferredDatePickerStyle = .inline
+        return datePicker
+    }()
     
     let imageCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
@@ -36,41 +49,55 @@ class RegisterPetView: UIView {
          return view
      }()
     
-    let genderStackView: UIStackView = {
+    lazy var genderView: RegisterInputView = {
+        let view = RegisterInputView(isButton: true, isEssential: true)
+        view.actionButton.isHidden = true
+        view.mainStackView.addArrangedSubview(genderStackView)
+        view.descriptionLabel.text = "성별"
+        genderStackView.snp.makeConstraints { make in
+            make.width.equalToSuperview()
+        }
+        return view
+    }()
+    
+    lazy var genderStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
-        stackView.backgroundColor = .green
         return stackView
     }()
     
-    let femaleButton: UIButton = {
-       let button = UIButton()
+    lazy var genderButtonList: [UIButton] = [femaleButton, maleButton, dontKnowButton]
+    
+    let femaleButton: ActionButton = {
+       let button = ActionButton()
         button.setTitle("암컷", for: .normal)
         return button
     }()
     
-    let maleButton: UIButton = {
-       let button = UIButton()
+    let maleButton: ActionButton = {
+       let button = ActionButton()
         button.setTitle("수컷", for: .normal)
         return button
     }()
     
-    let dontKnowButton: UIButton = {
-       let button = UIButton()
+    let dontKnowButton: ActionButton = {
+       let button = ActionButton()
         button.setTitle("미구분", for: .normal)
         return button
     }()
     
-    let dateButton: RegisterInputView = {
-        let view = RegisterInputView(isButton: true, isEssential: true)
+    lazy var dateButton: RegisterInputView = {
+        let view = RegisterInputView(isButton: false, isEssential: true)
          view.descriptionLabel.text = "입양일"
+        view.textField.inputView = datePicker
          return view
      }()
     
-    let birthDayButton: RegisterInputView = {
-        let view = RegisterInputView(isButton: true, isEssential: false)
+    lazy var birthDayButton: RegisterInputView = {
+        let view = RegisterInputView(isButton: false, isEssential: false)
          view.descriptionLabel.text = "해칭일"
+        view.textField.inputView = datePicker
          return view
      }()
     
@@ -100,15 +127,25 @@ class RegisterPetView: UIView {
     func configureView() {
         addSubview(imageCollectionView)
         addSubview(mainStakView)
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapView)))
         genderStackView.addArrangedSubview(femaleButton)
         genderStackView.addArrangedSubview(maleButton)
         genderStackView.addArrangedSubview(dontKnowButton)
-        for item in [nameTextField, speciesClassButton, genderStackView, dateButton, birthDayButton, weightTextField] {
+        for item in [nameTextField, speciesClassButton, genderView, dateButton, birthDayButton, weightTextField] {
             mainStakView.addArrangedSubview(item)
+        }
+        
+        for i in genderButtonList {
+            i.addTarget(self, action: #selector(tapGenderButton), for: .touchUpInside)
         }
     }
     
-    func setConstraints() {
+    @objc func tapGenderButton(_ sender: UIButton) {
+        genderButtonList.forEach { $0.isSelected = false }
+        sender.isSelected = true
+    }
+    
+    private func setConstraints() {
         imageCollectionView.snp.makeConstraints { make in
             make.top.leading.trailing.equalTo(safeAreaLayoutGuide).inset(10)
             make.height.equalTo(100)
@@ -119,6 +156,8 @@ class RegisterPetView: UIView {
         }
     }
     
-    
+    @objc private func tapView() {
+        endEditing(false)
+    }
 
 }

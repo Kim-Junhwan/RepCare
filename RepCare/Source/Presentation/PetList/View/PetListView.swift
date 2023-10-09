@@ -27,6 +27,7 @@ final class PetListView: UIView {
     let searchBar: UISearchBar = {
        let searchBar = UISearchBar()
         searchBar.searchBarStyle = .minimal
+        searchBar.searchTextField.setToolbar()
         return searchBar
     }()
     

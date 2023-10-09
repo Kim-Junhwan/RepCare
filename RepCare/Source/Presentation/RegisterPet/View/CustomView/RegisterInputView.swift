@@ -9,7 +9,7 @@ import UIKit
 
 class RegisterInputView: UIView {
     
-    private let mainStackView: UIStackView = {
+    let mainStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .leading
@@ -41,7 +41,6 @@ class RegisterInputView: UIView {
     
     lazy var textField: UITextField = {
        let textField = CustomTextField()
-        
         return textField
     }()
     
@@ -53,11 +52,16 @@ class RegisterInputView: UIView {
     
     init(isButton: Bool, isEssential: Bool) {
         super.init(frame: .zero)
+        essentialLabel.isHidden = !isEssential
         if isButton {
             buttonLayout()
         } else {
             textFieldLayout()
         }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func defaultLayout() {
@@ -70,7 +74,7 @@ class RegisterInputView: UIView {
         }
     }
     
-    func buttonLayout() {
+    private func buttonLayout() {
         defaultLayout()
         mainStackView.addArrangedSubview(actionButton)
         actionButton.snp.makeConstraints { make in
@@ -78,16 +82,12 @@ class RegisterInputView: UIView {
         }
     }
     
-    func textFieldLayout() {
+    private func textFieldLayout() {
         defaultLayout()
         mainStackView.addArrangedSubview(textField)
         textField.snp.makeConstraints { make in
             make.width.equalToSuperview()
         }
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
 }

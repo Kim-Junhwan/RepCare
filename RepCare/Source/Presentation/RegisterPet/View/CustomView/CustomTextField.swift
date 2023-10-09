@@ -12,6 +12,7 @@ class CustomTextField: UITextField {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setLayout()
+        setToolbar()
     }
     
     required init?(coder: NSCoder) {
@@ -26,9 +27,6 @@ class CustomTextField: UITextField {
             layer.borderWidth = 1.0
             layer.borderColor = UIColor.systemGray3.cgColor
         }
-        
     }
-    
-    
 
 }
