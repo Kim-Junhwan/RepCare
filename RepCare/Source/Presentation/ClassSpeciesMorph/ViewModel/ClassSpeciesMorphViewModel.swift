@@ -43,7 +43,7 @@ final class ClassSpeciesMorphViewModel {
     let selectPetClass: PublishRelay<PetClassItemViewModel> = .init()
     let selectSpecies: PublishRelay<Int> = .init()
     let speciesList: BehaviorRelay<[Section: [Item]]> = .init(value: [.detailSpecies:[],.morph:[],.petClass:[],.species:[]])
-    
+    let disposeBag = DisposeBag()
     
     init(repository: SpeciesRepository) {
         self.repository = repository
@@ -76,7 +76,8 @@ final class ClassSpeciesMorphViewModel {
         var origin = speciesList.value
         origin[section] = data
         for sectionValue in (section.rawValue+1)..<Section.allCases.count {
-            origin[Section(rawValue: sectionValue)!] = []
+            guard let removeSection = Section(rawValue: sectionValue) else { return }
+            origin[removeSection] = []
         }
         speciesList.accept(origin)
     }
@@ -90,14 +91,13 @@ final class ClassSpeciesMorphViewModel {
             guard let petClass = item.element?.toDomain() else { return }
             let fetchSpecies = self.repository.fetchSpecies(petClass: petClass)
             self.updateFetchSpeciesList(section: .species, data: fetchSpecies.map { Item(title: $0.species, id: $0.id, isRegisterCell: false) })
-            
-        }
+        }.disposed(by: disposeBag)
         
         selectSpecies.subscribe { item in
             guard let species = item.element else { return }
             guard let select = self.speciesList.value[.species]?[species] else { return }
             let fetchDetailSpecies = self.repository.fetchDetailSpecies(species: .init(id: select.id, species: select.title))
             self.updateFetchSpeciesList(section: .detailSpecies, data: fetchDetailSpecies.map { .init(title: $0.detailSpecies, id: $0.id, isRegisterCell: false) })
-        }
+        }.disposed(by: disposeBag)
     }
 }
