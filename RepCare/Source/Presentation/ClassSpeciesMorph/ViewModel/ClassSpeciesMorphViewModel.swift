@@ -32,6 +32,7 @@ enum Section: Int, CaseIterable {
 struct Item: Hashable {
     let title: String
     let id: String
+    let isRegisterCell: Bool
     private let identifier = UUID()
 }
 
@@ -61,8 +62,14 @@ final class ClassSpeciesMorphViewModel {
     private func fetchPetClass() {
         let fetchPetClass = repository.fetchPetClass().map { PetClassItemViewModel(petClass: $0) }
         var origin = speciesList.value
-        origin[.petClass] = fetchPetClass.map { Item(title: $0.title, id: "") }
+        origin[.petClass] = fetchPetClass.map { Item(title: $0.title, id: "", isRegisterCell: false) }
         speciesList.accept(origin)
+    }
+    
+    private func appendRegisterItem(data: [Item]) -> [Item] {
+        let registerItem = Item(title: "", id: "", isRegisterCell: true)
+        
+        return data+[registerItem]
     }
     
     private func updateList(section: Section, data: [Item]) {
@@ -74,11 +81,15 @@ final class ClassSpeciesMorphViewModel {
         speciesList.accept(origin)
     }
     
+    private func updateFetchSpeciesList(section: Section, data: [Item]) {
+        updateList(section: section, data: appendRegisterItem(data: data))
+    }
+    
     private func bind() {
         selectPetClass.subscribe { item in
             guard let petClass = item.element?.toDomain() else { return }
             let fetchSpecies = self.repository.fetchSpecies(petClass: petClass)
-            self.updateList(section: .species, data: fetchSpecies.map { Item(title: $0.species, id: $0.id) })
+            self.updateFetchSpeciesList(section: .species, data: fetchSpecies.map { Item(title: $0.species, id: $0.id, isRegisterCell: false) })
             
         }
         
@@ -86,7 +97,7 @@ final class ClassSpeciesMorphViewModel {
             guard let species = item.element else { return }
             guard let select = self.speciesList.value[.species]?[species] else { return }
             let fetchDetailSpecies = self.repository.fetchDetailSpecies(species: .init(id: select.id, species: select.title))
-            self.updateList(section: .detailSpecies, data: fetchDetailSpecies.map { .init(title: $0.detailSpecies, id: $0.id) })
+            self.updateFetchSpeciesList(section: .detailSpecies, data: fetchDetailSpecies.map { .init(title: $0.detailSpecies, id: $0.id, isRegisterCell: false) })
         }
     }
 }

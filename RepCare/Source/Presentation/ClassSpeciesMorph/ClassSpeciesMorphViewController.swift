@@ -49,7 +49,7 @@ extension ClassSpeciesMorphViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectSectionArr = viewModel.speciesList.value[Section(rawValue: indexPath.section)!]
         
-        if indexPath.section != 0 && indexPath.row == selectSectionArr?.count {
+        if indexPath.section != 0 && indexPath.row+1 == selectSectionArr?.count {
             
             return
         }

@@ -78,7 +78,7 @@ class SpeciesView: UIView {
         
         dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             guard let section = Section(rawValue: indexPath.section), let delegate = self.delegate else { return .init() }
-            if indexPath.row == delegate.getSectionItemCount(section: section) {
+            if itemIdentifier.isRegisterCell {
                 return collectionView.dequeueReusableCell(withReuseIdentifier: RegisterCollectionViewCell.identifier, for: indexPath)
             }
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
@@ -94,15 +94,7 @@ class SpeciesView: UIView {
         var snapShot = NSDiffableDataSourceSnapshot<Section, Item>()
         snapShot.appendSections(Section.allCases)
         for i in section {
-            if i.value.count != 0 {
-                var speciesList = i.value
-                if i.key != .petClass {
-                    speciesList.append(Item(title: "", id: ""))
-                }
-                snapShot.appendItems(speciesList, toSection: i.key)
-            } else {
-                snapShot.appendItems([], toSection: i.key)
-            }
+            snapShot.appendItems(i.value, toSection: i.key)
         }
         dataSource?.apply(snapShot, animatingDifferences: true)
     }
