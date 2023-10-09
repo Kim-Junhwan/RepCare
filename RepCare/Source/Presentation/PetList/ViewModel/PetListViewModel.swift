@@ -9,5 +9,5 @@ import Foundation
 
 final class PetListViewModel {
     
-    let petList: [PetListItemViewModel] = []
+    let petList: [PetModel] = []
 }

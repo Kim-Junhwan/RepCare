@@ -54,10 +54,14 @@ extension ClassSpeciesMorphViewController: UICollectionViewDelegate {
             return
         }
         if indexPath.section == 0 {
-            guard let selectPetClass = PetClassItemViewModel(rawValue: indexPath.row+1) else { return }
-            viewModel.selectPetClass.accept(selectPetClass)
+            let selectClass = viewModel.fetchPetClassList[indexPath.row]
+            viewModel.selectPetClass.accept(selectClass)
         } else if indexPath.section == 1 {
-            viewModel.selectSpecies.accept(indexPath.row)
+            let selectPetSpecies = viewModel.fetchSpeciesList[indexPath.row]
+            viewModel.selectSpecies.accept(selectPetSpecies)
+        } else if indexPath.section == 2 {
+            let selectDetailSpecies = viewModel.fetchDetailSpeciesList[indexPath.row]
+            viewModel.selectDetailSpecies.accept(selectDetailSpecies)
         }
         
         for item in 0..<selectSectionArr!.count {

@@ -63,7 +63,7 @@ final class PetClassCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func configureCell(petClass: PetClassItemViewModel) {
+    func configureCell(petClass: PetClassModel) {
         classImageView.image = petClass.image
         classLabel.text = petClass.title
     }

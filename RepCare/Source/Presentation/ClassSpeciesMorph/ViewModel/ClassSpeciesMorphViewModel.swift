@@ -40,8 +40,15 @@ final class ClassSpeciesMorphViewModel {
     
     private let repository: SpeciesRepository
     
-    let selectPetClass: PublishRelay<PetClassItemViewModel> = .init()
-    let selectSpecies: PublishRelay<Int> = .init()
+    let selectPetClass: PublishRelay<PetClassModel> = .init()
+    let selectSpecies: PublishRelay<PetSpeciesModel> = .init()
+    let selectDetailSpecies: PublishRelay<DetailPetSpeciesModel> = .init()
+    
+    var fetchPetClassList: [PetClassModel] = []
+    var fetchSpeciesList: [PetSpeciesModel] = []
+    var fetchDetailSpeciesList: [DetailPetSpeciesModel] = []
+    var fetchMorphList: [MorphModel] = []
+    
     let speciesList: BehaviorRelay<[Section: [Item]]> = .init(value: [.detailSpecies:[],.morph:[],.petClass:[],.species:[]])
     let disposeBag = DisposeBag()
     
@@ -60,7 +67,8 @@ final class ClassSpeciesMorphViewModel {
     }
     
     private func fetchPetClass() {
-        let fetchPetClass = repository.fetchPetClass().map { PetClassItemViewModel(petClass: $0) }
+        let fetchPetClass = repository.fetchPetClass().map { PetClassModel(petClass: $0) }
+        self.fetchPetClassList = fetchPetClass
         var origin = speciesList.value
         origin[.petClass] = fetchPetClass.map { Item(title: $0.title, id: "", isRegisterCell: false) }
         speciesList.accept(origin)
@@ -90,14 +98,22 @@ final class ClassSpeciesMorphViewModel {
         selectPetClass.subscribe { item in
             guard let petClass = item.element?.toDomain() else { return }
             let fetchSpecies = self.repository.fetchSpecies(petClass: petClass)
+            self.fetchSpeciesList = fetchSpecies.map{ .init(petSpecies: $0) }
             self.updateFetchSpeciesList(section: .species, data: fetchSpecies.map { Item(title: $0.species, id: $0.id, isRegisterCell: false) })
         }.disposed(by: disposeBag)
         
         selectSpecies.subscribe { item in
-            guard let species = item.element else { return }
-            guard let select = self.speciesList.value[.species]?[species] else { return }
-            let fetchDetailSpecies = self.repository.fetchDetailSpecies(species: .init(id: select.id, species: select.title))
-            self.updateFetchSpeciesList(section: .detailSpecies, data: fetchDetailSpecies.map { .init(title: $0.detailSpecies, id: $0.id, isRegisterCell: false) })
+            guard let petSpecies = item.element?.toDomain() else { return }
+            let fetchDetailSpecies = self.repository.fetchDetailSpecies(species: petSpecies)
+            self.fetchDetailSpeciesList = fetchDetailSpecies.map { .init(detailSpecies: $0) }
+            self.updateFetchSpeciesList(section: .detailSpecies, data: fetchDetailSpecies.map { Item(title: $0.detailSpecies, id: $0.id, isRegisterCell: false) })
+        }.disposed(by: disposeBag)
+        
+        selectDetailSpecies.subscribe { item in
+            guard let detailSpecies = item.element?.toDomain() else { return }
+            let fetchMorph = self.repository.fetchMorph(detailSpecies: detailSpecies)
+            self.fetchMorphList = fetchMorph.map { .init(morph: $0) }
+            self.updateFetchSpeciesList(section: .morph, data: fetchMorph.map { Item(title: $0.morphName, id: $0.id, isRegisterCell: false) })
         }.disposed(by: disposeBag)
     }
 }

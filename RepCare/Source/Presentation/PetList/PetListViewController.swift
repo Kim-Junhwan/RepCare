@@ -24,6 +24,12 @@ final class PetListViewController: BaseViewController {
     override func configureView() {
         mainView.petClassCollectionView.dataSource = self
         mainView.petListCollectionView.dataSource = self
+        mainView.addPetButton.addTarget(self, action: #selector(showRegisterPetView), for: .touchUpInside)
+    }
+    
+    @objc func showRegisterPetView() {
+        let registerVC = RegisterNewPetViewController()
+        navigationController?.pushViewController(registerVC, animated: true)
     }
 
 }
@@ -31,7 +37,7 @@ final class PetListViewController: BaseViewController {
 extension PetListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == mainView.petClassCollectionView {
-            return PetClassItemViewModel.allCases.count
+            return PetClassModel.allCases.count
         } else {
             return viewModel.petList.count
         }
