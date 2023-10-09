@@ -9,7 +9,9 @@ import UIKit
 
 extension UITextField {
     func setToolbar() {
-        let toolBar = UIToolbar(frame: .init(origin: .zero, size: .init(width: bounds.width, height: 35.0)))
+        guard let window = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+        let toolWidth = window.screen.bounds.width
+        let toolBar = UIToolbar(frame: .init(origin: .zero, size: .init(width: toolWidth, height: 35.0)))
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(tapDoneButton))
         toolBar.items = [flexibleSpace,doneButton]
