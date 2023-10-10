@@ -60,7 +60,17 @@ class RegisterNewPetViewController: BaseViewController {
     private func bindSpecies() {
         viewModel.overPetSpecies.subscribe { currentSpecies in
             guard let species = currentSpecies.element else { return }
-            self.mainView.speciesClassButton.actionButton.setTitle("\(species.petClass.title) > \(species.petSpecies.title) > \(species.detailSpecies!.title) > \(species.morph!.title) ", for: .normal)
+            var speciesArr: [String] = []
+            speciesArr.append(species.petClass.title)
+            speciesArr.append(species.petSpecies.title)
+            if let detailSpecies = species.detailSpecies?.title {
+                speciesArr.append(detailSpecies)
+            }
+            if let morph = species.morph?.title {
+                speciesArr.append(morph)
+            }
+            
+            self.mainView.speciesClassButton.actionButton.setTitle("\(speciesArr.joined(separator: " > "))", for: .normal)
         }.disposed(by: disposeBag)
     }
     
@@ -107,9 +117,9 @@ class RegisterNewPetViewController: BaseViewController {
     }
     
     @objc func showSpeciesView() {
-        let vc = ClassSpeciesMorphViewController()
-        vc.tapRegisterClosure = { self.viewModel.overPetSpecies.accept($0)
-        }
+        let viewModel = ClassSpeciesMorphViewModel(repository: DefaultSpeciesRepository(speciesStroage: RealmSpeciesStorage()))
+        let vc = ClassSpeciesMorphViewController(viewModel: viewModel)
+        viewModel.tapRegisterClosure = { self.viewModel.overPetSpecies.accept($0) }
         let nvc = UINavigationController(rootViewController: vc)
         nvc.modalPresentationStyle = .fullScreen
         present(nvc, animated: true)
