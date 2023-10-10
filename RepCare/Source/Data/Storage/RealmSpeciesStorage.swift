@@ -18,8 +18,6 @@ final class RealmSpeciesStorage {
 
 extension RealmSpeciesStorage: SpeciesStorage {
     
-    
-    
     func fetchPetClass() -> PetClassResponseDTO {
         guard let realm else { return .init(petClass: []) }
         let fetchClasses = Array(realm.objects(PetClassObject.self)).map{$0.toDomain()}
@@ -42,6 +40,30 @@ extension RealmSpeciesStorage: SpeciesStorage {
         guard let realm, let objectId = try? ObjectId(string: request.detailSpeciesId) else { return .init(morphList: []) }
         guard let morph = realm.object(ofType: DetailSpeciesObject.self, forPrimaryKey: objectId)?.morph else { return .init(morphList: []) }
         return .init(morphList: Array(morph))
+    }
+    
+    func registerNewSpecies(title: String, request: SpeciesRequestDTO) throws {
+        guard let realm else { return }
+        guard let parentClass = realm.objects(PetClassObject.self).where({ $0.title == request.petClassType }).first else { return }
+        try realm.write {
+            parentClass.species.append(.init(species: title))
+        }
+    }
+    
+    func registerNewDetailSpecies(title: String, request: DetailSpeciesRequestDTO) throws {
+        guard let realm, let objectId = try? ObjectId(string: request.speciesId) else { return }
+        guard let parentSpecies = realm.object(ofType: PetSpeciesObject.self, forPrimaryKey: objectId) else { return }
+        try realm.write {
+            parentSpecies.detailSpecies.append(.init(detailSpecies: title))
+        }
+    }
+    
+    func registerNewMorph(title: String, request: MorphRequestDTO) throws {
+        guard let realm, let objectId = try? ObjectId(string: request.detailSpeciesId) else { return }
+        guard let parentDetailSpecies = realm.object(ofType: DetailSpeciesObject.self, forPrimaryKey: objectId) else { return }
+        try realm.write {
+            parentDetailSpecies.morph.append(.init(morph: title))
+        }
     }
     
 }

@@ -9,7 +9,6 @@ import Foundation
 
 final class DefaultSpeciesRepository: SpeciesRepository {
     
-    
     let speciesStroage: SpeciesStorage
     
     init(speciesStroage: SpeciesStorage) {
@@ -40,11 +39,19 @@ final class DefaultSpeciesRepository: SpeciesRepository {
         return fetchMorph.morphList.map { .init(id: $0._id.stringValue, morphName: $0.title) }
     }
     
-    func registerNewSpecies(petSpecies: Species) throws {
-        
+    
+    func registerNewSpecies(petSpecies: String, parentClass: PetClass) throws {
+        let requestDTO = SpeciesRequestDTO(petClass: parentClass)
+        try speciesStroage.registerNewSpecies(title: petSpecies, request: requestDTO)
     }
     
-    func registerNewMorph(petMorph: Morph) throws {
-        
+    func registerNewDetailSpecies(detailSpecies: String, parentSpecies: Species) throws {
+        let requestDTO = DetailSpeciesRequestDTO(speciesId: parentSpecies.id)
+        try speciesStroage.registerNewDetailSpecies(title: detailSpecies, request: requestDTO)
+    }
+    
+    func registerNewMorph(petMorph: String, parentDetailSpecies: DetailSpecies) throws {
+        let requestDTO = MorphRequestDTO(detailSpeciesId: parentDetailSpecies.id)
+        try speciesStroage.registerNewMorph(title: petMorph, request: requestDTO)
     }
 }
