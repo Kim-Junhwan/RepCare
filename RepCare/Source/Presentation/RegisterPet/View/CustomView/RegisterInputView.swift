@@ -8,6 +8,11 @@
 import UIKit
 
 class RegisterInputView: UIView {
+    enum InputViewType {
+        case button
+        case datePicker
+        case textField
+    }
     
     let mainStackView: UIStackView = {
         let stackView = UIStackView()
@@ -50,12 +55,25 @@ class RegisterInputView: UIView {
         return button
     }()
     
-    init(isButton: Bool, isEssential: Bool) {
+    lazy var datePickerButton: DatePickerButton = {
+        let button = DatePickerButton()
+        
+        return button
+    }()
+    
+    let inputViewType: InputViewType 
+    
+    init(inputView: InputViewType, isEssential: Bool) {
+        self.inputViewType = inputView
         super.init(frame: .zero)
         essentialLabel.isHidden = !isEssential
-        if isButton {
+        defaultLayout()
+        switch inputViewType {
+        case .button:
             buttonLayout()
-        } else {
+        case .datePicker:
+            datePickerLayout()
+        case .textField:
             textFieldLayout()
         }
     }
@@ -75,7 +93,6 @@ class RegisterInputView: UIView {
     }
     
     private func buttonLayout() {
-        defaultLayout()
         mainStackView.addArrangedSubview(actionButton)
         actionButton.snp.makeConstraints { make in
             make.width.equalToSuperview()
@@ -83,9 +100,15 @@ class RegisterInputView: UIView {
     }
     
     private func textFieldLayout() {
-        defaultLayout()
         mainStackView.addArrangedSubview(textField)
         textField.snp.makeConstraints { make in
+            make.width.equalToSuperview()
+        }
+    }
+    
+    private func datePickerLayout() {
+        mainStackView.addArrangedSubview(datePickerButton)
+        datePickerButton.snp.makeConstraints { make in
             make.width.equalToSuperview()
         }
     }
