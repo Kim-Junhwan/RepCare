@@ -46,7 +46,7 @@ enum PetClassModel: Int, CaseIterable {
         case .arthropod:
             self = .arthropod
         case .amphibia:
-            self = .arthropod
+            self = .amphibia
         case .mammalia:
             self = .mammalia
         case .etc:
