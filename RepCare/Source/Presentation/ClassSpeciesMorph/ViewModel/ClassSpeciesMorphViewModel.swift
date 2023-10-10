@@ -40,9 +40,10 @@ final class ClassSpeciesMorphViewModel {
     
     private let repository: SpeciesRepository
     
-    let selectPetClass: PublishRelay<PetClassModel> = .init()
-    let selectSpecies: PublishRelay<PetSpeciesModel> = .init()
-    let selectDetailSpecies: PublishRelay<DetailPetSpeciesModel> = .init()
+    let selectPetClass: BehaviorRelay<PetClassModel?> = .init(value: nil)
+    let selectSpecies: BehaviorRelay<PetSpeciesModel?> = .init(value: nil)
+    let selectDetailSpecies: BehaviorRelay<DetailPetSpeciesModel?> = .init(value: nil)
+    let selectMorph: BehaviorRelay<MorphModel?> = .init(value: nil)
     
     var fetchPetClassList: [PetClassModel] = []
     var fetchSpeciesList: [PetSpeciesModel] = []
@@ -50,6 +51,9 @@ final class ClassSpeciesMorphViewModel {
     var fetchMorphList: [MorphModel] = []
     
     let speciesList: BehaviorRelay<[Section: [Item]]> = .init(value: [.detailSpecies:[],.morph:[],.petClass:[],.species:[]])
+    lazy var canRegister = BehaviorRelay<Bool>.combineLatest(selectPetClass, selectSpecies, selectDetailSpecies, selectMorph) { petClass, species, detailSpecies, morph in
+        return (petClass != nil) && (species != nil)
+    }
     let disposeBag = DisposeBag()
     
     init(repository: SpeciesRepository) {
@@ -69,9 +73,7 @@ final class ClassSpeciesMorphViewModel {
     private func fetchPetClass() {
         let fetchPetClass = repository.fetchPetClass().map { PetClassModel(petClass: $0) }
         self.fetchPetClassList = fetchPetClass
-        var origin = speciesList.value
-        origin[.petClass] = fetchPetClass.map { Item(title: $0.title, id: "", isRegisterCell: false) }
-        speciesList.accept(origin)
+        updateList(section: .petClass, data: fetchPetClass.map { Item(title: $0.title, id: "", isRegisterCell: false) })
     }
     
     private func appendRegisterItem(data: [Item]) -> [Item] {
@@ -85,6 +87,7 @@ final class ClassSpeciesMorphViewModel {
         origin[section] = data
         for sectionValue in (section.rawValue+1)..<Section.allCases.count {
             guard let removeSection = Section(rawValue: sectionValue) else { return }
+            
             origin[removeSection] = []
         }
         speciesList.accept(origin)
@@ -95,25 +98,35 @@ final class ClassSpeciesMorphViewModel {
     }
     
     private func bind() {
-        selectPetClass.subscribe { item in
+        selectPetClass.compactMap({ return $0 }).subscribe { item in
             guard let petClass = item.element?.toDomain() else { return }
             let fetchSpecies = self.repository.fetchSpecies(petClass: petClass)
             self.fetchSpeciesList = fetchSpecies.map{ .init(petSpecies: $0) }
             self.updateFetchSpeciesList(section: .species, data: fetchSpecies.map { Item(title: $0.species, id: $0.id, isRegisterCell: false) })
+            self.selectSpecies.accept(nil)
+            self.selectDetailSpecies.accept(nil)
+            self.selectMorph.accept(nil)
         }.disposed(by: disposeBag)
         
-        selectSpecies.subscribe { item in
+        selectSpecies.compactMap({ return $0 }).subscribe { item in
             guard let petSpecies = item.element?.toDomain() else { return }
             let fetchDetailSpecies = self.repository.fetchDetailSpecies(species: petSpecies)
             self.fetchDetailSpeciesList = fetchDetailSpecies.map { .init(detailSpecies: $0) }
             self.updateFetchSpeciesList(section: .detailSpecies, data: fetchDetailSpecies.map { Item(title: $0.detailSpecies, id: $0.id, isRegisterCell: false) })
+            self.selectDetailSpecies.accept(nil)
+            self.selectMorph.accept(nil)
         }.disposed(by: disposeBag)
         
-        selectDetailSpecies.subscribe { item in
+        selectDetailSpecies.compactMap({ return $0 }).subscribe { item in
             guard let detailSpecies = item.element?.toDomain() else { return }
             let fetchMorph = self.repository.fetchMorph(detailSpecies: detailSpecies)
             self.fetchMorphList = fetchMorph.map { .init(morph: $0) }
             self.updateFetchSpeciesList(section: .morph, data: fetchMorph.map { Item(title: $0.morphName, id: $0.id, isRegisterCell: false) })
+            self.selectMorph.accept(nil)
         }.disposed(by: disposeBag)
+    }
+    
+    func registerSpecies() {
+        
     }
 }
