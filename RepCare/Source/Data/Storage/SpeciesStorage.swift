@@ -12,4 +12,7 @@ protocol SpeciesStorage {
     func fetchPetSpecies(request: SpeciesRequestDTO) -> SpeciesResponseDTO
     func fetchDetailSpecies(request: DetailSpeciesRequestDTO) -> DetailSpeciesResponseDTO
     func fetchSpeciesMorph(request: MorphRequestDTO) -> MorphResponseDTO
+    func registerNewSpecies(title: String, request: SpeciesRequestDTO) throws
+    func registerNewDetailSpecies(title: String, request: DetailSpeciesRequestDTO) throws
+    func registerNewMorph(title: String, request: MorphRequestDTO) throws
 }

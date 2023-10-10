@@ -12,6 +12,7 @@ protocol SpeciesRepository {
     func fetchSpecies(petClass: PetClass) -> [Species]
     func fetchDetailSpecies(species: Species) -> [DetailSpecies]
     func fetchMorph(detailSpecies: DetailSpecies) -> [Morph]
-    func registerNewSpecies(petSpecies: Species) throws
-    func registerNewMorph(petMorph: Morph) throws
+    func registerNewSpecies(petSpecies: String, parentClass: PetClass) throws
+    func registerNewDetailSpecies(detailSpecies: String, parentSpecies: Species) throws
+    func registerNewMorph(petMorph: String, parentDetailSpecies: DetailSpecies) throws
 }
