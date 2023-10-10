@@ -54,6 +54,7 @@ final class ClassSpeciesMorphViewModel {
     lazy var canRegister = BehaviorRelay<Bool>.combineLatest(selectPetClass, selectSpecies, selectDetailSpecies, selectMorph) { petClass, species, detailSpecies, morph in
         return (petClass != nil) && (species != nil)
     }
+    var tapRegisterClosure: ((PetOverSpeciesModel) -> Void)?
     let disposeBag = DisposeBag()
     
     init(repository: SpeciesRepository) {
@@ -68,6 +69,23 @@ final class ClassSpeciesMorphViewModel {
     func removeSection(sectionIndex: Int) {
         guard let section = Section(rawValue: sectionIndex+1) else { return }
         updateList(section: section, data: [])
+    }
+    
+    func registerNewSpecies(section: Section, title: String) throws {
+        switch section {
+        case .species:
+            guard let selectClass = selectPetClass.value else { return }
+            try repository.registerNewSpecies(petSpecies: title, parentClass: selectClass.toDomain())
+            fetchPetSpecies(petClass: selectClass)
+        case .detailSpecies:
+            guard let selectSpecies = selectSpecies.value?.toDomain() else { return }
+            try repository.registerNewDetailSpecies(detailSpecies: title, parentSpecies: selectSpecies)
+        case .morph:
+            guard let selectDetailSpecies = selectDetailSpecies.value?.toDomain() else { return }
+            try repository.registerNewMorph(petMorph: title, parentDetailSpecies: selectDetailSpecies)
+        default:
+            fatalError("unknown Section")
+        }
     }
     
     private func fetchPetClass() {
@@ -97,12 +115,16 @@ final class ClassSpeciesMorphViewModel {
         updateList(section: section, data: appendRegisterItem(data: data))
     }
     
+    private func fetchPetSpecies(petClass: PetClassModel) {
+        let fetchSpecies = self.repository.fetchSpecies(petClass: petClass.toDomain())
+        self.fetchSpeciesList = fetchSpecies.map{ .init(petSpecies: $0) }
+        self.updateFetchSpeciesList(section: .species, data: fetchSpecies.map { Item(title: $0.species, id: $0.id, isRegisterCell: false) })
+    }
+    
     private func bind() {
         selectPetClass.compactMap({ return $0 }).subscribe { item in
-            guard let petClass = item.element?.toDomain() else { return }
-            let fetchSpecies = self.repository.fetchSpecies(petClass: petClass)
-            self.fetchSpeciesList = fetchSpecies.map{ .init(petSpecies: $0) }
-            self.updateFetchSpeciesList(section: .species, data: fetchSpecies.map { Item(title: $0.species, id: $0.id, isRegisterCell: false) })
+            guard let petClass = item.element else { return }
+            self.fetchPetSpecies(petClass: petClass)
             self.selectSpecies.accept(nil)
             self.selectDetailSpecies.accept(nil)
             self.selectMorph.accept(nil)
@@ -127,6 +149,8 @@ final class ClassSpeciesMorphViewModel {
     }
     
     func registerSpecies() {
-        
+        guard let petClass = selectPetClass.value else { return }
+        guard let petSpecies = selectSpecies.value else { return }
+        tapRegisterClosure?(.init(petClass: petClass, petSpecies: petSpecies, detailSpecies: selectDetailSpecies.value, morph: selectMorph.value))
     }
 }
