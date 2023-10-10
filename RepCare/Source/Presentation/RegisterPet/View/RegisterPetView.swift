@@ -38,19 +38,19 @@ class RegisterPetView: UIView {
     }()
     
     let nameTextField: RegisterInputView = {
-       let view = RegisterInputView(isButton: false, isEssential: true)
+        let view = RegisterInputView(inputView: .textField, isEssential: true)
         view.descriptionLabel.text = "개체 이름"
         return view
     }()
     
     let speciesClassButton: RegisterInputView = {
-        let view = RegisterInputView(isButton: true, isEssential: true)
+        let view = RegisterInputView(inputView: .button, isEssential: true)
         view.descriptionLabel.text = "종/모프"
          return view
      }()
     
     lazy var genderView: RegisterInputView = {
-        let view = RegisterInputView(isButton: true, isEssential: true)
+        let view = RegisterInputView(inputView: .button, isEssential: true)
         view.actionButton.isHidden = true
         view.mainStackView.addArrangedSubview(genderStackView)
         view.descriptionLabel.text = "성별"
@@ -87,22 +87,22 @@ class RegisterPetView: UIView {
         return button
     }()
     
-    lazy var dateButton: RegisterInputView = {
-        let view = RegisterInputView(isButton: false, isEssential: true)
+    lazy var adoptionDateButton: RegisterInputView = {
+        let view = RegisterInputView(inputView: .datePicker, isEssential: true)
          view.descriptionLabel.text = "입양일"
-        view.textField.inputView = datePicker
+        view.actionButton = DatePickerButton()
          return view
      }()
     
     lazy var birthDayButton: RegisterInputView = {
-        let view = RegisterInputView(isButton: false, isEssential: false)
+        let view = RegisterInputView(inputView: .datePicker, isEssential: false)
          view.descriptionLabel.text = "해칭일"
-        view.textField.inputView = datePicker
+        view.actionButton = DatePickerButton()
          return view
      }()
     
     let weightTextField: RegisterInputView = {
-        let view = RegisterInputView(isButton: false, isEssential: false)
+        let view = RegisterInputView(inputView: .textField, isEssential: false)
          view.descriptionLabel.text = "현재무게"
          return view
      }()
@@ -131,12 +131,14 @@ class RegisterPetView: UIView {
         genderStackView.addArrangedSubview(femaleButton)
         genderStackView.addArrangedSubview(maleButton)
         genderStackView.addArrangedSubview(dontKnowButton)
-        for item in [nameTextField, speciesClassButton, genderView, dateButton, birthDayButton, weightTextField] {
+        for item in [nameTextField, speciesClassButton, genderView, adoptionDateButton, birthDayButton, weightTextField] {
             mainStakView.addArrangedSubview(item)
         }
         
-        for i in genderButtonList {
-            i.addTarget(self, action: #selector(tapGenderButton), for: .touchUpInside)
+        for num in 0..<genderButtonList.count {
+            let button = genderButtonList[num]
+            button.tag = num
+            button.addTarget(self, action: #selector(tapGenderButton), for: .touchUpInside)
         }
     }
     
@@ -158,6 +160,11 @@ class RegisterPetView: UIView {
     
     @objc private func tapView() {
         endEditing(false)
+    }
+    
+    func setDatePickerButton(viewController: UIViewController) {
+        adoptionDateButton.datePickerButton.viewController = viewController
+        birthDayButton.datePickerButton.viewController = viewController
     }
 
 }
