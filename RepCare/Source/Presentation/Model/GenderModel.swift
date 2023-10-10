@@ -7,8 +7,8 @@
 
 import Foundation
 
-enum GenderModel {
-    case female
-    case male
-    case dontKnow
+enum GenderModel: Int {
+    case female = 0
+    case male = 1
+    case dontKnow = 2
 }
