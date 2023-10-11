@@ -26,19 +26,19 @@ extension RealmSpeciesStorage: SpeciesStorage {
     
     func fetchPetSpecies(request: SpeciesRequestDTO) -> SpeciesResponseDTO {
         guard let realm else { return .init(petSpecies: []) }
-        guard let fetchSpecies = realm.objects(PetClassObject.self).where({ $0.title == request.petClassType }).first?.species else { return .init(petSpecies: []) }
+        guard let fetchSpecies = realm.objects(PetClassObject.self).where({ $0.title == request.petClassType }).first?.species.sorted(by: \.title) else { return .init(petSpecies: []) }
         return .init(petSpecies: Array(fetchSpecies))
     }
     
     func fetchDetailSpecies(request: DetailSpeciesRequestDTO) -> DetailSpeciesResponseDTO {
         guard let realm, let objectId = try? ObjectId(string: request.speciesId) else { return .init(detailSpeciesList: []) }
-        guard let detailSpecies = realm.object(ofType: PetSpeciesObject.self, forPrimaryKey: objectId)?.detailSpecies else { return .init(detailSpeciesList: []) }
+        guard let detailSpecies = realm.object(ofType: PetSpeciesObject.self, forPrimaryKey: objectId)?.detailSpecies.sorted(by: \.title) else { return .init(detailSpeciesList: []) }
         return .init(detailSpeciesList: Array(detailSpecies))
     }
     
     func fetchSpeciesMorph(request: MorphRequestDTO) -> MorphResponseDTO {
         guard let realm, let objectId = try? ObjectId(string: request.detailSpeciesId) else { return .init(morphList: []) }
-        guard let morph = realm.object(ofType: DetailSpeciesObject.self, forPrimaryKey: objectId)?.morph else { return .init(morphList: []) }
+        guard let morph = realm.object(ofType: DetailSpeciesObject.self, forPrimaryKey: objectId)?.morph.sorted(by: \.title) else { return .init(morphList: []) }
         return .init(morphList: Array(morph))
     }
     
