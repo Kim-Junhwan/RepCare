@@ -7,24 +7,20 @@
 
 import UIKit
 
-protocol RegisterPetViewDelegate: AnyObject {
-    func setDateTime() -> Date 
+struct PetImage: Hashable {
+    let image: UIImage
+    private let identifier = UUID()
 }
 
 class RegisterPetView: UIView {
     
-    let datePicker: UIDatePicker = {
-       let datePicker = UIDatePicker()
-        datePicker.translatesAutoresizingMaskIntoConstraints = false
-        datePicker.locale = .init(identifier: "ko-KR")
-        datePicker.datePickerMode = .date
-        datePicker.preferredDatePickerStyle = .inline
-        return datePicker
-    }()
+    private enum ImageCollectionViewSection {
+        case main
+    }
     
-    let imageCollectionView: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
-        collectionView.backgroundColor = .red
+    lazy var imageCollectionView: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: makePetImageCollectionViewFlowLayout())
+        collectionView.register(RegisterImageCollectionViewCell.self, forCellWithReuseIdentifier: RegisterImageCollectionViewCell.identifier)
         return collectionView
     }()
     
@@ -108,19 +104,37 @@ class RegisterPetView: UIView {
          return view
      }()
     
+    private var dataSource: UICollectionViewDiffableDataSource<ImageCollectionViewSection, PetImage>?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureView()
         setConstraints()
+        configureDataSource()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func configureDataSource() {
+        
+        let cellRegistration = UICollectionView.CellRegistration<ImageCollectionViewCell, PetImage> { cell, indexPath, itemIdentifier in
+            cell.configureCell(petImage: itemIdentifier)
+        }
+        
+        dataSource = UICollectionViewDiffableDataSource<ImageCollectionViewSection, PetImage>(collectionView: imageCollectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+            if indexPath.row == 0 {
+                return collectionView.dequeueReusableCell(withReuseIdentifier: RegisterImageCollectionViewCell.identifier, for: indexPath)
+            }
+            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
+        })
+    }
+    
     private func makePetImageCollectionViewFlowLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 100.0, height: 100.0)
+        layout.scrollDirection = .horizontal
+        layout.itemSize = CGSize(width: 90, height: 90)
         layout.minimumInteritemSpacing = 10.0
         return layout
     }
@@ -128,7 +142,7 @@ class RegisterPetView: UIView {
     func configureView() {
         addSubview(imageCollectionView)
         addSubview(mainStakView)
-        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapView)))
+        //addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapView)))
         genderStackView.addArrangedSubview(femaleButton)
         genderStackView.addArrangedSubview(maleButton)
         genderStackView.addArrangedSubview(dontKnowButton)
@@ -150,7 +164,7 @@ class RegisterPetView: UIView {
     
     private func setConstraints() {
         imageCollectionView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalTo(safeAreaLayoutGuide).inset(10)
+            make.top.leading.trailing.equalTo(safeAreaLayoutGuide)
             make.height.equalTo(100)
         }
         mainStakView.snp.makeConstraints { make in
@@ -166,6 +180,16 @@ class RegisterPetView: UIView {
     func setDatePickerButton(viewController: UIViewController) {
         adoptionDateButton.datePickerButton.viewController = viewController
         birthDayButton.datePickerButton.viewController = viewController
+    }
+    
+    func updateImage(images: [PetImage]) {
+        var snapshot = NSDiffableDataSourceSnapshot<ImageCollectionViewSection,PetImage>()
+        snapshot.appendSections([.main])
+        var fetchImages = images
+        let registerCell = PetImage(image: .init())
+        fetchImages.insert(registerCell, at: 0)
+        snapshot.appendItems(fetchImages)
+        dataSource?.apply(snapshot)
     }
 
 }
