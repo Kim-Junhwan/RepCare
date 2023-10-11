@@ -80,9 +80,11 @@ final class ClassSpeciesMorphViewModel {
         case .detailSpecies:
             guard let selectSpecies = selectSpecies.value?.toDomain() else { return }
             try repository.registerNewDetailSpecies(detailSpecies: title, parentSpecies: selectSpecies)
+            self.selectSpecies.accept(self.selectSpecies.value)
         case .morph:
             guard let selectDetailSpecies = selectDetailSpecies.value?.toDomain() else { return }
             try repository.registerNewMorph(petMorph: title, parentDetailSpecies: selectDetailSpecies)
+            self.selectDetailSpecies.accept(self.selectDetailSpecies.value)
         default:
             fatalError("unknown Section")
         }
