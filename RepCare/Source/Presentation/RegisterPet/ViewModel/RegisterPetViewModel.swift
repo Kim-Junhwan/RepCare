@@ -10,6 +10,8 @@ import RxRelay
 import RxSwift
 
 final class RegisterPetViewModel {
+    
+    let petImageList: BehaviorRelay<[PetImage]> = .init(value: [])
     let petName: BehaviorRelay<String> = .init(value: "")
     let overPetSpecies: PublishRelay<PetOverSpeciesModel> = .init()
     let gender: PublishRelay<GenderModel> = .init()
