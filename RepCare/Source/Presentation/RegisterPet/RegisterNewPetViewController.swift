@@ -8,13 +8,14 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import PhotosUI
 
 class RegisterNewPetViewController: BaseViewController {
     
     let mainView = RegisterPetView()
     let viewModel: RegisterPetViewModel = .init()
     let dateFormatter: DateFormatter = {
-      let dateFormatter = DateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "ko_KR")
         dateFormatter.dateFormat = "yyyy/MM/dd"
         return dateFormatter
@@ -29,14 +30,15 @@ class RegisterNewPetViewController: BaseViewController {
     override func loadView() {
         view = mainView
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
-        
+        mainView.imageCollectionView.delegate = self
     }
     
     private func bind() {
+        bindImage()
         bindRegisterButton()
         bindName()
         bindSpecies()
@@ -44,6 +46,12 @@ class RegisterNewPetViewController: BaseViewController {
         bindAdoptionDate()
         bindBirthDate()
         bindWeight()
+    }
+    
+    private func bindImage() {
+        viewModel.petImageList.subscribe { imageList in
+            self.mainView.updateImage(images: imageList)
+        }.disposed(by: disposeBag)
     }
     
     private func bindRegisterButton() {
@@ -117,11 +125,97 @@ class RegisterNewPetViewController: BaseViewController {
     }
     
     @objc func showSpeciesView() {
-        let viewModel = ClassSpeciesMorphViewModel(repository: DefaultSpeciesRepository(speciesStroage: RealmSpeciesStorage()))
-        let vc = ClassSpeciesMorphViewController(viewModel: viewModel)
-        viewModel.tapRegisterClosure = { self.viewModel.overPetSpecies.accept($0) }
+        let speciesViewModel = ClassSpeciesMorphViewModel(repository: DefaultSpeciesRepository(speciesStroage: RealmSpeciesStorage()))
+        let vc = ClassSpeciesMorphViewController(viewModel: speciesViewModel)
+        speciesViewModel.tapRegisterClosure = { self.viewModel.overPetSpecies.accept($0) }
         let nvc = UINavigationController(rootViewController: vc)
         nvc.modalPresentationStyle = .fullScreen
         present(nvc, animated: true)
     }
+}
+
+extension RegisterNewPetViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            showCameraOrImagePickerActionSheet()
+        }
+    }
+    
+    private func showCameraOrImagePickerActionSheet() {
+        let alert = UIAlertController(title: "어떤 작업을 수행하시겠습니까?", message: nil, preferredStyle: .actionSheet)
+        let camera = UIAlertAction(title: "카메라", style: .default) { _ in
+            self.pick(sourceType: .camera)
+        }
+        let imagePicker = UIAlertAction(title: "앨범", style: .default) { _ in
+            self.showImagePicker()
+        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        alert.addAction(camera)
+        alert.addAction(imagePicker)
+        alert.addAction(cancel)
+        present(alert, animated: true)
+    }
+    func pick(sourceType: UIImagePickerController.SourceType) {
+        let picker = UIImagePickerController()
+        picker.sourceType = sourceType
+        picker.allowsEditing = true
+        picker.delegate = self
+        present(picker, animated: true)
+    }
+    
+    func showImagePicker() {
+        var config = PHPickerConfiguration()
+        config.selectionLimit = 5
+        config.filter = .images
+        let picker = PHPickerViewController(configuration: config)
+        picker.delegate = self
+        present(picker, animated: true)
+    }
+}
+
+extension RegisterNewPetViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true) {
+            let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
+            print(image)
+            self.viewModel.petImageList.accept([.init(image: image!)])
+        }
+    }
+}
+
+extension RegisterNewPetViewController: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        
+        picker.dismiss(animated: true)
+        let itemProviderList = results.map { $0.itemProvider }
+        Observable.zip(itemProviderList.map { convertImage(provider: $0) }).subscribe { imageList in
+            let petImageList = imageList.map { PetImageItem(image: $0) }
+            DispatchQueue.main.async {
+                self.viewModel.petImageList.accept(petImageList)
+            }
+        } onError: { error in
+            print("error \(error)")
+        }.disposed(by: disposeBag)
+
+        
+    }
+    
+    func convertImage(provider: NSItemProvider) -> Observable<UIImage> {
+        return Observable<UIImage>.create { observer in
+            if provider.canLoadObject(ofClass: UIImage.self) {
+                provider.loadObject(ofClass: UIImage.self) { image, error in
+                    if let errror = error {
+                        observer.onError(error!)
+                    } else {
+                        guard let convertImage = image as? UIImage else { return }
+                        observer.onNext(convertImage)
+                        observer.onCompleted()
+                    }
+                    
+                }
+            }
+            return Disposables.create()
+        }
+    }
+    
 }
