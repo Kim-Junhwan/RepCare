@@ -33,7 +33,6 @@ struct Item: Hashable {
     let title: String
     let id: String
     let isRegisterCell: Bool
-    private let identifier = UUID()
 }
 
 final class ClassSpeciesMorphViewModel {
@@ -97,7 +96,7 @@ final class ClassSpeciesMorphViewModel {
     }
     
     private func appendRegisterItem(data: [Item]) -> [Item] {
-        let registerItem = Item(title: "", id: "", isRegisterCell: true)
+        let registerItem = Item(title: "", id: UUID().uuidString, isRegisterCell: true)
         
         return data+[registerItem]
     }
