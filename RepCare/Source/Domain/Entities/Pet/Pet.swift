@@ -18,8 +18,9 @@ struct Pet {
     var name: String
     var petClass: PetClass
     var petSpecies: Species
-    var morph: Morph
+    var detailSpecies: DetailSpecies?
+    var morph: Morph?
     var adoptionDate: Date
-    var birthDate: Date
+    var birthDate: Date?
     var gender: Gender
 }
