@@ -8,9 +8,13 @@
 import Foundation
 
 struct PetModel {
-    let imagPath: String?
+    let imagPath: [PetImageModel]
     let name: String
     let sex: Gender
     let species: String
     let morph: String?
+}
+
+struct PetImageModel {
+    let imagePath: String
 }
