@@ -17,6 +17,8 @@
 		C7273BAB2AD444B5004B7A6F /* MorphModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273BAA2AD444B5004B7A6F /* MorphModel.swift */; };
 		C7273BAD2AD4D8CC004B7A6F /* PetOverSpeciesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273BAC2AD4D8CC004B7A6F /* PetOverSpeciesModel.swift */; };
 		C7273BAF2AD55D18004B7A6F /* DatePickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273BAE2AD55D18004B7A6F /* DatePickerButton.swift */; };
+		C7273BB22AD62DAD004B7A6F /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273BB12AD62DAD004B7A6F /* ImageCollectionViewCell.swift */; };
+		C7273BB42AD678A5004B7A6F /* RegisterImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273BB32AD678A5004B7A6F /* RegisterImageCollectionViewCell.swift */; };
 		C76A01EA2AD264FC0024D008 /* RealmSpeciesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76A01E92AD264FC0024D008 /* RealmSpeciesStorage.swift */; };
 		C76A01EC2AD265FB0024D008 /* SpeciesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76A01EB2AD265FB0024D008 /* SpeciesStorage.swift */; };
 		C76A01EE2AD2676B0024D008 /* PetClassResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76A01ED2AD2676B0024D008 /* PetClassResponseDTO.swift */; };
@@ -84,6 +86,8 @@
 		C7273BAA2AD444B5004B7A6F /* MorphModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorphModel.swift; sourceTree = "<group>"; };
 		C7273BAC2AD4D8CC004B7A6F /* PetOverSpeciesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetOverSpeciesModel.swift; sourceTree = "<group>"; };
 		C7273BAE2AD55D18004B7A6F /* DatePickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerButton.swift; sourceTree = "<group>"; };
+		C7273BB12AD62DAD004B7A6F /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		C7273BB32AD678A5004B7A6F /* RegisterImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		C76A01E92AD264FC0024D008 /* RealmSpeciesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmSpeciesStorage.swift; sourceTree = "<group>"; };
 		C76A01EB2AD265FB0024D008 /* SpeciesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesStorage.swift; sourceTree = "<group>"; };
 		C76A01ED2AD2676B0024D008 /* PetClassResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetClassResponseDTO.swift; sourceTree = "<group>"; };
@@ -173,6 +177,15 @@
 				C7273BAC2AD4D8CC004B7A6F /* PetOverSpeciesModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		C7273BB02AD62D9C004B7A6F /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				C7273BB12AD62DAD004B7A6F /* ImageCollectionViewCell.swift */,
+				C7273BB32AD678A5004B7A6F /* RegisterImageCollectionViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		C76A01E82AD264D00024D008 /* Storage */ = {
@@ -394,6 +407,7 @@
 		C7F5F41D2ACE371700ACFC76 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C7273BB02AD62D9C004B7A6F /* Cell */,
 				C7F5F4992ACFD1C700ACFC76 /* CustomView */,
 				C7F5F41E2ACE372D00ACFC76 /* RegisterPetView.swift */,
 			);
@@ -569,6 +583,7 @@
 				C7F5F41C2ACD680400ACFC76 /* RegisterNewPetViewController.swift in Sources */,
 				C7D152462AC51B270064D59F /* AppDelegate.swift in Sources */,
 				C7F5F4332ACE87AA00ACFC76 /* SpeciesRepository.swift in Sources */,
+				C7273BB22AD62DAD004B7A6F /* ImageCollectionViewCell.swift in Sources */,
 				C7D152EC2ACA5EA70064D59F /* Rule.swift in Sources */,
 				C7B499DA2AD2819B00DD325F /* MorphReqeust+ResponseDTO.swift in Sources */,
 				C7F5F41F2ACE372D00ACFC76 /* RegisterPetView.swift in Sources */,
@@ -612,6 +627,7 @@
 				C7F5F42A2ACE870300ACFC76 /* RegisterPetViewModel.swift in Sources */,
 				C7F5F4A72AD1025300ACFC76 /* DefaultSpeciesRepository.swift in Sources */,
 				C7D1525E2AC6E7AC0064D59F /* Color.swift in Sources */,
+				C7273BB42AD678A5004B7A6F /* RegisterImageCollectionViewCell.swift in Sources */,
 				C7F5F4302ACE875900ACFC76 /* ClassSpeciesMorphViewModel.swift in Sources */,
 				C7D152F22ACAA5B90064D59F /* PetListView.swift in Sources */,
 			);
