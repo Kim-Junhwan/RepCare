@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct PetImage: Hashable {
+struct PetImageItem: Hashable {
     let image: UIImage
     private let identifier = UUID()
 }
@@ -104,7 +104,7 @@ class RegisterPetView: UIView {
          return view
      }()
     
-    private var dataSource: UICollectionViewDiffableDataSource<ImageCollectionViewSection, PetImage>?
+    private var dataSource: UICollectionViewDiffableDataSource<ImageCollectionViewSection, PetImageItem>?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -119,11 +119,11 @@ class RegisterPetView: UIView {
     
     private func configureDataSource() {
         
-        let cellRegistration = UICollectionView.CellRegistration<ImageCollectionViewCell, PetImage> { cell, indexPath, itemIdentifier in
+        let cellRegistration = UICollectionView.CellRegistration<ImageCollectionViewCell, PetImageItem> { cell, indexPath, itemIdentifier in
             cell.configureCell(petImage: itemIdentifier)
         }
         
-        dataSource = UICollectionViewDiffableDataSource<ImageCollectionViewSection, PetImage>(collectionView: imageCollectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+        dataSource = UICollectionViewDiffableDataSource<ImageCollectionViewSection, PetImageItem>(collectionView: imageCollectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             if indexPath.row == 0 {
                 return collectionView.dequeueReusableCell(withReuseIdentifier: RegisterImageCollectionViewCell.identifier, for: indexPath)
             }
@@ -182,11 +182,11 @@ class RegisterPetView: UIView {
         birthDayButton.datePickerButton.viewController = viewController
     }
     
-    func updateImage(images: [PetImage]) {
-        var snapshot = NSDiffableDataSourceSnapshot<ImageCollectionViewSection,PetImage>()
+    func updateImage(images: [PetImageItem]) {
+        var snapshot = NSDiffableDataSourceSnapshot<ImageCollectionViewSection,PetImageItem>()
         snapshot.appendSections([.main])
         var fetchImages = images
-        let registerCell = PetImage(image: .init())
+        let registerCell = PetImageItem(image: .init())
         fetchImages.insert(registerCell, at: 0)
         snapshot.appendItems(fetchImages)
         dataSource?.apply(snapshot)

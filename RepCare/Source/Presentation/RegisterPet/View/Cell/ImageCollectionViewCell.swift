@@ -30,7 +30,7 @@ class ImageCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func configureCell(petImage: PetImage) {
+    func configureCell(petImage: PetImageItem) {
         imageView.image = petImage.image
     }
 }
