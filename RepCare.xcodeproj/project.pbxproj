@@ -24,7 +24,7 @@
 		C727A4242AD6F87600880111 /* DefaultPetRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C727A4232AD6F87600880111 /* DefaultPetRepository.swift */; };
 		C727A4282AD6FA0600880111 /* PetStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C727A4272AD6FA0600880111 /* PetStorage.swift */; };
 		C727A42C2AD6FA2E00880111 /* RegisterPetRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C727A42B2AD6FA2E00880111 /* RegisterPetRequestDTO.swift */; };
-		C727A42E2AD6FA7700880111 /* RealmPetStroage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C727A42D2AD6FA7700880111 /* RealmPetStroage.swift */; };
+		C727A42E2AD6FA7700880111 /* RealmPetStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C727A42D2AD6FA7700880111 /* RealmPetStorage.swift */; };
 		C727A4312AD70A3800880111 /* FileManagerPetImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C727A4302AD70A3800880111 /* FileManagerPetImageRepository.swift */; };
 		C727A4332AD70C6200880111 /* repcare.realm in Resources */ = {isa = PBXBuildFile; fileRef = C727A4322AD70C6200880111 /* repcare.realm */; };
 		C76A01EA2AD264FC0024D008 /* RealmSpeciesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76A01E92AD264FC0024D008 /* RealmSpeciesStorage.swift */; };
@@ -100,7 +100,7 @@
 		C727A4232AD6F87600880111 /* DefaultPetRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPetRepository.swift; sourceTree = "<group>"; };
 		C727A4272AD6FA0600880111 /* PetStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetStorage.swift; sourceTree = "<group>"; };
 		C727A42B2AD6FA2E00880111 /* RegisterPetRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPetRequestDTO.swift; sourceTree = "<group>"; };
-		C727A42D2AD6FA7700880111 /* RealmPetStroage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmPetStroage.swift; sourceTree = "<group>"; };
+		C727A42D2AD6FA7700880111 /* RealmPetStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmPetStorage.swift; sourceTree = "<group>"; };
 		C727A4302AD70A3800880111 /* FileManagerPetImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerPetImageRepository.swift; sourceTree = "<group>"; };
 		C727A4322AD70C6200880111 /* repcare.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = repcare.realm; sourceTree = "<group>"; };
 		C76A01E92AD264FC0024D008 /* RealmSpeciesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmSpeciesStorage.swift; sourceTree = "<group>"; };
@@ -215,7 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				C727A4272AD6FA0600880111 /* PetStorage.swift */,
-				C727A42D2AD6FA7700880111 /* RealmPetStroage.swift */,
+				C727A42D2AD6FA7700880111 /* RealmPetStorage.swift */,
 			);
 			path = Pet;
 			sourceTree = "<group>";
@@ -638,7 +638,7 @@
 				C727A4282AD6FA0600880111 /* PetStorage.swift in Sources */,
 				C7F5F43B2ACF112700ACFC76 /* MorphObject.swift in Sources */,
 				C7D152DB2AC999AB0064D59F /* Species.swift in Sources */,
-				C727A42E2AD6FA7700880111 /* RealmPetStroage.swift in Sources */,
+				C727A42E2AD6FA7700880111 /* RealmPetStorage.swift in Sources */,
 				C7273BA12AD43DC2004B7A6F /* PetClassModel.swift in Sources */,
 				C7F5F4252ACE5BA500ACFC76 /* RegisterInputView.swift in Sources */,
 				C7D152A22AC855F60064D59F /* PetClassObject.swift in Sources */,

@@ -8,15 +8,15 @@
 import Foundation
 import RealmSwift
 
-final class RealmPetStroage {
+final class RealmPetStorage {
     private let realm: Realm? = {
         guard let realmPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("repcare.realm", conformingTo: .data) else {fatalError()}
-        let bundleRealm = try! Realm(fileURL: realmPath)
+        let bundleRealm = try? Realm(fileURL: realmPath)
         return bundleRealm
     }()
 }
 
-extension RealmPetStroage: PetStorage {
+extension RealmPetStorage: PetStorage {
     
     func registerPet(request: RegisterPetRequestDTO) throws -> PetObject {
         guard let realm else { return .init() }
