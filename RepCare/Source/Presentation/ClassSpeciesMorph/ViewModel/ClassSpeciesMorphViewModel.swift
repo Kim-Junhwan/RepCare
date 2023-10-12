@@ -92,7 +92,7 @@ final class ClassSpeciesMorphViewModel {
     private func fetchPetClass() {
         let fetchPetClass = repository.fetchPetClass().map { PetClassModel(petClass: $0) }
         self.fetchPetClassList = fetchPetClass
-        updateList(section: .petClass, data: fetchPetClass.map { Item(title: $0.title, id: "", isRegisterCell: false) })
+        updateList(section: .petClass, data: fetchPetClass.map { Item(title: $0.title, id: UUID().uuidString, isRegisterCell: false) })
     }
     
     private func appendRegisterItem(data: [Item]) -> [Item] {
