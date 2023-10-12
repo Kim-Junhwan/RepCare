@@ -20,8 +20,23 @@ struct PetQuery {
     let searchKeyword: String?
 }
 
+struct RegisterPetQuery {
+    let name: String
+    let imagePath: [PetImage]
+    let petClass: PetClass
+    let petSpecies: Species
+    let detailSpecies: DetailSpecies?
+    let morph: Morph?
+    let adoptionDate: Date
+    let birthDate: Date?
+    let gender: Gender
+    let weight: Weight?
+}
+
 protocol PetRepository {
-    func registerPet(pet: Pet) throws
+    typealias petId = String
+    
+    func registerPet(pet: RegisterPetQuery) throws -> petId
     func deletePet(pet: Pet)
     func fetchPetList(query: PetQuery, start: Int) -> PetRepositoryResponse
 }
