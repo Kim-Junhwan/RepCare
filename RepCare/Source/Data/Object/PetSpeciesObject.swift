@@ -17,4 +17,8 @@ class PetSpeciesObject: Object {
         self.init()
         self.title = species
     }
+    
+    func toDomain() -> Species {
+        return Species(id: _id.stringValue, species: title)
+    }
 }

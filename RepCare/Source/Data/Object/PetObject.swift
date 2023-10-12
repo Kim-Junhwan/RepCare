@@ -17,11 +17,12 @@ class PetObject: Object {
     @Persisted var detailSpecies: DetailSpeciesObject?
     @Persisted var morph: MorphObject?
     
+    @Persisted var imagePathList: List<String>
     @Persisted var adoptionDate: Date
     @Persisted var weights: List<WeightObject>
     @Persisted var birthDate: Date?
     
-    convenience init(name:String, gender: GenderType, petClass: PetClassObject, petSpecies: PetSpeciesObject, detailSpecies: DetailSpeciesObject?, morph: MorphObject?, adoptionDate: Date, weights: WeightObject?, birthDate: Date?) {
+    convenience init(name:String, gender: GenderType, petClass: PetClassObject, petSpecies: PetSpeciesObject, detailSpecies: DetailSpeciesObject?, morph: MorphObject?, adoptionDate: Date, weights: WeightObject?, birthDate: Date?, imagePathList: [String]) {
         self.init()
         self.name = name
         self.gender = gender
@@ -34,6 +35,7 @@ class PetObject: Object {
             self.weights.append(weights)
         }
         self.birthDate = birthDate
+        self.imagePathList.append(objectsIn: imagePathList)
     }
 }
 
