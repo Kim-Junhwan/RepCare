@@ -15,4 +15,8 @@ struct MorphModel {
         self.id = morph.id
         self.title = morph.morphName
     }
+    
+    func toDomain() -> Morph {
+        return .init(id: id, morphName: title)
+    }
 }
