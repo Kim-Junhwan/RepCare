@@ -21,6 +21,17 @@ class ActionButton: UIButton {
     private func setLayout() {
         layer.borderWidth = 1.0
         layer.borderColor = UIColor.systemGray3.cgColor
+        setTitleColor(.black, for: .normal)
+    }
+    
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                backgroundColor = .red
+            } else {
+                backgroundColor = .white
+            }
+        }
     }
     
 }
