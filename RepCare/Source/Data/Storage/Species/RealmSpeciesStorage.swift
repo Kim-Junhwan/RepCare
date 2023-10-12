@@ -11,7 +11,7 @@ import RealmSwift
 final class RealmSpeciesStorage {
     private let realm: Realm? = {
         guard let realmPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("repcare.realm", conformingTo: .data) else {fatalError()}
-        let bundleRealm = try! Realm(fileURL: realmPath)
+        let bundleRealm = try? Realm(fileURL: realmPath)
         return bundleRealm
     }()
 }
@@ -64,6 +64,32 @@ extension RealmSpeciesStorage: SpeciesStorage {
         try realm.write {
             parentDetailSpecies.morph.append(.init(morph: title))
         }
+    }
+    
+    private func makeObjectId(id: String) -> ObjectId {
+        guard let id = try? ObjectId(string: id) else { return .init() }
+        return id
+    }
+    
+    func getPetClass(type: SpeciesRequestDTO) -> PetClassObject {
+        guard let realm else { fatalError("Realm Error") }
+        guard let classObject = realm.objects(PetClassObject.self).where({ $0.title == type.petClassType }).first else { fatalError("Unknown Pet Class") }
+        return classObject
+    }
+    
+    func getSpecies(id: String) -> PetSpeciesObject? {
+        guard let realm else { return .init() }
+        return realm.object(ofType: PetSpeciesObject.self, forPrimaryKey: makeObjectId(id: id))
+    }
+    
+    func getDetailSpecies(id: String) -> DetailSpeciesObject? {
+        guard let realm else { return .init() }
+        return realm.object(ofType: DetailSpeciesObject.self, forPrimaryKey: makeObjectId(id: id))
+    }
+    
+    func getMorph(id: String) -> MorphObject? {
+        guard let realm else { return .init() }
+        return realm.object(ofType: MorphObject.self, forPrimaryKey: makeObjectId(id: id))
     }
     
 }
