@@ -66,7 +66,7 @@ class RegisterNewPetViewController: BaseViewController {
     }
     
     private func bindSpecies() {
-        viewModel.overPetSpecies.subscribe { currentSpecies in
+        viewModel.overPetSpecies.compactMap { $0 }.subscribe { currentSpecies in
             guard let species = currentSpecies.element else { return }
             var speciesArr: [String] = []
             speciesArr.append(species.petClass.title)
@@ -90,7 +90,9 @@ class RegisterNewPetViewController: BaseViewController {
     }
     
     private func bindAdoptionDate() {
-        viewModel.adoptionDate.subscribe { self.mainView.adoptionDateButton.datePickerButton.setTitle(self.dateFormatter.string(from: $0), for: .normal) }.disposed(by: disposeBag)
+        viewModel.adoptionDate.subscribe { adopDate in
+            guard let adopDate else { return }
+            self.mainView.adoptionDateButton.datePickerButton.setTitle(self.dateFormatter.string(from: adopDate), for: .normal) }.disposed(by: disposeBag)
     }
     
     private func bindBirthDate() {
@@ -122,6 +124,12 @@ class RegisterNewPetViewController: BaseViewController {
     
     @objc func tapRegisterButton() {
         
+        do {
+            try self.viewModel.register()
+        } catch {
+            showErrorAlert(title: "저장 에러", message: error.localizedDescription)
+        }
+        navigationController?.popViewController(animated: true)
     }
     
     @objc func showSpeciesView() {
@@ -177,7 +185,6 @@ extension RegisterNewPetViewController: UIImagePickerControllerDelegate, UINavig
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true) {
             let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
-            print(image)
             self.viewModel.petImageList.accept([.init(image: image!)])
         }
     }
