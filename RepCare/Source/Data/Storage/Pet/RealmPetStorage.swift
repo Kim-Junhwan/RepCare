@@ -27,7 +27,9 @@ extension RealmPetStorage: PetStorage {
     
     func registerPet(request: RegisterPetRequestDTO) throws -> PetObject {
         guard let realm else { return .init() }
-        let pet = PetObject(name: request.name, gender: request.gender, petClass: request.petClass, petSpecies: request.petSpecies, detailSpecies: request.detailSpecies, morph: request.morph, adoptionDate: request.adoptionDate, weights: request.weight, birthDate: request.birthDate, imagePathList: request.imagePathList)
+        let pet = PetObject(name: request.name, gender: request.gender, petClass: request.petClass, petSpecies: request.petSpecies, detailSpecies: request.detailSpecies, morph: request.morph, adoptionDate: request.adoptionDate, weights: request.weight, birthDate: request.birthDate, imagePathList: [])
+        let imagePathList = request.imagePathList.map { "\(pet._id.stringValue)/\($0)" }
+        pet.imagePathList.append(objectsIn: imagePathList)
         try realm.write {
             realm.add(pet)
         }
