@@ -47,7 +47,7 @@ extension DefaultRegisterPetUseCase: RegisterPetUseCase {
                                                  birthDate: request.birthDate,
                                                  gender: request.gender,
                                                  weight: request.weight))
-        let saveImagePathList = try petImageRepository.savePetImage(petId: registerPetId, petImageList: request.imageDataList
+        try petImageRepository.savePetImage(petId: registerPetId, petImageList: request.imageDataList
         )
     }
 }
