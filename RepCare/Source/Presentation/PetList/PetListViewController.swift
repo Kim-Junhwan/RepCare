@@ -60,10 +60,7 @@ extension PetListViewController: UICollectionViewDataSource {
             return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PetCollectionViewCell.identifier, for: indexPath) as? PetCollectionViewCell else { return .init() }
-            let pet = viewModel.petList.value[indexPath.row]
-            cell.nameLabel.text = pet.name
-            cell.speciesLabel.text = pet.overSpecies.detailSpecies?.title
-            cell.morphLabel.text = pet.overSpecies.morph?.title
+            cell.configureCell(pet: viewModel.petList.value[indexPath.row])
             return cell
         }
     }

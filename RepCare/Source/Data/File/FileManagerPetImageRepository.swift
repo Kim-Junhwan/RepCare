@@ -18,10 +18,4 @@ final class FileManaerPetImageRepository: PetImageRepository {
             try petImageList[images].write(to: imagePath)
         }
     }
-    
-    func savePetImage(petImageList: [Data]) -> [PetImage] {
-        return []
-    }
-    
-    
 }

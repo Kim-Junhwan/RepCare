@@ -37,12 +37,19 @@ class PetCollectionViewCell: UICollectionViewCell {
         let stackView = UIStackView()
          stackView.axis = .horizontal
          stackView.distribution = .fill
+        stackView.spacing = 5
          return stackView
      }()
     
     let speciesLabel: UILabel = {
         let label = UILabel()
          return label
+    }()
+    
+    let boundaryLabel: UILabel = {
+        let label = UILabel()
+        label.text = "|"
+        return label
     }()
     
     let morphLabel: UILabel = {
@@ -72,6 +79,7 @@ class PetCollectionViewCell: UICollectionViewCell {
         petNameStackView.addArrangedSubview(nameLabel)
         petNameStackView.addArrangedSubview(sexImageView)
         morphStackView.addArrangedSubview(speciesLabel)
+        morphStackView.addArrangedSubview(boundaryLabel)
         morphStackView.addArrangedSubview(morphLabel)
     }
     
@@ -90,6 +98,26 @@ class PetCollectionViewCell: UICollectionViewCell {
         morphStackView.snp.makeConstraints { make in
             make.top.equalTo(petNameStackView.snp.bottom).offset(10)
             make.leading.equalTo(snp.leading).offset(10)
+        }
+    }
+    
+    func configureCell(pet: PetModel) {
+        nameLabel.text = pet.name
+        if pet.imagePath.isEmpty {
+            petImageView.image = UIImage(systemName: "star")
+        } else {
+            guard let imagePath = pet.imagePath.first?.imagePath else { return }
+            petImageView.configureImageFromFilePath(path: imagePath)
+        }
+        if let morph = pet.overSpecies.morph {
+            speciesLabel.text = pet.overSpecies.detailSpecies?.title
+            morphLabel.text = morph.title
+        } else if let detailSpecies = pet.overSpecies.detailSpecies?.title {
+            speciesLabel.text = pet.overSpecies.petSpecies.title
+            morphLabel.text = detailSpecies
+        } else {
+            speciesLabel.text = pet.overSpecies.petClass.title
+            morphLabel.text = pet.overSpecies.petSpecies.title
         }
     }
 }
