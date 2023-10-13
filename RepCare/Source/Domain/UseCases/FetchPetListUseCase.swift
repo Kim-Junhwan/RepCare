@@ -12,10 +12,8 @@ protocol FetchPetListUseCase {
 }
 
 struct FetchPetListRequest {
-    var page: Int
-    var petSpecies: Species
-    var petClass: PetClass
-    var searchKeyword: String?
+    let query: FetchPetListQuery
+    let start: Int
 }
 
 final class DefaultFetchPetListUseCase {
@@ -28,10 +26,8 @@ final class DefaultFetchPetListUseCase {
 
 extension DefaultFetchPetListUseCase: FetchPetListUseCase {
     func fetchPetList(request: FetchPetListRequest) -> PetPage {
-        let fetchIndex = request.page * Rule.fetchPetCount
-        let query = PetQuery(petClass: request.petClass, species: request.petSpecies, searchKeyword: request.searchKeyword)
-        let response = petRepository.fetchPetList(query: query, start: fetchIndex)
-        
+        let startIndex = request.start * Rule.fetchPetCount
+        let response = petRepository.fetchPetList(query: request.query, start: startIndex)
         let currentPage = (response.start/Rule.fetchPetCount)+1
         let totalPage = response.totalPetCount % Rule.fetchPetCount == 0 ? response.totalPetCount/Rule.fetchPetCount : (response.totalPetCount/Rule.fetchPetCount)+1
         return PetPage(currentPage: currentPage, totalPage: totalPage, petList: response.petList)
