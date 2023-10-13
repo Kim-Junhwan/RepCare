@@ -9,4 +9,5 @@ import Foundation
 
 protocol PetStorage {
     func registerPet(request: RegisterPetRequestDTO) throws -> PetObject
+    func fetchPetList(request: FetchPetListRequestDTO) -> FetchPetListResponseDTO
 }

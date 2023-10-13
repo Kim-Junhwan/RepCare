@@ -18,6 +18,13 @@ final class RealmPetStorage {
 
 extension RealmPetStorage: PetStorage {
     
+    func fetchPetList(request: FetchPetListRequestDTO) -> FetchPetListResponseDTO {
+        guard let realm else { return .init(totalPetCount: 0, startIndex: 0, petList: []) }
+        let petList = realm.objects(PetObject.self)
+        
+        return .init(totalPetCount: petList.count, startIndex: request.startIndex, petList: Array(petList))
+    }
+    
     func registerPet(request: RegisterPetRequestDTO) throws -> PetObject {
         guard let realm else { return .init() }
         let pet = PetObject(name: request.name, gender: request.gender, petClass: request.petClass, petSpecies: request.petSpecies, detailSpecies: request.detailSpecies, morph: request.morph, adoptionDate: request.adoptionDate, weights: request.weight, birthDate: request.birthDate, imagePathList: request.imagePathList)
