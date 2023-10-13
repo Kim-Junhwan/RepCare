@@ -37,10 +37,27 @@ class PetObject: Object {
         self.birthDate = birthDate
         self.imagePathList.append(objectsIn: imagePathList)
     }
+    
+    func toDomain() -> Pet {
+        guard let petClass = petClass?.toDomain() else { fatalError("Unknown PetClass") }
+        guard let petSpecies = petSpecies?.toDomain() else { fatalError("") }
+        return .init(id: _id.stringValue, name: name, imageList: imagePathList.map{.init(imagePath: $0)}, petClass: petClass, petSpecies: petSpecies, detailSpecies: detailSpecies?.toDomain(), morph: morph?.toDomain(), adoptionDate: adoptionDate, birthDate: birthDate , gender: gender.toDomain())
+    }
 }
 
 enum GenderType: String, PersistableEnum {
     case female
     case male
     case miss
+    
+    func toDomain() -> Gender {
+        switch self {
+        case .female:
+            return .female
+        case .male:
+            return .male
+        case .miss:
+            return .dontKnow
+        }
+    }
 }

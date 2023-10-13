@@ -16,4 +16,8 @@ class MorphObject: Object {
         self.init()
         self.title = morph
     }
+    
+    func toDomain() -> Morph {
+        return .init(id: _id.stringValue, morphName: title)
+    }
 }
