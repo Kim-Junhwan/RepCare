@@ -20,8 +20,8 @@ final class DefaultPetRepository: PetRepository {
     func registerPet(pet: RegisterPetQuery) throws -> petId {
         let petClass = speciesStroage.getPetClass(type: .init(petClass: pet.petClass))
         guard let species = speciesStroage.getSpecies(id: pet.petSpecies.id) else { fatalError("cant species") }
-        let detailSpecies = pet.detailSpecies == nil ? nil : speciesStroage.getDetailSpecies(id: pet.detailSpecies?.id ?? "")
-        let morph = pet.morph == nil ? nil : speciesStroage.getMorph(id: pet.morph?.id ?? "")
+        let detailSpecies = pet.detailSpecies.flatMap { speciesStroage.getDetailSpecies(id:$0.id) }
+        let morph = pet.morph.flatMap { speciesStroage.getMorph(id:$0.id) }
         let reqeustDTO = RegisterPetRequestDTO(pet: pet, petClass: petClass, petSpecies: species, detailSpecies: detailSpecies, morph: morph)
         let registerPet = try petStorage.registerPet(request: reqeustDTO)
         return registerPet._id.stringValue
@@ -31,9 +31,23 @@ final class DefaultPetRepository: PetRepository {
         
     }
     
-    func fetchPetList(query: PetQuery, start: Int) -> PetRepositoryResponse {
-        return .init(totalPetCount: 0, start: 0, petList: [])
+    func fetchPetList(query: FetchPetListQuery, start: Int) -> PetRepositoryResponse {
+        let petClass = query.petClass == .all ? nil : speciesStroage.getPetClass(type: .init(petClass: query.petClass))
+        let petSpecies = query.species.flatMap { speciesStroage.getSpecies(id:$0.id) }
+        let detailSpecies = query.detailSpecies.flatMap { speciesStroage.getDetailSpecies(id:$0.id) }
+        let morph = query.morph.flatMap { speciesStroage.getMorph(id:$0.id) }
+        let gender = query.gender.flatMap { gender in
+            switch gender {
+            case .female:
+                return GenderType.female
+            case .male:
+                return GenderType.male
+            case .dontKnow:
+                return GenderType.miss
+            }
+        }
+        let requestDTO = FetchPetListRequestDTO(startIndex: start, petClass: petClass, petSpecies: petSpecies, detailSpecies: detailSpecies, morph: morph, gender: gender)
+        let fetchList = petStorage.fetchPetList(request: requestDTO)
+        return .init(totalPetCount: fetchList.totalPetCount, start: fetchList.startIndex, petList: fetchList.petList.map { $0.toDomain() })
     }
-    
-    
 }
