@@ -12,6 +12,17 @@ enum GenderModel: Int {
     case male = 1
     case dontKnow = 2
     
+    init(gender: Gender) {
+        switch gender {
+        case .female:
+            self = .female
+        case .male:
+            self = .male
+        case .dontKnow:
+            self = .dontKnow
+        }
+    }
+    
     func toDomain() -> Gender {
         switch self {
         case .female:
