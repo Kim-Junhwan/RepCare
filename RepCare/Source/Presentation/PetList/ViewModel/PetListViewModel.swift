@@ -11,11 +11,12 @@ import RxSwift
 
 final class PetListViewModel {
     
-    let fetchPetListUseCase: FetchPetListUseCase
-    let selectPetClass: BehaviorRelay<PetClassModel> = .init(value: .all)
-    let requestPetListFilter: BehaviorRelay<FetchPetListRequest> = .init(value: .init(query: .init(petClass: .all, species: nil, detailSpecies: nil, morph: nil, searchKeyword: nil, gender: nil), start: 0))
+    private let fetchPetListUseCase: FetchPetListUseCase
+    let currentQuery: FetchPetListQuery = .init(petClass: .all, species: nil, detailSpecies: nil, morph: nil, searchKeyword: nil, gender: nil)
+    private var pages: [PetPage] = []
+    
     let petList: BehaviorRelay<[PetModel]> = .init(value: [])
-    let disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     var currentPage: Int = 0
     var totalPage: Int = 1
@@ -34,20 +35,52 @@ final class PetListViewModel {
         self.fetchPetListUseCase = fetchPetListUseCase
     }
     
-    func viewDidLooad() {
-        bind()
+    private func resetPage() {
+        currentPage = 0
+        totalPage = 1
+        pages.removeAll()
+        petList.accept([])
     }
     
-    private func bind() {
-        requestPetListFilter.subscribe(with: self) { owner, request in
-            owner.load(request: request)
-        }.disposed(by: disposeBag)
-    }
-    
-    private func load(request: FetchPetListRequest) {
+    private func load(query: FetchPetListQuery) {
+        let request = FetchPetListRequest(query: query, start: nextPage)
         let fetchPage = fetchPetListUseCase.fetchPetList(request: request)
-        currentPage = fetchPage.currentPage
-        totalPage = fetchPage.totalPage
-        petList.accept(fetchPage.petList.map { .init(pet: $0) })
+        appendPage(page: fetchPage)
+    }
+    
+    private func appendPage(page: PetPage) {
+        currentPage = page.currentPage
+        totalPage = page.totalPage
+        pages = pages.filter({ $0.currentPage != page.currentPage })+[page]
+        let co = pages.reduce(into: []) { partialResult, page in
+            partialResult.append(contentsOf: page.petList.map { PetModel(pet: $0) })
+        }
+        petList.accept(co)
+    }
+    
+    // MARK: - OUTPUT
+    func loadNextPage() {
+        
+    }
+    
+    func reloadPetList() {
+        resetPage()
+        load(query: currentQuery)
+    }
+    
+    func fetchFilterPetClassPetList(petClass: PetClassModel) {
+        let query = FetchPetListQuery(petClass: petClass.toDomain(), species: nil, detailSpecies: nil, morph: nil, searchKeyword: nil, gender: nil)
+        resetPage()
+        load(query: query)
+    }
+    
+    func fetchFilteringPetList(petClass: PetClassModel, species: PetSpeciesModel?, detailSpecies: DetailPetSpeciesModel?, morph: MorphModel?, gender: GenderType?) {
+        let query = FetchPetListQuery(petClass: petClass.toDomain(), species: species?.toDomain(), detailSpecies: detailSpecies?.toDomain(), morph: morph?.toDomain(), searchKeyword: nil, gender: gender?.toDomain())
+        resetPage()
+        load(query: query)
+    }
+    
+    func searchPet(keyword: String) {
+        
     }
 }
