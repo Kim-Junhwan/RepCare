@@ -21,8 +21,8 @@ final class PetListViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel.viewDidLooad()
         bind()
+        viewModel.fetchFilteringPetList(petClass: .all, species: nil, detailSpecies: nil, morph: nil, gender: nil)
     }
     
     private func bind() {
@@ -32,6 +32,7 @@ final class PetListViewController: BaseViewController {
     }
     
     override func configureView() {
+        mainView.delegate = self
         mainView.petClassCollectionView.dataSource = self
         mainView.petListCollectionView.dataSource = self
         mainView.addPetButton.addTarget(self, action: #selector(showRegisterPetView), for: .touchUpInside)
@@ -66,4 +67,15 @@ extension PetListViewController: UICollectionViewDataSource {
     }
     
     
+}
+
+extension PetListViewController: PetListViewDelegate {
+    func selectPetClass(petClass: PetClassModel) {
+        viewModel.fetchFilterPetClassPetList(petClass: petClass)
+    }
+    
+    func reloadPetList(completion: @escaping () -> Void) {
+        viewModel.reloadPetList()
+        completion()
+    }
 }
