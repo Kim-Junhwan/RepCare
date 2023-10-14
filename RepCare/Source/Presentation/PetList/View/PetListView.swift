@@ -10,6 +10,7 @@ import SnapKit
 
 protocol PetListViewDelegate: AnyObject {
     func selectPetClass(petClass: PetClassModel)
+    func selectPet(at index: Int)
     func reloadPetList(completion: @escaping () -> Void)
 }
 
@@ -155,6 +156,8 @@ extension PetListView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == petClassCollectionView {
             delegate?.selectPetClass(petClass: .init(rawValue: indexPath.row) ?? .all)
+        } else if collectionView == petListCollectionView {
+            delegate?.selectPet(at: indexPath.row)
         }
     }
 }

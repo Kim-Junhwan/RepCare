@@ -70,12 +70,17 @@ extension PetListViewController: UICollectionViewDataSource {
 }
 
 extension PetListViewController: PetListViewDelegate {
-    func selectPetClass(petClass: PetClassModel) {
-        viewModel.fetchFilterPetClassPetList(petClass: petClass)
-    }
     
     func reloadPetList(completion: @escaping () -> Void) {
         viewModel.reloadPetList()
         completion()
+    }
+    
+    func selectPetClass(petClass: PetClassModel) {
+        viewModel.fetchFilterPetClassPetList(petClass: petClass)
+    }
+    
+    func selectPet(at index: Int) {
+        <#code#>
     }
 }
