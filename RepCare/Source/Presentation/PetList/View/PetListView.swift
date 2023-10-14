@@ -8,6 +8,11 @@
 import UIKit
 import SnapKit
 
+protocol PetListViewDelegate: AnyObject {
+    func selectPetClass(petClass: PetClassModel)
+    func reloadPetList(completion: @escaping () -> Void)
+}
+
 final class PetListView: UIView {
     
     private enum Metric {
@@ -42,6 +47,7 @@ final class PetListView: UIView {
     lazy var petClassCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: makePetClassCollectionViewLayout())
         collectionView.register(PetClassCollectionViewCell.self, forCellWithReuseIdentifier: PetClassCollectionViewCell.identifier)
+        collectionView.delegate = self
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
@@ -49,6 +55,8 @@ final class PetListView: UIView {
     lazy var petListCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
         collectionView.register(PetCollectionViewCell.self, forCellWithReuseIdentifier: PetCollectionViewCell.identifier)
+        collectionView.refreshControl = .init()
+        collectionView.refreshControl?.addTarget(self, action: #selector(updatePetList), for: .valueChanged)
         return collectionView
     }()
     
@@ -61,6 +69,8 @@ final class PetListView: UIView {
         button.clipsToBounds = true
        return button
     }()
+    
+    weak var delegate: PetListViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -132,5 +142,19 @@ final class PetListView: UIView {
         flowLayout.sectionInset = .init(top: .zero, left: 10.0, bottom: .zero, right: 10.0)
         flowLayout.minimumLineSpacing = 10.0
         return flowLayout
+    }
+    
+    @objc func updatePetList() {
+        delegate?.reloadPetList {
+            self.petListCollectionView.refreshControl?.endRefreshing()
+        }
+    }
+}
+
+extension PetListView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == petClassCollectionView {
+            delegate?.selectPetClass(petClass: .init(rawValue: indexPath.row) ?? .all)
+        }
     }
 }
