@@ -20,7 +20,10 @@ extension RealmPetStorage: PetStorage {
     
     func fetchPetList(request: FetchPetListRequestDTO) -> FetchPetListResponseDTO {
         guard let realm else { return .init(totalPetCount: 0, startIndex: 0, petList: []) }
-        let petList = realm.objects(PetObject.self)
+        var petList = realm.objects(PetObject.self)
+        if request.petClass != nil {
+            petList = petList.where { $0.petClass == request.petClass }
+        }
         
         return .init(totalPetCount: petList.count, startIndex: request.startIndex, petList: Array(petList))
     }
