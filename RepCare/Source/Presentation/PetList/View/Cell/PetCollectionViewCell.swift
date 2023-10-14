@@ -72,6 +72,14 @@ class PetCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        petImageView.image = nil
+        nameLabel.text = nil
+        speciesLabel.text = nil
+        morphLabel.text = nil
+    }
+    
     private func configureView() {
         contentView.addSubview(petImageView)
         contentView.addSubview(petNameStackView)
