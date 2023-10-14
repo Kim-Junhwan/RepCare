@@ -12,7 +12,7 @@ import RxSwift
 final class PetListViewModel {
     
     private let fetchPetListUseCase: FetchPetListUseCase
-    let currentQuery: FetchPetListQuery = .init(petClass: .all, species: nil, detailSpecies: nil, morph: nil, searchKeyword: nil, gender: nil)
+    var currentQuery: FetchPetListQuery = .init(petClass: .all, species: nil, detailSpecies: nil, morph: nil, searchKeyword: nil, gender: nil)
     private var pages: [PetPage] = []
     
     let petList: BehaviorRelay<[PetModel]> = .init(value: [])
@@ -44,6 +44,7 @@ final class PetListViewModel {
     
     private func load(query: FetchPetListQuery) {
         let request = FetchPetListRequest(query: query, start: nextPage)
+        currentQuery = query
         let fetchPage = fetchPetListUseCase.fetchPetList(request: request)
         appendPage(page: fetchPage)
     }
