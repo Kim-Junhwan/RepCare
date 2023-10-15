@@ -10,6 +10,7 @@
 		C709AA412ADA9375004FA677 /* DetailPetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C709AA402ADA9375004FA677 /* DetailPetView.swift */; };
 		C709AA432ADAA107004FA677 /* DetailPetHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C709AA422ADAA107004FA677 /* DetailPetHeaderView.swift */; };
 		C709AA462ADB650B004FA677 /* TaskCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C709AA452ADB650B004FA677 /* TaskCollectionViewCell.swift */; };
+		C709AA492ADB8447004FA677 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = C709AA482ADB8447004FA677 /* Tabman */; };
 		C7273B9B2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273B9A2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift */; };
 		C7273B9E2AD427B8004B7A6F /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273B9D2AD427B8004B7A6F /* UITextField+.swift */; };
 		C7273BA12AD43DC2004B7A6F /* PetClassModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273BA02AD43DC2004B7A6F /* PetClassModel.swift */; };
@@ -175,6 +176,7 @@
 			files = (
 				C7D152952AC7F9E40064D59F /* RxRelay in Frameworks */,
 				C7D152912AC7F9E40064D59F /* RxCocoa in Frameworks */,
+				C709AA492ADB8447004FA677 /* Tabman in Frameworks */,
 				C7D152672AC7DADC0064D59F /* RealmSwift in Frameworks */,
 				C7D1529E2AC7FAE80064D59F /* SnapKit in Frameworks */,
 				C7D152652AC7DADC0064D59F /* Realm in Frameworks */,
@@ -626,6 +628,7 @@
 				C7D152942AC7F9E40064D59F /* RxRelay */,
 				C7D152982AC7F9E40064D59F /* RxSwift */,
 				C7D1529D2AC7FAE80064D59F /* SnapKit */,
+				C709AA482ADB8447004FA677 /* Tabman */,
 			);
 			productName = RepCare;
 			productReference = C7D152422AC51B270064D59F /* RepCare.app */;
@@ -659,6 +662,7 @@
 				C7D152632AC7DADC0064D59F /* XCRemoteSwiftPackageReference "realm-swift" */,
 				C7D1528F2AC7F9E40064D59F /* XCRemoteSwiftPackageReference "RxSwift" */,
 				C7D1529C2AC7FAE80064D59F /* XCRemoteSwiftPackageReference "SnapKit" */,
+				C709AA472ADB8447004FA677 /* XCRemoteSwiftPackageReference "Tabman" */,
 			);
 			productRefGroup = C7D152432AC51B270064D59F /* Products */;
 			projectDirPath = "";
@@ -980,6 +984,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		C709AA472ADB8447004FA677 /* XCRemoteSwiftPackageReference "Tabman" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/uias/Tabman";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.2;
+			};
+		};
 		C7D152632AC7DADC0064D59F /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
@@ -1007,6 +1019,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C709AA482ADB8447004FA677 /* Tabman */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C709AA472ADB8447004FA677 /* XCRemoteSwiftPackageReference "Tabman" */;
+			productName = Tabman;
+		};
 		C7D152642AC7DADC0064D59F /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C7D152632AC7DADC0064D59F /* XCRemoteSwiftPackageReference "realm-swift" */;
