@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C709AA412ADA9375004FA677 /* DetailPetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C709AA402ADA9375004FA677 /* DetailPetView.swift */; };
+		C709AA432ADAA107004FA677 /* DetailPetHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C709AA422ADAA107004FA677 /* DetailPetHeaderView.swift */; };
+		C709AA462ADB650B004FA677 /* TaskCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C709AA452ADB650B004FA677 /* TaskCollectionViewCell.swift */; };
 		C7273B9B2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273B9A2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift */; };
 		C7273B9E2AD427B8004B7A6F /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273B9D2AD427B8004B7A6F /* UITextField+.swift */; };
 		C7273BA12AD43DC2004B7A6F /* PetClassModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273BA02AD43DC2004B7A6F /* PetClassModel.swift */; };
@@ -36,6 +39,7 @@
 		C76A01EE2AD2676B0024D008 /* PetClassResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76A01ED2AD2676B0024D008 /* PetClassResponseDTO.swift */; };
 		C76A01F22AD26E550024D008 /* DetailSpecies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76A01F12AD26E550024D008 /* DetailSpecies.swift */; };
 		C76A01F42AD26E940024D008 /* DetailSpeciesRequest+ResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76A01F32AD26E940024D008 /* DetailSpeciesRequest+ResponseDTO.swift */; };
+		C776F6A72ADA8379006015AD /* DetailPetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C776F6A62ADA8379006015AD /* DetailPetViewController.swift */; };
 		C7A4C3092ACC18A300E299B0 /* PetClassCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A4C3072ACC18A300E299B0 /* PetClassCollectionViewCell.swift */; };
 		C7A4C30A2ACC18A300E299B0 /* PetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A4C3082ACC18A300E299B0 /* PetCollectionViewCell.swift */; };
 		C7B499DA2AD2819B00DD325F /* MorphReqeust+ResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B499D92AD2819B00DD325F /* MorphReqeust+ResponseDTO.swift */; };
@@ -86,6 +90,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C709AA402ADA9375004FA677 /* DetailPetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPetView.swift; sourceTree = "<group>"; };
+		C709AA422ADAA107004FA677 /* DetailPetHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPetHeaderView.swift; sourceTree = "<group>"; };
+		C709AA452ADB650B004FA677 /* TaskCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7273B9A2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7273B9D2AD427B8004B7A6F /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		C7273BA02AD43DC2004B7A6F /* PetClassModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetClassModel.swift; sourceTree = "<group>"; };
@@ -115,6 +122,7 @@
 		C76A01ED2AD2676B0024D008 /* PetClassResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetClassResponseDTO.swift; sourceTree = "<group>"; };
 		C76A01F12AD26E550024D008 /* DetailSpecies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSpecies.swift; sourceTree = "<group>"; };
 		C76A01F32AD26E940024D008 /* DetailSpeciesRequest+ResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailSpeciesRequest+ResponseDTO.swift"; sourceTree = "<group>"; };
+		C776F6A62ADA8379006015AD /* DetailPetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPetViewController.swift; sourceTree = "<group>"; };
 		C7A4C3072ACC18A300E299B0 /* PetClassCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetClassCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7A4C3082ACC18A300E299B0 /* PetCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7B499D92AD2819B00DD325F /* MorphReqeust+ResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MorphReqeust+ResponseDTO.swift"; sourceTree = "<group>"; };
@@ -177,6 +185,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C709AA3F2ADA9367004FA677 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C709AA442ADB64F4004FA677 /* Cell */,
+				C709AA402ADA9375004FA677 /* DetailPetView.swift */,
+				C709AA422ADAA107004FA677 /* DetailPetHeaderView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C709AA442ADB64F4004FA677 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				C709AA452ADB650B004FA677 /* TaskCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		C7273B9C2AD4279E004B7A6F /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -273,6 +299,15 @@
 			path = Storage;
 			sourceTree = "<group>";
 		};
+		C776F6A52ADA835D006015AD /* DetailPet */ = {
+			isa = PBXGroup;
+			children = (
+				C709AA3F2ADA9367004FA677 /* View */,
+				C776F6A62ADA8379006015AD /* DetailPetViewController.swift */,
+			);
+			path = DetailPet;
+			sourceTree = "<group>";
+		};
 		C7D152392AC51B270064D59F = {
 			isa = PBXGroup;
 			children = (
@@ -332,6 +367,7 @@
 		C7D1525C2AC6E7910064D59F /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				C776F6A52ADA835D006015AD /* DetailPet */,
 				C7273B9F2AD43C22004B7A6F /* Model */,
 				C7273B9C2AD4279E004B7A6F /* Extension */,
 				C7F5F42B2ACE870D00ACFC76 /* ClassSpeciesMorph */,
@@ -657,6 +693,7 @@
 				C7F5F43B2ACF112700ACFC76 /* MorphObject.swift in Sources */,
 				C7D152DB2AC999AB0064D59F /* Species.swift in Sources */,
 				C727A42E2AD6FA7700880111 /* RealmPetStorage.swift in Sources */,
+				C709AA432ADAA107004FA677 /* DetailPetHeaderView.swift in Sources */,
 				C7273BA12AD43DC2004B7A6F /* PetClassModel.swift in Sources */,
 				C7F5F4252ACE5BA500ACFC76 /* RegisterInputView.swift in Sources */,
 				C7D152A22AC855F60064D59F /* PetClassObject.swift in Sources */,
@@ -687,6 +724,7 @@
 				C7D152E12AC99F980064D59F /* Gender.swift in Sources */,
 				C7D152E62AC9B5100064D59F /* PetRepository.swift in Sources */,
 				C727A4222AD6E8D700880111 /* PetImageRepository.swift in Sources */,
+				C709AA462ADB650B004FA677 /* TaskCollectionViewCell.swift in Sources */,
 				C7D152482AC51B270064D59F /* SceneDelegate.swift in Sources */,
 				C7F5F42D2ACE873F00ACFC76 /* ClassSpeciesMorphViewController.swift in Sources */,
 				C727A43C2AD940E200880111 /* RegisterPetQuery.swift in Sources */,
@@ -712,8 +750,10 @@
 				C727A43A2AD93DB300880111 /* FetchPetListQuery.swift in Sources */,
 				C7F5F4362ACE8A6400ACFC76 /* SpeciesView.swift in Sources */,
 				C7F5F42A2ACE870300ACFC76 /* RegisterPetViewModel.swift in Sources */,
+				C709AA412ADA9375004FA677 /* DetailPetView.swift in Sources */,
 				C7F5F4A72AD1025300ACFC76 /* DefaultSpeciesRepository.swift in Sources */,
 				C7D1525E2AC6E7AC0064D59F /* Color.swift in Sources */,
+				C776F6A72ADA8379006015AD /* DetailPetViewController.swift in Sources */,
 				C7273BB42AD678A5004B7A6F /* RegisterImageCollectionViewCell.swift in Sources */,
 				C7F5F4302ACE875900ACFC76 /* ClassSpeciesMorphViewModel.swift in Sources */,
 				C7D152F22ACAA5B90064D59F /* PetListView.swift in Sources */,
