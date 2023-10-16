@@ -7,15 +7,15 @@
 
 import UIKit
 
-
 class DetailPetHeaderView: UIView {
 
-    let imagePageViewController: UIPageViewController = {
+    lazy var imagePageViewController: UIPageViewController = {
         let pageView = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
-        pageView.view.backgroundColor = .red
         return pageView
     }()
+    
     let pageControl: UIPageControl = UIPageControl()
+    
     lazy var onStackView: UIStackView = {
         let stackView = UIStackView()
          stackView.addArrangedSubview(nameStackView)
