@@ -7,10 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C709AA412ADA9375004FA677 /* DetailPetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C709AA402ADA9375004FA677 /* DetailPetView.swift */; };
 		C709AA432ADAA107004FA677 /* DetailPetHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C709AA422ADAA107004FA677 /* DetailPetHeaderView.swift */; };
 		C709AA462ADB650B004FA677 /* TaskCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C709AA452ADB650B004FA677 /* TaskCollectionViewCell.swift */; };
 		C709AA492ADB8447004FA677 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = C709AA482ADB8447004FA677 /* Tabman */; };
+		C709AA4B2ADB884A004FA677 /* DetailPetTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C709AA4A2ADB884A004FA677 /* DetailPetTabViewController.swift */; };
+		C709AA4F2ADB9652004FA677 /* PetCalenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C709AA4E2ADB9652004FA677 /* PetCalenderViewController.swift */; };
+		C709AA522ADB96F9004FA677 /* PetCalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C709AA512ADB96F9004FA677 /* PetCalenderView.swift */; };
+		C709AA542ADBB46A004FA677 /* PetWeightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C709AA532ADBB46A004FA677 /* PetWeightViewController.swift */; };
+		C709AA572ADBB64E004FA677 /* DetailPetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C709AA562ADBB64E004FA677 /* DetailPetViewModel.swift */; };
+		C709AA5A2ADC3690004FA677 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C709AA592ADC3690004FA677 /* ProfileViewController.swift */; };
 		C7273B9B2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273B9A2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift */; };
 		C7273B9E2AD427B8004B7A6F /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273B9D2AD427B8004B7A6F /* UITextField+.swift */; };
 		C7273BA12AD43DC2004B7A6F /* PetClassModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273BA02AD43DC2004B7A6F /* PetClassModel.swift */; };
@@ -91,9 +96,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C709AA402ADA9375004FA677 /* DetailPetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPetView.swift; sourceTree = "<group>"; };
 		C709AA422ADAA107004FA677 /* DetailPetHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPetHeaderView.swift; sourceTree = "<group>"; };
 		C709AA452ADB650B004FA677 /* TaskCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCollectionViewCell.swift; sourceTree = "<group>"; };
+		C709AA4A2ADB884A004FA677 /* DetailPetTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPetTabViewController.swift; sourceTree = "<group>"; };
+		C709AA4E2ADB9652004FA677 /* PetCalenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetCalenderViewController.swift; sourceTree = "<group>"; };
+		C709AA512ADB96F9004FA677 /* PetCalenderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetCalenderView.swift; sourceTree = "<group>"; };
+		C709AA532ADBB46A004FA677 /* PetWeightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetWeightViewController.swift; sourceTree = "<group>"; };
+		C709AA562ADBB64E004FA677 /* DetailPetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPetViewModel.swift; sourceTree = "<group>"; };
+		C709AA592ADC3690004FA677 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		C7273B9A2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7273B9D2AD427B8004B7A6F /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		C7273BA02AD43DC2004B7A6F /* PetClassModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetClassModel.swift; sourceTree = "<group>"; };
@@ -190,9 +200,8 @@
 		C709AA3F2ADA9367004FA677 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C709AA442ADB64F4004FA677 /* Cell */,
-				C709AA402ADA9375004FA677 /* DetailPetView.swift */,
 				C709AA422ADAA107004FA677 /* DetailPetHeaderView.swift */,
+				C709AA4A2ADB884A004FA677 /* DetailPetTabViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -203,6 +212,48 @@
 				C709AA452ADB650B004FA677 /* TaskCollectionViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		C709AA4C2ADB8D2D004FA677 /* PetCalender */ = {
+			isa = PBXGroup;
+			children = (
+				C709AA442ADB64F4004FA677 /* Cell */,
+				C709AA502ADB969E004FA677 /* View */,
+				C709AA4E2ADB9652004FA677 /* PetCalenderViewController.swift */,
+			);
+			path = PetCalender;
+			sourceTree = "<group>";
+		};
+		C709AA4D2ADB8D47004FA677 /* PetWeight */ = {
+			isa = PBXGroup;
+			children = (
+				C709AA532ADBB46A004FA677 /* PetWeightViewController.swift */,
+			);
+			path = PetWeight;
+			sourceTree = "<group>";
+		};
+		C709AA502ADB969E004FA677 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C709AA512ADB96F9004FA677 /* PetCalenderView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C709AA552ADBB642004FA677 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C709AA562ADBB64E004FA677 /* DetailPetViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C709AA582ADC366E004FA677 /* ProfileViewController */ = {
+			isa = PBXGroup;
+			children = (
+				C709AA592ADC3690004FA677 /* ProfileViewController.swift */,
+			);
+			path = ProfileViewController;
 			sourceTree = "<group>";
 		};
 		C7273B9C2AD4279E004B7A6F /* Extension */ = {
@@ -304,6 +355,7 @@
 		C776F6A52ADA835D006015AD /* DetailPet */ = {
 			isa = PBXGroup;
 			children = (
+				C709AA552ADBB642004FA677 /* ViewModel */,
 				C709AA3F2ADA9367004FA677 /* View */,
 				C776F6A62ADA8379006015AD /* DetailPetViewController.swift */,
 			);
@@ -369,6 +421,9 @@
 		C7D1525C2AC6E7910064D59F /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				C709AA582ADC366E004FA677 /* ProfileViewController */,
+				C709AA4D2ADB8D47004FA677 /* PetWeight */,
+				C709AA4C2ADB8D2D004FA677 /* PetCalender */,
 				C776F6A52ADA835D006015AD /* DetailPet */,
 				C7273B9F2AD43C22004B7A6F /* Model */,
 				C7273B9C2AD4279E004B7A6F /* Extension */,
@@ -709,7 +764,9 @@
 				C7273BB22AD62DAD004B7A6F /* ImageCollectionViewCell.swift in Sources */,
 				C7D152EC2ACA5EA70064D59F /* Rule.swift in Sources */,
 				C7B499DA2AD2819B00DD325F /* MorphReqeust+ResponseDTO.swift in Sources */,
+				C709AA4B2ADB884A004FA677 /* DetailPetTabViewController.swift in Sources */,
 				C7F5F41F2ACE372D00ACFC76 /* RegisterPetView.swift in Sources */,
+				C709AA522ADB96F9004FA677 /* PetCalenderView.swift in Sources */,
 				C7F5F4132ACD400700ACFC76 /* PetListViewModel.swift in Sources */,
 				C7273BA72AD44016004B7A6F /* GenderModel.swift in Sources */,
 				C7D152D92AC999350064D59F /* PetClass.swift in Sources */,
@@ -724,9 +781,12 @@
 				C76A01F42AD26E940024D008 /* DetailSpeciesRequest+ResponseDTO.swift in Sources */,
 				C7D152AA2AC91E320064D59F /* PetObject.swift in Sources */,
 				C7F5F4212ACE551600ACFC76 /* ActionButton.swift in Sources */,
+				C709AA542ADBB46A004FA677 /* PetWeightViewController.swift in Sources */,
 				C7273B9B2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift in Sources */,
 				C7D152E12AC99F980064D59F /* Gender.swift in Sources */,
 				C7D152E62AC9B5100064D59F /* PetRepository.swift in Sources */,
+				C709AA5A2ADC3690004FA677 /* ProfileViewController.swift in Sources */,
+				C709AA572ADBB64E004FA677 /* DetailPetViewModel.swift in Sources */,
 				C727A4222AD6E8D700880111 /* PetImageRepository.swift in Sources */,
 				C709AA462ADB650B004FA677 /* TaskCollectionViewCell.swift in Sources */,
 				C7D152482AC51B270064D59F /* SceneDelegate.swift in Sources */,
@@ -742,6 +802,7 @@
 				C7D152E42AC9A7F00064D59F /* Weight.swift in Sources */,
 				C7273BAB2AD444B5004B7A6F /* MorphModel.swift in Sources */,
 				C7D152DD2AC99B950064D59F /* Pet.swift in Sources */,
+				C709AA4F2ADB9652004FA677 /* PetCalenderViewController.swift in Sources */,
 				C76A01EA2AD264FC0024D008 /* RealmSpeciesStorage.swift in Sources */,
 				C727A4202AD6E89500880111 /* RegisterPetUseCase.swift in Sources */,
 				C7273BA92AD44048004B7A6F /* PetModel.swift in Sources */,
@@ -754,7 +815,6 @@
 				C727A43A2AD93DB300880111 /* FetchPetListQuery.swift in Sources */,
 				C7F5F4362ACE8A6400ACFC76 /* SpeciesView.swift in Sources */,
 				C7F5F42A2ACE870300ACFC76 /* RegisterPetViewModel.swift in Sources */,
-				C709AA412ADA9375004FA677 /* DetailPetView.swift in Sources */,
 				C7F5F4A72AD1025300ACFC76 /* DefaultSpeciesRepository.swift in Sources */,
 				C7D1525E2AC6E7AC0064D59F /* Color.swift in Sources */,
 				C776F6A72ADA8379006015AD /* DetailPetViewController.swift in Sources */,

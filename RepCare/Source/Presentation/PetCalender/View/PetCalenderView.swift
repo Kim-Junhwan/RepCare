@@ -1,13 +1,13 @@
 //
-//  DetailPetView.swift
+//  PetCalenderView.swift
 //  RepCare
 //
-//  Created by JunHwan Kim on 2023/10/14.
+//  Created by JunHwan Kim on 2023/10/15.
 //
 
 import UIKit
 
-class DetailPetView: UIView {
+class PetCalenderView: UIView {
 
     /*
     // Only override draw() if you perform custom drawing.
