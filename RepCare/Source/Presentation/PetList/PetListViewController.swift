@@ -81,6 +81,7 @@ extension PetListViewController: PetListViewDelegate {
     }
     
     func selectPet(at index: Int) {
-        <#code#>
+        let detailViewController = DetailPetViewController()
+        navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
