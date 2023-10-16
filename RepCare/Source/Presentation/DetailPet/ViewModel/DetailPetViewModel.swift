@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+final class DetailPetViewModel {
+    
+    let images: [PetImageModel]
+    
+    init(images: [PetImageModel]) {
+        self.images = images
+    }
+    
+}
