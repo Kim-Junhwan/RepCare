@@ -13,6 +13,12 @@ protocol ProfileViewControllerDelegate: AnyObject {
     func minHeaderHeight() -> CGFloat
 }
 
+protocol ProfileViewControllerDataSource: AnyObject {
+    func numberOfTabBarViewControllers() -> Int
+    func tabBarViewController(at index: Int) -> UIViewController
+    func tabBarItemTitle(at index: Int) -> String
+}
+
 final class ProfileViewController: UIViewController {
     
     private let overlayScrollView: UIScrollView = {
@@ -38,14 +44,18 @@ final class ProfileViewController: UIViewController {
     }
     private var contentOffsets: [Int: CGFloat] = [:]
     
-    private let headerView: UIView
+    private let headerViewController: UIViewController
+    private var headerView: UIView {
+        return headerViewController.view
+    }
     private let headerViewHeight: CGFloat
-    let bottomViewController: DetailPetTabViewController = .init()
+    private let bottomViewController: DetailPetTabViewController = .init()
     private var currentIndex = 0
     weak var delegate: ProfileViewControllerDelegate?
+    weak var datasource: ProfileViewControllerDataSource?
     
-    init(headerView: UIView, headerViewHeight: CGFloat) {
-        self.headerView = headerView
+    init(headerViewController: UIViewController, headerViewHeight: CGFloat) {
+        self.headerViewController = headerViewController
         self.headerViewHeight = headerViewHeight
         super.init(nibName: nil, bundle: nil)
     }
@@ -76,8 +86,10 @@ final class ProfileViewController: UIViewController {
     private func configureView() {
         overlayScrollView.delegate = self
         bottomViewController.delegate = self
+        bottomViewController.dataSource = self
+        bottomViewController.setTapBar(datasource: self)
         containerScrollView.addGestureRecognizer(overlayScrollView.panGestureRecognizer)
-        containerScrollView.addSubview(headerView)
+        addViewControllerView(headerViewController, at: containerScrollView)
         addViewControllerView(bottomViewController, at: containerScrollView)
     }
     
@@ -155,7 +167,25 @@ extension ProfileViewController: UIScrollViewDelegate {
     }
 }
 
-
+extension ProfileViewController: PageboyViewControllerDataSource, TMBarDataSource {
+    
+    func numberOfViewControllers(in pageboyViewController: Pageboy.PageboyViewController) -> Int {
+        return datasource?.numberOfTabBarViewControllers() ?? 0
+    }
+    
+    func viewController(for pageboyViewController: Pageboy.PageboyViewController, at index: Pageboy.PageboyViewController.PageIndex) -> UIViewController? {
+        return datasource?.tabBarViewController(at: index)
+    }
+    
+    func defaultPage(for pageboyViewController: Pageboy.PageboyViewController) -> Pageboy.PageboyViewController.Page? {
+        nil
+    }
+    
+    func barItem(for bar: Tabman.TMBar, at index: Int) -> Tabman.TMBarItemable {
+        guard let title = datasource?.tabBarItemTitle(at: index) else { fatalError("NO TabBarItemTitle") }
+        return TMBarItem(title: title)
+    }
+}
 
 extension ProfileViewController: CustomTabBarDelegate {
     func pageViewController(_ currentViewController: UIViewController?, didselectPageAt index: Int) {
