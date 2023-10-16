@@ -19,6 +19,9 @@
 		C709AA5C2ADCF733004FA677 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C709AA5B2ADCF733004FA677 /* ImageViewController.swift */; };
 		C709AA5E2ADD198C004FA677 /* DetailPetHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C709AA5D2ADD198C004FA677 /* DetailPetHeaderViewController.swift */; };
 		C709AA652ADD3D3E004FA677 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = C709AA642ADD3D3E004FA677 /* DGCharts */; };
+		C709AA6A2ADD41EA004FA677 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = C709AA692ADD41EA004FA677 /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		C709AA6C2ADD41EA004FA677 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = C709AA6B2ADD41EA004FA677 /* FirebaseCrashlytics */; };
+		C709AA6E2ADD443F004FA677 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C709AA6D2ADD443F004FA677 /* GoogleService-Info.plist */; };
 		C7273B9B2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273B9A2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift */; };
 		C7273B9E2AD427B8004B7A6F /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273B9D2AD427B8004B7A6F /* UITextField+.swift */; };
 		C7273BA12AD43DC2004B7A6F /* PetClassModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273BA02AD43DC2004B7A6F /* PetClassModel.swift */; };
@@ -109,6 +112,7 @@
 		C709AA592ADC3690004FA677 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		C709AA5B2ADCF733004FA677 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		C709AA5D2ADD198C004FA677 /* DetailPetHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPetHeaderViewController.swift; sourceTree = "<group>"; };
+		C709AA6D2ADD443F004FA677 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C7273B9A2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7273B9D2AD427B8004B7A6F /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		C7273BA02AD43DC2004B7A6F /* PetClassModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetClassModel.swift; sourceTree = "<group>"; };
@@ -196,6 +200,8 @@
 				C7D152672AC7DADC0064D59F /* RealmSwift in Frameworks */,
 				C7D1529E2AC7FAE80064D59F /* SnapKit in Frameworks */,
 				C7D152652AC7DADC0064D59F /* Realm in Frameworks */,
+				C709AA6C2ADD41EA004FA677 /* FirebaseCrashlytics in Frameworks */,
+				C709AA6A2ADD41EA004FA677 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				C7D152992AC7F9E40064D59F /* RxSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -406,6 +412,7 @@
 		C7D152592AC6D16C0064D59F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				C709AA6D2ADD443F004FA677 /* GoogleService-Info.plist */,
 				C727A4322AD70C6200880111 /* repcare.realm */,
 				C7D1524E2AC51B280064D59F /* Assets.xcassets */,
 				C7D152502AC51B280064D59F /* LaunchScreen.storyboard */,
@@ -686,6 +693,7 @@
 				C7D1523E2AC51B270064D59F /* Sources */,
 				C7D1523F2AC51B270064D59F /* Frameworks */,
 				C7D152402AC51B270064D59F /* Resources */,
+				C709AA6F2ADD46C4004FA677 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -701,6 +709,8 @@
 				C7D1529D2AC7FAE80064D59F /* SnapKit */,
 				C709AA482ADB8447004FA677 /* Tabman */,
 				C709AA642ADD3D3E004FA677 /* DGCharts */,
+				C709AA692ADD41EA004FA677 /* FirebaseAnalyticsWithoutAdIdSupport */,
+				C709AA6B2ADD41EA004FA677 /* FirebaseCrashlytics */,
 			);
 			productName = RepCare;
 			productReference = C7D152422AC51B270064D59F /* RepCare.app */;
@@ -736,6 +746,7 @@
 				C7D1529C2AC7FAE80064D59F /* XCRemoteSwiftPackageReference "SnapKit" */,
 				C709AA472ADB8447004FA677 /* XCRemoteSwiftPackageReference "Tabman" */,
 				C709AA632ADD3D3E004FA677 /* XCRemoteSwiftPackageReference "Charts" */,
+				C709AA682ADD41EA004FA677 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = C7D152432AC51B270064D59F /* Products */;
 			projectDirPath = "";
@@ -752,12 +763,38 @@
 			buildActionMask = 2147483647;
 			files = (
 				C727A4332AD70C6200880111 /* repcare.realm in Resources */,
+				C709AA6E2ADD443F004FA677 /* GoogleService-Info.plist in Resources */,
 				C7D152522AC51B280064D59F /* LaunchScreen.storyboard in Resources */,
 				C7D1524F2AC51B280064D59F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C709AA6F2ADD46C4004FA677 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${PRODUCT_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/GoogleService-Info.plist",
+				"$(TARGET_BUILD_DIR)/$(EXECUTABLE_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C7D1523E2AC51B270064D59F /* Sources */ = {
@@ -985,6 +1022,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = SBAHW5F54N;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RepCare/Resource/Info.plist;
@@ -1080,6 +1118,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		C709AA682ADD41EA004FA677 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.16.0;
+			};
+		};
 		C7D152632AC7DADC0064D59F /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
@@ -1116,6 +1162,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C709AA632ADD3D3E004FA677 /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = DGCharts;
+		};
+		C709AA692ADD41EA004FA677 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C709AA682ADD41EA004FA677 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		C709AA6B2ADD41EA004FA677 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C709AA682ADD41EA004FA677 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
 		};
 		C7D152642AC7DADC0064D59F /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
