@@ -6,24 +6,78 @@
 //
 
 import UIKit
+import Pageboy
+import Tabman
 
-class DetailPetViewController: UIViewController {
+class DetailPetViewController: BaseViewController {
+    
+    lazy var profileViewController = ProfileViewController(headerViewController: headerViewController, headerViewHeight: view.frame.width)
+    lazy var headerViewController = DetailPetHeaderViewController(imagePathList: viewModel.images)
+    let petCalenderViewController = PetCalenderViewController()
+    let petWeightViewController = PetWeightViewController()
+    lazy var tabViewControllers = [petCalenderViewController, petWeightViewController]
+    let viewModel: DetailPetViewModel
+    
+    init(viewModel: DetailPetViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setNavigationBarAppearance()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func configureView() {
+        profileViewController.delegate = self
+        profileViewController.datasource = self
+        view.addSubview(profileViewController.view)
+        addChild(profileViewController)
+        profileViewController.didMove(toParent: self)
     }
-    */
+    
+    override func setContraints() {
+        profileViewController.view.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
+    
+    private func setNavigationBarAppearance() {
+        let edgeAppearance = UINavigationBarAppearance()
+        edgeAppearance.backgroundColor = .clear
+        edgeAppearance.configureWithTransparentBackground()
+        navigationController?.navigationBar.scrollEdgeAppearance = edgeAppearance
+        let scrollApprearance = UINavigationBarAppearance()
+        scrollApprearance.shadowColor = .clear
+        scrollApprearance.backgroundColor = UIColor.systemBackground
+        navigationController?.navigationBar.standardAppearance = scrollApprearance
+        navigationController?.navigationBar.isTranslucent = true
+    }
 
+}
+
+extension DetailPetViewController: ProfileViewControllerDelegate, ProfileViewControllerDataSource {
+    
+    func minHeaderHeight() -> CGFloat {
+        guard let navigationBarHeight = navigationController?.navigationBar.frame.height else { return 0 }
+        guard let statusbarHeight = view.window?.windowScene?.statusBarManager?.statusBarFrame.height else { return 0 }
+        return navigationBarHeight + statusbarHeight
+    }
+    
+    func numberOfTabBarViewControllers() -> Int {
+        return tabViewControllers.count
+    }
+    
+    func tabBarViewController(at index: Int) -> UIViewController {
+        return tabViewControllers[index]
+    }
+    
+    func tabBarItemTitle(at index: Int) -> String {
+        guard let title = tabViewControllers[index].title else { fatalError("No title") }
+        return title
+    }
 }

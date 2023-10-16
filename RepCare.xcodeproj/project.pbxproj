@@ -16,6 +16,8 @@
 		C709AA542ADBB46A004FA677 /* PetWeightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C709AA532ADBB46A004FA677 /* PetWeightViewController.swift */; };
 		C709AA572ADBB64E004FA677 /* DetailPetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C709AA562ADBB64E004FA677 /* DetailPetViewModel.swift */; };
 		C709AA5A2ADC3690004FA677 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C709AA592ADC3690004FA677 /* ProfileViewController.swift */; };
+		C709AA5C2ADCF733004FA677 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C709AA5B2ADCF733004FA677 /* ImageViewController.swift */; };
+		C709AA5E2ADD198C004FA677 /* DetailPetHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C709AA5D2ADD198C004FA677 /* DetailPetHeaderViewController.swift */; };
 		C7273B9B2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273B9A2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift */; };
 		C7273B9E2AD427B8004B7A6F /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273B9D2AD427B8004B7A6F /* UITextField+.swift */; };
 		C7273BA12AD43DC2004B7A6F /* PetClassModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273BA02AD43DC2004B7A6F /* PetClassModel.swift */; };
@@ -104,6 +106,8 @@
 		C709AA532ADBB46A004FA677 /* PetWeightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetWeightViewController.swift; sourceTree = "<group>"; };
 		C709AA562ADBB64E004FA677 /* DetailPetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPetViewModel.swift; sourceTree = "<group>"; };
 		C709AA592ADC3690004FA677 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		C709AA5B2ADCF733004FA677 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		C709AA5D2ADD198C004FA677 /* DetailPetHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPetHeaderViewController.swift; sourceTree = "<group>"; };
 		C7273B9A2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7273B9D2AD427B8004B7A6F /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		C7273BA02AD43DC2004B7A6F /* PetClassModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetClassModel.swift; sourceTree = "<group>"; };
@@ -200,7 +204,6 @@
 		C709AA3F2ADA9367004FA677 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C709AA422ADAA107004FA677 /* DetailPetHeaderView.swift */,
 				C709AA4A2ADB884A004FA677 /* DetailPetTabViewController.swift */,
 			);
 			path = View;
@@ -254,6 +257,16 @@
 				C709AA592ADC3690004FA677 /* ProfileViewController.swift */,
 			);
 			path = ProfileViewController;
+			sourceTree = "<group>";
+		};
+		C709AA5F2ADD19AD004FA677 /* HeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				C709AA5B2ADCF733004FA677 /* ImageViewController.swift */,
+				C709AA422ADAA107004FA677 /* DetailPetHeaderView.swift */,
+				C709AA5D2ADD198C004FA677 /* DetailPetHeaderViewController.swift */,
+			);
+			path = HeaderView;
 			sourceTree = "<group>";
 		};
 		C7273B9C2AD4279E004B7A6F /* Extension */ = {
@@ -355,6 +368,7 @@
 		C776F6A52ADA835D006015AD /* DetailPet */ = {
 			isa = PBXGroup;
 			children = (
+				C709AA5F2ADD19AD004FA677 /* HeaderView */,
 				C709AA552ADBB642004FA677 /* ViewModel */,
 				C709AA3F2ADA9367004FA677 /* View */,
 				C776F6A62ADA8379006015AD /* DetailPetViewController.swift */,
@@ -754,6 +768,7 @@
 				C727A42E2AD6FA7700880111 /* RealmPetStorage.swift in Sources */,
 				C709AA432ADAA107004FA677 /* DetailPetHeaderView.swift in Sources */,
 				C7273BA12AD43DC2004B7A6F /* PetClassModel.swift in Sources */,
+				C709AA5E2ADD198C004FA677 /* DetailPetHeaderViewController.swift in Sources */,
 				C7F5F4252ACE5BA500ACFC76 /* RegisterInputView.swift in Sources */,
 				C7D152A22AC855F60064D59F /* PetClassObject.swift in Sources */,
 				C727A4402AD99A6E00880111 /* UIImageView+.swift in Sources */,
@@ -777,6 +792,7 @@
 				C7F5F4AA2AD18FC200ACFC76 /* SpeciesRequest+ResponseDTO.swift in Sources */,
 				C7D152EF2ACAA4250064D59F /* BaseViewController.swift in Sources */,
 				C7273BAD2AD4D8CC004B7A6F /* PetOverSpeciesModel.swift in Sources */,
+				C709AA5C2ADCF733004FA677 /* ImageViewController.swift in Sources */,
 				C7D152D52AC998900064D59F /* FetchPetListUseCase.swift in Sources */,
 				C76A01F42AD26E940024D008 /* DetailSpeciesRequest+ResponseDTO.swift in Sources */,
 				C7D152AA2AC91E320064D59F /* PetObject.swift in Sources */,
