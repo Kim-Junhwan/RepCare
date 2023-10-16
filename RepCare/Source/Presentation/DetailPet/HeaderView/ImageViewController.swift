@@ -9,11 +9,20 @@ import UIKit
 
 class ImageViewController: UIViewController {
     
+    private enum Sentence {
+        static let emptyImageIdentifier = "star"
+    }
+    
     let imageView: UIImageView = UIImageView(frame: .zero)
     
     init(imagePath: PetImageModel) {
         super.init(nibName: nil, bundle: nil)
         imageView.configureImageFromFilePath(path: imagePath.imagePath)
+    }
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        imageView.image = UIImage(systemName: Sentence.emptyImageIdentifier)
     }
     
     required init?(coder: NSCoder) {
