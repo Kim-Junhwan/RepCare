@@ -56,6 +56,7 @@ final class PetListView: UIView {
     lazy var petListCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
         collectionView.register(PetCollectionViewCell.self, forCellWithReuseIdentifier: PetCollectionViewCell.identifier)
+        collectionView.delegate = self
         collectionView.refreshControl = .init()
         collectionView.refreshControl?.addTarget(self, action: #selector(updatePetList), for: .valueChanged)
         return collectionView
