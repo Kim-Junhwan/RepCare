@@ -52,6 +52,10 @@
 		C76A01F22AD26E550024D008 /* DetailSpecies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76A01F12AD26E550024D008 /* DetailSpecies.swift */; };
 		C76A01F42AD26E940024D008 /* DetailSpeciesRequest+ResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76A01F32AD26E940024D008 /* DetailSpeciesRequest+ResponseDTO.swift */; };
 		C776F6A72ADA8379006015AD /* DetailPetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C776F6A62ADA8379006015AD /* DetailPetViewController.swift */; };
+		C7988D182ADD60330011FF8D /* WeightChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7988D172ADD60330011FF8D /* WeightChartView.swift */; };
+		C7988D1A2ADD61F40011FF8D /* WeightCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7988D192ADD61F40011FF8D /* WeightCollectionViewCell.swift */; };
+		C7988D5B2ADDC38F0011FF8D /* PetWeightModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7988D5A2ADDC38F0011FF8D /* PetWeightModel.swift */; };
+		C7988D5E2ADDC6D30011FF8D /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = C7988D5D2ADDC6D30011FF8D /* FSCalendar */; };
 		C7A4C3092ACC18A300E299B0 /* PetClassCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A4C3072ACC18A300E299B0 /* PetClassCollectionViewCell.swift */; };
 		C7A4C30A2ACC18A300E299B0 /* PetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A4C3082ACC18A300E299B0 /* PetCollectionViewCell.swift */; };
 		C7B499DA2AD2819B00DD325F /* MorphReqeust+ResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B499D92AD2819B00DD325F /* MorphReqeust+ResponseDTO.swift */; };
@@ -143,6 +147,9 @@
 		C76A01F12AD26E550024D008 /* DetailSpecies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSpecies.swift; sourceTree = "<group>"; };
 		C76A01F32AD26E940024D008 /* DetailSpeciesRequest+ResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailSpeciesRequest+ResponseDTO.swift"; sourceTree = "<group>"; };
 		C776F6A62ADA8379006015AD /* DetailPetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPetViewController.swift; sourceTree = "<group>"; };
+		C7988D172ADD60330011FF8D /* WeightChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightChartView.swift; sourceTree = "<group>"; };
+		C7988D192ADD61F40011FF8D /* WeightCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightCollectionViewCell.swift; sourceTree = "<group>"; };
+		C7988D5A2ADDC38F0011FF8D /* PetWeightModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetWeightModel.swift; sourceTree = "<group>"; };
 		C7A4C3072ACC18A300E299B0 /* PetClassCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetClassCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7A4C3082ACC18A300E299B0 /* PetCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7B499D92AD2819B00DD325F /* MorphReqeust+ResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MorphReqeust+ResponseDTO.swift"; sourceTree = "<group>"; };
@@ -203,6 +210,7 @@
 				C709AA6C2ADD41EA004FA677 /* FirebaseCrashlytics in Frameworks */,
 				C709AA6A2ADD41EA004FA677 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				C7D152992AC7F9E40064D59F /* RxSwift in Frameworks */,
+				C7988D5E2ADDC6D30011FF8D /* FSCalendar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +247,8 @@
 			isa = PBXGroup;
 			children = (
 				C709AA532ADBB46A004FA677 /* PetWeightViewController.swift */,
+				C7988D172ADD60330011FF8D /* WeightChartView.swift */,
+				C7988D192ADD61F40011FF8D /* WeightCollectionViewCell.swift */,
 			);
 			path = PetWeight;
 			sourceTree = "<group>";
@@ -296,6 +306,7 @@
 				C7273BA82AD44048004B7A6F /* PetModel.swift */,
 				C7273BAA2AD444B5004B7A6F /* MorphModel.swift */,
 				C7273BAC2AD4D8CC004B7A6F /* PetOverSpeciesModel.swift */,
+				C7988D5A2ADDC38F0011FF8D /* PetWeightModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -711,6 +722,7 @@
 				C709AA642ADD3D3E004FA677 /* DGCharts */,
 				C709AA692ADD41EA004FA677 /* FirebaseAnalyticsWithoutAdIdSupport */,
 				C709AA6B2ADD41EA004FA677 /* FirebaseCrashlytics */,
+				C7988D5D2ADDC6D30011FF8D /* FSCalendar */,
 			);
 			productName = RepCare;
 			productReference = C7D152422AC51B270064D59F /* RepCare.app */;
@@ -747,6 +759,7 @@
 				C709AA472ADB8447004FA677 /* XCRemoteSwiftPackageReference "Tabman" */,
 				C709AA632ADD3D3E004FA677 /* XCRemoteSwiftPackageReference "Charts" */,
 				C709AA682ADD41EA004FA677 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				C7988D5C2ADDC6D30011FF8D /* XCRemoteSwiftPackageReference "FSCalendar" */,
 			);
 			productRefGroup = C7D152432AC51B270064D59F /* Products */;
 			projectDirPath = "";
@@ -832,6 +845,7 @@
 				C7A4C30A2ACC18A300E299B0 /* PetCollectionViewCell.swift in Sources */,
 				C7F5F4AA2AD18FC200ACFC76 /* SpeciesRequest+ResponseDTO.swift in Sources */,
 				C7D152EF2ACAA4250064D59F /* BaseViewController.swift in Sources */,
+				C7988D182ADD60330011FF8D /* WeightChartView.swift in Sources */,
 				C7273BAD2AD4D8CC004B7A6F /* PetOverSpeciesModel.swift in Sources */,
 				C709AA5C2ADCF733004FA677 /* ImageViewController.swift in Sources */,
 				C7D152D52AC998900064D59F /* FetchPetListUseCase.swift in Sources */,
@@ -872,10 +886,12 @@
 				C727A43A2AD93DB300880111 /* FetchPetListQuery.swift in Sources */,
 				C7F5F4362ACE8A6400ACFC76 /* SpeciesView.swift in Sources */,
 				C7F5F42A2ACE870300ACFC76 /* RegisterPetViewModel.swift in Sources */,
+				C7988D1A2ADD61F40011FF8D /* WeightCollectionViewCell.swift in Sources */,
 				C7F5F4A72AD1025300ACFC76 /* DefaultSpeciesRepository.swift in Sources */,
 				C7D1525E2AC6E7AC0064D59F /* Color.swift in Sources */,
 				C776F6A72ADA8379006015AD /* DetailPetViewController.swift in Sources */,
 				C7273BB42AD678A5004B7A6F /* RegisterImageCollectionViewCell.swift in Sources */,
+				C7988D5B2ADDC38F0011FF8D /* PetWeightModel.swift in Sources */,
 				C7F5F4302ACE875900ACFC76 /* ClassSpeciesMorphViewModel.swift in Sources */,
 				C7D152F22ACAA5B90064D59F /* PetListView.swift in Sources */,
 				C727A4312AD70A3800880111 /* FileManagerPetImageRepository.swift in Sources */,
@@ -1126,6 +1142,14 @@
 				minimumVersion = 10.16.0;
 			};
 		};
+		C7988D5C2ADDC6D30011FF8D /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.4;
+			};
+		};
 		C7D152632AC7DADC0064D59F /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
@@ -1172,6 +1196,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C709AA682ADD41EA004FA677 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
+		};
+		C7988D5D2ADDC6D30011FF8D /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C7988D5C2ADDC6D30011FF8D /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
 		};
 		C7D152642AC7DADC0064D59F /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
