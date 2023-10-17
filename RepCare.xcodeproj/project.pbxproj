@@ -24,6 +24,8 @@
 		C709AA6E2ADD443F004FA677 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C709AA6D2ADD443F004FA677 /* GoogleService-Info.plist */; };
 		C70E59B92ADEB55000428CDE /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E59B82ADEB55000428CDE /* Date+.swift */; };
 		C70E59CA2ADECDD700428CDE /* repcare.realm in Resources */ = {isa = PBXBuildFile; fileRef = C70E59C92ADECDD700428CDE /* repcare.realm */; };
+		C70E59CC2ADECF2700428CDE /* TaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E59CB2ADECF2700428CDE /* TaskRepository.swift */; };
+		C70E59CE2ADECFCE00428CDE /* RegisterTaskQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E59CD2ADECFCE00428CDE /* RegisterTaskQuery.swift */; };
 		C7273B9B2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273B9A2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift */; };
 		C7273B9E2AD427B8004B7A6F /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273B9D2AD427B8004B7A6F /* UITextField+.swift */; };
 		C7273BA12AD43DC2004B7A6F /* PetClassModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273BA02AD43DC2004B7A6F /* PetClassModel.swift */; };
@@ -126,6 +128,8 @@
 		C709AA6D2ADD443F004FA677 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C70E59B82ADEB55000428CDE /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		C70E59C92ADECDD700428CDE /* repcare.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = repcare.realm; sourceTree = "<group>"; };
+		C70E59CB2ADECF2700428CDE /* TaskRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRepository.swift; sourceTree = "<group>"; };
+		C70E59CD2ADECFCE00428CDE /* RegisterTaskQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTaskQuery.swift; sourceTree = "<group>"; };
 		C7273B9A2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7273B9D2AD427B8004B7A6F /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		C7273BA02AD43DC2004B7A6F /* PetClassModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetClassModel.swift; sourceTree = "<group>"; };
@@ -390,6 +394,7 @@
 			children = (
 				C727A4392AD93DB300880111 /* FetchPetListQuery.swift */,
 				C727A43B2AD940E200880111 /* RegisterPetQuery.swift */,
+				C70E59CD2ADECFCE00428CDE /* RegisterTaskQuery.swift */,
 			);
 			path = Query;
 			sourceTree = "<group>";
@@ -559,6 +564,7 @@
 				C7D152E52AC9B5100064D59F /* PetRepository.swift */,
 				C7F5F4322ACE87AA00ACFC76 /* SpeciesRepository.swift */,
 				C727A4212AD6E8D700880111 /* PetImageRepository.swift */,
+				C70E59CB2ADECF2700428CDE /* TaskRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -851,6 +857,7 @@
 				C7273BA52AD43FB4004B7A6F /* DetailPetSpeciesModel.swift in Sources */,
 				C7F5F41C2ACD680400ACFC76 /* RegisterNewPetViewController.swift in Sources */,
 				C7D152462AC51B270064D59F /* AppDelegate.swift in Sources */,
+				C70E59CE2ADECFCE00428CDE /* RegisterTaskQuery.swift in Sources */,
 				C7F5F4332ACE87AA00ACFC76 /* SpeciesRepository.swift in Sources */,
 				C7273BB22AD62DAD004B7A6F /* ImageCollectionViewCell.swift in Sources */,
 				C73A4E692ADE4BF10069009B /* TaskModel.swift in Sources */,
@@ -888,6 +895,7 @@
 				C7D152482AC51B270064D59F /* SceneDelegate.swift in Sources */,
 				C7F5F42D2ACE873F00ACFC76 /* ClassSpeciesMorphViewController.swift in Sources */,
 				C727A43C2AD940E200880111 /* RegisterPetQuery.swift in Sources */,
+				C70E59CC2ADECF2700428CDE /* TaskRepository.swift in Sources */,
 				C7D152D12AC93B3D0064D59F /* WeightObject.swift in Sources */,
 				C7D152DF2AC99BF90064D59F /* Morph.swift in Sources */,
 				C70E59B92ADEB55000428CDE /* Date+.swift in Sources */,
