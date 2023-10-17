@@ -8,6 +8,7 @@
 import Foundation
 
 final class PetCalenderViewController: BaseViewController {
+    
     let mainView = PetCalenderView()
     
     init() {
@@ -26,4 +27,28 @@ final class PetCalenderViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    override func configureView() {
+        mainView.datasource = self
+        mainView.delegate = self
+    }
+}
+
+extension PetCalenderViewController: PetCalenderDataSource, PetCalenderViewDelegate {
+    func selectCalenderDate(date: Date) {
+        print(date)
+    }
+    
+    func changeCalenderMonth(date: Date) {
+        print(date)
+    }
+    
+    func numberOfDaysInTask() -> Int {
+        return 1
+    }
+    
+    func numberOfTask(date: Date) -> Int {
+        return 0
+    }
+    
 }

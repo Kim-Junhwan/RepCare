@@ -9,10 +9,12 @@ import Foundation
 
 final class DetailPetViewModel {
     
-    let images: [PetImageModel]
-    
-    init(images: [PetImageModel]) {
-        self.images = images
+    let pet: PetModel
+    var images: [PetImageModel] {
+        return pet.imagePath
     }
     
+    init(pet: PetModel) {
+        self.pet = pet
+    }
 }

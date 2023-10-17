@@ -46,6 +46,10 @@
 		C727A43C2AD940E200880111 /* RegisterPetQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C727A43B2AD940E200880111 /* RegisterPetQuery.swift */; };
 		C727A43E2AD95BDF00880111 /* FetchPetListRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C727A43D2AD95BDF00880111 /* FetchPetListRequestDTO.swift */; };
 		C727A4402AD99A6E00880111 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C727A43F2AD99A6E00880111 /* UIImageView+.swift */; };
+		C73A4E592ADDF6BB0069009B /* TimeLineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73A4E582ADDF6BB0069009B /* TimeLineHeaderView.swift */; };
+		C73A4E5B2ADE101B0069009B /* TimelineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73A4E5A2ADE101B0069009B /* TimelineCollectionViewCell.swift */; };
+		C73A4E672ADE49450069009B /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73A4E662ADE49450069009B /* Task.swift */; };
+		C73A4E692ADE4BF10069009B /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73A4E682ADE4BF10069009B /* TaskModel.swift */; };
 		C76A01EA2AD264FC0024D008 /* RealmSpeciesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76A01E92AD264FC0024D008 /* RealmSpeciesStorage.swift */; };
 		C76A01EC2AD265FB0024D008 /* SpeciesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76A01EB2AD265FB0024D008 /* SpeciesStorage.swift */; };
 		C76A01EE2AD2676B0024D008 /* PetClassResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76A01ED2AD2676B0024D008 /* PetClassResponseDTO.swift */; };
@@ -56,6 +60,7 @@
 		C7988D1A2ADD61F40011FF8D /* WeightCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7988D192ADD61F40011FF8D /* WeightCollectionViewCell.swift */; };
 		C7988D5B2ADDC38F0011FF8D /* PetWeightModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7988D5A2ADDC38F0011FF8D /* PetWeightModel.swift */; };
 		C7988D5E2ADDC6D30011FF8D /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = C7988D5D2ADDC6D30011FF8D /* FSCalendar */; };
+		C7988D602ADDD0290011FF8D /* CalenderHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7988D5F2ADDD0290011FF8D /* CalenderHeaderView.swift */; };
 		C7A4C3092ACC18A300E299B0 /* PetClassCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A4C3072ACC18A300E299B0 /* PetClassCollectionViewCell.swift */; };
 		C7A4C30A2ACC18A300E299B0 /* PetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A4C3082ACC18A300E299B0 /* PetCollectionViewCell.swift */; };
 		C7B499DA2AD2819B00DD325F /* MorphReqeust+ResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B499D92AD2819B00DD325F /* MorphReqeust+ResponseDTO.swift */; };
@@ -141,6 +146,10 @@
 		C727A43B2AD940E200880111 /* RegisterPetQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPetQuery.swift; sourceTree = "<group>"; };
 		C727A43D2AD95BDF00880111 /* FetchPetListRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPetListRequestDTO.swift; sourceTree = "<group>"; };
 		C727A43F2AD99A6E00880111 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
+		C73A4E582ADDF6BB0069009B /* TimeLineHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineHeaderView.swift; sourceTree = "<group>"; };
+		C73A4E5A2ADE101B0069009B /* TimelineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineCollectionViewCell.swift; sourceTree = "<group>"; };
+		C73A4E662ADE49450069009B /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		C73A4E682ADE4BF10069009B /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		C76A01E92AD264FC0024D008 /* RealmSpeciesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmSpeciesStorage.swift; sourceTree = "<group>"; };
 		C76A01EB2AD265FB0024D008 /* SpeciesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesStorage.swift; sourceTree = "<group>"; };
 		C76A01ED2AD2676B0024D008 /* PetClassResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetClassResponseDTO.swift; sourceTree = "<group>"; };
@@ -150,6 +159,7 @@
 		C7988D172ADD60330011FF8D /* WeightChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightChartView.swift; sourceTree = "<group>"; };
 		C7988D192ADD61F40011FF8D /* WeightCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7988D5A2ADDC38F0011FF8D /* PetWeightModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetWeightModel.swift; sourceTree = "<group>"; };
+		C7988D5F2ADDD0290011FF8D /* CalenderHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalenderHeaderView.swift; sourceTree = "<group>"; };
 		C7A4C3072ACC18A300E299B0 /* PetClassCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetClassCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7A4C3082ACC18A300E299B0 /* PetCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7B499D92AD2819B00DD325F /* MorphReqeust+ResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MorphReqeust+ResponseDTO.swift"; sourceTree = "<group>"; };
@@ -229,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				C709AA452ADB650B004FA677 /* TaskCollectionViewCell.swift */,
+				C73A4E5A2ADE101B0069009B /* TimelineCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -257,6 +268,8 @@
 			isa = PBXGroup;
 			children = (
 				C709AA512ADB96F9004FA677 /* PetCalenderView.swift */,
+				C7988D5F2ADDD0290011FF8D /* CalenderHeaderView.swift */,
+				C73A4E582ADDF6BB0069009B /* TimeLineHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -307,6 +320,7 @@
 				C7273BAA2AD444B5004B7A6F /* MorphModel.swift */,
 				C7273BAC2AD4D8CC004B7A6F /* PetOverSpeciesModel.swift */,
 				C7988D5A2ADDC38F0011FF8D /* PetWeightModel.swift */,
+				C73A4E682ADE4BF10069009B /* TaskModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -562,6 +576,7 @@
 				C7D152DE2AC99BF90064D59F /* Morph.swift */,
 				C7D152E02AC99F980064D59F /* Gender.swift */,
 				C7D152E32AC9A7F00064D59F /* Weight.swift */,
+				C73A4E662ADE49450069009B /* Task.swift */,
 			);
 			path = Pet;
 			sourceTree = "<group>";
@@ -816,6 +831,7 @@
 			files = (
 				C7F5F4232ACE5A2500ACFC76 /* CustomTextField.swift in Sources */,
 				C727A4282AD6FA0600880111 /* PetStorage.swift in Sources */,
+				C73A4E5B2ADE101B0069009B /* TimelineCollectionViewCell.swift in Sources */,
 				C727A43E2AD95BDF00880111 /* FetchPetListRequestDTO.swift in Sources */,
 				C7F5F43B2ACF112700ACFC76 /* MorphObject.swift in Sources */,
 				C7D152DB2AC999AB0064D59F /* Species.swift in Sources */,
@@ -831,6 +847,7 @@
 				C7D152462AC51B270064D59F /* AppDelegate.swift in Sources */,
 				C7F5F4332ACE87AA00ACFC76 /* SpeciesRepository.swift in Sources */,
 				C7273BB22AD62DAD004B7A6F /* ImageCollectionViewCell.swift in Sources */,
+				C73A4E692ADE4BF10069009B /* TaskModel.swift in Sources */,
 				C7D152EC2ACA5EA70064D59F /* Rule.swift in Sources */,
 				C7B499DA2AD2819B00DD325F /* MorphReqeust+ResponseDTO.swift in Sources */,
 				C709AA4B2ADB884A004FA677 /* DetailPetTabViewController.swift in Sources */,
@@ -845,8 +862,10 @@
 				C7A4C30A2ACC18A300E299B0 /* PetCollectionViewCell.swift in Sources */,
 				C7F5F4AA2AD18FC200ACFC76 /* SpeciesRequest+ResponseDTO.swift in Sources */,
 				C7D152EF2ACAA4250064D59F /* BaseViewController.swift in Sources */,
+				C73A4E672ADE49450069009B /* Task.swift in Sources */,
 				C7988D182ADD60330011FF8D /* WeightChartView.swift in Sources */,
 				C7273BAD2AD4D8CC004B7A6F /* PetOverSpeciesModel.swift in Sources */,
+				C7988D602ADDD0290011FF8D /* CalenderHeaderView.swift in Sources */,
 				C709AA5C2ADCF733004FA677 /* ImageViewController.swift in Sources */,
 				C7D152D52AC998900064D59F /* FetchPetListUseCase.swift in Sources */,
 				C76A01F42AD26E940024D008 /* DetailSpeciesRequest+ResponseDTO.swift in Sources */,
@@ -865,6 +884,7 @@
 				C727A43C2AD940E200880111 /* RegisterPetQuery.swift in Sources */,
 				C7D152D12AC93B3D0064D59F /* WeightObject.swift in Sources */,
 				C7D152DF2AC99BF90064D59F /* Morph.swift in Sources */,
+				C73A4E592ADDF6BB0069009B /* TimeLineHeaderView.swift in Sources */,
 				C7D152622AC70B3E0064D59F /* PetListViewController.swift in Sources */,
 				C7A4C3092ACC18A300E299B0 /* PetClassCollectionViewCell.swift in Sources */,
 				C76A01EE2AD2676B0024D008 /* PetClassResponseDTO.swift in Sources */,

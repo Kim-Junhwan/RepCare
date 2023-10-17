@@ -81,7 +81,7 @@ extension PetListViewController: PetListViewDelegate {
     }
     
     func selectPet(at index: Int) {
-        let detailViewController = DetailPetViewController(viewModel: .init(images: viewModel.petList.value[index].imagePath))
+        let detailViewController = DetailPetViewController(viewModel: .init(pet: viewModel.petList.value[index]))
         navigationController?.pushViewController(detailViewController, animated: true)
     }
 }

@@ -25,6 +25,7 @@ final class ProfileViewController: UIViewController {
         let scrollView = UIScrollView()
         scrollView.contentInsetAdjustmentBehavior = .never
         scrollView.showsVerticalScrollIndicator = false
+        scrollView.bounces = false
         return scrollView
     }()
     

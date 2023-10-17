@@ -61,6 +61,10 @@ class DetailPetViewController: BaseViewController {
 }
 
 extension DetailPetViewController: ProfileViewControllerDelegate, ProfileViewControllerDataSource {
+    func getCurrentBottomViewControllerContentInset(at index: Int) -> CGFloat {
+        return 400
+    }
+    
     
     func minHeaderHeight() -> CGFloat {
         guard let navigationBarHeight = navigationController?.navigationBar.frame.height else { return 0 }

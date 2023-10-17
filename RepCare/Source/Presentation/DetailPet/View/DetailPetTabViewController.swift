@@ -22,6 +22,12 @@ class DetailPetTabViewController: TabmanViewController {
         let bar = TMBar.ButtonBar()
         bar.backgroundView.style = .flat(color: .systemBackground)
         bar.layout.transitionStyle = .snap
+        bar.layout.contentInset = .init(top: 0, left: 20, bottom: 0, right: 20)
+        bar.buttons.customize { button in
+            button.tintColor = .black
+            button.selectedTintColor = .lightDeepGreen
+        }
+        bar.indicator.tintColor = .lightDeepGreen
         return bar
     }()
     

@@ -89,8 +89,8 @@ class DetailPetHeaderView: UIView {
             make.bottom.equalTo(imagePageViewController.view.snp.bottom)
         }
         petInfoStackView.snp.makeConstraints { make in
-            make.top.equalTo(imagePageViewController.view.snp.bottom)
-            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(imagePageViewController.view.snp.bottom).offset(10)
+            make.leading.trailing.bottom.equalToSuperview().inset(10)
         }
         onStackView.snp.makeConstraints { make in
             make.width.equalToSuperview()
