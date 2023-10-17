@@ -100,4 +100,20 @@ class DetailPetHeaderView: UIView {
             make.width.equalTo(genderImageView.snp.height).multipliedBy(1.0)
         }
     }
+    
+    func setPetInfo(pet: PetModel) {
+        nameLabel.text = pet.name
+        guard let difference = Calendar.current.dateComponents([.day], from: Date(), to: pet.adoptionDate).day else { return }
+        adoptionLabel.text = "입양한지 \(abs(difference))일째"
+        if let morph = pet.overSpecies.morph {
+            speciesLabel.text = pet.overSpecies.detailSpecies?.title
+            morphLabel.text = morph.title
+        } else if let detailSpecies = pet.overSpecies.detailSpecies?.title {
+            speciesLabel.text = pet.overSpecies.petSpecies.title
+            morphLabel.text = detailSpecies
+        } else {
+            speciesLabel.text = pet.overSpecies.petClass.title
+            morphLabel.text = pet.overSpecies.petSpecies.title
+        }
+    }
 }
