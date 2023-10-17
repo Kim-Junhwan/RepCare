@@ -11,6 +11,7 @@ import FSCalendar
 protocol PetCalenderViewDelegate: AnyObject {
     func selectCalenderDate(date: Date)
     func changeCalenderMonth(date: Date)
+    func selectTaskCell(date: Date, task: TaskModel)
 }
 
 protocol PetCalenderDataSource: AnyObject {
@@ -38,6 +39,7 @@ class PetCalenderView: UIView {
         collectionView.bounces = false
         return collectionView
     }()
+    private var currentDate = Date()
     
     weak var delegate: PetCalenderViewDelegate?
     weak var datasource: PetCalenderDataSource?
@@ -144,14 +146,27 @@ extension PetCalenderView: UICollectionViewDataSource, UICollectionViewDelegate 
             return header
         }
         guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: TimeLineHeaderView.identifier, for: indexPath) as? TimeLineHeaderView else { return .init() }
-        header.dateLabel.text = "2023년 12월 12일"
         return header
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            guard let task = TaskModel(rawValue: indexPath.row) else { return }
+            delegate?.selectTaskCell(date: currentDate, task: task)
+        }
     }
 }
 
 extension PetCalenderView: FSCalendarDelegate {
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        delegate?.selectCalenderDate(date: date)
+        let convertDate = date.convertDateToKoreaLocale()
+        if convertDate == currentDate {
+            calendar.deselect(date)
+            currentDate = Date()
+        } else {
+            currentDate = convertDate
+            delegate?.selectCalenderDate(date: currentDate)
+        }
     }
     
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
