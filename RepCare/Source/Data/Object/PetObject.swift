@@ -20,6 +20,7 @@ class PetObject: Object {
     @Persisted var imagePathList: List<String>
     @Persisted var adoptionDate: Date
     @Persisted var weights: List<WeightObject>
+    @Persisted var tasks: List<DetailTaskObject>
     @Persisted var birthDate: Date?
     
     convenience init(name:String, gender: GenderType, petClass: PetClassObject, petSpecies: PetSpeciesObject, detailSpecies: DetailSpeciesObject?, morph: MorphObject?, adoptionDate: Date, weights: WeightObject?, birthDate: Date?, imagePathList: [String]) {

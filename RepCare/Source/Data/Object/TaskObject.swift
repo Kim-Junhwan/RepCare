@@ -6,6 +6,7 @@
 //
 
 import RealmSwift
+import Foundation
 
 enum TaskType: String, PersistableEnum {
     case feed
@@ -15,4 +16,10 @@ enum TaskType: String, PersistableEnum {
     case memo
 }
 
-
+class DetailTaskObject: Object {
+    @Persisted(primaryKey: true) var _id: ObjectId
+    @Persisted var taskType: TaskType
+    @Persisted var memo: String
+    @Persisted var registerDate: Date
+    @Persisted(originProperty: "tasks") var pet: LinkingObjects<PetObject>
+}

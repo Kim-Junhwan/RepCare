@@ -23,6 +23,7 @@
 		C709AA6C2ADD41EA004FA677 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = C709AA6B2ADD41EA004FA677 /* FirebaseCrashlytics */; };
 		C709AA6E2ADD443F004FA677 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C709AA6D2ADD443F004FA677 /* GoogleService-Info.plist */; };
 		C70E59B92ADEB55000428CDE /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E59B82ADEB55000428CDE /* Date+.swift */; };
+		C70E59CA2ADECDD700428CDE /* repcare.realm in Resources */ = {isa = PBXBuildFile; fileRef = C70E59C92ADECDD700428CDE /* repcare.realm */; };
 		C7273B9B2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273B9A2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift */; };
 		C7273B9E2AD427B8004B7A6F /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273B9D2AD427B8004B7A6F /* UITextField+.swift */; };
 		C7273BA12AD43DC2004B7A6F /* PetClassModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273BA02AD43DC2004B7A6F /* PetClassModel.swift */; };
@@ -42,7 +43,6 @@
 		C727A42C2AD6FA2E00880111 /* RegisterPetRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C727A42B2AD6FA2E00880111 /* RegisterPetRequestDTO.swift */; };
 		C727A42E2AD6FA7700880111 /* RealmPetStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C727A42D2AD6FA7700880111 /* RealmPetStorage.swift */; };
 		C727A4312AD70A3800880111 /* FileManagerPetImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C727A4302AD70A3800880111 /* FileManagerPetImageRepository.swift */; };
-		C727A4332AD70C6200880111 /* repcare.realm in Resources */ = {isa = PBXBuildFile; fileRef = C727A4322AD70C6200880111 /* repcare.realm */; };
 		C727A43A2AD93DB300880111 /* FetchPetListQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C727A4392AD93DB300880111 /* FetchPetListQuery.swift */; };
 		C727A43C2AD940E200880111 /* RegisterPetQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C727A43B2AD940E200880111 /* RegisterPetQuery.swift */; };
 		C727A43E2AD95BDF00880111 /* FetchPetListRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C727A43D2AD95BDF00880111 /* FetchPetListRequestDTO.swift */; };
@@ -125,6 +125,7 @@
 		C709AA5D2ADD198C004FA677 /* DetailPetHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPetHeaderViewController.swift; sourceTree = "<group>"; };
 		C709AA6D2ADD443F004FA677 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C70E59B82ADEB55000428CDE /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		C70E59C92ADECDD700428CDE /* repcare.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = repcare.realm; sourceTree = "<group>"; };
 		C7273B9A2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7273B9D2AD427B8004B7A6F /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		C7273BA02AD43DC2004B7A6F /* PetClassModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetClassModel.swift; sourceTree = "<group>"; };
@@ -144,7 +145,6 @@
 		C727A42B2AD6FA2E00880111 /* RegisterPetRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPetRequestDTO.swift; sourceTree = "<group>"; };
 		C727A42D2AD6FA7700880111 /* RealmPetStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmPetStorage.swift; sourceTree = "<group>"; };
 		C727A4302AD70A3800880111 /* FileManagerPetImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerPetImageRepository.swift; sourceTree = "<group>"; };
-		C727A4322AD70C6200880111 /* repcare.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = repcare.realm; sourceTree = "<group>"; };
 		C727A4392AD93DB300880111 /* FetchPetListQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPetListQuery.swift; sourceTree = "<group>"; };
 		C727A43B2AD940E200880111 /* RegisterPetQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPetQuery.swift; sourceTree = "<group>"; };
 		C727A43D2AD95BDF00880111 /* FetchPetListRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPetListRequestDTO.swift; sourceTree = "<group>"; };
@@ -442,8 +442,8 @@
 		C7D152592AC6D16C0064D59F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				C70E59C92ADECDD700428CDE /* repcare.realm */,
 				C709AA6D2ADD443F004FA677 /* GoogleService-Info.plist */,
-				C727A4322AD70C6200880111 /* repcare.realm */,
 				C7D1524E2AC51B280064D59F /* Assets.xcassets */,
 				C7D152502AC51B280064D59F /* LaunchScreen.storyboard */,
 				C7D152532AC51B280064D59F /* Info.plist */,
@@ -796,9 +796,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C727A4332AD70C6200880111 /* repcare.realm in Resources */,
 				C709AA6E2ADD443F004FA677 /* GoogleService-Info.plist in Resources */,
 				C7D152522AC51B280064D59F /* LaunchScreen.storyboard in Resources */,
+				C70E59CA2ADECDD700428CDE /* repcare.realm in Resources */,
 				C7D1524F2AC51B280064D59F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
