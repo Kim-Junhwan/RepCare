@@ -23,9 +23,14 @@
 		C709AA6C2ADD41EA004FA677 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = C709AA6B2ADD41EA004FA677 /* FirebaseCrashlytics */; };
 		C709AA6E2ADD443F004FA677 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C709AA6D2ADD443F004FA677 /* GoogleService-Info.plist */; };
 		C70E59B92ADEB55000428CDE /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E59B82ADEB55000428CDE /* Date+.swift */; };
-		C70E59CA2ADECDD700428CDE /* repcare.realm in Resources */ = {isa = PBXBuildFile; fileRef = C70E59C92ADECDD700428CDE /* repcare.realm */; };
 		C70E59CC2ADECF2700428CDE /* TaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E59CB2ADECF2700428CDE /* TaskRepository.swift */; };
 		C70E59CE2ADECFCE00428CDE /* RegisterTaskQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E59CD2ADECFCE00428CDE /* RegisterTaskQuery.swift */; };
+		C70E59D02ADED20500428CDE /* DefaultTaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E59CF2ADED20500428CDE /* DefaultTaskRepository.swift */; };
+		C70E59D42ADED3C100428CDE /* TaskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E59D32ADED3C100428CDE /* TaskStorage.swift */; };
+		C70E59D82ADED3F600428CDE /* RegisterTaskRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E59D72ADED3F600428CDE /* RegisterTaskRequestDTO.swift */; };
+		C70E59DA2ADED6A500428CDE /* RealmTaskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E59D92ADED6A500428CDE /* RealmTaskStorage.swift */; };
+		C70E59DC2ADEE73200428CDE /* repcare.realm in Resources */ = {isa = PBXBuildFile; fileRef = C70E59DB2ADEE73200428CDE /* repcare.realm */; };
+		C70E59DF2ADF9DD900428CDE /* FetchTaskListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E59DE2ADF9DD900428CDE /* FetchTaskListDTO.swift */; };
 		C7273B9B2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273B9A2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift */; };
 		C7273B9E2AD427B8004B7A6F /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273B9D2AD427B8004B7A6F /* UITextField+.swift */; };
 		C7273BA12AD43DC2004B7A6F /* PetClassModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273BA02AD43DC2004B7A6F /* PetClassModel.swift */; };
@@ -127,9 +132,14 @@
 		C709AA5D2ADD198C004FA677 /* DetailPetHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPetHeaderViewController.swift; sourceTree = "<group>"; };
 		C709AA6D2ADD443F004FA677 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C70E59B82ADEB55000428CDE /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
-		C70E59C92ADECDD700428CDE /* repcare.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = repcare.realm; sourceTree = "<group>"; };
 		C70E59CB2ADECF2700428CDE /* TaskRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRepository.swift; sourceTree = "<group>"; };
 		C70E59CD2ADECFCE00428CDE /* RegisterTaskQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTaskQuery.swift; sourceTree = "<group>"; };
+		C70E59CF2ADED20500428CDE /* DefaultTaskRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTaskRepository.swift; sourceTree = "<group>"; };
+		C70E59D32ADED3C100428CDE /* TaskStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStorage.swift; sourceTree = "<group>"; };
+		C70E59D72ADED3F600428CDE /* RegisterTaskRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTaskRequestDTO.swift; sourceTree = "<group>"; };
+		C70E59D92ADED6A500428CDE /* RealmTaskStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTaskStorage.swift; sourceTree = "<group>"; };
+		C70E59DB2ADEE73200428CDE /* repcare.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = repcare.realm; sourceTree = "<group>"; };
+		C70E59DE2ADF9DD900428CDE /* FetchTaskListDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchTaskListDTO.swift; sourceTree = "<group>"; };
 		C7273B9A2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7273B9D2AD427B8004B7A6F /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		C7273BA02AD43DC2004B7A6F /* PetClassModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetClassModel.swift; sourceTree = "<group>"; };
@@ -275,9 +285,8 @@
 		C709AA502ADB969E004FA677 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C70E59DD2ADF6AA500428CDE /* HeaderView */,
 				C709AA512ADB96F9004FA677 /* PetCalenderView.swift */,
-				C7988D5F2ADDD0290011FF8D /* CalenderHeaderView.swift */,
-				C73A4E582ADDF6BB0069009B /* TimeLineHeaderView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -304,6 +313,33 @@
 				C709AA5B2ADCF733004FA677 /* ImageViewController.swift */,
 				C709AA422ADAA107004FA677 /* DetailPetHeaderView.swift */,
 				C709AA5D2ADD198C004FA677 /* DetailPetHeaderViewController.swift */,
+			);
+			path = HeaderView;
+			sourceTree = "<group>";
+		};
+		C70E59D52ADED3C900428CDE /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				C70E59D32ADED3C100428CDE /* TaskStorage.swift */,
+				C70E59D92ADED6A500428CDE /* RealmTaskStorage.swift */,
+			);
+			path = Task;
+			sourceTree = "<group>";
+		};
+		C70E59D62ADED3DD00428CDE /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				C70E59D72ADED3F600428CDE /* RegisterTaskRequestDTO.swift */,
+				C70E59DE2ADF9DD900428CDE /* FetchTaskListDTO.swift */,
+			);
+			path = Task;
+			sourceTree = "<group>";
+		};
+		C70E59DD2ADF6AA500428CDE /* HeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				C7988D5F2ADDD0290011FF8D /* CalenderHeaderView.swift */,
+				C73A4E582ADDF6BB0069009B /* TimeLineHeaderView.swift */,
 			);
 			path = HeaderView;
 			sourceTree = "<group>";
@@ -402,6 +438,7 @@
 		C76A01E82AD264D00024D008 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				C70E59D52ADED3C900428CDE /* Task */,
 				C727A4262AD6F9F600880111 /* Pet */,
 				C727A4252AD6F9C700880111 /* Species */,
 			);
@@ -447,7 +484,7 @@
 		C7D152592AC6D16C0064D59F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				C70E59C92ADECDD700428CDE /* repcare.realm */,
+				C70E59DB2ADEE73200428CDE /* repcare.realm */,
 				C709AA6D2ADD443F004FA677 /* GoogleService-Info.plist */,
 				C7D1524E2AC51B280064D59F /* Assets.xcassets */,
 				C7D152502AC51B280064D59F /* LaunchScreen.storyboard */,
@@ -708,6 +745,7 @@
 			children = (
 				C7F5F4A62AD1025300ACFC76 /* DefaultSpeciesRepository.swift */,
 				C727A4232AD6F87600880111 /* DefaultPetRepository.swift */,
+				C70E59CF2ADED20500428CDE /* DefaultTaskRepository.swift */,
 			);
 			path = RealmRepository;
 			sourceTree = "<group>";
@@ -715,6 +753,7 @@
 		C7F5F4A82AD1073000ACFC76 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				C70E59D62ADED3DD00428CDE /* Task */,
 				C727A42A2AD6FA2000880111 /* Pet */,
 				C727A4292AD6FA1700880111 /* Species */,
 			);
@@ -804,7 +843,7 @@
 			files = (
 				C709AA6E2ADD443F004FA677 /* GoogleService-Info.plist in Resources */,
 				C7D152522AC51B280064D59F /* LaunchScreen.storyboard in Resources */,
-				C70E59CA2ADECDD700428CDE /* repcare.realm in Resources */,
+				C70E59DC2ADEE73200428CDE /* repcare.realm in Resources */,
 				C7D1524F2AC51B280064D59F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -845,6 +884,7 @@
 				C727A4282AD6FA0600880111 /* PetStorage.swift in Sources */,
 				C73A4E5B2ADE101B0069009B /* TimelineCollectionViewCell.swift in Sources */,
 				C727A43E2AD95BDF00880111 /* FetchPetListRequestDTO.swift in Sources */,
+				C70E59DA2ADED6A500428CDE /* RealmTaskStorage.swift in Sources */,
 				C7F5F43B2ACF112700ACFC76 /* MorphObject.swift in Sources */,
 				C7D152DB2AC999AB0064D59F /* Species.swift in Sources */,
 				C727A42E2AD6FA7700880111 /* RealmPetStorage.swift in Sources */,
@@ -855,8 +895,11 @@
 				C7D152A22AC855F60064D59F /* PetClassObject.swift in Sources */,
 				C727A4402AD99A6E00880111 /* UIImageView+.swift in Sources */,
 				C7273BA52AD43FB4004B7A6F /* DetailPetSpeciesModel.swift in Sources */,
+				C70E59D02ADED20500428CDE /* DefaultTaskRepository.swift in Sources */,
 				C7F5F41C2ACD680400ACFC76 /* RegisterNewPetViewController.swift in Sources */,
+				C70E59D42ADED3C100428CDE /* TaskStorage.swift in Sources */,
 				C7D152462AC51B270064D59F /* AppDelegate.swift in Sources */,
+				C70E59DF2ADF9DD900428CDE /* FetchTaskListDTO.swift in Sources */,
 				C70E59CE2ADECFCE00428CDE /* RegisterTaskQuery.swift in Sources */,
 				C7F5F4332ACE87AA00ACFC76 /* SpeciesRepository.swift in Sources */,
 				C7273BB22AD62DAD004B7A6F /* ImageCollectionViewCell.swift in Sources */,
@@ -903,6 +946,7 @@
 				C76D3F892ADE943200DB6AB6 /* TaskObject.swift in Sources */,
 				C7D152622AC70B3E0064D59F /* PetListViewController.swift in Sources */,
 				C7A4C3092ACC18A300E299B0 /* PetClassCollectionViewCell.swift in Sources */,
+				C70E59D82ADED3F600428CDE /* RegisterTaskRequestDTO.swift in Sources */,
 				C76A01EE2AD2676B0024D008 /* PetClassResponseDTO.swift in Sources */,
 				C76A01EC2AD265FB0024D008 /* SpeciesStorage.swift in Sources */,
 				C76A01F22AD26E550024D008 /* DetailSpecies.swift in Sources */,
