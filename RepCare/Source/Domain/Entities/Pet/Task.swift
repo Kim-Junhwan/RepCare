@@ -14,3 +14,10 @@ enum Task {
     case spawn
     case memo
 }
+
+struct DetailTask {
+    let taskType: Task
+    let id: String
+    let description: String?
+    let registerDate: Date
+}
