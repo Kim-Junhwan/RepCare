@@ -10,7 +10,7 @@ import Foundation
 extension Date {
     func convertDateToKoreaLocale() -> Date {
         let dateformatter = DateFormatter()
-        let dateFormat = "yyyy.MM.dd HH:mm"
+        let dateFormat = "yyyy.MM.dd HH:mm:ss"
         dateformatter.dateFormat = dateFormat
         let formattedDate = dateformatter.string(from: self)
         dateformatter.locale = NSLocale.current
