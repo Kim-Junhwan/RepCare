@@ -10,13 +10,14 @@ import FSCalendar
 
 protocol PetCalenderViewDelegate: AnyObject {
     func selectCalenderDate(date: Date)
-    func changeCalenderMonth(date: Date)
+    func changeCalenderMonth(month: Int, year: Int)
     func selectTaskCell(date: Date, task: TaskModel)
 }
 
 protocol PetCalenderDataSource: AnyObject {
     func numberOfTask(date: Date) -> Int
     func numberOfDaysInTask() -> Int
+    func date(section: Int) -> Date
 }
 
 class PetCalenderView: UIView {
@@ -37,9 +38,10 @@ class PetCalenderView: UIView {
         collectionView.delegate = self
         collectionView.isScrollEnabled = false
         collectionView.bounces = false
+        collectionView.contentInsetAdjustmentBehavior = .never
         return collectionView
     }()
-    private var currentDate = Date()
+    var currentDate = Date()
     
     weak var delegate: PetCalenderViewDelegate?
     weak var datasource: PetCalenderDataSource?
@@ -146,6 +148,8 @@ extension PetCalenderView: UICollectionViewDataSource, UICollectionViewDelegate 
             return header
         }
         guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: TimeLineHeaderView.identifier, for: indexPath) as? TimeLineHeaderView else { return .init() }
+        guard let sectionDate = datasource?.date(section: indexPath.section) else { return .init() }
+        header.dateLabel.text = sectionDate.description
         return header
     }
     
@@ -170,6 +174,10 @@ extension PetCalenderView: FSCalendarDelegate {
     }
     
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
-        delegate?.changeCalenderMonth(date: calendar.currentPage)
+        let currentMonthYear = Calendar.current.dateComponents([.month, .year], from: calendar.currentPage.convertDateToKoreaLocale())
+        if let month = currentMonthYear.month, let year = currentMonthYear.year {
+            delegate?.changeCalenderMonth(month: month, year: year)
+        }
     }
+    
 }
