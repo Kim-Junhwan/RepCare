@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+protocol TaskStorage {
+    func registerTask(request: RegisterTaskRequestDTO) throws
+    func fetchTaskListInMonth(request: FetchTaskListDTO) -> [DetailTaskObject]
+}

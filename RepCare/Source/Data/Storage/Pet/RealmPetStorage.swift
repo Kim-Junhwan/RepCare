@@ -39,4 +39,10 @@ extension RealmPetStorage: PetStorage {
         return pet
     }
     
+    func fetchPet(id: String) -> PetObject? {
+        guard let realm, let objectId = try? ObjectId(string: id) else { return .init() }
+        let pet = realm.object(ofType: PetObject.self, forPrimaryKey: objectId)
+        return pet
+    }
+    
 }

@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+struct RegisterTaskRequestDTO {
+    let pet: PetObject
+    let registerDate: Date
+    let taskType: TaskType
+    let memo: String?
+}
