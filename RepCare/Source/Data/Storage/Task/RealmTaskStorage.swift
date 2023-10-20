@@ -25,10 +25,14 @@ final class RealmTaskStorage: TaskStorage {
     }
     
     func fetchTaskListInMonth(request: FetchTaskListDTO) -> [DetailTaskObject] {
-        guard let realm else { return [] }
-        guard let firstDate = makeDate(year: request.year, month: request.month, day: 1, hour: 0, minute: 0, second: 0) else { return [] }
-        guard let lastDate = makeDate(year: request.year, month: request.month+1, day: 0, hour: 23, minute: 59, second: 59) else { return [] }
-        let predicate = NSPredicate(format: "registerDate >= %@ AND registerDate <= %@", argumentArray: [firstDate as NSDate, lastDate as NSDate])
+        guard let firstDate = makeDate(year: request.year, month: request.month, day: request.day ?? 1, hour: 0, minute: 0, second: 0) else { return [] }
+        let lastDate: Date
+        if request.day == nil {
+            lastDate = makeDate(year: request.year, month: request.month+1, day: 0, hour: 23, minute: 59, second: 59) ?? Date()
+        } else {
+            lastDate = makeDate(year: request.year, month: request.month, day: request.day ?? 1, hour: 23, minute: 59, second: 59) ?? Date()
+        }
+        let predicate = NSPredicate(format: "registerDate BETWEEN { %@, %@ }", argumentArray: [firstDate as NSDate, lastDate as NSDate])
         return Array(request.pet.tasks.filter(predicate))
     }
     
@@ -40,7 +44,7 @@ final class RealmTaskStorage: TaskStorage {
         components.hour = hour
         components.minute = minute
         components.second = second
-        return Calendar.current.date(from: components)?.convertDateToKoreaLocale()
+        return Calendar.current.date(from: components)
     }
     
     

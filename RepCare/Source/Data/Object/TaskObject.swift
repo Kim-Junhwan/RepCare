@@ -46,6 +46,6 @@ class DetailTaskObject: Object {
     }
     
     func toDomain() -> DetailTask {
-        return .init(taskType: taskType.toDomain(), id: _id.stringValue, description: memo, registerDate: registerDate.convertDateToKoreaLocale())
+        return .init(taskType: taskType.toDomain(), id: _id.stringValue, description: memo, registerDate: registerDate)
     }
 }

@@ -43,12 +43,17 @@ final class DefaultTaskRepository: TaskRepository {
     }
     
     func fetchTaskListInDate(petId: String, date: Date) -> [DetailTask] {
+        guard let petObj = petStorage.fetchPet(id: petId) else { return [] }
+        let current = Calendar.current.dateComponents([.year,.month,.day], from: date)
+        if let year = current.year, let month = current.month, let day = current.day {
+            return taskStorage.fetchTaskListInMonth(request: .init(pet: petObj, month: month, year: year, day: day)).map { $0.toDomain() }
+        }
         return []
     }
     
     func fetchTaskListInMonth(petId: String, month: Int, year: Int) -> Dictionary<Int, [DetailTask]> {
         guard let petObj = petStorage.fetchPet(id: petId) else { return [:] }
-        let fetchTask = taskStorage.fetchTaskListInMonth(request: .init(pet: petObj, month: month, year: year))
+        let fetchTask = taskStorage.fetchTaskListInMonth(request: .init(pet: petObj, month: month, year: year, day: nil))
         var dict: [Int:[DetailTask]] = [:]
         fetchTask.forEach { task in
             let entityTask = task.toDomain()

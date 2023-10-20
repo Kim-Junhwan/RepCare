@@ -11,4 +11,5 @@ struct FetchTaskListDTO {
     let pet: PetObject
     let month: Int
     let year: Int
+    let day: Int?
 }
