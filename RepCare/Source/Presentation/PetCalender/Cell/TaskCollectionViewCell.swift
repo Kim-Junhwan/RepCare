@@ -12,14 +12,13 @@ class TaskCollectionViewCell: UICollectionViewCell {
     
     let classImageBackgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = .lightDeepGreen
         view.clipsToBounds = true
         return view
     }()
     
     let classImageView: UIImageView = {
        let imageView = UIImageView()
-        
+        imageView.tintColor = .white
         return imageView
     }()
     
@@ -54,7 +53,7 @@ class TaskCollectionViewCell: UICollectionViewCell {
         }
         classImageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.width.height.equalTo(50)
+            make.width.height.equalTo(30)
         }
         classLabel.snp.makeConstraints { make in
             make.top.equalTo(classImageBackgroundView.snp.bottom)
@@ -63,7 +62,8 @@ class TaskCollectionViewCell: UICollectionViewCell {
     }
     
     func configureCell(task: TaskModel) {
-        classImageView.image = UIImage(systemName: task.image)
+        classImageView.image = UIImage(named: task.image)?.withRenderingMode(.alwaysTemplate)
         classLabel.text = task.title
+        classImageBackgroundView.backgroundColor = task.color
     }
 }

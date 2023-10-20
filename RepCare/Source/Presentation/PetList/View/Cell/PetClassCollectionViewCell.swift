@@ -20,7 +20,7 @@ final class PetClassCollectionViewCell: UICollectionViewCell {
     
     let classImageView: UIImageView = {
        let imageView = UIImageView()
-        
+        imageView.tintColor = .systemGray2
         return imageView
     }()
     
@@ -64,13 +64,14 @@ final class PetClassCollectionViewCell: UICollectionViewCell {
     }
     
     func configureCell(petClass: PetClassModel) {
-        classImageView.image = petClass.image
+        classImageView.image = UIImage(named: petClass.image)?.withRenderingMode(.alwaysTemplate)
         classLabel.text = petClass.title
     }
     
     override var isSelected: Bool {
         didSet {
             classImageBackgroundView.backgroundColor = isSelected ? .deepGreen : .systemGray5
+            classImageView.tintColor = isSelected ? .white : .systemGray2
         }
     }
     

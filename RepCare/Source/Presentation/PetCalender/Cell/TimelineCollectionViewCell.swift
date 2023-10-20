@@ -13,7 +13,7 @@ class TimelineCollectionViewCell: UICollectionViewCell {
     lazy var allStackView: UIStackView = {
         let stackView = UIStackView()
          stackView.axis = .vertical
-        stackView.spacing = 0
+        stackView.spacing = 10
         stackView.distribution = .equalSpacing
         stackView.alignment = .trailing
          stackView.addArrangedSubview(topStackView)
@@ -33,7 +33,9 @@ class TimelineCollectionViewCell: UICollectionViewCell {
     
     let logoImageView: UIImageView = {
        let imageView = UIImageView()
+        imageView.backgroundColor = .white
         imageView.contentMode = .scaleToFill
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -43,9 +45,11 @@ class TimelineCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    let memoLabel: UILabel = {
-       let label = UILabel()
+    let memoLabel: PaddingLabel = {
+       let label = PaddingLabel()
         label.numberOfLines = 0
+        label.layer.cornerRadius = 10
+        label.clipsToBounds = true
         return label
     }()
     
@@ -76,19 +80,20 @@ class TimelineCollectionViewCell: UICollectionViewCell {
         memoLabel.snp.makeConstraints { make in
             make.leading.equalTo(titleLabel.snp.leading)
         }
-        backgroundColor = .brightLightGreen
         layer.cornerRadius = 10
+        logoImageView.layer.cornerRadius = 20
     }
     
-    func configureCell(memo: String?) {
-        titleLabel.text = "먹이 급여"
-        logoImageView.image = UIImage(systemName: "star")
-        if let memo {
+    func configureCell(detailTask: DetailTaskModel) {
+        titleLabel.text = detailTask.taskType.title
+        backgroundColor = detailTask.taskType.color
+        logoImageView.image = UIImage(named: detailTask.taskType.timeLineImage)
+        if let memo = detailTask.memo , !memo.isEmpty {
             memoLabel.text = memo
+            memoLabel.backgroundColor = detailTask.taskType.color.adjustBrightness(factor: 1.2)
         } else {
             memoLabel.isHidden = true
         }
-        
     }
     
     override func prepareForReuse() {
