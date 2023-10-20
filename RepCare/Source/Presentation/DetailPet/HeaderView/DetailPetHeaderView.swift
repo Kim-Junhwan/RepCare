@@ -103,6 +103,7 @@ class DetailPetHeaderView: UIView {
     
     func setPetInfo(pet: PetModel) {
         nameLabel.text = pet.name
+        genderImageView.image = UIImage(named: pet.sex.image)
         guard let difference = Calendar.current.dateComponents([.day], from: Date(), to: pet.adoptionDate).day else { return }
         adoptionLabel.text = "입양한지 \(abs(difference))일째"
         if let morph = pet.overSpecies.morph {
