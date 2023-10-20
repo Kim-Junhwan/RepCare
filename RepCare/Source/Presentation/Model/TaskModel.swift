@@ -32,4 +32,25 @@ enum TaskModel: Int, CaseIterable {
     var image: String {
         return "star"
     }
+    
+    func toDomain() ->  Task {
+        switch self {
+        case .feed:
+            return .feed
+        case .clean:
+            return .clean
+        case .molt:
+            return .molt
+        case .spawn:
+            return .spawn
+        case .memo:
+            return .memo
+        }
+    }
+}
+
+struct DetailTaskModel {
+    let taskType: TaskModel
+    let registerDate: Date
+    let memo: String?
 }
