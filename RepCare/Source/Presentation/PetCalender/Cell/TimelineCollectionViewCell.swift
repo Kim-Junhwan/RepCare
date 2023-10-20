@@ -76,7 +76,7 @@ class TimelineCollectionViewCell: UICollectionViewCell {
         memoLabel.snp.makeConstraints { make in
             make.leading.equalTo(titleLabel.snp.leading)
         }
-        backgroundColor = UIColor(red: 0.96, green: 0.96, blue: 0.96, alpha: 1.00)
+        backgroundColor = .brightLightGreen
         layer.cornerRadius = 10
     }
     
