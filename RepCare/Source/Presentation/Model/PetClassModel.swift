@@ -33,8 +33,21 @@ enum PetClassModel: Int, CaseIterable {
     }
     
     // 추후 사용할 이미지가 구해지면 수정
-    var image: UIImage? {
-        return UIImage(systemName: "star")
+    var image: String {
+        switch self {
+        case .all:
+            return "All"
+        case .reptile:
+            return "Lizard"
+        case .arthropod:
+            return "Spider"
+        case .amphibia:
+            return "Frog"
+        case .mammalia:
+            return "Hamster"
+        case .etc:
+            return "Etc"
+        }
     }
     
     init(petClass: PetClass) {

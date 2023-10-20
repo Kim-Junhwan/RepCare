@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum TaskModel: Int, CaseIterable {
     case feed
@@ -30,7 +31,48 @@ enum TaskModel: Int, CaseIterable {
     }
     
     var image: String {
-        return "star"
+        switch self {
+        case .feed:
+            return "Feed"
+        case .clean:
+            return "Clean"
+        case .molt:
+            return "star"
+        case .spawn:
+            return "Spawn"
+        case .memo:
+            return "Memo"
+        }
+    }
+    
+    var timeLineImage: String {
+        switch self {
+        case .feed:
+            return "TimeLineCricket"
+        case .clean:
+            return "TimeLineClean"
+        case .molt:
+            return "star"
+        case .spawn:
+            return "TimeLineEgg"
+        case .memo:
+            return "TimeLineMemo"
+        }
+    }
+    
+    var color: UIColor {
+        switch self {
+        case .feed:
+            return .lightDeepGreen
+        case .clean:
+            return .lightPink
+        case .molt:
+            return .oceanBlue
+        case .spawn:
+            return .lightYellow
+        case .memo:
+            return .middleGray
+        }
     }
     
     func toDomain() ->  Task {
@@ -47,10 +89,31 @@ enum TaskModel: Int, CaseIterable {
             return .memo
         }
     }
+    
+    init(taskType: Task) {
+        switch taskType {
+        case .feed:
+            self = .feed
+        case .clean:
+            self = .clean
+        case .molt:
+            self = .molt
+        case .spawn:
+            self = .spawn
+        case .memo:
+            self = .memo
+        }
+    }
 }
 
 struct DetailTaskModel {
     let taskType: TaskModel
     let registerDate: Date
     let memo: String?
+    
+    init(detailTask: DetailTask) {
+        self.taskType = .init(taskType: detailTask.taskType)
+        self.registerDate = detailTask.registerDate
+        self.memo = detailTask.description
+    }
 }

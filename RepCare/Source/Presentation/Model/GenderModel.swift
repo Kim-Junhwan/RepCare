@@ -23,6 +23,17 @@ enum GenderModel: Int {
         }
     }
     
+    var image: String {
+        switch self {
+        case .female:
+            return "Female"
+        case .male:
+            return "Male"
+        case .dontKnow:
+            return "Missing"
+        }
+    }
+    
     func toDomain() -> Gender {
         switch self {
         case .female:
