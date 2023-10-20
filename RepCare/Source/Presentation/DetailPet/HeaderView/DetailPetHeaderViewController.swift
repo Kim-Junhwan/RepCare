@@ -10,7 +10,10 @@ import UIKit
 class DetailPetHeaderViewController: BaseViewController {
     
     private let mainView = DetailPetHeaderView()
-    let imagePathList: [PetImageModel]
+    let pet: PetModel
+    var imagePathList: [PetImageModel] {
+        return pet.imagePath
+    }
     
     lazy var viewControllers: [UIViewController] = {
         if imagePathList.isEmpty {
@@ -19,8 +22,8 @@ class DetailPetHeaderViewController: BaseViewController {
         return imagePathList.map {ImageViewController(imagePath: $0)}
     }()
     
-    init(imagePathList: [PetImageModel]) {
-        self.imagePathList = imagePathList
+    init(pet: PetModel) {
+        self.pet = pet
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -42,6 +45,7 @@ class DetailPetHeaderViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        mainView.setPetInfo(pet: pet)
     }
 
     @objc func pageControlHandler(_ sender: UIPageControl) {
