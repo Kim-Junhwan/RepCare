@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "free-icon-frog-2417588.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "free-icon-frog-2417588@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "free-icon-frog-2417588@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
