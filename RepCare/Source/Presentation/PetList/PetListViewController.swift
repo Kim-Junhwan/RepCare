@@ -22,7 +22,8 @@ final class PetListViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
-        viewModel.fetchFilteringPetList(petClass: .all, species: nil, detailSpecies: nil, morph: nil, gender: nil)
+        mainView.petClassCollectionView.selectItem(at: [0,0], animated: false, scrollPosition: .init())
+        mainView.collectionView(mainView.petClassCollectionView, didSelectItemAt: .init(row: 0, section: 0))
     }
     
     private func bind() {
