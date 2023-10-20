@@ -58,6 +58,7 @@
 		C73A4E672ADE49450069009B /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73A4E662ADE49450069009B /* Task.swift */; };
 		C73A4E692ADE4BF10069009B /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73A4E682ADE4BF10069009B /* TaskModel.swift */; };
 		C7608D962AE0F39E001F03DA /* RegisterTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7608D952AE0F39E001F03DA /* RegisterTaskViewController.swift */; };
+		C7675F9A2AE2A6090054BC7A /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7675F992AE2A6090054BC7A /* PaddingLabel.swift */; };
 		C76A01EA2AD264FC0024D008 /* RealmSpeciesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76A01E92AD264FC0024D008 /* RealmSpeciesStorage.swift */; };
 		C76A01EC2AD265FB0024D008 /* SpeciesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76A01EB2AD265FB0024D008 /* SpeciesStorage.swift */; };
 		C76A01EE2AD2676B0024D008 /* PetClassResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76A01ED2AD2676B0024D008 /* PetClassResponseDTO.swift */; };
@@ -167,6 +168,7 @@
 		C73A4E662ADE49450069009B /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		C73A4E682ADE4BF10069009B /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		C7608D952AE0F39E001F03DA /* RegisterTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTaskViewController.swift; sourceTree = "<group>"; };
+		C7675F992AE2A6090054BC7A /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		C76A01E92AD264FC0024D008 /* RealmSpeciesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmSpeciesStorage.swift; sourceTree = "<group>"; };
 		C76A01EB2AD265FB0024D008 /* SpeciesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeciesStorage.swift; sourceTree = "<group>"; };
 		C76A01ED2AD2676B0024D008 /* PetClassResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetClassResponseDTO.swift; sourceTree = "<group>"; };
@@ -535,6 +537,7 @@
 			isa = PBXGroup;
 			children = (
 				C7D1525D2AC6E7AC0064D59F /* Color.swift */,
+				C7675F992AE2A6090054BC7A /* PaddingLabel.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -916,6 +919,7 @@
 				C727A4242AD6F87600880111 /* DefaultPetRepository.swift in Sources */,
 				C7F5F4392ACEEA9200ACFC76 /* DetailSpeciesObject.swift in Sources */,
 				C7A4C30A2ACC18A300E299B0 /* PetCollectionViewCell.swift in Sources */,
+				C7675F9A2AE2A6090054BC7A /* PaddingLabel.swift in Sources */,
 				C7608D962AE0F39E001F03DA /* RegisterTaskViewController.swift in Sources */,
 				C7F5F4AA2AD18FC200ACFC76 /* SpeciesRequest+ResponseDTO.swift in Sources */,
 				C7D152EF2ACAA4250064D59F /* BaseViewController.swift in Sources */,
