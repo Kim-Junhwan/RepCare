@@ -68,23 +68,22 @@ final class PetCalenderViewController: BaseViewController {
 }
 
 extension PetCalenderViewController: PetCalenderDataSource, PetCalenderViewDelegate {
-    
-    
     //작업 등록
     func selectTaskCell(task: TaskModel) {
         presentRegisterViewController(task: task)
-        if isDateSelected {
-            fetchTaskForDate(date: currentDate)
-        } else {
-            fetchTaskListForMonth(date: currentDate)
-        }
     }
     
     private func presentRegisterViewController(task: TaskModel) {
         let vc = RegisterTaskViewController(taskType: task, date: currentDate)
-        vc.registerClosure = { registDate, registTask, registStr in
+        vc.registerClosure = { [weak self] registDate, registTask, registStr in
+            guard let self else { return }
             do {
                 try self.taskRepository.registerTask(query: .init(petId: self.pet.id, taskType: registTask.toDomain(), registerDate: registDate, memo: registStr))
+                if self.isDateSelected {
+                    self.fetchTaskForDate(date: self.currentDate)
+                } else {
+                    self.fetchTaskListForMonth(date: self.currentDate)
+                }
             } catch {
                 print(error)
             }
@@ -135,6 +134,10 @@ extension PetCalenderViewController: PetCalenderDataSource, PetCalenderViewDeleg
     //섹션 헤더에 넣을 작업이 존재하는 일(day)를 전달
     func date(section: Int) -> Date {
         return taskArr[section].first?.registerDate ?? Date()
+    }
+    
+    func detailTaskToDay(section: Int, row: Int) -> DetailTaskModel {
+        return .init(detailTask: taskArr[section][row])
     }
     
 }

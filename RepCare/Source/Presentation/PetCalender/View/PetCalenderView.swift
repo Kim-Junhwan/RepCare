@@ -19,6 +19,7 @@ protocol PetCalenderDataSource: AnyObject {
     func numberOfTask(section: Int) -> Int
     func numberOfDaysInTask() -> Int
     func date(section: Int) -> Date
+    func detailTaskToDay(section: Int, row: Int) -> DetailTaskModel
 }
 
 class PetCalenderView: UIView {
@@ -142,8 +143,8 @@ extension PetCalenderView: UICollectionViewDataSource, UICollectionViewDelegate 
             return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TimelineCollectionViewCell.identifier, for: indexPath) as? TimelineCollectionViewCell else { return .init() }
-            
-            cell.configureCell(memo: " \(indexPath.section) ,\(indexPath.row)")
+            guard let detailTask = datasource?.detailTaskToDay(section: indexPath.section-2, row: indexPath.row) else { return .init() }
+            cell.configureCell(detailTask: detailTask)
             return cell
         }
     }
@@ -197,10 +198,6 @@ extension PetCalenderView: FSCalendarDelegate {
     
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
         delegate?.changeCalenderMonth(date: calendar.currentPage)
-//        let currentMonthYear = Calendar.current.dateComponents([.month, .year], from: calendar.currentPage)
-//        if let month = currentMonthYear.month, let year = currentMonthYear.year {
-//            //delegate?.changeCalenderMonth(month: month, year: year)
-//        }
     }
     
 }
