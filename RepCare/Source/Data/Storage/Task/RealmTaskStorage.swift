@@ -33,7 +33,7 @@ final class RealmTaskStorage: TaskStorage {
             lastDate = makeDate(year: request.year, month: request.month, day: request.day ?? 1, hour: 23, minute: 59, second: 59) ?? Date()
         }
         let predicate = NSPredicate(format: "registerDate BETWEEN { %@, %@ }", argumentArray: [firstDate as NSDate, lastDate as NSDate])
-        return Array(request.pet.tasks.filter(predicate))
+        return Array(request.pet.tasks.filter(predicate)).reversed()
     }
     
     private func makeDate(year: Int, month: Int, day: Int, hour: Int, minute: Int, second: Int) -> Date? {
