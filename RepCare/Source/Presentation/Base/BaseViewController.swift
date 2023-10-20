@@ -12,6 +12,7 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        
         configureView()
         setContraints()
     }
@@ -30,5 +31,12 @@ class BaseViewController: UIViewController {
         alert.addAction(ok)
         present(alert, animated: true)
     }
+    
+    func tapViewEndEdit() {
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(endEdit)))
+    }
 
+    @objc func endEdit() {
+        view.endEditing(true)
+    }
 }
