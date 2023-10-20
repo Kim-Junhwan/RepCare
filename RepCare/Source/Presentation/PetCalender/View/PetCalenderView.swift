@@ -9,13 +9,14 @@ import UIKit
 import FSCalendar
 
 protocol PetCalenderViewDelegate: AnyObject {
-    func selectCalenderDate(date: Date)
-    func changeCalenderMonth(month: Int, year: Int)
-    func selectTaskCell(date: Date, task: TaskModel)
+    func selectCalendarDate(date: Date)
+    func changeCalenderMonth(date: Date)
+    func selectTaskCell(task: TaskModel)
+    func deselectCalendarDate(date: Date)
 }
 
 protocol PetCalenderDataSource: AnyObject {
-    func numberOfTask(date: Date) -> Int
+    func numberOfTask(section: Int) -> Int
     func numberOfDaysInTask() -> Int
     func date(section: Int) -> Date
 }
@@ -41,7 +42,12 @@ class PetCalenderView: UIView {
         collectionView.contentInsetAdjustmentBehavior = .never
         return collectionView
     }()
-    var currentDate = Date()
+    
+    private let dateFormatter: DateFormatter = {
+       let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM월 dd일"
+        return dateFormatter
+    }()
     
     weak var delegate: PetCalenderViewDelegate?
     weak var datasource: PetCalenderDataSource?
@@ -113,7 +119,8 @@ class PetCalenderView: UIView {
 extension PetCalenderView: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return (datasource?.numberOfDaysInTask() ?? 0)+2 
+        let sectionCount = datasource?.numberOfDaysInTask() ?? 0
+        return sectionCount+2
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -123,7 +130,7 @@ extension PetCalenderView: UICollectionViewDataSource, UICollectionViewDelegate 
         } else if section == 1 {
             return 0
         }
-        return datasource.numberOfTask(date: Date())
+        return datasource.numberOfTask(section: section-2)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -135,8 +142,8 @@ extension PetCalenderView: UICollectionViewDataSource, UICollectionViewDelegate 
             return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TimelineCollectionViewCell.identifier, for: indexPath) as? TimelineCollectionViewCell else { return .init() }
-            cell.configureCell(memo: " \(indexPath.section) ,\(indexPath.row)")
             
+            cell.configureCell(memo: " \(indexPath.section) ,\(indexPath.row)")
             return cell
         }
     }
@@ -145,39 +152,55 @@ extension PetCalenderView: UICollectionViewDataSource, UICollectionViewDelegate 
         if indexPath.section == 1 {
             guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: CalenderHeaderView.identifier, for: indexPath) as? CalenderHeaderView else { return .init() }
             header.fsCalendar.delegate = self
+            if collectionView.numberOfSections == 2 {
+                header.emptyView.isHidden = false
+            } else {
+                header.emptyView.isHidden = true
+            }
             return header
         }
         guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: TimeLineHeaderView.identifier, for: indexPath) as? TimeLineHeaderView else { return .init() }
-        guard let sectionDate = datasource?.date(section: indexPath.section) else { return .init() }
-        header.dateLabel.text = sectionDate.description
+        guard let sectionDate = datasource?.date(section: indexPath.section-2) else { return TimeLineHeaderView() }
+        header.dateLabel.text = dateFormatter.string(from: sectionDate)
         return header
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             guard let task = TaskModel(rawValue: indexPath.row) else { return }
-            delegate?.selectTaskCell(date: currentDate, task: task)
+            delegate?.selectTaskCell(task: task)
         }
     }
 }
 
 extension PetCalenderView: FSCalendarDelegate {
-    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        let convertDate = date.convertDateToKoreaLocale()
-        if convertDate == currentDate {
-            calendar.deselect(date)
-            currentDate = Date()
-        } else {
-            currentDate = convertDate
-            delegate?.selectCalenderDate(date: currentDate)
+    
+    private func getYearAndMonthCurrentCalendarPage(_ calendar: FSCalendar) -> (Int, Int) {
+        let currentMonthYear = Calendar.current.dateComponents([.month, .year], from: calendar.currentPage)
+        if let month = currentMonthYear.month, let year = currentMonthYear.year {
+            return (month, year)
         }
+        return (1,1)
+    }
+    
+    func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        var selectedDates = calendar.selectedDates
+        if calendar.selectedDates.count > 1 {
+            calendar.deselect(selectedDates.removeFirst())
+        }
+        delegate?.selectCalendarDate(date: date)
+    }
+    
+    func calendar(_ calendar: FSCalendar, didDeselect date: Date, at monthPosition: FSCalendarMonthPosition) {
+        delegate?.deselectCalendarDate(date: date)
     }
     
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
-        let currentMonthYear = Calendar.current.dateComponents([.month, .year], from: calendar.currentPage.convertDateToKoreaLocale())
-        if let month = currentMonthYear.month, let year = currentMonthYear.year {
-            delegate?.changeCalenderMonth(month: month, year: year)
-        }
+        delegate?.changeCalenderMonth(date: calendar.currentPage)
+//        let currentMonthYear = Calendar.current.dateComponents([.month, .year], from: calendar.currentPage)
+//        if let month = currentMonthYear.month, let year = currentMonthYear.year {
+//            //delegate?.changeCalenderMonth(month: month, year: year)
+//        }
     }
     
 }
