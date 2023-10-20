@@ -77,8 +77,19 @@ class CalenderHeaderView: UICollectionReusableView {
         calendar.clipsToBounds = true
         calendar.calendarHeaderView.isHidden = false
         calendar.scrollEnabled = false
+        calendar.allowsMultipleSelection = true
         calendar.headerHeight = 0
         return calendar
+    }()
+    
+    lazy var timeLineStackView: UIStackView = {
+       let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.spacing = 20
+        stackView.addArrangedSubview(timelineLabel)
+        stackView.addArrangedSubview(emptyView)
+        return stackView
     }()
     
     let timelineLabel: UILabel = {
@@ -88,44 +99,77 @@ class CalenderHeaderView: UICollectionReusableView {
         return label
     }()
     
+    let emptyView: UIView = {
+       let view = UIView()
+        view.backgroundColor = .whiteGray
+        view.layer.cornerRadius = 10
+        view.clipsToBounds = true
+        return view
+    }()
+    
+    let emptyLabel: UILabel = {
+        let label = UILabel()
+        label.text = "입력된 작업이 존재하지 않습니다."
+        return label
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(calendarbaseView)
+        addSubview(timeLineStackView)
+        emptyView.addSubview(emptyLabel)
         yearMonthLabel.text = dateFormatter.string(from: fsCalendar.currentPage)
         calendarbaseView.addSubview(calendarStackView)
-        addSubview(timelineLabel)
         calendarbaseView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview().inset(10)
-            make.height.equalTo(calendarbaseView.snp.width).multipliedBy(1.0)
         }
         calendarStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        
         fsCalendar.snp.makeConstraints { make in
             make.width.equalToSuperview()
+            make.height.equalTo(fsCalendar.snp.width).multipliedBy(0.8)
         }
         calendarHeaderView.snp.makeConstraints { make in
             make.height.equalTo(40)
             make.width.equalToSuperview().multipliedBy(0.8)
         }
-        timelineLabel.snp.makeConstraints { make in
-            make.top.equalTo(fsCalendar.snp.bottom).offset(20)
-            make.leading.equalToSuperview().inset(20)
+        timeLineStackView.snp.makeConstraints { make in
+            make.top.equalTo(calendarbaseView.snp.bottom).offset(20)
+            make.leading.trailing.equalToSuperview().inset(10)
             make.bottom.equalToSuperview()
+        }
+        emptyView.snp.makeConstraints { make in
+            make.height.equalTo(70)
+        }
+        emptyLabel.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview().offset(10)
         }
         
         forwardButton.addTarget(self, action: #selector(tapForward), for: .touchUpInside)
         backButton.addTarget(self, action: #selector(tapBackward), for: .touchUpInside)
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-    }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func animateEmptyView(hidden: Bool) {
+        UIView.animate(withDuration: 0.3) {
+            if hidden {
+                self.emptyView.snp.updateConstraints { make in
+                    make.height.equalTo(0)
+                    self.layoutIfNeeded()
+                }
+            } else {
+                self.emptyView.snp.updateConstraints { make in
+                    make.height.equalTo(70)
+                    self.layoutIfNeeded()
+                }
+            }
+        }
+        self.emptyView.isHidden = hidden
     }
     
     @objc func tapForward() {
