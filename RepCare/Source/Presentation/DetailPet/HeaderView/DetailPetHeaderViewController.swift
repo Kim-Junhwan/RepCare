@@ -17,7 +17,7 @@ class DetailPetHeaderViewController: BaseViewController {
     
     lazy var viewControllers: [UIViewController] = {
         if imagePathList.isEmpty {
-            return [ImageViewController(imagePath: .init(imagePath: ""))]
+            return [ImageViewController(petClass: pet.overSpecies.petClass)]
         }
         return imagePathList.map {ImageViewController(imagePath: $0)}
     }()

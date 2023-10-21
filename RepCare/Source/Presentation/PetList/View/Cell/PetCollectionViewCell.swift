@@ -11,25 +11,46 @@ class PetCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "PetCollectionViewCell"
     
+    let basePetImageView: UIView = {
+       let view = UIView()
+        view.backgroundColor = .systemGray5
+        return view
+    }()
+    
     let petImageView: UIImageView = {
        let imageView = UIImageView()
+        imageView.tintColor = .systemGray3
+        imageView.contentMode = .scaleAspectFill
         return imageView
+    }()
+    
+    lazy var descriptionStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .leading
+        stackView.spacing = 10
+        stackView.addArrangedSubview(petNameStackView)
+        stackView.addArrangedSubview(morphStackView)
+        return stackView
     }()
     
     let petNameStackView: UIStackView = {
        let stackView = UIStackView()
         stackView.axis = .horizontal
+        stackView.spacing = 10
         stackView.distribution = .fill
         return stackView
     }()
     
     let sexImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
          return imageView
      }()
     
     let nameLabel: UILabel = {
        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 20)
         return label
     }()
     
@@ -37,12 +58,14 @@ class PetCollectionViewCell: UICollectionViewCell {
         let stackView = UIStackView()
          stackView.axis = .horizontal
          stackView.distribution = .fill
+        stackView.alignment = .leading
         stackView.spacing = 5
          return stackView
      }()
     
     let speciesLabel: UILabel = {
         let label = UILabel()
+        label.adjustsFontSizeToFitWidth = true
          return label
     }()
     
@@ -54,6 +77,7 @@ class PetCollectionViewCell: UICollectionViewCell {
     
     let morphLabel: UILabel = {
        let label = UILabel()
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
@@ -61,11 +85,6 @@ class PetCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         configureView()
         setConstraints()
-        petImageView.image = UIImage(systemName: "heart")
-        nameLabel.text = "123"
-        sexImageView.image = UIImage(systemName: "heart")
-        speciesLabel.text = "호랑이"
-        morphLabel.text = "백호"
     }
     
     required init?(coder: NSCoder) {
@@ -78,12 +97,15 @@ class PetCollectionViewCell: UICollectionViewCell {
         nameLabel.text = nil
         speciesLabel.text = nil
         morphLabel.text = nil
+        petImageView.snp.remakeConstraints { make in  make.width.height.equalTo(basePetImageView.snp.width)
+            make.center.equalToSuperview()
+        }
     }
     
     private func configureView() {
-        contentView.addSubview(petImageView)
-        contentView.addSubview(petNameStackView)
-        contentView.addSubview(morphStackView)
+        contentView.addSubview(basePetImageView)
+        basePetImageView.addSubview(petImageView)
+        contentView.addSubview(descriptionStackView)
         petNameStackView.addArrangedSubview(nameLabel)
         petNameStackView.addArrangedSubview(sexImageView)
         morphStackView.addArrangedSubview(speciesLabel)
@@ -92,27 +114,37 @@ class PetCollectionViewCell: UICollectionViewCell {
     }
     
     private func setConstraints() {
-        backgroundColor = .systemGray5
+        backgroundColor = .brightLightGreen
         layer.cornerRadius = 10.0
         clipsToBounds = true
-        petImageView.snp.makeConstraints { make in
+        basePetImageView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
-            make.height.equalTo(petImageView.snp.width).multipliedBy(1.0)
+            make.height.equalTo(basePetImageView.snp.width).multipliedBy(1.0)
+        }
+        petImageView.snp.makeConstraints { make in
+            make.width.height.equalTo(basePetImageView.snp.width)
+            make.center.equalToSuperview()
+        }
+        sexImageView.snp.makeConstraints { make in
+            make.height.width.equalTo(snp.width).multipliedBy(0.1)
+        }
+        descriptionStackView.snp.makeConstraints { make in
+            make.top.equalTo(basePetImageView.snp.bottom).offset(10)
+            make.leading.trailing.bottom.equalToSuperview().inset(10)
         }
         petNameStackView.snp.makeConstraints { make in
-            make.top.equalTo(petImageView.snp.bottom).offset(10)
-            make.leading.equalTo(snp.leading).offset(10)
-        }
-        morphStackView.snp.makeConstraints { make in
-            make.top.equalTo(petNameStackView.snp.bottom).offset(10)
-            make.leading.equalTo(snp.leading).offset(10)
+            make.width.equalToSuperview()
         }
     }
     
     func configureCell(pet: PetModel) {
         nameLabel.text = pet.name
+        sexImageView.image = UIImage(named: pet.sex.image)
         if pet.imagePath.isEmpty {
-            petImageView.image = UIImage(systemName: "star")
+            petImageView.image = UIImage(named: pet.overSpecies.petClass.image)?.withRenderingMode(.alwaysTemplate)
+            petImageView.snp.remakeConstraints { make in  make.width.height.equalTo(basePetImageView.snp.width).multipliedBy(0.5)
+                make.center.equalToSuperview()
+            }
         } else {
             guard let imagePath = pet.imagePath.first?.imagePath else { return }
             petImageView.configureImageFromFilePath(path: imagePath)
@@ -128,4 +160,5 @@ class PetCollectionViewCell: UICollectionViewCell {
             morphLabel.text = pet.overSpecies.petSpecies.title
         }
     }
+    
 }

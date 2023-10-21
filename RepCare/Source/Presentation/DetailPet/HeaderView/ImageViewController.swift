@@ -13,27 +13,40 @@ class ImageViewController: UIViewController {
         static let emptyImageIdentifier = "star"
     }
     
+    let imageBaseView = UIView()
     let imageView: UIImageView = UIImageView(frame: .zero)
+    let isEmptyImage: Bool
     
     init(imagePath: PetImageModel) {
+        isEmptyImage = false
         super.init(nibName: nil, bundle: nil)
         imageView.configureImageFromFilePath(path: imagePath.imagePath)
     }
     
-    init() {
+    init(petClass: PetClassModel) {
+        isEmptyImage = true
         super.init(nibName: nil, bundle: nil)
-        imageView.image = UIImage(systemName: Sentence.emptyImageIdentifier)
+        imageView.image = UIImage(named: petClass.image)?.withRenderingMode(.alwaysTemplate)
+        imageView.tintColor = .systemGray2
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    override func loadView() {
-        view = imageView
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(imageBaseView)
+        imageBaseView.addSubview(imageView)
+        imageBaseView.backgroundColor = .systemGray4
+        imageBaseView.snp.makeConstraints { $0.edges.equalToSuperview() }
+        imageView.snp.makeConstraints { make in
+            if isEmptyImage {
+                make.center.equalToSuperview()
+                make.width.height.equalTo(imageBaseView.snp.width).multipliedBy(0.5)
+            } else {
+                make.edges.equalToSuperview()
+            }
+        }
     }
 }
