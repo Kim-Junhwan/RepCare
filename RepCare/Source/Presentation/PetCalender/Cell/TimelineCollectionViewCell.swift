@@ -13,7 +13,7 @@ class TimelineCollectionViewCell: UICollectionViewCell {
     lazy var allStackView: UIStackView = {
         let stackView = UIStackView()
          stackView.axis = .vertical
-        stackView.spacing = 10
+        stackView.spacing = 5
         stackView.distribution = .equalSpacing
         stackView.alignment = .trailing
          stackView.addArrangedSubview(topStackView)
@@ -91,14 +91,9 @@ class TimelineCollectionViewCell: UICollectionViewCell {
         if let memo = detailTask.memo , !memo.isEmpty {
             memoLabel.text = memo
             memoLabel.backgroundColor = detailTask.taskType.color.adjustBrightness(factor: 1.2)
+            memoLabel.isHidden = false
         } else {
             memoLabel.isHidden = true
         }
-    }
-    
-    override func prepareForReuse() {
-        memoLabel.isHidden = false
-        titleLabel.text = nil
-        memoLabel.text = nil
     }
 }
