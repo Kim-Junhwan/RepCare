@@ -33,19 +33,30 @@ class DetailPetHeaderView: UIView {
         stackView.spacing = 5
         return stackView
     }()
-    let nameLabel: UILabel = UILabel()
+    let nameLabel:UILabel = {
+        let label = UILabel()
+        label.font = .boldSystemFont(ofSize: 25)
+        return label
+    }()
     let genderImageView: UIImageView = .init()
     let adoptionLabel: UILabel = UILabel()
     
     lazy var speciesStackView: UIStackView = {
         let stackView = UIStackView()
          stackView.addArrangedSubview(speciesLabel)
+        stackView.addArrangedSubview(separLabel)
          stackView.addArrangedSubview(morphLabel)
          stackView.axis = .horizontal
          stackView.spacing = 5
          return stackView
      }()
     let speciesLabel: UILabel = UILabel()
+    let separLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .lightDeepGreen
+        label.text = "·"
+        return label
+    }()
     let morphLabel: UILabel = UILabel()
     
     lazy var petInfoStackView: UIStackView = {
@@ -61,10 +72,6 @@ class DetailPetHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        nameLabel.text = "이름"
-        adoptionLabel.text = "입양한지 100일째"
-        speciesLabel.text = "고양이"
-        morphLabel.text = "치즈냥이"
         configureView()
         setConstraints()
     }
@@ -99,6 +106,8 @@ class DetailPetHeaderView: UIView {
             make.height.equalToSuperview()
             make.width.equalTo(genderImageView.snp.height).multipliedBy(1.0)
         }
+        speciesLabel.textColor = .deepGreen
+        morphLabel.textColor = .deepGreen
     }
     
     func setPetInfo(pet: PetModel) {
