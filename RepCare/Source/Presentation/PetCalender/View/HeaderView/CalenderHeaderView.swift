@@ -156,23 +156,6 @@ class CalenderHeaderView: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func animateEmptyView(hidden: Bool) {
-        UIView.animate(withDuration: 0.3) {
-            if hidden {
-                self.emptyView.snp.updateConstraints { make in
-                    make.height.equalTo(0)
-                    self.layoutIfNeeded()
-                }
-            } else {
-                self.emptyView.snp.updateConstraints { make in
-                    make.height.equalTo(70)
-                    self.layoutIfNeeded()
-                }
-            }
-        }
-        self.emptyView.isHidden = hidden
-    }
-    
     @objc func tapForward() {
         moveMonth(next: true)
     }

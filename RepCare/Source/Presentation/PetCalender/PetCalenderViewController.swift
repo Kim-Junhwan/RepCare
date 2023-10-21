@@ -12,12 +12,14 @@ final class PetCalenderViewController: BaseViewController {
     
     let mainView = PetCalenderView()
     let taskRepository: TaskRepository
-    var currentTaskList: [Int:[DetailTask]] = [:]
-    var taskArr: [[DetailTask]] = []
-    var taskDateArr: [Int] = []
+    //해당 달의 전체 작업 목록
+    var currentTaskMonthList: [Int:[DetailTaskModel]] = [:]
+    //선택된 일의 작업 목록
+    var taskArr: [[DetailTaskModel]] = []
     let pet: PetModel
     var isDateSelected: Bool = false
     var currentDate = Date()
+    
     
     init(taskRepository: TaskRepository, pet: PetModel) {
         self.taskRepository = taskRepository
@@ -36,7 +38,8 @@ final class PetCalenderViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchTaskListForMonth(date: currentDate)
+        let fetchList = fetchTaskListForMonth(date: currentDate)
+        updateTaskList(tasks: fetchList)
     }
     
     override func configureView() {
@@ -44,30 +47,60 @@ final class PetCalenderViewController: BaseViewController {
         mainView.delegate = self
     }
     
-    func fetchTaskListForMonth(date: Date) {
+    func updateTaskList(tasks: [Int: [DetailTaskModel]]) {
+        currentTaskMonthList = tasks
+        tasks.sorted { $0.key > $1.key }.forEach { _, values in
+            taskArr.append(values)
+        }
+        mainView.updateTaskList(tasks: tasks)
+    }
+    
+    func resetTaskList() {
+        currentTaskMonthList.removeAll()
         taskArr.removeAll()
+    }
+    
+    private func fetchTaskListForMonth(date: Date) -> [Int: [DetailTaskModel]] {
         let yearMonth = Calendar.current.dateComponents([.year,.month], from: date)
         if let year = yearMonth.year, let month = yearMonth.month {
             let fetchTaskDict = taskRepository.fetchTaskListInMonth(petId: pet.id, month: month, year: year)
-            fetchTaskDict.sorted { $0.key > $1.key }.forEach { result in
-                taskArr.append(result.value)
-                taskDateArr.append(result.key)
-            }
+            let detailTaskModelDict: [Int: [DetailTaskModel]] = Dictionary(uniqueKeysWithValues: fetchTaskDict.map({ key, tasks in
+                return (key, tasks.map({ DetailTaskModel(detailTask: $0) }))
+            }))
+            return detailTaskModelDict
         }
-        mainView.collectionView.reloadData()
+        return [:]
     }
     
-    func fetchTaskForDate(date: Date) {
-        taskArr.removeAll()
-        let fetchList = taskRepository.fetchTaskListInDate(petId: pet.id, date: date)
-        if !fetchList.isEmpty {
-            taskArr.append(fetchList)
-        }
-        mainView.collectionView.reloadData()
+    func updateTaskOnDay(date: Date, taskList: [DetailTaskModel]) {
+        guard let day = Calendar.current.dateComponents([.day], from: date).day else { return }
+        taskArr = [taskList]
+        mainView.updateTaskList(tasks: [day:taskList])
     }
+    
+    func fetchTaskForDate(date: Date) -> [DetailTaskModel] {
+        let fetchList = taskRepository.fetchTaskListInDate(petId: pet.id, date: date)
+        return fetchList.map { .init(detailTask: $0) }
+    }
+    
+    
 }
 
 extension PetCalenderViewController: PetCalenderDataSource, PetCalenderViewDelegate {
+    
+    func dayEventColor(date: Date) -> [UIColor]? {
+        guard let day =  Calendar.current.dateComponents([.day], from: date).day else { return [] }
+        let endIndex = min(3, currentTaskMonthList[day]?.count ?? 0)
+        let events = currentTaskMonthList[day]?.prefix(endIndex)
+        return events?.map({ $0.taskType.color })
+    }
+    
+    //Calendar에 day마다 표시할 이벤트 개수
+    func numberOfEventOnDay(date: Date) -> Int {
+        guard let day =  Calendar.current.dateComponents([.day], from: date).day else { return 0 }
+        return currentTaskMonthList[day]?.count ?? 0
+    }
+    
     //작업 등록
     func selectTaskCell(task: TaskModel) {
         presentRegisterViewController(task: task)
@@ -79,11 +112,10 @@ extension PetCalenderViewController: PetCalenderDataSource, PetCalenderViewDeleg
             guard let self else { return }
             do {
                 try self.taskRepository.registerTask(query: .init(petId: self.pet.id, taskType: registTask.toDomain(), registerDate: registDate, memo: registStr))
-                if self.isDateSelected {
-                    self.fetchTaskForDate(date: self.currentDate)
-                } else {
-                    self.fetchTaskListForMonth(date: self.currentDate)
-                }
+                updateTaskOnDay(date: currentDate, taskList: fetchTaskForDate(date: currentDate))
+                
+                currentTaskMonthList = fetchTaskListForMonth(date: currentDate)
+                mainView.calendar?.reloadData()
             } catch {
                 print(error)
             }
@@ -98,14 +130,15 @@ extension PetCalenderViewController: PetCalenderDataSource, PetCalenderViewDeleg
     // 선택한 날짜에 해당하는 작업 가져오기
     func selectCalendarDate(date: Date) {
         isDateSelected = true
-        fetchTaskForDate(date: date)
+        updateTaskOnDay(date: date, taskList: fetchTaskForDate(date: date))
         currentDate = date
     }
     
     //선택된 날짜가 선택취소되는 경우 현재 calendar의 currentPage의 작업 가져오기
     func deselectCalendarDate(date: Date) {
         isDateSelected = false
-        fetchTaskListForMonth(date: date)
+        resetTaskList()
+        updateTaskList(tasks: fetchTaskListForMonth(date: date))
         currentDate = date
     }
     
@@ -113,10 +146,13 @@ extension PetCalenderViewController: PetCalenderDataSource, PetCalenderViewDeleg
     func changeCalenderMonth(date: Date) {
         let changeMonth = Calendar.current.dateComponents([.year,.month], from: date)
         let selectedMonth = Calendar.current.dateComponents([.year, .month], from: currentDate)
+        resetTaskList()
         if isDateSelected  && (changeMonth == selectedMonth) {
-            fetchTaskForDate(date: currentDate)
+            currentTaskMonthList = fetchTaskListForMonth(date: date)
+            updateTaskOnDay(date: date, taskList: fetchTaskForDate(date: currentDate))
+            
         } else {
-            fetchTaskListForMonth(date: date)
+            updateTaskList(tasks: fetchTaskListForMonth(date: date))
         }
         
     }
@@ -137,7 +173,7 @@ extension PetCalenderViewController: PetCalenderDataSource, PetCalenderViewDeleg
     }
     
     func detailTaskToDay(section: Int, row: Int) -> DetailTaskModel {
-        return .init(detailTask: taskArr[section][row])
+        return taskArr[section][row]
     }
     
 }
