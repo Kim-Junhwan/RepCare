@@ -20,23 +20,39 @@ protocol PetCalenderDataSource: AnyObject {
     func numberOfDaysInTask() -> Int
     func date(section: Int) -> Date
     func detailTaskToDay(section: Int, row: Int) -> DetailTaskModel
+    func numberOfEventOnDay(date: Date) -> Int
+    func dayEventColor(date: Date) -> [UIColor]?
+    
+}
+
+enum CalendarSectionType: Int {
+    case task
+    case calendar
+    case timeline
+}
+
+enum ItemType {
+    case task
+    case timeline
+}
+
+struct CalendarCollectioViewSectionItem: Hashable {
+    let id: String
+    let type: CalendarSectionType
+}
+
+struct CalendarCollectionViewItem: Hashable {
+    let id: String
+    let taskType: ItemType
 }
 
 class PetCalenderView: UIView {
     
-    enum Section: Int {
-        case task
-        case calender
-        case timeline
-    }
+    static let calendarHeaderElementKind = "CalendatHeaderElemendKind"
+    static let timeLineHeaderElementKind = "TimeLineHeaderElementKind"
 
     lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: makeCollectionViewLayout())
-        collectionView.register(TaskCollectionViewCell.self, forCellWithReuseIdentifier: TaskCollectionViewCell.identifier)
-        collectionView.register(TimelineCollectionViewCell.self, forCellWithReuseIdentifier: TimelineCollectionViewCell.identifier)
-        collectionView.register(CalenderHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: CalenderHeaderView.identifier)
-        collectionView.register(TimeLineHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: TimeLineHeaderView.identifier)
-        collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.isScrollEnabled = false
         collectionView.bounces = false
@@ -50,17 +66,96 @@ class PetCalenderView: UIView {
         return dateFormatter
     }()
     
+    private var isTimeLineEmpty = true
+    weak var calendar: FSCalendar?
+    weak var isEmptyView: CalenderHeaderView?
     weak var delegate: PetCalenderViewDelegate?
     weak var datasource: PetCalenderDataSource?
+    var collectionViewDatasource: UICollectionViewDiffableDataSource<CalendarCollectioViewSectionItem, CalendarCollectionViewItem>?
+    
+    var currentSnapShot: NSDiffableDataSourceSnapshot<CalendarCollectioViewSectionItem, CalendarCollectionViewItem> = {
+        var snapShot = NSDiffableDataSourceSnapshot<CalendarCollectioViewSectionItem, CalendarCollectionViewItem>()
+        let taskSection = CalendarCollectioViewSectionItem(id: UUID().uuidString, type: .task)
+        let calendarSection = CalendarCollectioViewSectionItem(id: UUID().uuidString, type: .calendar)
+        var taskItems: [CalendarCollectionViewItem] = []
+        for i in TaskModel.allCases {
+            taskItems.append(CalendarCollectionViewItem(id: UUID().uuidString, taskType: .task))
+        }
+        snapShot.appendSections([taskSection, calendarSection])
+        snapShot.appendItems(taskItems, toSection: taskSection)
+        return snapShot
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureView()
         setConstrains()
+        configureDatasource()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func updateTaskList(tasks: [Int:[DetailTaskModel]]) {
+        currentSnapShot.deleteSections(currentSnapShot.sectionIdentifiers.filter { $0.type == .timeline })
+        let sortedTasks = tasks.sorted { $0.key > $1.key }
+        if tasks.count <= 1  {
+            if tasks.first?.value.count ?? 0 == 0  {
+                isTimeLineEmpty = true
+            } else {
+                isTimeLineEmpty = false
+            }
+        } else {
+            isTimeLineEmpty = false
+        }
+        for task in sortedTasks {
+            if task.value.isEmpty {
+                continue
+            }
+            let dateSection = CalendarCollectioViewSectionItem(id: "\(task.key)", type: .timeline)
+            currentSnapShot.appendSections([dateSection])
+            currentSnapShot.appendItems(task.value.map{.init(id: $0.id, taskType: .timeline)}, toSection: dateSection)
+        }
+        isEmptyView?.emptyView.isHidden = !isTimeLineEmpty
+        collectionViewDatasource?.apply(currentSnapShot)
+    }
+    
+    func configureDatasource() {
+        let taskCellRegistration = UICollectionView.CellRegistration<TaskCollectionViewCell, TaskModel> { (cell, indexPath, task) in
+            cell.configureCell(task: task)
+        }
+        
+        let timeCellRegistration = UICollectionView.CellRegistration<TimelineCollectionViewCell, DetailTaskModel> { (cell, indexPath, detailTask) in
+            cell.configureCell(detailTask: detailTask)
+        }
+        
+        let calendatHeaderRegistration = UICollectionView.SupplementaryRegistration<CalenderHeaderView>(elementKind: PetCalenderView.calendarHeaderElementKind) { supplementaryView, elementKind, indexPath in
+            supplementaryView.fsCalendar.delegate = self
+            supplementaryView.fsCalendar.dataSource = self
+            self.calendar = supplementaryView.fsCalendar
+            self.isEmptyView = supplementaryView
+            supplementaryView.emptyView.isHidden = !self.isTimeLineEmpty
+        }
+        
+        let timeLineHeaderRegistration = UICollectionView.SupplementaryRegistration<TimeLineHeaderView>(elementKind: PetCalenderView.timeLineHeaderElementKind) { supplementaryView, elementKind, indexPath in
+            guard let sectionDate = self.datasource?.date(section: indexPath.section-2) else { return }
+            supplementaryView.dateLabel.text = self.dateFormatter.string(from: sectionDate)
+        }
+        
+        collectionViewDatasource = UICollectionViewDiffableDataSource<CalendarCollectioViewSectionItem, CalendarCollectionViewItem>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+            if itemIdentifier.taskType == .task {
+                return collectionView.dequeueConfiguredReusableCell(using: taskCellRegistration, for: indexPath, item: TaskModel(rawValue: indexPath.row))
+            }
+            return collectionView.dequeueConfiguredReusableCell(using: timeCellRegistration, for: indexPath, item: self.datasource?.detailTaskToDay(section: indexPath.section-2, row: indexPath.row))
+        })
+        
+        collectionViewDatasource?.supplementaryViewProvider = { (view, kind, index) in
+            if kind == PetCalenderView.calendarHeaderElementKind {
+                return self.collectionView.dequeueConfiguredReusableSupplementary(using: calendatHeaderRegistration, for: index)
+            }
+            return self.collectionView.dequeueConfiguredReusableSupplementary(using: timeLineHeaderRegistration, for: index)
+        }
     }
     
     private func configureView() {
@@ -75,9 +170,18 @@ class PetCalenderView: UIView {
     
     private func makeCollectionViewLayout() -> UICollectionViewLayout {
         let sectionProvier = { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
-            let sectionKind = Section(rawValue: sectionIndex) ?? .timeline
+            let sectionKind: CalendarCollectioViewSectionItem
+            if sectionIndex == 0 {
+                sectionKind = .init(id: UUID().uuidString, type: .task)
+            } else if sectionIndex == 1 {
+                sectionKind = .init(id: UUID().uuidString, type: .calendar)
+            } else {
+                guard let datasource = self.datasource else { fatalError() }
+                sectionKind = .init(id: datasource.date(section: sectionIndex-2).description, type: .timeline)
+            }
+            
             let section: NSCollectionLayoutSection
-            if sectionKind == .task {
+            if sectionKind.type == .task {
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(65), heightDimension: .absolute(65))
@@ -86,24 +190,24 @@ class PetCalenderView: UIView {
                 section.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                 section.interGroupSpacing = 10
                 section.contentInsets = .init(top: 10, leading: 10, bottom: 20, trailing: 10)
-            } else if sectionKind == .calender {
+            } else if sectionKind.type == .calendar {
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 section = NSCollectionLayoutSection(group: group)
                 let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(200))
-                let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
+                let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: PetCalenderView.calendarHeaderElementKind, alignment: .topLeading)
                 section.boundarySupplementaryItems = [sectionHeader]
-            } else if sectionKind == .timeline {
-                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(50))
+            } else if sectionKind.type == .timeline {
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(60.0))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(50.0))
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(60.0))
                 let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
                 section = NSCollectionLayoutSection(group: group)
                 section.interGroupSpacing = 10
                 let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(50))
-                let timeLineHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
+                let timeLineHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: PetCalenderView.timeLineHeaderElementKind, alignment: .topLeading)
                 section.boundarySupplementaryItems = [timeLineHeader]
                 section.interGroupSpacing = 10.0
                 section.contentInsets = .init(top: 0, leading: 10, bottom: 0, trailing: 10)
@@ -117,54 +221,25 @@ class PetCalenderView: UIView {
     }
 }
 
-extension PetCalenderView: UICollectionViewDataSource, UICollectionViewDelegate {
+extension PetCalenderView: UICollectionViewDelegate {
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        let sectionCount = datasource?.numberOfDaysInTask() ?? 0
-        return sectionCount+2
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let datasource else { return 0 }
-        if section == 0 {
-            return TaskModel.allCases.count
-        } else if section == 1 {
-            return 0
-        }
-        return datasource.numberOfTask(section: section-2)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        if indexPath.section == 0 {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TaskCollectionViewCell.identifier, for: indexPath) as? TaskCollectionViewCell else { return .init() }
-            guard let task = TaskModel(rawValue: indexPath.row) else { return .init() }
-            cell.configureCell(task: task)
-            return cell
-        } else {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TimelineCollectionViewCell.identifier, for: indexPath) as? TimelineCollectionViewCell else { return .init() }
-            guard let detailTask = datasource?.detailTaskToDay(section: indexPath.section-2, row: indexPath.row) else { return .init() }
-            cell.configureCell(detailTask: detailTask)
-            return cell
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if indexPath.section == 1 {
-            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: CalenderHeaderView.identifier, for: indexPath) as? CalenderHeaderView else { return .init() }
-            header.fsCalendar.delegate = self
-            if collectionView.numberOfSections == 2 {
-                header.emptyView.isHidden = false
-            } else {
-                header.emptyView.isHidden = true
-            }
-            return header
-        }
-        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: TimeLineHeaderView.identifier, for: indexPath) as? TimeLineHeaderView else { return .init() }
-        guard let sectionDate = datasource?.date(section: indexPath.section-2) else { return TimeLineHeaderView() }
-        header.dateLabel.text = dateFormatter.string(from: sectionDate)
-        return header
-    }
+//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+//        if kind == PetCalenderView.calendarHeaderElementKind {
+//            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: CalenderHeaderView.identifier, for: indexPath) as? CalenderHeaderView else { return .init() }
+//            header.fsCalendar.delegate = self
+//            header.fsCalendar.dataSource = self
+//            if collectionView.numberOfSections == 2 {
+//                header.emptyView.isHidden = false
+//            } else {
+//                header.emptyView.isHidden = true
+//            }
+//            return header
+//        }
+//        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: TimeLineHeaderView.identifier, for: indexPath) as? TimeLineHeaderView else { return .init() }
+//        guard let sectionDate = datasource?.date(section: indexPath.section-2) else { return TimeLineHeaderView() }
+//        header.dateLabel.text = dateFormatter.string(from: sectionDate)
+//        return header
+//    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 0 {
@@ -174,7 +249,15 @@ extension PetCalenderView: UICollectionViewDataSource, UICollectionViewDelegate 
     }
 }
 
-extension PetCalenderView: FSCalendarDelegate {
+extension PetCalenderView: FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
+    
+    func calendar(_ calendar: FSCalendar, numberOfEventsFor date: Date) -> Int {
+        return datasource?.numberOfEventOnDay(date: date) ?? 0
+    }
+    
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventDefaultColorsFor date: Date) -> [UIColor]? {
+        return datasource?.dayEventColor(date: date)
+    }
     
     private func getYearAndMonthCurrentCalendarPage(_ calendar: FSCalendar) -> (Int, Int) {
         let currentMonthYear = Calendar.current.dateComponents([.month, .year], from: calendar.currentPage)
