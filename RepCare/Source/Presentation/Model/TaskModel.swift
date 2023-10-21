@@ -107,11 +107,13 @@ enum TaskModel: Int, CaseIterable {
 }
 
 struct DetailTaskModel {
+    let id: String
     let taskType: TaskModel
     let registerDate: Date
     let memo: String?
     
     init(detailTask: DetailTask) {
+        self.id = detailTask.id
         self.taskType = .init(taskType: detailTask.taskType)
         self.registerDate = detailTask.registerDate
         self.memo = detailTask.description
