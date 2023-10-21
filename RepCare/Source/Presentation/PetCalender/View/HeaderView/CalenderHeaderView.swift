@@ -78,6 +78,7 @@ class CalenderHeaderView: UICollectionReusableView {
         calendar.calendarHeaderView.isHidden = false
         calendar.scrollEnabled = false
         calendar.allowsMultipleSelection = true
+        calendar.placeholderType = .none
         calendar.headerHeight = 0
         return calendar
     }()
