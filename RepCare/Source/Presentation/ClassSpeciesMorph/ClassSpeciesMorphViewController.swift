@@ -47,8 +47,8 @@ class ClassSpeciesMorphViewController: UIViewController {
     }
     
     private func bind() {
-        viewModel.speciesList.subscribe { self.mainView.applyData(section: $0) }.disposed(by: disposeBag)
-        viewModel.canRegister.subscribe { self.registerButton.isEnabled = $0 }.disposed(by: disposeBag)
+        viewModel.speciesList.subscribe(with: self) { $0.mainView.applyData(section: $1) }.disposed(by: disposeBag)
+        viewModel.canRegister.subscribe(with: self) { $0.registerButton.isEnabled = $1 }.disposed(by: disposeBag)
     }
     
     func configureCollectionView() {

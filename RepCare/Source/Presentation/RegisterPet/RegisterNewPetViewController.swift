@@ -49,36 +49,34 @@ class RegisterNewPetViewController: BaseViewController {
     }
     
     private func bindImage() {
-        viewModel.petImageList.subscribe { imageList in
-            self.mainView.updateImage(images: imageList)
+        viewModel.petImageList.subscribe(with: self) { owner, imageList in
+            owner.mainView.updateImage(images: imageList)
         }.disposed(by: disposeBag)
     }
     
     private func bindRegisterButton() {
-        viewModel.canRegister.subscribe { self.registerButton.isEnabled = $0 }.disposed(by: disposeBag)
+        viewModel.canRegister.subscribe(with: self) { $0.registerButton.isEnabled = $1 }.disposed(by: disposeBag)
     }
     
     private func bindName() {
-        mainView.nameTextField.textField.rx.text.orEmpty.subscribe { input in
-            guard let inputStr = input.event.element else { return }
-            self.viewModel.petName.accept(inputStr)
+        mainView.nameTextField.textField.rx.text.orEmpty.subscribe(with: self) { owner, input in
+            owner.viewModel.petName.accept(input)
         }.disposed(by: disposeBag)
     }
     
     private func bindSpecies() {
-        viewModel.overPetSpecies.compactMap { $0 }.subscribe { currentSpecies in
-            guard let species = currentSpecies.element else { return }
+        viewModel.overPetSpecies.compactMap { $0 }.subscribe(with: self) { owner, currentSpecies in
             var speciesArr: [String] = []
-            speciesArr.append(species.petClass.title)
-            speciesArr.append(species.petSpecies.title)
-            if let detailSpecies = species.detailSpecies?.title {
+            speciesArr.append(currentSpecies.petClass.title)
+            speciesArr.append(currentSpecies.petSpecies.title)
+            if let detailSpecies = currentSpecies.detailSpecies?.title {
                 speciesArr.append(detailSpecies)
             }
-            if let morph = species.morph?.title {
+            if let morph = currentSpecies.morph?.title {
                 speciesArr.append(morph)
             }
             
-            self.mainView.speciesClassButton.actionButton.setTitle("\(speciesArr.joined(separator: " > "))", for: .normal)
+            owner.mainView.speciesClassButton.actionButton.setTitle("\(speciesArr.joined(separator: " > "))", for: .normal)
         }.disposed(by: disposeBag)
     }
     
@@ -139,6 +137,10 @@ class RegisterNewPetViewController: BaseViewController {
         let nvc = UINavigationController(rootViewController: vc)
         nvc.modalPresentationStyle = .fullScreen
         present(nvc, animated: true)
+    }
+    
+    deinit {
+        print("deinit ReggisterNewPet")
     }
 }
 

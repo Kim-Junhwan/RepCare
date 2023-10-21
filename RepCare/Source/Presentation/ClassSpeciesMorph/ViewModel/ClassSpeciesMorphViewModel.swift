@@ -29,6 +29,7 @@ enum Section: Int, CaseIterable {
     }
 }
 
+
 struct Item: Hashable {
     let title: String
     let id: String
@@ -123,15 +124,15 @@ final class ClassSpeciesMorphViewModel {
     }
     
     private func bind() {
-        selectPetClass.compactMap({ return $0 }).subscribe { item in
-            guard let petClass = item.element else { return }
-            self.fetchPetSpecies(petClass: petClass)
-            self.selectSpecies.accept(nil)
-            self.selectDetailSpecies.accept(nil)
-            self.selectMorph.accept(nil)
+        selectPetClass.compactMap({ return $0 }).subscribe(with: self) { owner, item in
+            owner.fetchPetSpecies(petClass: item)
+            owner.selectSpecies.accept(nil)
+            owner.selectDetailSpecies.accept(nil)
+            owner.selectMorph.accept(nil)
         }.disposed(by: disposeBag)
         
-        selectSpecies.compactMap({ return $0 }).subscribe { item in
+        selectSpecies.compactMap({ return $0 }).subscribe { [weak self] item in
+            guard let self else { return }
             guard let petSpecies = item.element?.toDomain() else { return }
             let fetchDetailSpecies = self.repository.fetchDetailSpecies(species: petSpecies)
             self.fetchDetailSpeciesList = fetchDetailSpecies.map { .init(detailSpecies: $0) }
@@ -140,7 +141,8 @@ final class ClassSpeciesMorphViewModel {
             self.selectMorph.accept(nil)
         }.disposed(by: disposeBag)
         
-        selectDetailSpecies.compactMap({ return $0 }).subscribe { item in
+        selectDetailSpecies.compactMap({ return $0 }).subscribe { [weak self] item in
+            guard let self else { return }
             guard let detailSpecies = item.element?.toDomain() else { return }
             let fetchMorph = self.repository.fetchMorph(detailSpecies: detailSpecies)
             self.fetchMorphList = fetchMorph.map { .init(morph: $0) }
