@@ -136,7 +136,7 @@ final class ProfileViewController: UIViewController {
         if let tabBarController = keywindow.rootViewController?.tabBarController {
             return tabBarController.tabBar.frame.height
         }
-        return keywindow.safeAreaInsets.bottom
+        return keywindow.safeAreaInsets.bottom 
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -146,6 +146,8 @@ final class ProfileViewController: UIViewController {
             }
         }
     }
+    
+
     
 }
 

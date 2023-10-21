@@ -142,7 +142,6 @@ class RegisterPetView: UIView {
     func configureView() {
         addSubview(imageCollectionView)
         addSubview(mainStakView)
-        //addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapView)))
         genderStackView.addArrangedSubview(femaleButton)
         genderStackView.addArrangedSubview(maleButton)
         genderStackView.addArrangedSubview(dontKnowButton)

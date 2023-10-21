@@ -33,7 +33,7 @@ final class PetWeightViewController: BaseViewController {
     
     var dayData: [Date] = []
     let calender = Calendar.current
-    let currentDate = Date()
+    private lazy var currentDate = Date()
     
     init() {
         super.init(nibName: nil, bundle: nil)

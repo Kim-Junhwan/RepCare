@@ -12,8 +12,8 @@ import Tabman
 class DetailPetViewController: BaseViewController {
     
     lazy var profileViewController = ProfileViewController(headerViewController: headerViewController, headerViewHeight: view.frame.width)
-    lazy var headerViewController = DetailPetHeaderViewController(imagePathList: viewModel.images)
-    let petCalenderViewController = PetCalenderViewController()
+    lazy var headerViewController = DetailPetHeaderViewController(pet: viewModel.pet)
+    lazy var petCalenderViewController = PetCalenderViewController(taskRepository: DefaultTaskRepository(petStorage: RealmPetStorage(), taskStorage: RealmTaskStorage()), pet: viewModel.pet)
     let petWeightViewController = PetWeightViewController()
     lazy var tabViewControllers = [petCalenderViewController, petWeightViewController]
     let viewModel: DetailPetViewModel
@@ -56,6 +56,10 @@ class DetailPetViewController: BaseViewController {
         scrollApprearance.backgroundColor = UIColor.systemBackground
         navigationController?.navigationBar.standardAppearance = scrollApprearance
         navigationController?.navigationBar.isTranslucent = true
+    }
+    
+    deinit {
+        print("deinit DetailPetVC")
     }
 
 }
