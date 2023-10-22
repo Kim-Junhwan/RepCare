@@ -23,7 +23,22 @@ class WeightChartView: UICollectionReusableView {
     
     weak var datasource: WeightChartViewDataSource?
     weak var delegate: WeightChartViewDelegate?
-    let lineChart = LineChartView()
+    let lineChart: LineChartView = {
+        let view = LineChartView()
+        view.backgroundColor = .brightLightGreen
+        view.rightAxis.enabled = false
+        view.xAxis.labelPosition = .bottom
+        view.animate(yAxisDuration: 1.0)
+        
+        let yAxis = view.leftAxis
+        yAxis.labelFont = .boldSystemFont(ofSize: 10)
+        yAxis.labelPosition = .insideChart
+        
+        let xAxis = view.xAxis
+        xAxis.labelFont = .boldSystemFont(ofSize: 10)
+        
+        return view
+    }()
     
     lazy var buttonStackView: UIStackView = {
        let stackView = UIStackView()
@@ -59,22 +74,10 @@ class WeightChartView: UICollectionReusableView {
         setConstraints()
         lineChart.dragEnabled = false
         lineChart.noDataText = "입력된 무게가 없어요"
-        setChart(weightList: [.init(date: Date(), weight: 10.0)])
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setChart(weightList: [PetWeightModel]) {
-        var dataEntries: [ChartDataEntry] = []
-        for weight in weightList.enumerated() {
-            let dataEntry = ChartDataEntry(x: Double(weight.offset), y: weight.element.weight ?? 0)
-            dataEntries.append(dataEntry)
-        }
-        let lineDataSet = LineChartDataSet(entries: dataEntries)
-        lineChart.data = LineChartData(dataSet: lineDataSet)
-        
     }
     
     private func configureView() {
@@ -89,7 +92,7 @@ class WeightChartView: UICollectionReusableView {
     
     private func setConstraints() {
         lineChart.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview().inset(10)
+            make.top.leading.trailing.equalToSuperview()
             make.height.equalTo(lineChart.snp.width).multipliedBy(0.8)
         }
         addWeightButton.snp.makeConstraints { make in

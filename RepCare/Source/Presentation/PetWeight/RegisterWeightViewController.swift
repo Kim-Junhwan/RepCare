@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+import RxCocoa
+import RxSwift
 
 final class RegisterWeightViewController: BaseViewController {
     lazy var cancelButton: UIBarButtonItem = {
@@ -24,7 +26,7 @@ final class RegisterWeightViewController: BaseViewController {
         var config = UIButton.Configuration.plain()
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .regular)
         let calendarImage = UIImage(systemName: "calendar", withConfiguration: imageConfig)
-        config.contentInsets = .init(top: 20, leading: 0, bottom: 20, trailing: 0)
+        config.contentInsets = .init(top: 10, leading: 0, bottom: 10, trailing: 0)
         config.image = calendarImage
         config.baseForegroundColor = .black
         config.imagePadding = 50
@@ -57,22 +59,23 @@ final class RegisterWeightViewController: BaseViewController {
         stackView.distribution = .fill
         stackView.spacing = 5
         stackView.addArrangedSubview(memoTitleLabel)
-        stackView.addArrangedSubview(memoTextField)
+        stackView.addArrangedSubview(weightTextField)
         return stackView
     }()
     
     let memoTitleLabel: UILabel = {
         let label = UILabel()
-         label.text = "메모"
+         label.text = "무게"
         label.font = .boldSystemFont(ofSize: 25)
          return label
      }()
     
-    let memoTextField: UITextView = {
-        let textField = UITextView()
+    let weightTextField: UITextField = {
+        let textField = UITextField()
         textField.layer.borderWidth = 1.0
         textField.layer.cornerRadius = 10
         textField.keyboardType = .decimalPad
+        textField.textAlignment = .center
         return textField
     }()
     
@@ -82,7 +85,9 @@ final class RegisterWeightViewController: BaseViewController {
         return formatter
     }()
     var currentDate: Date
+    var weight: Double = 0
     var registerClosure: ((Date, Double) -> Void)?
+    let disposeBag = DisposeBag()
     
     init(date: Date) {
         self.currentDate = date
@@ -95,8 +100,20 @@ final class RegisterWeightViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "무게"
+        title = "무게 추가"
         tapViewEndEdit()
+        bind()
+    }
+    
+    func bind() {
+        weightTextField.rx.text.subscribe(with: self) { owner, input in
+            if let text = input, !text.isEmpty, let number = Double(text) {
+                owner.weight = number
+                owner.registerButton.isEnabled = true
+            } else {
+                owner.registerButton.isEnabled = false
+            }
+        }.disposed(by: disposeBag)
     }
     
     override func configureView() {
@@ -107,23 +124,21 @@ final class RegisterWeightViewController: BaseViewController {
     }
     
     override func setContraints() {
-        registerDateView.setContentHuggingPriority(.init(751), for: .vertical)
         registerDateView.snp.makeConstraints { make in
             make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
         }
-        memoStackView.setContentHuggingPriority(.init(750), for: .vertical)
         memoStackView.snp.makeConstraints { make in
             make.top.equalTo(registerDateView.snp.bottom).offset(20)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
-            make.height.equalTo(view.snp.height).multipliedBy(0.4)
         }
-        
+        weightTextField.snp.makeConstraints { make in
+            make.height.equalTo(50)
+        }
     }
     
     @objc func register() {
         self.dismiss(animated: true) {
-            guard let weight = Double(self.memoTextField.text) else { return }
-            self.registerClosure?(self.currentDate, weight)
+            self.registerClosure?(self.currentDate, self.weight)
         }
     }
     

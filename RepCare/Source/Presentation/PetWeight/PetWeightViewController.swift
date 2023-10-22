@@ -39,6 +39,11 @@ final class PetWeightViewController: BaseViewController {
     
     var dayData: [Date] = []
     let calender = Calendar.current
+    let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+         formatter.dateFormat = "yyyy/MM/dd"
+         return formatter
+     }()
     var weightRepository: WeightRepository
     private var pet: PetModel
     private lazy var currentDate = Date()
@@ -59,19 +64,25 @@ final class PetWeightViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         weightList = weightRepository.fetchAllWeight(petId: pet.id).map { .init(date: $0.date, weight: $0.weight) }
-        setChart(weightList: weightList)
+        
     }
     
     private func setChart(weightList: [PetWeightModel]) {
         var dataEntries: [ChartDataEntry] = []
+        chartView?.xAxis.valueFormatter = IndexAxisValueFormatter(values: Array(weightList.map { dateFormatter.string(from: $0.date)}))
+        chartView?.xAxis.setLabelCount(weightList.count, force: true)
+        chartView?.leftAxis.setLabelCount(weightList.count, force: false)
         for weight in weightList.enumerated() {
             let dataEntry = ChartDataEntry(x: Double(weight.offset), y: weight.element.weight ?? 0)
             dataEntries.append(dataEntry)
         }
         let lineDataSet = LineChartDataSet(entries: dataEntries)
-        DispatchQueue.main.async {
-            self.chartView?.data = LineChartData(dataSet: lineDataSet)
-        }
+        lineDataSet.mode = .linear
+        lineDataSet.lineWidth = 3
+        lineDataSet.valueFont = .systemFont(ofSize: 10)
+        lineDataSet.setColor(.deepGreen)
+        lineDataSet.setCircleColor(.deepGreen)
+        self.chartView?.data = LineChartData(dataSet: lineDataSet)
         
     }
     
@@ -105,7 +116,10 @@ extension PetWeightViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeightCollectionViewCell.identifier, for: indexPath) as? WeightCollectionViewCell else { return .init() }
-        cell.configureCell(date: Date(), weight: 10, change: 2.3)
+        let reverseWeightList = Array(weightList.reversed())
+        let weight = reverseWeightList[indexPath.row]
+        let lastWeight = indexPath.row+1 >= weightList.count ? 0 : reverseWeightList[indexPath.row+1].weight
+        cell.configureCell(date: weight.date, weight: weight.weight, change: weight.weight-lastWeight)
         return cell
     }
     
@@ -114,6 +128,8 @@ extension PetWeightViewController: UICollectionViewDataSource {
         header.datasource = self
         header.delegate = self
         chartView = header.lineChart
+        
+        setChart(weightList: weightList)
         return header
     }
     
@@ -135,6 +151,7 @@ extension PetWeightViewController: WeightChartViewDataSource, WeightChartViewDel
                 try self.weightRepository.registerWeight(petId: self.pet.id, weight: .init(date: date, weight: weight))
                 self.weightList = self.weightRepository.fetchAllWeight(petId: self.pet.id).map { .init(date: $0.date, weight: $0.weight) }
                 self.setChart(weightList: self.weightList)
+                self.collectionView.reloadSections([0])
             } catch {
                 print(error)
             }
