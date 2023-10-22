@@ -113,7 +113,6 @@ class CalenderHeaderView: UICollectionReusableView {
         }
         calendarStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
-            make.height.equalTo(350)
         }
         fsCalendar.snp.makeConstraints { make in
             make.width.equalToSuperview()

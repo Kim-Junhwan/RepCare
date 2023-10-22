@@ -53,7 +53,7 @@ class TaskCollectionViewCell: UICollectionViewCell {
         }
         classImageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.width.height.equalTo(30)
+            make.width.height.equalTo(40)
         }
         classLabel.snp.makeConstraints { make in
             make.top.equalTo(classImageBackgroundView.snp.bottom)
