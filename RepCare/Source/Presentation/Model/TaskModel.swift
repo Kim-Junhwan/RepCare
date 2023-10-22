@@ -37,7 +37,7 @@ enum TaskModel: Int, CaseIterable {
         case .clean:
             return "Clean"
         case .molt:
-            return "star"
+            return "Molt"
         case .spawn:
             return "Spawn"
         case .memo:
@@ -52,7 +52,7 @@ enum TaskModel: Int, CaseIterable {
         case .clean:
             return "TimeLineClean"
         case .molt:
-            return "star"
+            return "TimeLineMolt"
         case .spawn:
             return "TimeLineEgg"
         case .memo:
