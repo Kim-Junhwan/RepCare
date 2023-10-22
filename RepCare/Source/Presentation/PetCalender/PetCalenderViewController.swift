@@ -150,7 +150,6 @@ extension PetCalenderViewController: PetCalenderDataSource, PetCalenderViewDeleg
         if isDateSelected  && (changeMonth == selectedMonth) {
             currentTaskMonthList = fetchTaskListForMonth(date: date)
             updateTaskOnDay(date: date, taskList: fetchTaskForDate(date: currentDate))
-            
         } else {
             updateTaskList(tasks: fetchTaskListForMonth(date: date))
         }

@@ -14,7 +14,7 @@ class DetailPetViewController: BaseViewController {
     lazy var profileViewController = ProfileViewController(headerViewController: headerViewController, headerViewHeight: view.frame.width)
     lazy var headerViewController = DetailPetHeaderViewController(pet: viewModel.pet)
     lazy var petCalenderViewController = PetCalenderViewController(taskRepository: DefaultTaskRepository(petStorage: RealmPetStorage(), taskStorage: RealmTaskStorage()), pet: viewModel.pet)
-    let petWeightViewController = PetWeightViewController()
+    lazy var petWeightViewController = PetWeightViewController(weightRepository: DefaultWeightRepository(weightStroage: RealmWeightStorage(), petStorage: RealmPetStorage()), pet: viewModel.pet)
     lazy var tabViewControllers = [petCalenderViewController, petWeightViewController]
     let viewModel: DetailPetViewModel
     
