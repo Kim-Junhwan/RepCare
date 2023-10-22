@@ -9,5 +9,5 @@ import Foundation
 
 struct PetWeightModel {
     let date: Date
-    let weight: Double?
+    let weight: Double
 }
