@@ -102,6 +102,7 @@
 		C7D152EC2ACA5EA70064D59F /* Rule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152EB2ACA5EA70064D59F /* Rule.swift */; };
 		C7D152EF2ACAA4250064D59F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152EE2ACAA4250064D59F /* BaseViewController.swift */; };
 		C7D152F22ACAA5B90064D59F /* PetListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152F12ACAA5B90064D59F /* PetListView.swift */; };
+		C7E835E42AE576FA00AA0361 /* DateFormatter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E835E32AE576FA00AA0361 /* DateFormatter+.swift */; };
 		C7F3E8AE2AE4D644007621E1 /* DefaultWeightRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F3E8AD2AE4D644007621E1 /* DefaultWeightRepository.swift */; };
 		C7F3E8B12AE4D6B5007621E1 /* WeightStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F3E8B02AE4D6B5007621E1 /* WeightStorage.swift */; };
 		C7F3E8B42AE4D7C0007621E1 /* WeightDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F3E8B32AE4D7C0007621E1 /* WeightDTO.swift */; };
@@ -214,6 +215,7 @@
 		C7D152EB2ACA5EA70064D59F /* Rule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rule.swift; sourceTree = "<group>"; };
 		C7D152EE2ACAA4250064D59F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C7D152F12ACAA5B90064D59F /* PetListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetListView.swift; sourceTree = "<group>"; };
+		C7E835E32AE576FA00AA0361 /* DateFormatter+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+.swift"; sourceTree = "<group>"; };
 		C7F3E8AD2AE4D644007621E1 /* DefaultWeightRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultWeightRepository.swift; sourceTree = "<group>"; };
 		C7F3E8B02AE4D6B5007621E1 /* WeightStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightStorage.swift; sourceTree = "<group>"; };
 		C7F3E8B32AE4D7C0007621E1 /* WeightDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightDTO.swift; sourceTree = "<group>"; };
@@ -367,6 +369,7 @@
 			children = (
 				C7273B9D2AD427B8004B7A6F /* UITextField+.swift */,
 				C727A43F2AD99A6E00880111 /* UIImageView+.swift */,
+				C7E835E32AE576FA00AA0361 /* DateFormatter+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -1016,6 +1019,7 @@
 				C7F5F42A2ACE870300ACFC76 /* RegisterPetViewModel.swift in Sources */,
 				C7988D1A2ADD61F40011FF8D /* WeightCollectionViewCell.swift in Sources */,
 				C7F5F4A72AD1025300ACFC76 /* DefaultSpeciesRepository.swift in Sources */,
+				C7E835E42AE576FA00AA0361 /* DateFormatter+.swift in Sources */,
 				C7D1525E2AC6E7AC0064D59F /* Color.swift in Sources */,
 				C776F6A72ADA8379006015AD /* DetailPetViewController.swift in Sources */,
 				C7273BB42AD678A5004B7A6F /* RegisterImageCollectionViewCell.swift in Sources */,

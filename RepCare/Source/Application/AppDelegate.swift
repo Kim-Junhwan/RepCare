@@ -7,12 +7,14 @@
 
 import UIKit
 import FirebaseCore
+import FirebaseAnalytics
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         copyRealm()
         FirebaseApp.configure()
+        Analytics.logEvent(AnalyticsEventAppOpen, parameters: nil)
         return true
     }
     
