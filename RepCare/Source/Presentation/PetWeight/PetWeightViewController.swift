@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import DGCharts
 
 final class PetWeightViewController: BaseViewController {
     
@@ -20,6 +21,13 @@ final class PetWeightViewController: BaseViewController {
         case year
     }
     
+    private var registerWeightButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        button.tintColor = .black
+        return button
+    }()
+    
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: makeCollectionViewLayout())
         collectionView.register(WeightChartView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: WeightChartView.identifier)
@@ -29,15 +37,19 @@ final class PetWeightViewController: BaseViewController {
         return collectionView
     }()
     
-    
-    
     var dayData: [Date] = []
     let calender = Calendar.current
+    var weightRepository: WeightRepository
+    private var pet: PetModel
     private lazy var currentDate = Date()
+    var weightList: [PetWeightModel] = []
+    weak var chartView: LineChartView?
     
-    init() {
+    init(weightRepository: WeightRepository, pet: PetModel) {
+        self.weightRepository = weightRepository
+        self.pet = pet
         super.init(nibName: nil, bundle: nil)
-        title = "체중"
+        title = "무게"
     }
     
     required init?(coder: NSCoder) {
@@ -46,6 +58,21 @@ final class PetWeightViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        weightList = weightRepository.fetchAllWeight(petId: pet.id).map { .init(date: $0.date, weight: $0.weight) }
+        setChart(weightList: weightList)
+    }
+    
+    private func setChart(weightList: [PetWeightModel]) {
+        var dataEntries: [ChartDataEntry] = []
+        for weight in weightList.enumerated() {
+            let dataEntry = ChartDataEntry(x: Double(weight.offset), y: weight.element.weight ?? 0)
+            dataEntries.append(dataEntry)
+        }
+        let lineDataSet = LineChartDataSet(entries: dataEntries)
+        DispatchQueue.main.async {
+            self.chartView?.data = LineChartData(dataSet: lineDataSet)
+        }
+        
     }
     
     override func configureView() {
@@ -64,35 +91,16 @@ final class PetWeightViewController: BaseViewController {
         layout.itemSize = .init(width: width, height: 50)
         return layout
     }
-    
-    func calculateDate(timeInterval: TimeInterval) {
-        dayData.removeAll()
-        if timeInterval == .week {
-            for i in 0..<7 {
-                if let previousDate = calender.date(byAdding: .day, value: -i, to: currentDate) {
-                    dayData.append(previousDate)
-                }
-            }
-        } else if timeInterval == .month {
-            for i in 0..<30 {
-                if let previousDate = calender.date(byAdding: .day, value: -i, to: currentDate) {
-                    dayData.append(previousDate)
-                }
-            }
-        } else if timeInterval == .year {
-            for i in 0..<12 {
-                if let previousDate = calender.date(byAdding: .month, value: -i, to: currentDate) {
-                    dayData.append(previousDate)
-                }
-            }
-        }
-    }
 }
 
 extension PetWeightViewController: UICollectionViewDataSource {
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 100
+        return weightList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -105,6 +113,7 @@ extension PetWeightViewController: UICollectionViewDataSource {
         guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: WeightChartView.identifier, for: indexPath) as? WeightChartView else { return .init() }
         header.datasource = self
         header.delegate = self
+        chartView = header.lineChart
         return header
     }
     
@@ -112,11 +121,36 @@ extension PetWeightViewController: UICollectionViewDataSource {
 
 extension PetWeightViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-            return .init(width: view.frame.width, height: Metric.chartViewHeight)
+        let indexPath = IndexPath(row: 0, section: section)
+        let headerView = self.collectionView(collectionView, viewForSupplementaryElementOfKind: UICollectionView.elementKindSectionHeader, at: indexPath)
+        return headerView.systemLayoutSizeFitting(.init(width: collectionView.frame.width, height: UIView.layoutFittingExpandedSize.height), withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
     }
 }
 
 extension PetWeightViewController: WeightChartViewDataSource, WeightChartViewDelegate {
+    func tapRegisterWeightButton() {
+        let vc = RegisterWeightViewController(date: Date())
+        vc.registerClosure = { date, weight in
+            do {
+                try self.weightRepository.registerWeight(petId: self.pet.id, weight: .init(date: date, weight: weight))
+                self.weightList = self.weightRepository.fetchAllWeight(petId: self.pet.id).map { .init(date: $0.date, weight: $0.weight) }
+                self.setChart(weightList: self.weightList)
+            } catch {
+                print(error)
+            }
+            
+        }
+        let nvc = UINavigationController(rootViewController: vc)
+        nvc.modalPresentationStyle = .pageSheet
+        nvc.sheetPresentationController?.detents = [.medium()]
+        nvc.sheetPresentationController?.widthFollowsPreferredContentSizeWhenEdgeAttached = true
+        present(nvc, animated: true)
+    }
+    
+    func tapEditButton() {
+        
+    }
+    
     func getWeightDataList() -> [PetWeightModel] {
         []
     }
@@ -128,11 +162,5 @@ extension PetWeightViewController: WeightChartViewDataSource, WeightChartViewDel
     func getLineUnitList() -> [Double] {
        [1,2,3]
     }
-    
-    func tapSeguement(index: Int) {
-        guard let timeInt = TimeInterval(rawValue: index) else { return }
-        calculateDate(timeInterval: timeInt)
-    }
-    
     
 }

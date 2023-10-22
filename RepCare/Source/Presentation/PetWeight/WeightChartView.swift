@@ -9,7 +9,8 @@ import UIKit
 import DGCharts
 
 protocol WeightChartViewDelegate: AnyObject {
-    func tapSeguement(index: Int)
+    func tapRegisterWeightButton()
+    func tapEditButton()
 }
 
 protocol WeightChartViewDataSource: AnyObject {
@@ -22,69 +23,86 @@ class WeightChartView: UICollectionReusableView {
     
     weak var datasource: WeightChartViewDataSource?
     weak var delegate: WeightChartViewDelegate?
-
-    lazy var dateSeguement: UISegmentedControl = {
-        let segue = UISegmentedControl(items: ["주","월","년"])
-        segue.addTarget(self, action: #selector(tapSegue), for: .valueChanged)
-        return segue
+    let lineChart = LineChartView()
+    
+    lazy var buttonStackView: UIStackView = {
+       let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fill
+        stackView.spacing = 10
+        stackView.addArrangedSubview(addWeightButton)
+        stackView.addArrangedSubview(editButton)
+        return stackView
     }()
     
+    let addWeightButton: UIButton = {
+        var config = UIButton.Configuration.filled()
+        config.baseBackgroundColor = .lightDeepGreen
+        config.baseForegroundColor = .black
+        config.title = "무게 추가"
+       let button = UIButton(configuration: config)
+        return button
+    }()
     
-    let lineChart = LineChartView()
+    let editButton: UIButton = {
+        var config = UIButton.Configuration.filled()
+        config.baseBackgroundColor = .lightDeepGreen
+        config.baseForegroundColor = .black
+        config.title = "편집"
+       let button = UIButton(configuration: config)
+        return button
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureView()
         setConstraints()
         lineChart.dragEnabled = false
-        lineChart.noDataText = "최근 입력된 데이터가 없어요"
+        lineChart.noDataText = "입력된 무게가 없어요"
+        setChart(weightList: [.init(date: Date(), weight: 10.0)])
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func setChart(weightList: [PetWeightModel]) {
+        var dataEntries: [ChartDataEntry] = []
+        for weight in weightList.enumerated() {
+            let dataEntry = ChartDataEntry(x: Double(weight.offset), y: weight.element.weight ?? 0)
+            dataEntries.append(dataEntry)
+        }
+        let lineDataSet = LineChartDataSet(entries: dataEntries)
+        lineChart.data = LineChartData(dataSet: lineDataSet)
+        
+    }
+    
     private func configureView() {
-        addSubview(dateSeguement)
         addSubview(lineChart)
+        addSubview(buttonStackView)
+        addWeightButton.addTarget(self, action: #selector(showRegisterView), for: .touchUpInside)
+    }
+    
+    @objc func showRegisterView() {
+        delegate?.tapRegisterWeightButton()
     }
     
     private func setConstraints() {
-        dateSeguement.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview().inset(10)
-        }
         lineChart.snp.makeConstraints { make in
-            make.top.equalTo(dateSeguement.snp.bottom)
-            make.leading.trailing.bottom.equalToSuperview().inset(10)
+            make.top.leading.trailing.equalToSuperview().inset(10)
+            make.height.equalTo(lineChart.snp.width).multipliedBy(0.8)
         }
-    }
-    
-    @objc func tapSegue(_ sender: UISegmentedControl) {
-        delegate?.tapSeguement(index: sender.selectedSegmentIndex)
-        updateChartTapSegue()
-    }
-    
-    func updateChartTapSegue() {
-        guard let datasource else { return }
-        let weightData = datasource.getWeightDataList()
-        lineChart.xAxis.valueFormatter = IndexAxisValueFormatter(values: weightData.map{ $0.date.description })
-        lineChart.xAxis.setLabelCount(weightData.count, force: false)
-        setLineData(weightDataEntry: makeDataEntry(weights: weightData))
-    }
-    
-    func setLineData(weightDataEntry: [ChartDataEntry]) {
-        let lineChartDataSet = LineChartDataSet(entries: weightDataEntry)
-        let lineChartData = LineChartData(dataSet: lineChartDataSet)
-        lineChart.data = lineChartData
-    }
-    
-    func makeDataEntry(weights: [PetWeightModel]) -> [ChartDataEntry] {
-//        var lineDataEntries: [ChartDataEntry] = []
-//        for i in 0..<weights.count {
-//            let lineDataEntry = ChartDataEntry(x: Double(i), y: weights[i])
-//            lineDataEntries.append(lineDataEntry)
-//        }
-//        return lineDataEntries
-        return []
+        addWeightButton.snp.makeConstraints { make in
+            make.width.equalTo(60)
+        }
+        editButton.snp.makeConstraints { make in
+            make.width.equalTo(60)
+        }
+        buttonStackView.snp.makeConstraints { make in
+            make.top.equalTo(lineChart.snp.bottom).offset(10)
+            make.leading.equalToSuperview().offset(10)
+            make.height.equalTo(40)
+            make.bottom.equalToSuperview()
+        }
     }
 }
