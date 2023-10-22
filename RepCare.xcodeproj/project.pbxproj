@@ -74,6 +74,7 @@
 		C7A4C3092ACC18A300E299B0 /* PetClassCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A4C3072ACC18A300E299B0 /* PetClassCollectionViewCell.swift */; };
 		C7A4C30A2ACC18A300E299B0 /* PetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A4C3082ACC18A300E299B0 /* PetCollectionViewCell.swift */; };
 		C7B499DA2AD2819B00DD325F /* MorphReqeust+ResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B499D92AD2819B00DD325F /* MorphReqeust+ResponseDTO.swift */; };
+		C7BB170B2AE4445E00CCEBAB /* WeightRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BB170A2AE4445E00CCEBAB /* WeightRepository.swift */; };
 		C7D152462AC51B270064D59F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152452AC51B270064D59F /* AppDelegate.swift */; };
 		C7D152482AC51B270064D59F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152472AC51B270064D59F /* SceneDelegate.swift */; };
 		C7D1524F2AC51B280064D59F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7D1524E2AC51B280064D59F /* Assets.xcassets */; };
@@ -101,6 +102,12 @@
 		C7D152EC2ACA5EA70064D59F /* Rule.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152EB2ACA5EA70064D59F /* Rule.swift */; };
 		C7D152EF2ACAA4250064D59F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152EE2ACAA4250064D59F /* BaseViewController.swift */; };
 		C7D152F22ACAA5B90064D59F /* PetListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152F12ACAA5B90064D59F /* PetListView.swift */; };
+		C7F3E8AE2AE4D644007621E1 /* DefaultWeightRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F3E8AD2AE4D644007621E1 /* DefaultWeightRepository.swift */; };
+		C7F3E8B12AE4D6B5007621E1 /* WeightStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F3E8B02AE4D6B5007621E1 /* WeightStorage.swift */; };
+		C7F3E8B42AE4D7C0007621E1 /* WeightDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F3E8B32AE4D7C0007621E1 /* WeightDTO.swift */; };
+		C7F3E8B62AE4D9AF007621E1 /* RealmWeightStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F3E8B52AE4D9AF007621E1 /* RealmWeightStorage.swift */; };
+		C7F3E8B82AE4DDDA007621E1 /* RegisterWeightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F3E8B72AE4DDDA007621E1 /* RegisterWeightViewController.swift */; };
+		C7F3E8BA2AE511A3007621E1 /* EmptyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F3E8B92AE511A3007621E1 /* EmptyHeaderView.swift */; };
 		C7F5F4132ACD400700ACFC76 /* PetListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F5F4122ACD400700ACFC76 /* PetListViewModel.swift */; };
 		C7F5F41C2ACD680400ACFC76 /* RegisterNewPetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F5F41B2ACD680400ACFC76 /* RegisterNewPetViewController.swift */; };
 		C7F5F41F2ACE372D00ACFC76 /* RegisterPetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F5F41E2ACE372D00ACFC76 /* RegisterPetView.swift */; };
@@ -183,6 +190,7 @@
 		C7A4C3072ACC18A300E299B0 /* PetClassCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetClassCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7A4C3082ACC18A300E299B0 /* PetCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PetCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7B499D92AD2819B00DD325F /* MorphReqeust+ResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MorphReqeust+ResponseDTO.swift"; sourceTree = "<group>"; };
+		C7BB170A2AE4445E00CCEBAB /* WeightRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightRepository.swift; sourceTree = "<group>"; };
 		C7D152422AC51B270064D59F /* RepCare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RepCare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7D152452AC51B270064D59F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7D152472AC51B270064D59F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -206,6 +214,12 @@
 		C7D152EB2ACA5EA70064D59F /* Rule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rule.swift; sourceTree = "<group>"; };
 		C7D152EE2ACAA4250064D59F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C7D152F12ACAA5B90064D59F /* PetListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetListView.swift; sourceTree = "<group>"; };
+		C7F3E8AD2AE4D644007621E1 /* DefaultWeightRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultWeightRepository.swift; sourceTree = "<group>"; };
+		C7F3E8B02AE4D6B5007621E1 /* WeightStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightStorage.swift; sourceTree = "<group>"; };
+		C7F3E8B32AE4D7C0007621E1 /* WeightDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightDTO.swift; sourceTree = "<group>"; };
+		C7F3E8B52AE4D9AF007621E1 /* RealmWeightStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmWeightStorage.swift; sourceTree = "<group>"; };
+		C7F3E8B72AE4DDDA007621E1 /* RegisterWeightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterWeightViewController.swift; sourceTree = "<group>"; };
+		C7F3E8B92AE511A3007621E1 /* EmptyHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyHeaderView.swift; sourceTree = "<group>"; };
 		C7F5F4122ACD400700ACFC76 /* PetListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetListViewModel.swift; sourceTree = "<group>"; };
 		C7F5F41B2ACD680400ACFC76 /* RegisterNewPetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterNewPetViewController.swift; sourceTree = "<group>"; };
 		C7F5F41E2ACE372D00ACFC76 /* RegisterPetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPetView.swift; sourceTree = "<group>"; };
@@ -280,6 +294,7 @@
 				C709AA532ADBB46A004FA677 /* PetWeightViewController.swift */,
 				C7988D172ADD60330011FF8D /* WeightChartView.swift */,
 				C7988D192ADD61F40011FF8D /* WeightCollectionViewCell.swift */,
+				C7F3E8B72AE4DDDA007621E1 /* RegisterWeightViewController.swift */,
 			);
 			path = PetWeight;
 			sourceTree = "<group>";
@@ -342,6 +357,7 @@
 			children = (
 				C7988D5F2ADDD0290011FF8D /* CalenderHeaderView.swift */,
 				C73A4E582ADDF6BB0069009B /* TimeLineHeaderView.swift */,
+				C7F3E8B92AE511A3007621E1 /* EmptyHeaderView.swift */,
 			);
 			path = HeaderView;
 			sourceTree = "<group>";
@@ -439,6 +455,7 @@
 		C76A01E82AD264D00024D008 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				C7F3E8AF2AE4D6A7007621E1 /* Weight */,
 				C70E59D52ADED3C900428CDE /* Task */,
 				C727A4262AD6F9F600880111 /* Pet */,
 				C727A4252AD6F9C700880111 /* Species */,
@@ -605,6 +622,7 @@
 				C7F5F4322ACE87AA00ACFC76 /* SpeciesRepository.swift */,
 				C727A4212AD6E8D700880111 /* PetImageRepository.swift */,
 				C70E59CB2ADECF2700428CDE /* TaskRepository.swift */,
+				C7BB170A2AE4445E00CCEBAB /* WeightRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -657,6 +675,23 @@
 				C7A4C3082ACC18A300E299B0 /* PetCollectionViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		C7F3E8AF2AE4D6A7007621E1 /* Weight */ = {
+			isa = PBXGroup;
+			children = (
+				C7F3E8B02AE4D6B5007621E1 /* WeightStorage.swift */,
+				C7F3E8B52AE4D9AF007621E1 /* RealmWeightStorage.swift */,
+			);
+			path = Weight;
+			sourceTree = "<group>";
+		};
+		C7F3E8B22AE4D7B8007621E1 /* Weight */ = {
+			isa = PBXGroup;
+			children = (
+				C7F3E8B32AE4D7C0007621E1 /* WeightDTO.swift */,
+			);
+			path = Weight;
 			sourceTree = "<group>";
 		};
 		C7F5F4112ACD3FE600ACFC76 /* ViewModel */ = {
@@ -749,6 +784,7 @@
 				C7F5F4A62AD1025300ACFC76 /* DefaultSpeciesRepository.swift */,
 				C727A4232AD6F87600880111 /* DefaultPetRepository.swift */,
 				C70E59CF2ADED20500428CDE /* DefaultTaskRepository.swift */,
+				C7F3E8AD2AE4D644007621E1 /* DefaultWeightRepository.swift */,
 			);
 			path = RealmRepository;
 			sourceTree = "<group>";
@@ -756,6 +792,7 @@
 		C7F5F4A82AD1073000ACFC76 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				C7F3E8B22AE4D7B8007621E1 /* Weight */,
 				C70E59D62ADED3DD00428CDE /* Task */,
 				C727A42A2AD6FA2000880111 /* Pet */,
 				C727A4292AD6FA1700880111 /* Species */,
@@ -890,16 +927,19 @@
 				C70E59DA2ADED6A500428CDE /* RealmTaskStorage.swift in Sources */,
 				C7F5F43B2ACF112700ACFC76 /* MorphObject.swift in Sources */,
 				C7D152DB2AC999AB0064D59F /* Species.swift in Sources */,
+				C7F3E8AE2AE4D644007621E1 /* DefaultWeightRepository.swift in Sources */,
 				C727A42E2AD6FA7700880111 /* RealmPetStorage.swift in Sources */,
 				C709AA432ADAA107004FA677 /* DetailPetHeaderView.swift in Sources */,
 				C7273BA12AD43DC2004B7A6F /* PetClassModel.swift in Sources */,
 				C709AA5E2ADD198C004FA677 /* DetailPetHeaderViewController.swift in Sources */,
 				C7F5F4252ACE5BA500ACFC76 /* RegisterInputView.swift in Sources */,
+				C7F3E8B42AE4D7C0007621E1 /* WeightDTO.swift in Sources */,
 				C7D152A22AC855F60064D59F /* PetClassObject.swift in Sources */,
 				C727A4402AD99A6E00880111 /* UIImageView+.swift in Sources */,
 				C7273BA52AD43FB4004B7A6F /* DetailPetSpeciesModel.swift in Sources */,
 				C70E59D02ADED20500428CDE /* DefaultTaskRepository.swift in Sources */,
 				C7F5F41C2ACD680400ACFC76 /* RegisterNewPetViewController.swift in Sources */,
+				C7BB170B2AE4445E00CCEBAB /* WeightRepository.swift in Sources */,
 				C70E59D42ADED3C100428CDE /* TaskStorage.swift in Sources */,
 				C7D152462AC51B270064D59F /* AppDelegate.swift in Sources */,
 				C70E59DF2ADF9DD900428CDE /* FetchTaskListDTO.swift in Sources */,
@@ -927,6 +967,7 @@
 				C7988D182ADD60330011FF8D /* WeightChartView.swift in Sources */,
 				C7273BAD2AD4D8CC004B7A6F /* PetOverSpeciesModel.swift in Sources */,
 				C7988D602ADDD0290011FF8D /* CalenderHeaderView.swift in Sources */,
+				C7F3E8BA2AE511A3007621E1 /* EmptyHeaderView.swift in Sources */,
 				C709AA5C2ADCF733004FA677 /* ImageViewController.swift in Sources */,
 				C7D152D52AC998900064D59F /* FetchPetListUseCase.swift in Sources */,
 				C76A01F42AD26E940024D008 /* DetailSpeciesRequest+ResponseDTO.swift in Sources */,
@@ -939,6 +980,7 @@
 				C709AA5A2ADC3690004FA677 /* ProfileViewController.swift in Sources */,
 				C709AA572ADBB64E004FA677 /* DetailPetViewModel.swift in Sources */,
 				C727A4222AD6E8D700880111 /* PetImageRepository.swift in Sources */,
+				C7F3E8B82AE4DDDA007621E1 /* RegisterWeightViewController.swift in Sources */,
 				C709AA462ADB650B004FA677 /* TaskCollectionViewCell.swift in Sources */,
 				C7D152482AC51B270064D59F /* SceneDelegate.swift in Sources */,
 				C7F5F42D2ACE873F00ACFC76 /* ClassSpeciesMorphViewController.swift in Sources */,
@@ -951,6 +993,7 @@
 				C7D152622AC70B3E0064D59F /* PetListViewController.swift in Sources */,
 				C7A4C3092ACC18A300E299B0 /* PetClassCollectionViewCell.swift in Sources */,
 				C70E59D82ADED3F600428CDE /* RegisterTaskRequestDTO.swift in Sources */,
+				C7F3E8B12AE4D6B5007621E1 /* WeightStorage.swift in Sources */,
 				C76A01EE2AD2676B0024D008 /* PetClassResponseDTO.swift in Sources */,
 				C76A01EC2AD265FB0024D008 /* SpeciesStorage.swift in Sources */,
 				C76A01F22AD26E550024D008 /* DetailSpecies.swift in Sources */,
@@ -960,6 +1003,7 @@
 				C709AA4F2ADB9652004FA677 /* PetCalenderViewController.swift in Sources */,
 				C76A01EA2AD264FC0024D008 /* RealmSpeciesStorage.swift in Sources */,
 				C727A4202AD6E89500880111 /* RegisterPetUseCase.swift in Sources */,
+				C7F3E8B62AE4D9AF007621E1 /* RealmWeightStorage.swift in Sources */,
 				C7273BA92AD44048004B7A6F /* PetModel.swift in Sources */,
 				C7F5F49F2AD03A2E00ACFC76 /* SpeciesHeaderView.swift in Sources */,
 				C7D152A82AC8F9D60064D59F /* PetSpeciesObject.swift in Sources */,

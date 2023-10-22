@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum TaskRepositoryError: Error {
+enum RepositoryError: Error {
     case unknownPet
 }
 
@@ -38,7 +38,7 @@ final class DefaultTaskRepository: TaskRepository {
             }
             try taskStorage.registerTask(request: .init(pet: pet, registerDate: query.registerDate, taskType: task, memo: query.memo))
         } else {
-            throw TaskRepositoryError.unknownPet
+            throw RepositoryError.unknownPet
         }
     }
     
