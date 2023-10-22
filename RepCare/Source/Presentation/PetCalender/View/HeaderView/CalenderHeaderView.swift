@@ -30,6 +30,7 @@ class CalenderHeaderView: UICollectionReusableView {
     
     lazy var calendarStackView: UIStackView = {
         let stackView = UIStackView()
+        stackView.spacing = 0
          stackView.axis = .vertical
          stackView.alignment = .center
         stackView.layer.cornerRadius = 10
@@ -89,7 +90,6 @@ class CalenderHeaderView: UICollectionReusableView {
         stackView.distribution = .fill
         stackView.spacing = 20
         stackView.addArrangedSubview(timelineLabel)
-        stackView.addArrangedSubview(emptyView)
         return stackView
     }()
     
@@ -100,25 +100,12 @@ class CalenderHeaderView: UICollectionReusableView {
         return label
     }()
     
-    let emptyView: UIView = {
-       let view = UIView()
-        view.backgroundColor = .whiteGray
-        view.layer.cornerRadius = 10
-        view.clipsToBounds = true
-        return view
-    }()
     
-    let emptyLabel: UILabel = {
-        let label = UILabel()
-        label.text = "입력된 작업이 존재하지 않습니다."
-        return label
-    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(calendarbaseView)
         addSubview(timeLineStackView)
-        emptyView.addSubview(emptyLabel)
         yearMonthLabel.text = dateFormatter.string(from: fsCalendar.currentPage)
         calendarbaseView.addSubview(calendarStackView)
         calendarbaseView.snp.makeConstraints { make in
@@ -126,6 +113,7 @@ class CalenderHeaderView: UICollectionReusableView {
         }
         calendarStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+            make.height.equalTo(350)
         }
         fsCalendar.snp.makeConstraints { make in
             make.width.equalToSuperview()
@@ -140,14 +128,6 @@ class CalenderHeaderView: UICollectionReusableView {
             make.leading.trailing.equalToSuperview().inset(10)
             make.bottom.equalToSuperview()
         }
-        emptyView.snp.makeConstraints { make in
-            make.height.equalTo(70)
-        }
-        emptyLabel.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.leading.equalToSuperview().offset(10)
-        }
-        
         forwardButton.addTarget(self, action: #selector(tapForward), for: .touchUpInside)
         backButton.addTarget(self, action: #selector(tapBackward), for: .touchUpInside)
     }
