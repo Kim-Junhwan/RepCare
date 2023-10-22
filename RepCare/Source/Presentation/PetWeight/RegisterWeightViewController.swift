@@ -43,9 +43,9 @@ final class RegisterWeightViewController: BaseViewController {
         button.datePicker.setDate(currentDate, animated: true)
         button.titleLabel?.font = .systemFont(ofSize: 20)
         button.titleLabel?.textColor = .black
-        button.setTitle(dateFormatter.string(from: currentDate), for: .normal)
+        button.setTitle(DateFormatter.yearMonthDateFormatter.string(from: currentDate), for: .normal)
         button.actionClosure = { [weak self] date in
-            button.setTitle(self?.dateFormatter.string(from: date), for: .normal)
+            button.setTitle(DateFormatter.yearMonthDateFormatter.string(from: date), for: .normal)
             self?.currentDate = date
         }
         button.viewController = self
@@ -79,11 +79,6 @@ final class RegisterWeightViewController: BaseViewController {
         return textField
     }()
     
-    private let dateFormatter: DateFormatter = {
-       let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd"
-        return formatter
-    }()
     var currentDate: Date
     var weight: Double = 0
     var registerClosure: ((Date, Double) -> Void)?

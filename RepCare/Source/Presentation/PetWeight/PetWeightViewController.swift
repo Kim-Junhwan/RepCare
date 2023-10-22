@@ -39,11 +39,6 @@ final class PetWeightViewController: BaseViewController {
     
     var dayData: [Date] = []
     let calender = Calendar.current
-    let dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-         formatter.dateFormat = "yyyy/MM/dd"
-         return formatter
-     }()
     var weightRepository: WeightRepository
     private var pet: PetModel
     private lazy var currentDate = Date()
@@ -69,7 +64,7 @@ final class PetWeightViewController: BaseViewController {
     
     private func setChart(weightList: [PetWeightModel]) {
         var dataEntries: [ChartDataEntry] = []
-        chartView?.xAxis.valueFormatter = IndexAxisValueFormatter(values: Array(weightList.map { dateFormatter.string(from: $0.date)}))
+        chartView?.xAxis.valueFormatter = IndexAxisValueFormatter(values: Array(weightList.map { DateFormatter.yearMonthDateFormatter.string(from: $0.date) }))
         chartView?.xAxis.setLabelCount(weightList.count, force: true)
         chartView?.leftAxis.setLabelCount(weightList.count, force: false)
         for weight in weightList.enumerated() {

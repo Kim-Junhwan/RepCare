@@ -62,12 +62,6 @@ class PetCalenderView: UIView {
         return collectionView
     }()
     
-    private let dateFormatter: DateFormatter = {
-       let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MM월 dd일"
-        return dateFormatter
-    }()
-    
     private var isTimeLineEmpty = true
     weak var calendar: FSCalendar?
     weak var isEmptyView: CalenderHeaderView?
@@ -144,7 +138,7 @@ class PetCalenderView: UIView {
         
         let timeLineHeaderRegistration = UICollectionView.SupplementaryRegistration<TimeLineHeaderView>(elementKind: PetCalenderView.timeLineHeaderElementKind) { supplementaryView, elementKind, indexPath in
             guard let sectionDate = self.datasource?.date(section: indexPath.section-2) else { return }
-            supplementaryView.dateLabel.text = self.dateFormatter.string(from: sectionDate)
+            supplementaryView.dateLabel.text = DateFormatter.monthDateFormatter.string(from: sectionDate)
         }
         
         collectionViewDatasource = UICollectionViewDiffableDataSource<CalendarCollectioViewSectionItem, CalendarCollectionViewItem>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in

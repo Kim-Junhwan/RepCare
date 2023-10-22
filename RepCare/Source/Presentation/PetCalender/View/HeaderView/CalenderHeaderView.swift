@@ -12,12 +12,6 @@ class CalenderHeaderView: UICollectionReusableView {
     
     static let identifier = "CalenderHeaderView"
     
-    private let dateFormatter: DateFormatter = {
-       let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy년 MM월"
-        return dateFormatter
-    }()
-    
     let calendarbaseView: UIView = {
         let view = UIView()
         view.layer.shadowColor = UIColor.black.cgColor
@@ -106,7 +100,7 @@ class CalenderHeaderView: UICollectionReusableView {
         super.init(frame: frame)
         addSubview(calendarbaseView)
         addSubview(timeLineStackView)
-        yearMonthLabel.text = dateFormatter.string(from: fsCalendar.currentPage)
+        yearMonthLabel.text = DateFormatter.yearMonthFormatter.string(from: fsCalendar.currentPage)
         calendarbaseView.addSubview(calendarStackView)
         calendarbaseView.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview().inset(10)
@@ -148,6 +142,6 @@ class CalenderHeaderView: UICollectionReusableView {
         dateComponents.month = next ? 1 : -1
         let currentDate = Calendar.current.date(byAdding: dateComponents, to: fsCalendar.currentPage)!
         self.fsCalendar.setCurrentPage(currentDate, animated: true)
-        yearMonthLabel.text = dateFormatter.string(from: currentDate)
+        yearMonthLabel.text = DateFormatter.yearMonthFormatter.string(from: currentDate)
     }
 }

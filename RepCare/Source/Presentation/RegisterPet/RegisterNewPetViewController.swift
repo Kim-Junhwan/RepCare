@@ -14,12 +14,6 @@ class RegisterNewPetViewController: BaseViewController {
     
     let mainView = RegisterPetView()
     let viewModel: RegisterPetViewModel = .init()
-    let dateFormatter: DateFormatter = {
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "ko_KR")
-        dateFormatter.dateFormat = "yyyy/MM/dd"
-        return dateFormatter
-    }()
     let disposeBag = DisposeBag()
     
     lazy var registerButton: UIBarButtonItem = {
@@ -90,13 +84,13 @@ class RegisterNewPetViewController: BaseViewController {
     private func bindAdoptionDate() {
         viewModel.adoptionDate.subscribe { adopDate in
             guard let adopDate else { return }
-            self.mainView.adoptionDateButton.datePickerButton.setTitle(self.dateFormatter.string(from: adopDate), for: .normal) }.disposed(by: disposeBag)
+            self.mainView.adoptionDateButton.datePickerButton.setTitle(DateFormatter.yearMonthDateFormatter.string(from: adopDate), for: .normal) }.disposed(by: disposeBag)
     }
     
     private func bindBirthDate() {
         viewModel.hatchDate.subscribe {
             guard let birthDate = $0 else { return }
-            self.mainView.birthDayButton.datePickerButton.setTitle(self.dateFormatter.string(from: birthDate), for: .normal) }.disposed(by: disposeBag)
+            self.mainView.birthDayButton.datePickerButton.setTitle(DateFormatter.yearMonthDateFormatter.string(from: birthDate), for: .normal) }.disposed(by: disposeBag)
     }
     
     private func bindWeight() {
