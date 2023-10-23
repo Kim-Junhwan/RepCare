@@ -96,23 +96,22 @@ class PetCalenderView: UIView {
     func updateTaskList(tasks: [Int:[DetailTaskModel]]) {
         currentSnapShot.deleteSections(currentSnapShot.sectionIdentifiers.filter { $0.type == .timeline || $0.type == .empty })
         let sortedTasks = tasks.sorted { $0.key > $1.key }
-        if tasks.count <= 1  {
+        if tasks.count <= 1 || tasks.isEmpty {
             if tasks.first?.value.count ?? 0 == 0  {
                 isTimeLineEmpty = true
+                currentSnapShot.appendSections([CalendarCollectioViewSectionItem(id: UUID().uuidString, type: .empty)])
             } else {
                 isTimeLineEmpty = false
             }
         } else {
             isTimeLineEmpty = false
         }
-        for task in sortedTasks {
-            if task.value.isEmpty {
-                currentSnapShot.appendSections([CalendarCollectioViewSectionItem(id: UUID().uuidString, type: .empty)])
-                continue
+        if !isTimeLineEmpty {
+            for task in sortedTasks {
+                let dateSection = CalendarCollectioViewSectionItem(id: "\(task.key)", type: .timeline)
+                currentSnapShot.appendSections([dateSection])
+                currentSnapShot.appendItems(task.value.map{.init(id: $0.id, taskType: .timeline)}, toSection: dateSection)
             }
-            let dateSection = CalendarCollectioViewSectionItem(id: "\(task.key)", type: .timeline)
-            currentSnapShot.appendSections([dateSection])
-            currentSnapShot.appendItems(task.value.map{.init(id: $0.id, taskType: .timeline)}, toSection: dateSection)
         }
         collectionViewDatasource?.apply(currentSnapShot)
     }

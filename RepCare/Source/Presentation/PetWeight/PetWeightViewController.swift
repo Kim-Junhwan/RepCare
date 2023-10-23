@@ -63,12 +63,15 @@ final class PetWeightViewController: BaseViewController {
     }
     
     private func setChart(weightList: [PetWeightModel]) {
+        if weightList.isEmpty {
+            return
+        }
         var dataEntries: [ChartDataEntry] = []
         chartView?.xAxis.valueFormatter = IndexAxisValueFormatter(values: Array(weightList.map { DateFormatter.yearMonthDateFormatter.string(from: $0.date) }))
-        chartView?.xAxis.setLabelCount(weightList.count, force: true)
+        chartView?.xAxis.setLabelCount(min(6, weightList.count), force: false)
         chartView?.leftAxis.setLabelCount(weightList.count, force: false)
         for weight in weightList.enumerated() {
-            let dataEntry = ChartDataEntry(x: Double(weight.offset), y: weight.element.weight ?? 0)
+            let dataEntry = ChartDataEntry(x: Double(weight.offset), y: weight.element.weight)
             dataEntries.append(dataEntry)
         }
         let lineDataSet = LineChartDataSet(entries: dataEntries)
@@ -77,6 +80,7 @@ final class PetWeightViewController: BaseViewController {
         lineDataSet.valueFont = .systemFont(ofSize: 10)
         lineDataSet.setColor(.deepGreen)
         lineDataSet.setCircleColor(.deepGreen)
+        lineDataSet.drawCircleHoleEnabled = false
         self.chartView?.data = LineChartData(dataSet: lineDataSet)
         
     }
@@ -106,14 +110,20 @@ extension PetWeightViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return weightList.count
+        return weightList.count+1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeightCollectionViewCell.identifier, for: indexPath) as? WeightCollectionViewCell else { return .init() }
+        if indexPath.row == 0 {
+            cell.dateLabel.text = "날짜"
+            cell.weightLabel.text = "무게(g)"
+            cell.changeWeightLabel.text = "변화량(g)"
+            return cell
+        }
         let reverseWeightList = Array(weightList.reversed())
-        let weight = reverseWeightList[indexPath.row]
-        let lastWeight = indexPath.row+1 >= weightList.count ? 0 : reverseWeightList[indexPath.row+1].weight
+        let weight = reverseWeightList[indexPath.row-1]
+        let lastWeight = indexPath.row >= weightList.count ? 0 : reverseWeightList[indexPath.row].weight
         cell.configureCell(date: weight.date, weight: weight.weight, change: weight.weight-lastWeight)
         return cell
     }
