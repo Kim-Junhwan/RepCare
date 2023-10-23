@@ -48,6 +48,7 @@ final class RegisterWeightViewController: BaseViewController {
             button.setTitle(DateFormatter.yearMonthDateFormatter.string(from: date), for: .normal)
             self?.currentDate = date
         }
+        button.datePicker.maximumDate = Date()
         button.viewController = self
         return view
     }()
@@ -102,7 +103,7 @@ final class RegisterWeightViewController: BaseViewController {
     
     func bind() {
         weightTextField.rx.text.subscribe(with: self) { owner, input in
-            if let text = input, !text.isEmpty, let number = Double(text) {
+            if let text = input, !text.isEmpty, let number = Double(text), number > 0 {
                 owner.weight = number
                 owner.registerButton.isEnabled = true
             } else {

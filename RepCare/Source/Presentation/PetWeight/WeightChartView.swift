@@ -13,15 +13,9 @@ protocol WeightChartViewDelegate: AnyObject {
     func tapEditButton()
 }
 
-protocol WeightChartViewDataSource: AnyObject {
-    func getWeightDataList() -> [PetWeightModel]
-}
-
 class WeightChartView: UICollectionReusableView {
     
     static let identifier = "WeightChartView"
-    
-    weak var datasource: WeightChartViewDataSource?
     weak var delegate: WeightChartViewDelegate?
     let lineChart: LineChartView = {
         let view = LineChartView()
@@ -29,6 +23,11 @@ class WeightChartView: UICollectionReusableView {
         view.rightAxis.enabled = false
         view.xAxis.labelPosition = .bottom
         view.animate(yAxisDuration: 1.0)
+        view.doubleTapToZoomEnabled = false
+        view.pinchZoomEnabled = true
+        view.highlightPerDragEnabled = false
+        view.legend.enabled = false
+        view.highlightPerTapEnabled = false
         
         let yAxis = view.leftAxis
         yAxis.labelFont = .boldSystemFont(ofSize: 10)
@@ -36,6 +35,8 @@ class WeightChartView: UICollectionReusableView {
         
         let xAxis = view.xAxis
         xAxis.labelFont = .boldSystemFont(ofSize: 10)
+        xAxis.spaceMin = 1.0
+        xAxis.spaceMax = 0.5
         
         return view
     }()
@@ -43,7 +44,7 @@ class WeightChartView: UICollectionReusableView {
     lazy var buttonStackView: UIStackView = {
        let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.distribution = .fill
+        stackView.distribution = .fillProportionally
         stackView.spacing = 10
         stackView.addArrangedSubview(addWeightButton)
         stackView.addArrangedSubview(editButton)
@@ -56,6 +57,8 @@ class WeightChartView: UICollectionReusableView {
         config.baseForegroundColor = .black
         config.title = "무게 추가"
        let button = UIButton(configuration: config)
+        button.titleLabel?.numberOfLines = 1
+        button.invalidateIntrinsicContentSize()
         return button
     }()
     
@@ -72,8 +75,9 @@ class WeightChartView: UICollectionReusableView {
         super.init(frame: frame)
         configureView()
         setConstraints()
-        lineChart.dragEnabled = false
-        lineChart.noDataText = "입력된 무게가 없어요"
+        lineChart.dragEnabled = true
+        lineChart.noDataFont = .boldSystemFont(ofSize: 20)
+        lineChart.noDataText = "입력된 무게가 없어요."
     }
     
     required init?(coder: NSCoder) {
@@ -94,9 +98,6 @@ class WeightChartView: UICollectionReusableView {
         lineChart.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
             make.height.equalTo(lineChart.snp.width).multipliedBy(0.8)
-        }
-        addWeightButton.snp.makeConstraints { make in
-            make.width.equalTo(60)
         }
         editButton.snp.makeConstraints { make in
             make.width.equalTo(60)

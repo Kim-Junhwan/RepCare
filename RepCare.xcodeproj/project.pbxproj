@@ -57,6 +57,7 @@
 		C73A4E5B2ADE101B0069009B /* TimelineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73A4E5A2ADE101B0069009B /* TimelineCollectionViewCell.swift */; };
 		C73A4E672ADE49450069009B /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73A4E662ADE49450069009B /* Task.swift */; };
 		C73A4E692ADE4BF10069009B /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73A4E682ADE4BF10069009B /* TaskModel.swift */; };
+		C7460F122AE659AF00F0C3AC /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7460F112AE659AF00F0C3AC /* Date+.swift */; };
 		C7608D962AE0F39E001F03DA /* RegisterTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7608D952AE0F39E001F03DA /* RegisterTaskViewController.swift */; };
 		C7675F9A2AE2A6090054BC7A /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7675F992AE2A6090054BC7A /* PaddingLabel.swift */; };
 		C76A01EA2AD264FC0024D008 /* RealmSpeciesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76A01E92AD264FC0024D008 /* RealmSpeciesStorage.swift */; };
@@ -175,6 +176,7 @@
 		C73A4E5A2ADE101B0069009B /* TimelineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineCollectionViewCell.swift; sourceTree = "<group>"; };
 		C73A4E662ADE49450069009B /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		C73A4E682ADE4BF10069009B /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
+		C7460F112AE659AF00F0C3AC /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		C7608D952AE0F39E001F03DA /* RegisterTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTaskViewController.swift; sourceTree = "<group>"; };
 		C7675F992AE2A6090054BC7A /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		C76A01E92AD264FC0024D008 /* RealmSpeciesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmSpeciesStorage.swift; sourceTree = "<group>"; };
@@ -370,6 +372,7 @@
 				C7273B9D2AD427B8004B7A6F /* UITextField+.swift */,
 				C727A43F2AD99A6E00880111 /* UIImageView+.swift */,
 				C7E835E32AE576FA00AA0361 /* DateFormatter+.swift */,
+				C7460F112AE659AF00F0C3AC /* Date+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -965,6 +968,7 @@
 				C7675F9A2AE2A6090054BC7A /* PaddingLabel.swift in Sources */,
 				C7608D962AE0F39E001F03DA /* RegisterTaskViewController.swift in Sources */,
 				C7F5F4AA2AD18FC200ACFC76 /* SpeciesRequest+ResponseDTO.swift in Sources */,
+				C7460F122AE659AF00F0C3AC /* Date+.swift in Sources */,
 				C7D152EF2ACAA4250064D59F /* BaseViewController.swift in Sources */,
 				C73A4E672ADE49450069009B /* Task.swift in Sources */,
 				C7988D182ADD60330011FF8D /* WeightChartView.swift in Sources */,

@@ -58,7 +58,7 @@ final class PetWeightViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        weightList = weightRepository.fetchAllWeight(petId: pet.id).map { .init(date: $0.date, weight: $0.weight) }
+        weightList = weightRepository.fetchAllWeight(petId: pet.id).map { .init(date: $0.date, weight: $0.weight) }.sorted { $0.date < $1.date }
         
     }
     
@@ -121,7 +121,7 @@ extension PetWeightViewController: UICollectionViewDataSource {
             cell.changeWeightLabel.text = "변화량(g)"
             return cell
         }
-        let reverseWeightList = Array(weightList.reversed())
+        let reverseWeightList = Array(weightList.sorted{$0.date < $1.date}.reversed())
         let weight = reverseWeightList[indexPath.row-1]
         let lastWeight = indexPath.row >= weightList.count ? 0 : reverseWeightList[indexPath.row].weight
         cell.configureCell(date: weight.date, weight: weight.weight, change: weight.weight-lastWeight)
@@ -130,7 +130,6 @@ extension PetWeightViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: WeightChartView.identifier, for: indexPath) as? WeightChartView else { return .init() }
-        header.datasource = self
         header.delegate = self
         chartView = header.lineChart
         
@@ -148,19 +147,28 @@ extension PetWeightViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension PetWeightViewController: WeightChartViewDataSource, WeightChartViewDelegate {
+extension PetWeightViewController: WeightChartViewDelegate {
     func tapRegisterWeightButton() {
         let vc = RegisterWeightViewController(date: Date())
         vc.registerClosure = { date, weight in
             do {
-                try self.weightRepository.registerWeight(petId: self.pet.id, weight: .init(date: date, weight: weight))
-                self.weightList = self.weightRepository.fetchAllWeight(petId: self.pet.id).map { .init(date: $0.date, weight: $0.weight) }
-                self.setChart(weightList: self.weightList)
-                self.collectionView.reloadSections([0])
+                if self.weightRepository.checkRegisterWeightInDay(petId: self.pet.id, date: date) {
+                    self.showAlert(title: "해당 날짜에 이미 무게가 등록되어있습니다.", message: "해당 날짜의 무게를 업데이트 하시겠습니까?") { _ in
+                        do {
+                            try self.weightRepository.updateWeightAtDate(petId: self.pet.id, date: date, weight: weight)
+                            self.reloadView()
+                        } catch {
+                            self.showErrorAlert(title: error.localizedDescription, message: nil)
+                        }
+                    }
+                } else {
+                    try self.weightRepository.registerWeight(petId: self.pet.id, date: date, weight: weight)
+                    self.reloadView()
+                }
+                
             } catch {
                 print(error)
             }
-            
         }
         let nvc = UINavigationController(rootViewController: vc)
         nvc.modalPresentationStyle = .pageSheet
@@ -169,20 +177,14 @@ extension PetWeightViewController: WeightChartViewDataSource, WeightChartViewDel
         present(nvc, animated: true)
     }
     
+    func reloadView() {
+        self.weightList = self.weightRepository.fetchAllWeight(petId: self.pet.id).map { .init(date: $0.date, weight: $0.weight) }
+        self.setChart(weightList: self.weightList)
+        self.collectionView.reloadSections([0])
+    }
+    
     func tapEditButton() {
         
-    }
-    
-    func getWeightDataList() -> [PetWeightModel] {
-        []
-    }
-    
-    func getDateList() -> [String] {
-        return dayData.map {$0.description}
-    }
-    
-    func getLineUnitList() -> [Double] {
-       [1,2,3]
     }
     
 }

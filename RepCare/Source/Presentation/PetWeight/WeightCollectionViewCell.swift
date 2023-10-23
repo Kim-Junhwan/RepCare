@@ -40,7 +40,7 @@ class WeightCollectionViewCell: UICollectionViewCell {
     }
     
     func configureCell(date: Date, weight: Double, change: Double) {
-        dateLabel.text = date.description
+        dateLabel.text = DateFormatter.yearMonthDateFormatter.string(from: date)
         weightLabel.text = "\(weight)"
         changeWeightLabel.text = String(format: "%.2f", change)
     }
