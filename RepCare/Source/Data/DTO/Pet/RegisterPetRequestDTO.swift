@@ -36,6 +36,6 @@ struct RegisterPetRequestDTO {
         self.morph = morph
         self.adoptionDate = pet.adoptionDate
         self.birthDate = pet.birthDate
-        self.weight = pet.weight == nil ? nil : WeightObject(date: pet.weight?.date ?? Date(), weight: pet.weight?.weight ?? 0)
+        self.weight = pet.weight == nil ? nil : WeightObject(date: pet.adoptionDate, weight: pet.weight ?? 0)
     }
 }

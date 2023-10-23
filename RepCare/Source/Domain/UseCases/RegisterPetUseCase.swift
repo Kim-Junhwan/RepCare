@@ -21,7 +21,7 @@ struct RegisterPetRequest {
     let adoptionDate: Date
     let birthDate: Date?
     let gender: Gender
-    let weight: Weight?
+    let weight: Double?
 }
 
 final class DefaultRegisterPetUseCase {

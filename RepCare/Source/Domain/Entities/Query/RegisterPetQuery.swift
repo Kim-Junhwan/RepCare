@@ -17,5 +17,5 @@ struct RegisterPetQuery {
     let adoptionDate: Date
     let birthDate: Date?
     let gender: Gender
-    let weight: Weight?
+    let weight: Double?
 }

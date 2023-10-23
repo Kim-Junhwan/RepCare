@@ -34,14 +34,7 @@ final class RegisterPetViewModel {
         guard let species = overPetSpecies.value?.petSpecies else { return }
         guard let adoptionDate = adoptionDate.value else { return }
         guard let gender = gender.value else { return }
-        let weight: Weight?
-        if currentWeight.value == nil {
-            weight = nil
-        } else {
-            guard let weightNum = currentWeight.value else { return }
-            weight = .init(date: adoptionDate, weight: weightNum)
-        }
-        try registerUseCase.registerPet(request: .init(name: petName.value, imageDataList: imageListData, petClass: petClass.toDomain(), petSpecies: species.toDomain(), detailSpecies: overPetSpecies.value?.detailSpecies?.toDomain(), morph: overPetSpecies.value?.morph?.toDomain(), adoptionDate: adoptionDate, birthDate: hatchDate.value, gender: gender.toDomain(), weight: weight))
+        try registerUseCase.registerPet(request: .init(name: petName.value, imageDataList: imageListData, petClass: petClass.toDomain(), petSpecies: species.toDomain(), detailSpecies: overPetSpecies.value?.detailSpecies?.toDomain(), morph: overPetSpecies.value?.morph?.toDomain(), adoptionDate: adoptionDate, birthDate: hatchDate.value, gender: gender.toDomain(), weight: currentWeight.value))
         
         
     }

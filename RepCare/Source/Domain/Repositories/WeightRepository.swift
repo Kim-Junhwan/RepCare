@@ -8,6 +8,9 @@
 import Foundation
 
 protocol WeightRepository {
-    func registerWeight(petId: String, weight: Weight) throws
+    typealias hasData = Bool
+    func registerWeight(petId: String, date: Date, weight: Double) throws
     func fetchAllWeight(petId: String) -> [Weight]
+    func updateWeightAtDate(petId: String, date: Date, weight: Double) throws
+    func checkRegisterWeightInDay(petId: String, date: Date) -> hasData
 }

@@ -17,14 +17,24 @@ final class DefaultWeightRepository: WeightRepository {
         self.petStorage = petStorage
     }
     
-    func registerWeight(petId: String, weight: Weight) throws {
+    func registerWeight(petId: String, date: Date, weight: Double) throws {
         guard let pet = petStorage.fetchPet(id: petId) else { throw RepositoryError.unknownPet }
-        try weightStroage.registerWeight(weight: .init(pet: pet, weight: weight.weight, date: weight.date))
+        try weightStroage.registerWeight(weight: .init(pet: pet, weight: weight, date: date))
     }
     
     func fetchAllWeight(petId: String) -> [Weight] {
         guard let pet = petStorage.fetchPet(id: petId) else { return [] }
-        return weightStroage.fetchWeightList(pet: pet).map { .init(date: $0.date, weight: $0.weight) }
+        return weightStroage.fetchWeightList(pet: pet).map { .init(id: $0._id.stringValue, date: $0.date, weight: $0.weight) }.sorted { $0.date < $1.date }
+    }
+    
+    func updateWeightAtDate(petId: String, date: Date, weight: Double) throws {
+        guard let pet = petStorage.fetchPet(id: petId) else { throw RepositoryError.unknownPet }
+        try weightStroage.updateStroage(weightDTO: .init(pet: pet, weight: weight, date: date))
+    }
+    
+    func checkRegisterWeightInDay(petId: String, date: Date) -> hasData {
+        guard let pet = petStorage.fetchPet(id: petId) else { return false }
+        return weightStroage.checkPetHasDataAtDate(pet: pet, date: date)
     }
     
 }

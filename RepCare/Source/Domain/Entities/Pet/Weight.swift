@@ -8,6 +8,7 @@
 import Foundation
 
 struct Weight {
-    var date: Date
-    var weight: Double
+    let id: String
+    let date: Date
+    let weight: Double
 }
