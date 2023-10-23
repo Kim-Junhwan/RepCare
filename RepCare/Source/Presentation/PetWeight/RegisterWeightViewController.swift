@@ -82,7 +82,8 @@ final class RegisterWeightViewController: BaseViewController {
     
     var currentDate: Date
     var weight: Double = 0
-    var registerClosure: ((Date, Double) -> Void)?
+    var registerClosure: ((Date, Double, @escaping (Bool) -> Void ) -> Void)?
+    var updateClosure: ((Date, Double) -> Void)?
     let disposeBag = DisposeBag()
     
     init(date: Date) {
@@ -133,8 +134,15 @@ final class RegisterWeightViewController: BaseViewController {
     }
     
     @objc func register() {
-        self.dismiss(animated: true) {
-            self.registerClosure?(self.currentDate, self.weight)
+        self.registerClosure?(self.currentDate, self.weight) { canRegist in
+            if canRegist {
+                self.dismiss(animated: true)
+            } else {
+                self.showAlert(title: "해당 날짜에 이미 무게가 등록되어있습니다.", message: "해당 날짜의 무게를 업데이트 하시겠습니까?") { _ in
+                    self.updateClosure?(self.currentDate, self.weight)
+                    self.cancel()
+                }
+            }
         }
     }
     

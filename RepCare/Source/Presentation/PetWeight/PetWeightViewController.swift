@@ -148,28 +148,14 @@ extension PetWeightViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension PetWeightViewController: WeightChartViewDelegate {
+    func tapEditButton() {
+        
+    }
+    
     func tapRegisterWeightButton() {
         let vc = RegisterWeightViewController(date: Date())
-        vc.registerClosure = { date, weight in
-            do {
-                if self.weightRepository.checkRegisterWeightInDay(petId: self.pet.id, date: date) {
-                    self.showAlert(title: "해당 날짜에 이미 무게가 등록되어있습니다.", message: "해당 날짜의 무게를 업데이트 하시겠습니까?") { _ in
-                        do {
-                            try self.weightRepository.updateWeightAtDate(petId: self.pet.id, date: date, weight: weight)
-                            self.reloadView()
-                        } catch {
-                            self.showErrorAlert(title: error.localizedDescription, message: nil)
-                        }
-                    }
-                } else {
-                    try self.weightRepository.registerWeight(petId: self.pet.id, date: date, weight: weight)
-                    self.reloadView()
-                }
-                
-            } catch {
-                print(error)
-            }
-        }
+        vc.registerClosure = tapRegisterButton(date:weight:completion:)
+        vc.updateClosure = updateWeight(date:weight:)
         let nvc = UINavigationController(rootViewController: vc)
         nvc.modalPresentationStyle = .pageSheet
         nvc.sheetPresentationController?.detents = [.medium()]
@@ -183,8 +169,19 @@ extension PetWeightViewController: WeightChartViewDelegate {
         self.collectionView.reloadSections([0])
     }
     
-    func tapEditButton() {
-        
+    func tapRegisterButton(date: Date, weight: Double, completion: @escaping (Bool) -> Void) {
+        if weightRepository.checkRegisterWeightInDay(petId: pet.id, date: date) {
+            completion(false)
+        } else {
+            completion(true)
+            try? weightRepository.registerWeight(petId: pet.id, date: date, weight: weight)
+            reloadView()
+        }
+    }
+    
+    func updateWeight(date: Date, weight: Double) {
+        try? weightRepository.updateWeightAtDate(petId: pet.id, date: date, weight: weight)
+        reloadView()
     }
     
 }

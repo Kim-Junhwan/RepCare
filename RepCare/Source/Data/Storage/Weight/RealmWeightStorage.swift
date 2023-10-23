@@ -33,11 +33,8 @@ final class RealmWeightStorage: WeightStorage {
     }
     
     func checkPetHasDataAtDate(pet: PetObject, date: Date) -> Bool {
-        let calendar = Calendar.current
-        let checkDate = calendar.dateComponents([.year, .month, .day], from: date)
         for weight in pet.weights {
-            let compareDate = calendar.dateComponents([.year, .month, .day], from: weight.date)
-            if compareDate == checkDate {
+            if weight.date.isEqualDay(date) {
                 return true
             }
         }
@@ -46,11 +43,8 @@ final class RealmWeightStorage: WeightStorage {
     
     func updateStroage(weightDTO: WeightDTO) throws {
         let pet = weightDTO.pet
-        let calendar = Calendar.current
-        let checkDate = calendar.dateComponents([.year, .month, .day], from: weightDTO.date)
         let updateWeight = pet.weights.first { weight in
-            let compareDate = calendar.dateComponents([.year, .month, .day], from: weight.date)
-            return compareDate == checkDate
+            return weightDTO.date.isEqualDay(weight.date)
         }
         guard let updateWeight else { throw WeightError.unknownWeight }
         try realm?.write({

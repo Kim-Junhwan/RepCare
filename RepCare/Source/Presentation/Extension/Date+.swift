@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+extension Date {
+    func isEqualDay(_ date: Date) -> Bool {
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone.current
+        let compareDate = calendar.dateComponents([.year, .month, .day], from: date)
+        let currentDate = calendar.dateComponents([.year, .month, .day], from: self)
+        return compareDate == currentDate
+    }
+}
