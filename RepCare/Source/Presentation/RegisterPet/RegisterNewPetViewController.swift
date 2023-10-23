@@ -29,6 +29,7 @@ class RegisterNewPetViewController: BaseViewController {
         super.viewDidLoad()
         bind()
         mainView.imageCollectionView.delegate = self
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
     }
     
     private func bind() {
@@ -124,6 +125,8 @@ class RegisterNewPetViewController: BaseViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    
+    
     @objc func showSpeciesView() {
         let speciesViewModel = ClassSpeciesMorphViewModel(repository: DefaultSpeciesRepository(speciesStroage: RealmSpeciesStorage()))
         let vc = ClassSpeciesMorphViewController(viewModel: speciesViewModel)
@@ -188,7 +191,6 @@ extension RegisterNewPetViewController: UIImagePickerControllerDelegate, UINavig
 
 extension RegisterNewPetViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        
         picker.dismiss(animated: true)
         let itemProviderList = results.map { $0.itemProvider }
         Observable.zip(itemProviderList.map { convertImage(provider: $0) }).subscribe { imageList in
@@ -211,8 +213,11 @@ extension RegisterNewPetViewController: PHPickerViewControllerDelegate {
                         observer.onError(error!)
                     } else {
                         guard let convertImage = image as? UIImage else { return }
-                        observer.onNext(convertImage)
-                        observer.onCompleted()
+                        DispatchQueue.main.async {
+                            let resizingImage = convertImage.downSamplingImage(maxSize: self.view.frame.width)
+                            observer.onNext(resizingImage)
+                            observer.onCompleted()
+                        }
                     }
                     
                 }

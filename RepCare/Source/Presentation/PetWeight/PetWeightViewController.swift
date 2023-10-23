@@ -78,6 +78,7 @@ final class PetWeightViewController: BaseViewController {
         lineDataSet.mode = .linear
         lineDataSet.lineWidth = 3
         lineDataSet.valueFont = .systemFont(ofSize: 10)
+        lineDataSet.valueFormatter = DataSetValueFormatter()
         lineDataSet.setColor(.deepGreen)
         lineDataSet.setCircleColor(.deepGreen)
         lineDataSet.drawCircleHoleEnabled = false
@@ -183,5 +184,18 @@ extension PetWeightViewController: WeightChartViewDelegate {
         try? weightRepository.updateWeightAtDate(petId: pet.id, date: date, weight: weight)
         reloadView()
     }
+    
+}
+
+final class DataSetValueFormatter: NSObject, ValueFormatter {
+    
+    private func format(value: Double) -> String {
+        return String(format: "%.1f", value)
+    }
+    
+    func stringForValue(_ value: Double, entry: DGCharts.ChartDataEntry, dataSetIndex: Int, viewPortHandler: DGCharts.ViewPortHandler?) -> String {
+        return format(value: value)
+    }
+    
     
 }
