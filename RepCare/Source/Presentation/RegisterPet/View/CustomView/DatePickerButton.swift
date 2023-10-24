@@ -18,12 +18,13 @@ class DatePickerButton: UIButton {
         return datePicker
     }()
     
-    var viewController: UIViewController?
+    weak var viewController: UIViewController?
     var actionClosure: ((Date) -> Void)?
     
     @objc func showDatePicker() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let ok = UIAlertAction(title: "확인", style: .default) { _ in
+        let ok = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
+            guard let self else { return }
             self.actionClosure?(self.datePicker.date)
         }
         let cancel = UIAlertAction(title: "취소", style: .cancel)

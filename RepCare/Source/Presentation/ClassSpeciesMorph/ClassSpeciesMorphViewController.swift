@@ -64,6 +64,10 @@ class ClassSpeciesMorphViewController: UIViewController {
     @objc func tapDismissButton() {
         self.dismiss(animated: true)
     }
+    
+    deinit {
+        print("deinit ClassSpeciesMorphViewController")
+    }
 }
 
 extension ClassSpeciesMorphViewController: UICollectionViewDelegate {

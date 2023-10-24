@@ -29,7 +29,6 @@ class RegisterNewPetViewController: BaseViewController {
         super.viewDidLoad()
         bind()
         mainView.imageCollectionView.delegate = self
-        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
     }
     
     private func bind() {
@@ -78,26 +77,25 @@ class RegisterNewPetViewController: BaseViewController {
     private func bindGender() {
         mainView.genderButtonList.forEach { button in
             guard let gender = GenderModel(rawValue: button.tag) else {  return }
-            button.rx.tap.bind { self.viewModel.gender.accept(gender) }.disposed(by: disposeBag)
+            button.rx.tap.bind { [weak self] in self?.viewModel.gender.accept(gender) }.disposed(by: disposeBag)
         }
     }
     
     private func bindAdoptionDate() {
-        viewModel.adoptionDate.subscribe { adopDate in
+        viewModel.adoptionDate.subscribe(with: self) { owner, adopDate in
             guard let adopDate else { return }
-            self.mainView.adoptionDateButton.datePickerButton.setTitle(DateFormatter.yearMonthDateFormatter.string(from: adopDate), for: .normal) }.disposed(by: disposeBag)
+            owner.mainView.adoptionDateButton.datePickerButton.setTitle(DateFormatter.yearMonthDateFormatter.string(from: adopDate), for: .normal) }.disposed(by: disposeBag)
     }
     
     private func bindBirthDate() {
-        viewModel.hatchDate.subscribe {
-            guard let birthDate = $0 else { return }
-            self.mainView.birthDayButton.datePickerButton.setTitle(DateFormatter.yearMonthDateFormatter.string(from: birthDate), for: .normal) }.disposed(by: disposeBag)
+        viewModel.hatchDate.subscribe(with: self) { owner, date in
+            guard let birthDate = date else { return }
+            owner.mainView.birthDayButton.datePickerButton.setTitle(DateFormatter.yearMonthDateFormatter.string(from: birthDate), for: .normal) }.disposed(by: disposeBag)
     }
     
     private func bindWeight() {
-        mainView.weightTextField.textField.rx.text.orEmpty.subscribe { fetchWeight in
-            guard let weightStr = fetchWeight.event.element else { return }
-            self.viewModel.currentWeight.accept(Double(weightStr))
+        mainView.weightTextField.textField.rx.text.orEmpty.subscribe(with: self) { owner, fetchWeight in
+            owner.viewModel.currentWeight.accept(Double(fetchWeight))
         }.disposed(by: disposeBag)
     }
     
@@ -107,11 +105,11 @@ class RegisterNewPetViewController: BaseViewController {
         navigationItem.setRightBarButton(registerButton, animated: false)
         mainView.setDatePickerButton(viewController: self)
         mainView.speciesClassButton.actionButton.addTarget(self, action: #selector(showSpeciesView), for: .touchUpInside)
-        mainView.adoptionDateButton.datePickerButton.actionClosure = { selectDate in
-            self.viewModel.adoptionDate.accept(selectDate)
+        mainView.adoptionDateButton.datePickerButton.actionClosure = { [weak self] selectDate in
+            self?.viewModel.adoptionDate.accept(selectDate)
         }
-        mainView.birthDayButton.datePickerButton.actionClosure = { selectDate in
-            self.viewModel.hatchDate.accept(selectDate)
+        mainView.birthDayButton.datePickerButton.actionClosure = { [weak self] selectDate in
+            self?.viewModel.hatchDate.accept(selectDate)
         }
     }
     
@@ -130,7 +128,7 @@ class RegisterNewPetViewController: BaseViewController {
     @objc func showSpeciesView() {
         let speciesViewModel = ClassSpeciesMorphViewModel(repository: DefaultSpeciesRepository(speciesStroage: RealmSpeciesStorage()))
         let vc = ClassSpeciesMorphViewController(viewModel: speciesViewModel)
-        speciesViewModel.tapRegisterClosure = { self.viewModel.overPetSpecies.accept($0) }
+        speciesViewModel.tapRegisterClosure = { [weak self] in self?.viewModel.overPetSpecies.accept($0) }
         let nvc = UINavigationController(rootViewController: vc)
         nvc.modalPresentationStyle = .fullScreen
         present(nvc, animated: true)
@@ -150,11 +148,11 @@ extension RegisterNewPetViewController: UICollectionViewDelegate {
     
     private func showCameraOrImagePickerActionSheet() {
         let alert = UIAlertController(title: "어떤 작업을 수행하시겠습니까?", message: nil, preferredStyle: .actionSheet)
-        let camera = UIAlertAction(title: "카메라", style: .default) { _ in
-            self.pick(sourceType: .camera)
+        let camera = UIAlertAction(title: "카메라", style: .default) { [weak self] _ in
+            self?.pick(sourceType: .camera)
         }
-        let imagePicker = UIAlertAction(title: "앨범", style: .default) { _ in
-            self.showImagePicker()
+        let imagePicker = UIAlertAction(title: "앨범", style: .default) { [weak self] _ in
+            self?.showImagePicker()
         }
         let cancel = UIAlertAction(title: "취소", style: .cancel)
         alert.addAction(camera)
@@ -182,9 +180,9 @@ extension RegisterNewPetViewController: UICollectionViewDelegate {
 
 extension RegisterNewPetViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        picker.dismiss(animated: true) {
+        picker.dismiss(animated: true) { [weak self] in
             let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
-            self.viewModel.petImageList.accept([.init(image: image!)])
+            self?.viewModel.petImageList.accept([.init(image: image!)])
         }
     }
 }
@@ -195,8 +193,8 @@ extension RegisterNewPetViewController: PHPickerViewControllerDelegate {
         let itemProviderList = results.map { $0.itemProvider }
         Observable.zip(itemProviderList.map { convertImage(provider: $0) }).subscribe { imageList in
             let petImageList = imageList.map { PetImageItem(image: $0) }
-            DispatchQueue.main.async {
-                self.viewModel.petImageList.accept(petImageList)
+            DispatchQueue.main.async { [weak self] in
+                self?.viewModel.petImageList.accept(petImageList)
             }
         } onError: { error in
             print("error \(error)")
@@ -213,7 +211,8 @@ extension RegisterNewPetViewController: PHPickerViewControllerDelegate {
                         observer.onError(error!)
                     } else {
                         guard let convertImage = image as? UIImage else { return }
-                        DispatchQueue.main.async {
+                        DispatchQueue.main.async { [weak self] in
+                            guard let self else { return }
                             let resizingImage = convertImage.downSamplingImage(maxSize: self.view.frame.width)
                             observer.onNext(resizingImage)
                             observer.onCompleted()

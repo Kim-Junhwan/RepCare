@@ -191,4 +191,7 @@ class RegisterPetView: UIView {
         dataSource?.apply(snapshot)
     }
 
+    deinit {
+        print("deinit RegisterPetView")
+    }
 }

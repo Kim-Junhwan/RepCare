@@ -51,7 +51,7 @@ class RegisterInputView: UIView {
     
     lazy var actionButton: UIButton = {
         let button = ActionButton()
-        
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
         return button
     }()
     

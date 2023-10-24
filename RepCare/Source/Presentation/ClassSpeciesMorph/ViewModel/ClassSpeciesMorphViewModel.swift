@@ -156,4 +156,8 @@ final class ClassSpeciesMorphViewModel {
         guard let petSpecies = selectSpecies.value else { return }
         tapRegisterClosure?(.init(petClass: petClass, petSpecies: petSpecies, detailSpecies: selectDetailSpecies.value, morph: selectMorph.value))
     }
+    
+    deinit {
+        print("deinit ClassSpeciesMorphViewModel")
+    }
 }
