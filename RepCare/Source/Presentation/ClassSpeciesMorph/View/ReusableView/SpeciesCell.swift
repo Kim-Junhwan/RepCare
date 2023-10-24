@@ -11,7 +11,7 @@ final class SpeciesCell: UICollectionViewCell {
     
     let titleLabel: UILabel = {
        let label = UILabel()
-        
+        label.font = .systemFont(ofSize: 13.0)
         return label
     }()
     
@@ -26,17 +26,25 @@ final class SpeciesCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
-            backgroundColor = isSelected ? .red : .white
+            backgroundColor = isSelected ? .opacityGreen : .white
+            titleLabel.textColor = isSelected ? .deepGreen : .black
+            layer.borderColor = isSelected ? UIColor.deepGreen.cgColor : UIColor.systemGray2.cgColor
         }
     }
     
     private func configureCell() {
-        layer.borderWidth = 1
-        layer.borderColor = UIColor.black.cgColor
+        layer.borderWidth = 1.0
+        layer.borderColor = UIColor.systemGray2.cgColor
         contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.edges.equalToSuperview().inset(10)
+            make.top.bottom.equalToSuperview().inset(8)
+            make.leading.trailing.equalToSuperview().inset(20)
         }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        layer.cornerRadius = bounds.height/2
     }
 }

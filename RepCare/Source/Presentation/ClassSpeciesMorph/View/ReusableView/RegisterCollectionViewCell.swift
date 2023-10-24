@@ -13,7 +13,7 @@ class RegisterCollectionViewCell: UICollectionViewCell {
     
     let plusImageView: UIImageView = {
         let imageView = UIImageView(image: .init(systemName: "plus"))
-        
+        imageView.tintColor = .systemGray4
         return imageView
     }()
     
@@ -27,13 +27,19 @@ class RegisterCollectionViewCell: UICollectionViewCell {
     }
     
     private func configureView() {
-        layer.borderWidth = 1
-        layer.borderColor = UIColor.black.cgColor
+        layer.borderWidth = 1.0
+        layer.borderColor = UIColor.systemGray2.cgColor
         contentView.addSubview(plusImageView)
         plusImageView.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.edges.equalToSuperview().inset(10)
+            make.top.bottom.equalToSuperview().inset(8)
+            make.leading.trailing.equalToSuperview().inset(20)
         }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        layer.cornerRadius = bounds.height/2
     }
     
 }
