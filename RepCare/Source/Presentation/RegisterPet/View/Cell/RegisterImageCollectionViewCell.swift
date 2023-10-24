@@ -9,7 +9,29 @@ import UIKit
 
 class RegisterImageCollectionViewCell: UICollectionViewCell {
     static let identifier = "RegisterImageCollectionViewCell"
-    let plusImageView: UIImageView = UIImageView(image: .init(systemName: "plus"))
+    
+    lazy var mainStackView: UIStackView = {
+       let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        stackView.addArrangedSubview(cameraImageView)
+        stackView.addArrangedSubview(limitLabel)
+        return stackView
+    }()
+    
+    let cameraImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "camera.fill")
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
+    let limitLabel: UILabel = {
+       let label = UILabel()
+        label.font = .systemFont(ofSize: 13)
+        return label
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,12 +43,17 @@ class RegisterImageCollectionViewCell: UICollectionViewCell {
     }
     
     private func configureView() {
-        layer.borderWidth = 1.0
-        layer.borderColor = UIColor.black.cgColor
-        contentView.addSubview(plusImageView)
-        plusImageView.snp.makeConstraints { make in
-            make.width.height.equalTo(50)
+        contentView.addSubview(mainStackView)
+        cameraImageView.tintColor = .black
+        mainStackView.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
+        cameraImageView.snp.makeConstraints { make in
+            make.width.height.equalTo(32)
+        }
+    }
+    
+    func configureCell(imageCount: Int) {
+        limitLabel.text = "\(imageCount)/5"
     }
 }
