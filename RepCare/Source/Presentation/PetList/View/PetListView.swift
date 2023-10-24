@@ -12,6 +12,7 @@ protocol PetListViewDelegate: AnyObject {
     func selectPetClass(petClass: PetClassModel)
     func selectPet(at index: Int)
     func reloadPetList(completion: @escaping () -> Void)
+    func searchPetList(searchKeyword: String)
 }
 
 final class PetListView: UIView {
@@ -101,6 +102,7 @@ final class PetListView: UIView {
         addSubview(petClassCollectionView)
         addSubview(petListCollectionView)
         addSubview(addPetButton)
+        searchBar.delegate = self
     }
     
     private func setConstraints() {
@@ -160,5 +162,11 @@ extension PetListView: UICollectionViewDelegate {
         } else if collectionView == petListCollectionView {
             delegate?.selectPet(at: indexPath.row)
         }
+    }
+}
+
+extension PetListView: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        delegate?.searchPetList(searchKeyword: searchText)
     }
 }

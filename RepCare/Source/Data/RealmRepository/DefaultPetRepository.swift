@@ -46,7 +46,7 @@ final class DefaultPetRepository: PetRepository {
                 return GenderType.miss
             }
         }
-        let requestDTO = FetchPetListRequestDTO(startIndex: start, petClass: petClass, petSpecies: petSpecies, detailSpecies: detailSpecies, morph: morph, gender: gender)
+        let requestDTO = FetchPetListRequestDTO(startIndex: start, petClass: petClass, petSpecies: petSpecies, detailSpecies: detailSpecies, morph: morph, gender: gender, searchKeyword: query.searchKeyword)
         let fetchList = petStorage.fetchPetList(request: requestDTO)
         return .init(totalPetCount: fetchList.totalPetCount, start: fetchList.startIndex, petList: fetchList.petList.map { $0.toDomain() })
     }

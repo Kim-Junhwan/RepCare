@@ -21,8 +21,12 @@ extension RealmPetStorage: PetStorage {
     func fetchPetList(request: FetchPetListRequestDTO) -> FetchPetListResponseDTO {
         guard let realm else { return .init(totalPetCount: 0, startIndex: 0, petList: []) }
         var petList = realm.objects(PetObject.self)
+        
         if request.petClass != nil {
             petList = petList.where { $0.petClass == request.petClass }
+        }
+        if let searchKeyword = request.searchKeyword, !searchKeyword.isEmpty {
+            petList = petList.where { $0.petSpecies.title.contains(searchKeyword) || $0.name.contains(searchKeyword) || $0.detailSpecies.title.contains(searchKeyword) || $0.morph.title.contains(searchKeyword) }
         }
         
         return .init(totalPetCount: petList.count, startIndex: request.startIndex, petList: Array(petList))

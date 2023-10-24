@@ -82,6 +82,8 @@ final class PetListViewModel {
     }
     
     func searchPet(keyword: String) {
-        
+        let searchQuery: FetchPetListQuery = .init(petClass: currentQuery.petClass, species: currentQuery.species, detailSpecies: currentQuery.detailSpecies, morph: currentQuery.morph, searchKeyword: keyword, gender: currentQuery.gender)
+        resetPage()
+        load(query: searchQuery)
     }
 }

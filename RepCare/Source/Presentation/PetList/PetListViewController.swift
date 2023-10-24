@@ -27,8 +27,8 @@ final class PetListViewController: BaseViewController {
     }
     
     private func bind() {
-        viewModel.petList.subscribe { petList in
-            self.mainView.petListCollectionView.reloadData()
+        viewModel.petList.asDriver().drive(with: self) { owner, petList in
+            owner.mainView.petListCollectionView.reloadData()
         }.disposed(by: disposeBag)
     }
     
@@ -71,6 +71,9 @@ extension PetListViewController: UICollectionViewDataSource {
 }
 
 extension PetListViewController: PetListViewDelegate {
+    func searchPetList(searchKeyword: String) {
+        viewModel.searchPet(keyword: searchKeyword)
+    }
     
     func reloadPetList(completion: @escaping () -> Void) {
         viewModel.reloadPetList()

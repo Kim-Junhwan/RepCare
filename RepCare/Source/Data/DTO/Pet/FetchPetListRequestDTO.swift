@@ -14,6 +14,8 @@ struct FetchPetListRequestDTO {
     let detailSpecies: DetailSpeciesObject?
     let morph: MorphObject?
     let gender: GenderType?
+    let searchKeyword: String?
+    
 }
 
 struct FetchPetListResponseDTO {
