@@ -45,10 +45,9 @@ class SpeciesView: UIView {
         group.interItemSpacing = .fixed(10)
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 10
-        
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(50))
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: ElementKind.sectionHeader, alignment: .top)
-        
+        section.contentInsets = .init(top: 0, leading: 10, bottom: 0, trailing: 10)
         section.boundarySupplementaryItems = [sectionHeader]
         
         return UICollectionViewCompositionalLayout(section: section)
