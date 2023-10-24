@@ -21,12 +21,9 @@ class RegisterNewPetViewController: BaseViewController {
         return barButton
     }()
     
-    override func loadView() {
-        view = mainView
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureDatasource()
         bind()
         mainView.imageCollectionView.delegate = self
     }
@@ -101,6 +98,7 @@ class RegisterNewPetViewController: BaseViewController {
     
     override func configureView() {
         title = "개체 등록"
+        view.addSubview(mainView)
         registerButton.isEnabled = false
         navigationItem.setRightBarButton(registerButton, animated: false)
         mainView.setDatePickerButton(viewController: self)
@@ -110,6 +108,24 @@ class RegisterNewPetViewController: BaseViewController {
         }
         mainView.birthDayButton.datePickerButton.actionClosure = { [weak self] selectDate in
             self?.viewModel.hatchDate.accept(selectDate)
+        }
+    }
+    
+    func configureDatasource() {
+        mainView.dataSource = UICollectionViewDiffableDataSource<ImageCollectionViewSection, PetImageItem>(collectionView: mainView.imageCollectionView, cellProvider: { [weak self] collectionView, indexPath, itemIdentifier in
+            guard let self else { return .init() }
+            if indexPath.row == 0 {
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RegisterImageCollectionViewCell.identifier, for: indexPath) as? RegisterImageCollectionViewCell else { return .init() }
+                cell.configureCell(imageCount: viewModel.petImageList.value.count)
+                return cell
+            }
+            return collectionView.dequeueConfiguredReusableCell(using: self.mainView.imageCellRegistration, for: indexPath, item: itemIdentifier)
+        })
+    }
+    
+    override func setContraints() {
+        mainView.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(10)
         }
     }
     
@@ -199,8 +215,6 @@ extension RegisterNewPetViewController: PHPickerViewControllerDelegate {
         } onError: { error in
             print("error \(error)")
         }.disposed(by: disposeBag)
-
-        
     }
     
     func convertImage(provider: NSItemProvider) -> Observable<UIImage> {

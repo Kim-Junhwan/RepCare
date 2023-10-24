@@ -12,15 +12,16 @@ struct PetImageItem: Hashable {
     private let identifier = UUID()
 }
 
+enum ImageCollectionViewSection {
+    case main
+}
+
 class RegisterPetView: UIView {
-    
-    private enum ImageCollectionViewSection {
-        case main
-    }
     
     lazy var imageCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: makePetImageCollectionViewFlowLayout())
         collectionView.register(RegisterImageCollectionViewCell.self, forCellWithReuseIdentifier: RegisterImageCollectionViewCell.identifier)
+        collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
     
@@ -60,6 +61,7 @@ class RegisterPetView: UIView {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
+        stackView.spacing = 5
         return stackView
     }()
     
@@ -104,7 +106,10 @@ class RegisterPetView: UIView {
          return view
      }()
     
-    private var dataSource: UICollectionViewDiffableDataSource<ImageCollectionViewSection, PetImageItem>?
+    var dataSource: UICollectionViewDiffableDataSource<ImageCollectionViewSection, PetImageItem>?
+    let imageCellRegistration = UICollectionView.CellRegistration<ImageCollectionViewCell, PetImageItem> { cell, indexPath, itemIdentifier in
+        cell.configureCell(petImage: itemIdentifier)
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -119,16 +124,7 @@ class RegisterPetView: UIView {
     
     private func configureDataSource() {
         
-        let cellRegistration = UICollectionView.CellRegistration<ImageCollectionViewCell, PetImageItem> { cell, indexPath, itemIdentifier in
-            cell.configureCell(petImage: itemIdentifier)
-        }
         
-        dataSource = UICollectionViewDiffableDataSource<ImageCollectionViewSection, PetImageItem>(collectionView: imageCollectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
-            if indexPath.row == 0 {
-                return collectionView.dequeueReusableCell(withReuseIdentifier: RegisterImageCollectionViewCell.identifier, for: indexPath)
-            }
-            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
-        })
     }
     
     private func makePetImageCollectionViewFlowLayout() -> UICollectionViewLayout {

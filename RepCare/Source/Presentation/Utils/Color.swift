@@ -16,6 +16,7 @@ enum Color {
     static let middleGray = UIColor(named: "MiddleGray")
     static let lightYellow = UIColor(named: "LightYellow")
     static let oceanBlue = UIColor(named: "OceanBlue")
+    static let opacityGreen = UIColor(named: "OpacityGreen")
 }
 
 extension UIColor {
