@@ -28,6 +28,7 @@ class RegisterInputView: UIView {
         stackView.axis = .horizontal
         stackView.alignment = .fill
         stackView.distribution = .equalSpacing
+        stackView.spacing = 7
         return stackView
     }()
     
@@ -44,7 +45,7 @@ class RegisterInputView: UIView {
         return label
     }()
     
-    lazy var textField: UITextField = {
+    lazy var textField: CustomTextField = {
        let textField = CustomTextField()
         return textField
     }()
@@ -96,6 +97,7 @@ class RegisterInputView: UIView {
         mainStackView.addArrangedSubview(actionButton)
         actionButton.snp.makeConstraints { make in
             make.width.equalToSuperview()
+            make.height.equalTo(45)
         }
     }
     
@@ -103,6 +105,7 @@ class RegisterInputView: UIView {
         mainStackView.addArrangedSubview(textField)
         textField.snp.makeConstraints { make in
             make.width.equalToSuperview()
+            make.height.equalTo(45)
         }
     }
     
@@ -110,6 +113,7 @@ class RegisterInputView: UIView {
         mainStackView.addArrangedSubview(datePickerButton)
         datePickerButton.snp.makeConstraints { make in
             make.width.equalToSuperview()
+            make.height.equalTo(45)
         }
     }
     

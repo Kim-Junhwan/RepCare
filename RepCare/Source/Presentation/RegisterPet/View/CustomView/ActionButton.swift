@@ -20,6 +20,7 @@ class ActionButton: UIButton {
     
     private func setLayout() {
         layer.borderWidth = 1.0
+        layer.cornerRadius = 10.0
         layer.borderColor = UIColor.systemGray3.cgColor
         setTitleColor(.black, for: .normal)
     }

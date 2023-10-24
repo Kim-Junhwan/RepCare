@@ -11,8 +11,9 @@ class CustomTextField: UITextField {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setLayout()
         setToolbar()
+        addLeftPadding()
+        setLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -20,13 +21,27 @@ class CustomTextField: UITextField {
     }
     
     private func setLayout() {
-        if isFirstResponder {
-            layer.borderWidth = 2.0
-            layer.borderColor = UIColor.black.cgColor
-        } else {
-            layer.borderWidth = 1.0
-            layer.borderColor = UIColor.systemGray3.cgColor
-        }
+        layer.borderWidth = 1.0
+        layer.borderColor = UIColor.systemGray3.cgColor
+        layer.cornerRadius = 10.0
+    }
+    
+    override func becomeFirstResponder() -> Bool {
+        layer.borderWidth = 2.0
+        layer.borderColor = UIColor.black.cgColor
+        return super.becomeFirstResponder()
+    }
+    
+    override func resignFirstResponder() -> Bool {
+        layer.borderWidth = 1.0
+        layer.borderColor = UIColor.systemGray3.cgColor
+        return super.resignFirstResponder()
+    }
+    
+    private func addLeftPadding() {
+        let paddingView = UIView(frame: .init(origin: .zero, size: .init(width: 20, height: frame.height)))
+        leftView = paddingView
+        leftViewMode = .always
     }
 
 }
