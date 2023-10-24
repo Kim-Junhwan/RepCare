@@ -12,8 +12,9 @@ class RegisterCollectionViewCell: UICollectionViewCell {
     static let identifier = "RegisterCollectionViewCell"
     
     let plusImageView: UIImageView = {
-        let imageView = UIImageView(image: .init(systemName: "plus"))
-        imageView.tintColor = .systemGray4
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 13, weight: .medium)
+        let imageView = UIImageView(image: .init(systemName: "plus", withConfiguration: imageConfig))
+        imageView.tintColor = .systemGray2
         return imageView
     }()
     
