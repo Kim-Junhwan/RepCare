@@ -168,7 +168,7 @@ extension RegisterNewPetViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == 0 && viewModel.petImageList.value.count < 5 {
             showCameraOrImagePickerActionSheet()
-            return 
+            return
         }
     }
     
@@ -218,10 +218,14 @@ extension RegisterNewPetViewController: UIImagePickerControllerDelegate, UINavig
 extension RegisterNewPetViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true)
-        LoadingView.show()
+        
         let newImages = results.filter { result in
             return !viewModel.petImageList.value.contains { $0.id == result.assetIdentifier }
         }
+        if newImages.isEmpty {
+            return
+        }
+        LoadingView.show()
         Observable.zip(newImages.map{ convertImage(provider: $0.itemProvider) }).subscribe(with: self) { owner, imageList in
             var petImageItemList: [PetImageItem] = []
             imageList.enumerated().forEach { element in
