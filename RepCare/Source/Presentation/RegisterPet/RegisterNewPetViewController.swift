@@ -13,13 +13,22 @@ import PhotosUI
 class RegisterNewPetViewController: BaseViewController {
     
     let mainView = RegisterPetView()
-    let viewModel: RegisterPetViewModel = .init()
+    let viewModel: RegisterPetViewModel
     let disposeBag = DisposeBag()
     
     lazy var registerButton: UIBarButtonItem = {
         let barButton = UIBarButtonItem(title: "등록", style: .plain, target: self, action: #selector(tapRegisterButton))
         return barButton
     }()
+    
+    init(viewModel: RegisterPetViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -152,9 +161,8 @@ class RegisterNewPetViewController: BaseViewController {
     }
     
     @objc func showSpeciesView() {
-        let speciesViewModel = ClassSpeciesMorphViewModel(repository: DefaultSpeciesRepository(speciesStroage: RealmSpeciesStorage()))
-        let vc = ClassSpeciesMorphViewController(viewModel: speciesViewModel)
-        speciesViewModel.tapRegisterClosure = { [weak self] in self?.viewModel.overPetSpecies.accept($0) }
+        let vc = viewModel.diContainer.makeSpeciesViewController()
+        vc.viewModel.tapRegisterClosure = { [weak self] in self?.viewModel.overPetSpecies.accept($0) }
         let nvc = UINavigationController(rootViewController: vc)
         nvc.modalPresentationStyle = .fullScreen
         present(nvc, animated: true)

@@ -33,13 +33,16 @@ class DetailPetViewController: BaseViewController {
     }()
     
     lazy var profileViewController = ProfileViewController(headerViewController: headerViewController, headerViewHeight: view.frame.width)
-    lazy var headerViewController = DetailPetHeaderViewController(pet: viewModel.pet)
-    lazy var petCalenderViewController = PetCalenderViewController(taskRepository: DefaultTaskRepository(petStorage: RealmPetStorage(), taskStorage: RealmTaskStorage()), pet: viewModel.pet)
-    lazy var petWeightViewController = PetWeightViewController(weightRepository: DefaultWeightRepository(weightStroage: RealmWeightStorage(), petStorage: RealmPetStorage()), pet: viewModel.pet)
+    let headerViewController: DetailPetHeaderViewController
+    var petCalenderViewController: PetCalendarViewController
+    var petWeightViewController: PetWeightViewController
     lazy var tabViewControllers = [petCalenderViewController, petWeightViewController]
     let viewModel: DetailPetViewModel
     
-    init(viewModel: DetailPetViewModel) {
+    init(headerViewController: DetailPetHeaderViewController, petCalenderViewController: PetCalendarViewController, petWeightViewController: PetWeightViewController, viewModel: DetailPetViewModel) {
+        self.headerViewController = headerViewController
+        self.petCalenderViewController = petCalenderViewController
+        self.petWeightViewController = petWeightViewController
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -47,7 +50,7 @@ class DetailPetViewController: BaseViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationBarAppearance()

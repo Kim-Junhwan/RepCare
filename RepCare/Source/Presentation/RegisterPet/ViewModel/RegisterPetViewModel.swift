@@ -18,12 +18,18 @@ final class RegisterPetViewModel {
     let adoptionDate: BehaviorRelay<Date?> = .init(value: nil)
     var hatchDate: BehaviorRelay<Date?> = .init(value: nil)
     var currentWeight: BehaviorRelay<Double?> = .init(value: nil)
+    let diContainer: PetListSceneDIContainer
     
     lazy var canRegister = BehaviorRelay.combineLatest(petName, overPetSpecies, adoptionDate, gender) { name, petSpecies, adopDate, gender in
         return !name.isEmpty && (gender != nil) && (petSpecies != nil) && (adopDate != nil)
     }
     
-    let registerUseCase = DefaultRegisterPetUseCase(petRepository: DefaultPetRepository(petStorage: RealmPetStorage(), speciesStroage: RealmSpeciesStorage()), petImageRepository: FileManaerPetImageRepository())
+    let registerUseCase: DefaultRegisterPetUseCase
+    
+    init(diContainer: PetListSceneDIContainer) {
+        self.diContainer = diContainer
+        registerUseCase = diContainer.makeRegisterUseCase()
+    }
     
     func register() throws {
         let imageListData = petImageList.value.map({ image in

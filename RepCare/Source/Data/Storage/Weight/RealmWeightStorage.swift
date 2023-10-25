@@ -14,14 +14,13 @@ enum WeightError: Error {
 
 final class RealmWeightStorage: WeightStorage {
     
-    private let realm: Realm? = {
-        guard let realmPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("repcare.realm", conformingTo: .data) else {fatalError()}
-        let bundleRealm = try? Realm(fileURL: realmPath)
-        return bundleRealm
-    }()
+    private let realm: Realm
+    
+    init(realm: Realm) {
+        self.realm = realm
+    }
     
     func registerWeight(weight: WeightDTO) throws {
-        guard let realm else { return }
         let pet = weight.pet
         try realm.write {
             pet.weights.append(.init(date: weight.date, weight: weight.weight))
@@ -47,7 +46,7 @@ final class RealmWeightStorage: WeightStorage {
             return weightDTO.date.isEqualDay(weight.date)
         }
         guard let updateWeight else { throw WeightError.unknownWeight }
-        try realm?.write({
+        try realm.write({
             updateWeight.weight = weightDTO.weight
         })
     }

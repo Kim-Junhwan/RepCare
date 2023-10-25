@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-final class PetCalenderViewController: BaseViewController {
+final class PetCalendarViewController: BaseViewController {
     
     let mainView = PetCalenderView()
     let taskRepository: TaskRepository
@@ -89,7 +89,7 @@ final class PetCalenderViewController: BaseViewController {
     
 }
 
-extension PetCalenderViewController: PetCalenderDataSource, PetCalenderViewDelegate {
+extension PetCalendarViewController: PetCalenderDataSource, PetCalenderViewDelegate {
     
     func dayEventColor(date: Date) -> [UIColor]? {
         guard let day =  Calendar.current.dateComponents([.day], from: date).day else { return [] }

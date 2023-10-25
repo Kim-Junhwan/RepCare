@@ -10,14 +10,13 @@ import RealmSwift
 
 final class RealmTaskStorage: TaskStorage {
     
-    private let realm: Realm? = {
-        guard let realmPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("repcare.realm", conformingTo: .data) else {fatalError()}
-        let bundleRealm = try? Realm(fileURL: realmPath)
-        return bundleRealm
-    }()
+    private let realm: Realm
+    
+    init(realm: Realm) {
+        self.realm = realm
+    }
     
     func registerTask(request: RegisterTaskRequestDTO) throws {
-        guard let realm else { return }
         let pet = request.pet
         try realm.write {
             pet.tasks.append(.init(registerDate: request.registerDate, memo: request.memo, taskType: request.taskType))

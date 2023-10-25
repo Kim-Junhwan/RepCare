@@ -8,6 +8,7 @@
 import Foundation
 
 final class FileManaerPetImageRepository: PetImageRepository {
+    
     func savePetImage(petId: String, petImageList: [Data]) throws {
         guard let defaultDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
         let petImageDirectoryURL = defaultDirectory.appendingPathComponent(petId, conformingTo: .directory)

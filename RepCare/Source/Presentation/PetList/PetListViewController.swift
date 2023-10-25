@@ -12,8 +12,17 @@ import RxSwift
 final class PetListViewController: BaseViewController {
     
     let mainView = PetListView()
-    let viewModel = PetListViewModel(fetchPetListUseCase: DefaultFetchPetListUseCase(petRepository: DefaultPetRepository(petStorage: RealmPetStorage(), speciesStroage: RealmSpeciesStorage())))
+    let viewModel: PetListViewModel
     let disposeBag = DisposeBag()
+    
+    init(viewModel: PetListViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         view = mainView
@@ -40,7 +49,7 @@ final class PetListViewController: BaseViewController {
     }
     
     @objc func showRegisterPetView() {
-        let registerVC = RegisterNewPetViewController()
+        let registerVC = viewModel.diContainer.makeRegisterViewController()
         navigationController?.pushViewController(registerVC, animated: true)
     }
 
@@ -72,8 +81,7 @@ extension PetListViewController: UICollectionViewDataSource {
 
 extension PetListViewController: PetListViewDelegate {
     func tapFilterButton() {
-        let filterVC = FilterViewController(viewModel: .init(repository: DefaultSpeciesRepository(speciesStroage: RealmSpeciesStorage())))
-        present(filterVC, animated: true)
+        
     }
     
     func searchPetList(searchKeyword: String) {
@@ -90,7 +98,7 @@ extension PetListViewController: PetListViewDelegate {
     }
     
     func selectPet(at index: Int) {
-        let detailViewController = DetailPetViewController(viewModel: .init(pet: viewModel.petList.value[index]))
+        let detailViewController = viewModel.diContainer.makeDetailPetViewController(pet: viewModel.petList.value[index])
         navigationController?.pushViewController(detailViewController, animated: true)
     }
 }

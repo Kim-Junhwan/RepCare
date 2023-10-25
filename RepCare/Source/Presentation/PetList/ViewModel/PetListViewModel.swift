@@ -16,6 +16,7 @@ final class PetListViewModel {
     private var pages: [PetPage] = []
     
     let petList: BehaviorRelay<[PetModel]> = .init(value: [])
+    let diContainer: PetListSceneDIContainer
     private let disposeBag = DisposeBag()
     
     var currentPage: Int = 0
@@ -31,8 +32,9 @@ final class PetListViewModel {
         }
     }
     
-    init(fetchPetListUseCase: FetchPetListUseCase) {
-        self.fetchPetListUseCase = fetchPetListUseCase
+    init(diContainer: PetListSceneDIContainer) {
+        self.diContainer = diContainer
+        self.fetchPetListUseCase = diContainer.makeFetchPetListUseCase()
     }
     
     private func resetPage() {
