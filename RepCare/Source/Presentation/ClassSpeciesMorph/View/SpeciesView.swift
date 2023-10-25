@@ -84,12 +84,16 @@ class SpeciesView: UIView {
     }
     
     func applyData(section: [Section: [Item]]) {
+        dataSource?.apply(appendSection(section: section), animatingDifferences: true)
+    }
+    
+    func appendSection(section: [Section: [Item]]) -> NSDiffableDataSourceSnapshot<Section, Item> {
         var snapShot = NSDiffableDataSourceSnapshot<Section, Item>()
         snapShot.appendSections(Section.allCases)
         for i in section {
             snapShot.appendItems(i.value, toSection: i.key)
         }
-        dataSource?.apply(snapShot, animatingDifferences: true)
+        return snapShot
     }
     
 }

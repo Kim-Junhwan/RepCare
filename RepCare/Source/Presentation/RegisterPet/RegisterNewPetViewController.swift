@@ -133,6 +133,7 @@ class RegisterNewPetViewController: BaseViewController {
         mainView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(10)
         }
+        navigationController?.navigationBar.tintColor = .black
     }
     
     @objc func tapRegisterButton() {

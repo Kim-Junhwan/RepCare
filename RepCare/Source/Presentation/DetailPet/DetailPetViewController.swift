@@ -11,6 +11,27 @@ import Tabman
 
 class DetailPetViewController: BaseViewController {
     
+    lazy var menu: UIMenu = {
+        let menu = UIMenu(title: "Menu", children: menuItems)
+        return menu
+    }()
+    
+    var menuItems: [UIAction] {
+        return [
+            UIAction(title: "개체 정보 수정", image: UIImage(systemName: "pencil"), handler: { (_) in
+            }),
+            UIAction(title: "삭제", image: UIImage(systemName: "trash"), attributes: .destructive, handler: { (_) in
+            })
+        ]
+    }
+    
+    lazy var infoButton: UIBarButtonItem = {
+        let buttonImage = UIImage(named: "ellipsis")?.withRenderingMode(.alwaysTemplate).resizeImage(size: .init(width: 20, height: 20))
+        let barButton = UIBarButtonItem(image: buttonImage, menu: menu)
+        barButton.tintColor = .white
+        return barButton
+    }()
+    
     lazy var profileViewController = ProfileViewController(headerViewController: headerViewController, headerViewHeight: view.frame.width)
     lazy var headerViewController = DetailPetHeaderViewController(pet: viewModel.pet)
     lazy var petCalenderViewController = PetCalenderViewController(taskRepository: DefaultTaskRepository(petStorage: RealmPetStorage(), taskStorage: RealmTaskStorage()), pet: viewModel.pet)
@@ -30,6 +51,7 @@ class DetailPetViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationBarAppearance()
+        navigationController?.navigationBar.tintColor = .white
     }
     
     override func configureView() {
@@ -38,6 +60,7 @@ class DetailPetViewController: BaseViewController {
         view.addSubview(profileViewController.view)
         addChild(profileViewController)
         profileViewController.didMove(toParent: self)
+        navigationItem.setRightBarButton(infoButton, animated: false)
     }
     
     override func setContraints() {
@@ -50,10 +73,16 @@ class DetailPetViewController: BaseViewController {
         let edgeAppearance = UINavigationBarAppearance()
         edgeAppearance.backgroundColor = .clear
         edgeAppearance.configureWithTransparentBackground()
+        let defaultBackButtonStyle = UIBarButtonItemAppearance(style: .plain)
+        //defaultBackButtonStyle.normal.titleTextAttributes = [.foregroundColor: UIColor.white]
+        edgeAppearance.backButtonAppearance = defaultBackButtonStyle
         navigationController?.navigationBar.scrollEdgeAppearance = edgeAppearance
         let scrollApprearance = UINavigationBarAppearance()
+        let scrollBackButtonStyle = UIBarButtonItemAppearance(style: .plain)
+        //scrollBackButtonStyle.normal.titleTextAttributes = [.foregroundColor: UIColor.black]
         scrollApprearance.shadowColor = .clear
         scrollApprearance.backgroundColor = UIColor.systemBackground
+        scrollApprearance.backButtonAppearance = scrollBackButtonStyle
         navigationController?.navigationBar.standardAppearance = scrollApprearance
         navigationController?.navigationBar.isTranslucent = true
     }
@@ -65,10 +94,20 @@ class DetailPetViewController: BaseViewController {
 }
 
 extension DetailPetViewController: ProfileViewControllerDelegate, ProfileViewControllerDataSource {
+    func scroll(contentOffset: CGPoint) {
+        let yOffset = contentOffset.y
+        if yOffset == 0 {
+            navigationController?.navigationBar.tintColor = .white
+            infoButton.tintColor = .white
+            return
+        }
+        navigationController?.navigationBar.tintColor = .black
+        infoButton.tintColor = .black
+    }
+    
     func getCurrentBottomViewControllerContentInset(at index: Int) -> CGFloat {
         return 400
     }
-    
     
     func minHeaderHeight() -> CGFloat {
         guard let navigationBarHeight = navigationController?.navigationBar.frame.height else { return 0 }

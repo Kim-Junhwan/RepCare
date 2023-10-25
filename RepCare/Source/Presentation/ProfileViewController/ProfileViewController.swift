@@ -11,6 +11,7 @@ import Pageboy
 
 protocol ProfileViewControllerDelegate: AnyObject {
     func minHeaderHeight() -> CGFloat
+    func scroll(contentOffset: CGPoint)
 }
 
 protocol ProfileViewControllerDataSource: AnyObject {
@@ -154,6 +155,7 @@ final class ProfileViewController: UIViewController {
 extension ProfileViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         contentOffsets[currentIndex] = scrollView.contentOffset.y
+        delegate?.scroll(contentOffset: scrollView.contentOffset)
         let topHeight = bottomViewController.view.frame.minY - (delegate?.minHeaderHeight() ?? 0)
         if scrollView.contentOffset.y < topHeight{
             self.containerScrollView.contentOffset.y = scrollView.contentOffset.y

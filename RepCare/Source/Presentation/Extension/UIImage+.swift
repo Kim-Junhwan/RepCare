@@ -9,15 +9,14 @@ import Foundation
 import UIKit
 
 extension UIImage {
-    func resize(width: CGFloat) -> UIImage {
-        let scale = width / size.width
-        let height = size.height * scale
-        let newSize = CGSize(width: width, height: height)
-        let render = UIGraphicsImageRenderer(size: newSize)
-        let renderImage = render.image { context in
-            self.draw(in: .init(origin: .zero, size: size))
-        }
-        return renderImage
+    func resizeImage(size: CGSize) -> UIImage {
+        let originalSize = self.size
+        let ratio: CGFloat = {
+            return originalSize.width > originalSize.height ? 1 / (size.width / originalSize.width) :
+            1 / (size.height / originalSize.height)
+        }()
+        
+        return UIImage(cgImage: self.cgImage!, scale: self.scale * ratio, orientation: self.imageOrientation)
     }
     
     func downSamplingImage(maxSize:CGFloat) -> UIImage {

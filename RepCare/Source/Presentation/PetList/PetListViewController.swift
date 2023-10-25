@@ -72,7 +72,8 @@ extension PetListViewController: UICollectionViewDataSource {
 
 extension PetListViewController: PetListViewDelegate {
     func tapFilterButton() {
-        
+        let filterVC = FilterViewController(viewModel: .init(repository: DefaultSpeciesRepository(speciesStroage: RealmSpeciesStorage())))
+        present(filterVC, animated: true)
     }
     
     func searchPetList(searchKeyword: String) {
