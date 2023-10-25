@@ -71,6 +71,10 @@ extension PetListViewController: UICollectionViewDataSource {
 }
 
 extension PetListViewController: PetListViewDelegate {
+    func tapFilterButton() {
+        
+    }
+    
     func searchPetList(searchKeyword: String) {
         viewModel.searchPet(keyword: searchKeyword)
     }

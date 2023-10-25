@@ -112,6 +112,12 @@ class RegisterNewPetViewController: BaseViewController {
     }
     
     func configureDatasource() {
+        let imageCellRegistration = UICollectionView.CellRegistration<ImageCollectionViewCell, PetImageItem> { cell, indexPath, itemIdentifier in
+            cell.configureCell(petImage: itemIdentifier)
+            cell.deleteButton.identifier = self.viewModel.petImageList.value[indexPath.row-1].id
+            cell.deleteButton.addTarget(self, action: #selector(self.deleteImage(_:)), for: .touchUpInside)
+        }
+        
         mainView.dataSource = UICollectionViewDiffableDataSource<ImageCollectionViewSection, PetImageItem>(collectionView: mainView.imageCollectionView, cellProvider: { [weak self] collectionView, indexPath, itemIdentifier in
             guard let self else { return .init() }
             if indexPath.row == 0 {
@@ -119,7 +125,7 @@ class RegisterNewPetViewController: BaseViewController {
                 cell.configureCell(imageCount: viewModel.petImageList.value.count)
                 return cell
             }
-            return collectionView.dequeueConfiguredReusableCell(using: self.mainView.imageCellRegistration, for: indexPath, item: itemIdentifier)
+            return collectionView.dequeueConfiguredReusableCell(using: imageCellRegistration, for: indexPath, item: itemIdentifier)
         })
     }
     
@@ -139,7 +145,10 @@ class RegisterNewPetViewController: BaseViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    
+    @objc func deleteImage(_ sender: DeleteButton) {
+        var imageList = viewModel.petImageList.value
+        viewModel.petImageList.accept(imageList.filter { $0.id != sender.identifier })
+    }
     
     @objc func showSpeciesView() {
         let speciesViewModel = ClassSpeciesMorphViewModel(repository: DefaultSpeciesRepository(speciesStroage: RealmSpeciesStorage()))
@@ -157,8 +166,9 @@ class RegisterNewPetViewController: BaseViewController {
 
 extension RegisterNewPetViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
+        if indexPath.row == 0 && viewModel.petImageList.value.count < 5 {
             showCameraOrImagePickerActionSheet()
+            return 
         }
     }
     
@@ -185,9 +195,10 @@ extension RegisterNewPetViewController: UICollectionViewDelegate {
     }
     
     func showImagePicker() {
-        var config = PHPickerConfiguration()
-        config.selectionLimit = 5
+        var config = PHPickerConfiguration(photoLibrary: .shared())
         config.filter = .images
+        config.preselectedAssetIdentifiers = viewModel.petImageList.value.filter { $0.imageType == .galleryImage }.map { $0.id }.compactMap { $0 }
+        config.selectionLimit = 5 - (viewModel.petImageList.value.filter { $0.imageType == .cameraImage }.count)
         let picker = PHPickerViewController(configuration: config)
         picker.delegate = self
         present(picker, animated: true)
@@ -197,8 +208,9 @@ extension RegisterNewPetViewController: UICollectionViewDelegate {
 extension RegisterNewPetViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true) { [weak self] in
-            let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
-            self?.viewModel.petImageList.accept([.init(image: image!)])
+            guard let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else { return }
+            guard let self else { return }
+            self.viewModel.petImageList.accept(self.viewModel.petImageList.value+[PetImageItem(image: image.downSamplingImage(maxSize: UIScreen.main.bounds.width), imageType: .cameraImage, id: UUID().uuidString)])
         }
     }
 }
@@ -206,14 +218,18 @@ extension RegisterNewPetViewController: UIImagePickerControllerDelegate, UINavig
 extension RegisterNewPetViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true)
-        let itemProviderList = results.map { $0.itemProvider }
-        Observable.zip(itemProviderList.map { convertImage(provider: $0) }).subscribe { imageList in
-            let petImageList = imageList.map { PetImageItem(image: $0) }
-            DispatchQueue.main.async { [weak self] in
-                self?.viewModel.petImageList.accept(petImageList)
+        LoadingView.show()
+        let newImages = results.filter { result in
+            return !viewModel.petImageList.value.contains { $0.id == result.assetIdentifier }
+        }
+        Observable.zip(newImages.map{ convertImage(provider: $0.itemProvider) }).subscribe(with: self) { owner, imageList in
+            var petImageItemList: [PetImageItem] = []
+            imageList.enumerated().forEach { element in
+                guard let imageIdentifier = newImages[element.offset].assetIdentifier else { return }
+                petImageItemList.append(.init(image: imageList[element.offset], imageType: .galleryImage, id: imageIdentifier))
             }
-        } onError: { error in
-            print("error \(error)")
+            owner.viewModel.petImageList.accept(owner.viewModel.petImageList.value + petImageItemList)
+            LoadingView.hide()
         }.disposed(by: disposeBag)
     }
     

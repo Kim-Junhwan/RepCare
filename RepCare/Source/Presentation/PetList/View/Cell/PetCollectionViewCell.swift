@@ -28,6 +28,7 @@ class PetCollectionViewCell: UICollectionViewCell {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .leading
+        stackView.distribution = .equalSpacing
         stackView.spacing = 10
         stackView.addArrangedSubview(petNameStackView)
         stackView.addArrangedSubview(morphStackView)
@@ -51,6 +52,7 @@ class PetCollectionViewCell: UICollectionViewCell {
     let nameLabel: UILabel = {
        let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
@@ -130,7 +132,7 @@ class PetCollectionViewCell: UICollectionViewCell {
         }
         descriptionStackView.snp.makeConstraints { make in
             make.top.equalTo(basePetImageView.snp.bottom).offset(10)
-            make.leading.trailing.bottom.equalToSuperview().inset(10)
+            make.leading.trailing.equalToSuperview().inset(10)
         }
         petNameStackView.snp.makeConstraints { make in
             make.width.equalToSuperview()

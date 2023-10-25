@@ -83,6 +83,9 @@ final class PetCalenderViewController: BaseViewController {
         return fetchList.map { .init(detailTask: $0) }
     }
     
+    deinit {
+        print("deinit PetCalendarVC")
+    }
     
 }
 

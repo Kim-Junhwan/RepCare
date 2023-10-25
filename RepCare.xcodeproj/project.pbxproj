@@ -105,6 +105,7 @@
 		C7D152EF2ACAA4250064D59F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152EE2ACAA4250064D59F /* BaseViewController.swift */; };
 		C7D152F22ACAA5B90064D59F /* PetListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152F12ACAA5B90064D59F /* PetListView.swift */; };
 		C7E835E42AE576FA00AA0361 /* DateFormatter+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E835E32AE576FA00AA0361 /* DateFormatter+.swift */; };
+		C7F378A92AE8F77300281A35 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F378A82AE8F77300281A35 /* LoadingView.swift */; };
 		C7F3E8AE2AE4D644007621E1 /* DefaultWeightRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F3E8AD2AE4D644007621E1 /* DefaultWeightRepository.swift */; };
 		C7F3E8B12AE4D6B5007621E1 /* WeightStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F3E8B02AE4D6B5007621E1 /* WeightStorage.swift */; };
 		C7F3E8B42AE4D7C0007621E1 /* WeightDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F3E8B32AE4D7C0007621E1 /* WeightDTO.swift */; };
@@ -220,6 +221,7 @@
 		C7D152EE2ACAA4250064D59F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		C7D152F12ACAA5B90064D59F /* PetListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetListView.swift; sourceTree = "<group>"; };
 		C7E835E32AE576FA00AA0361 /* DateFormatter+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+.swift"; sourceTree = "<group>"; };
+		C7F378A82AE8F77300281A35 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		C7F3E8AD2AE4D644007621E1 /* DefaultWeightRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultWeightRepository.swift; sourceTree = "<group>"; };
 		C7F3E8B02AE4D6B5007621E1 /* WeightStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightStorage.swift; sourceTree = "<group>"; };
 		C7F3E8B32AE4D7C0007621E1 /* WeightDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightDTO.swift; sourceTree = "<group>"; };
@@ -555,6 +557,7 @@
 				C7D152ED2ACAA4160064D59F /* Base */,
 				C7D152602AC70B100064D59F /* PetList */,
 				C7D1525F2AC70B080064D59F /* Utils */,
+				C7F378A82AE8F77300281A35 /* LoadingView.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -952,6 +955,7 @@
 				C70E59D42ADED3C100428CDE /* TaskStorage.swift in Sources */,
 				C7D152462AC51B270064D59F /* AppDelegate.swift in Sources */,
 				C70E59DF2ADF9DD900428CDE /* FetchTaskListDTO.swift in Sources */,
+				C7F378A92AE8F77300281A35 /* LoadingView.swift in Sources */,
 				C70E59CE2ADECFCE00428CDE /* RegisterTaskQuery.swift in Sources */,
 				C7F5F4332ACE87AA00ACFC76 /* SpeciesRepository.swift in Sources */,
 				C7273BB22AD62DAD004B7A6F /* ImageCollectionViewCell.swift in Sources */,

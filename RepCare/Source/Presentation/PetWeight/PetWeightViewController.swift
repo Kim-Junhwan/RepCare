@@ -102,6 +102,10 @@ final class PetWeightViewController: BaseViewController {
         layout.itemSize = .init(width: width, height: 50)
         return layout
     }
+    
+    deinit {
+        print("deinit PetCalendarVC")
+    }
 }
 
 extension PetWeightViewController: UICollectionViewDataSource {

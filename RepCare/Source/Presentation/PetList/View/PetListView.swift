@@ -13,6 +13,7 @@ protocol PetListViewDelegate: AnyObject {
     func selectPet(at index: Int)
     func reloadPetList(completion: @escaping () -> Void)
     func searchPetList(searchKeyword: String)
+    func tapFilterButton()
 }
 
 final class PetListView: UIView {
@@ -103,6 +104,7 @@ final class PetListView: UIView {
         addSubview(petListCollectionView)
         addSubview(addPetButton)
         searchBar.delegate = self
+        filterButton.addTarget(self, action: #selector(tapFilterButton), for: .touchUpInside)
     }
     
     private func setConstraints() {
@@ -146,6 +148,10 @@ final class PetListView: UIView {
         flowLayout.sectionInset = .init(top: .zero, left: 10.0, bottom: .zero, right: 10.0)
         flowLayout.minimumLineSpacing = 10.0
         return flowLayout
+    }
+    
+    @objc func tapFilterButton() {
+        delegate?.tapFilterButton()
     }
     
     @objc func updatePetList() {

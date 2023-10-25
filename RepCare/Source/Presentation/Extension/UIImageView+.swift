@@ -18,12 +18,12 @@ extension UIImageView {
             imagePath = defaultPath.appendingPathComponent(path, conformingTo: .png).path
         }
         if let imageFile = FileManager.default.contents(atPath: imagePath) {
-            DispatchQueue.main.async {
-                self.image = UIImage(data: imageFile)
+            DispatchQueue.main.async { [weak self] in
+                self?.image = UIImage(data: imageFile)
             }
         } else {
-            DispatchQueue.main.async {
-                self.image = UIImage(systemName: "star")
+            DispatchQueue.main.async { [weak self] in
+                self?.image = UIImage(systemName: "star")
             }
         }
     }

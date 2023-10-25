@@ -7,6 +7,10 @@
 
 import UIKit
 
+final class DeleteButton: UIButton {
+    var identifier: String?
+}
+
 class ImageCollectionViewCell: UICollectionViewCell {
     let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -15,13 +19,13 @@ class ImageCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-    let deleteButton: UIButton = {
+    let deleteButton: DeleteButton = {
         var config = UIButton.Configuration.filled()
         var imageConfig = UIImage.SymbolConfiguration(pointSize: 6, weight: .light)
         config.image = UIImage(systemName: "xmark", withConfiguration: imageConfig)
         config.baseForegroundColor = .white
         config.baseBackgroundColor = .black
-        let button = UIButton(configuration: config)
+        let button = DeleteButton(configuration: config)
         button.clipsToBounds = true
         return button
     }()
@@ -38,7 +42,6 @@ class ImageCollectionViewCell: UICollectionViewCell {
     private func configureView() {
         contentView.addSubview(imageView)
         contentView.addSubview(deleteButton)
-        deleteButton.addTarget(self, action: #selector(tapDelete), for: .touchUpInside)
         imageView.snp.makeConstraints { make in
             make.leading.bottom.equalToSuperview()
             make.width.height.equalToSuperview().multipliedBy(0.9)
@@ -64,7 +67,8 @@ class ImageCollectionViewCell: UICollectionViewCell {
         imageView.layer.cornerRadius = 10.0
     }
     
-    @objc private func tapDelete() {
-        print("DELETE")
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        deleteButton.identifier = nil
     }
 }

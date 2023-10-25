@@ -8,8 +8,13 @@
 import UIKit
 
 struct PetImageItem: Hashable {
+    enum ImageType {
+        case cameraImage
+        case galleryImage
+    }
     let image: UIImage
-    private let identifier = UUID()
+    let imageType: ImageType
+    let id: String
 }
 
 enum ImageCollectionViewSection {
@@ -107,9 +112,7 @@ class RegisterPetView: UIView {
      }()
     
     var dataSource: UICollectionViewDiffableDataSource<ImageCollectionViewSection, PetImageItem>?
-    let imageCellRegistration = UICollectionView.CellRegistration<ImageCollectionViewCell, PetImageItem> { cell, indexPath, itemIdentifier in
-        cell.configureCell(petImage: itemIdentifier)
-    }
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -181,7 +184,7 @@ class RegisterPetView: UIView {
         var snapshot = NSDiffableDataSourceSnapshot<ImageCollectionViewSection,PetImageItem>()
         snapshot.appendSections([.main])
         var fetchImages = images
-        let registerCell = PetImageItem(image: .init())
+        let registerCell = PetImageItem(image: .init(), imageType: .cameraImage, id: UUID().uuidString)
         fetchImages.insert(registerCell, at: 0)
         snapshot.appendItems(fetchImages)
         dataSource?.apply(snapshot)
