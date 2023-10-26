@@ -24,6 +24,7 @@ struct Pet {
     var adoptionDate: Date
     var birthDate: Date?
     var gender: Gender
+    let currentWeight: Double?
 }
 
 struct PetImage {

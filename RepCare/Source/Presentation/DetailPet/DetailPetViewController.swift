@@ -18,7 +18,10 @@ class DetailPetViewController: BaseViewController {
     
     var menuItems: [UIAction] {
         return [
-            UIAction(title: "개체 정보 수정", image: UIImage(systemName: "pencil"), handler: { (_) in
+            UIAction(title: "개체 정보 수정", image: UIImage(systemName: "pencil"), handler: { [weak self] (_) in
+                guard let self else { return }
+                let updateVC = self.viewModel.diContainer.makeUpdateViewController(pet: self.viewModel.pet)
+                self.present(updateVC, animated: true)
             }),
             UIAction(title: "삭제", image: UIImage(systemName: "trash"), attributes: .destructive, handler: { _ in
                 do {
@@ -86,16 +89,10 @@ class DetailPetViewController: BaseViewController {
         let edgeAppearance = UINavigationBarAppearance()
         edgeAppearance.backgroundColor = .clear
         edgeAppearance.configureWithTransparentBackground()
-        let defaultBackButtonStyle = UIBarButtonItemAppearance(style: .plain)
-        //defaultBackButtonStyle.normal.titleTextAttributes = [.foregroundColor: UIColor.white]
-        edgeAppearance.backButtonAppearance = defaultBackButtonStyle
         navigationController?.navigationBar.scrollEdgeAppearance = edgeAppearance
         let scrollApprearance = UINavigationBarAppearance()
-        let scrollBackButtonStyle = UIBarButtonItemAppearance(style: .plain)
-        //scrollBackButtonStyle.normal.titleTextAttributes = [.foregroundColor: UIColor.black]
         scrollApprearance.shadowColor = .clear
         scrollApprearance.backgroundColor = UIColor.systemBackground
-        scrollApprearance.backButtonAppearance = scrollBackButtonStyle
         navigationController?.navigationBar.standardAppearance = scrollApprearance
         navigationController?.navigationBar.isTranslucent = true
     }

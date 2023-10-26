@@ -11,13 +11,15 @@ final class DetailPetViewModel {
     
     let pet: PetModel
     private let deleteUseCase: DeletePetUseCase
+    let diContainer: PetListSceneDIContainer
     var images: [PetImageModel] {
         return pet.imagePath
     }
     
-    init(pet: PetModel, deleteUseCase: DeletePetUseCase) {
+    init(pet: PetModel, deleteUseCase: DeletePetUseCase, diContainer: PetListSceneDIContainer) {
         self.pet = pet
         self.deleteUseCase = deleteUseCase
+        self.diContainer = diContainer
     }
     
     func deletePet() throws {

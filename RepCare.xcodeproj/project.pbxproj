@@ -81,6 +81,8 @@
 		C7C26FC12AE95E4500A76B03 /* RealmDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C26FC02AE95E4500A76B03 /* RealmDIContainer.swift */; };
 		C7C26FC32AE9689800A76B03 /* PetListSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C26FC22AE9689800A76B03 /* PetListSceneDIContainer.swift */; };
 		C7C26FC52AE9866100A76B03 /* DeletePetUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C26FC42AE9866100A76B03 /* DeletePetUseCase.swift */; };
+		C7C26FC82AE9FD3B00A76B03 /* UpdatePetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C26FC72AE9FD3B00A76B03 /* UpdatePetViewModel.swift */; };
+		C7C26FCA2AE9FDCF00A76B03 /* UpdatePetUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C26FC92AE9FDCF00A76B03 /* UpdatePetUseCase.swift */; };
 		C7D152462AC51B270064D59F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152452AC51B270064D59F /* AppDelegate.swift */; };
 		C7D152482AC51B270064D59F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152472AC51B270064D59F /* SceneDelegate.swift */; };
 		C7D1524F2AC51B280064D59F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7D1524E2AC51B280064D59F /* Assets.xcassets */; };
@@ -207,6 +209,8 @@
 		C7C26FC02AE95E4500A76B03 /* RealmDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDIContainer.swift; sourceTree = "<group>"; };
 		C7C26FC22AE9689800A76B03 /* PetListSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetListSceneDIContainer.swift; sourceTree = "<group>"; };
 		C7C26FC42AE9866100A76B03 /* DeletePetUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletePetUseCase.swift; sourceTree = "<group>"; };
+		C7C26FC72AE9FD3B00A76B03 /* UpdatePetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePetViewModel.swift; sourceTree = "<group>"; };
+		C7C26FC92AE9FDCF00A76B03 /* UpdatePetUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePetUseCase.swift; sourceTree = "<group>"; };
 		C7D152422AC51B270064D59F /* RepCare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RepCare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7D152452AC51B270064D59F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7D152472AC51B270064D59F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -489,6 +493,7 @@
 		C776F6A52ADA835D006015AD /* DetailPet */ = {
 			isa = PBXGroup;
 			children = (
+				C7C26FC62AE9FD2B00A76B03 /* UpdatePetViewModel */,
 				C709AA5F2ADD19AD004FA677 /* HeaderView */,
 				C709AA552ADBB642004FA677 /* ViewModel */,
 				C709AA3F2ADA9367004FA677 /* View */,
@@ -505,6 +510,14 @@
 				C7C26FC22AE9689800A76B03 /* PetListSceneDIContainer.swift */,
 			);
 			path = DI;
+			sourceTree = "<group>";
+		};
+		C7C26FC62AE9FD2B00A76B03 /* UpdatePetViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C7C26FC72AE9FD3B00A76B03 /* UpdatePetViewModel.swift */,
+			);
+			path = UpdatePetViewModel;
 			sourceTree = "<group>";
 		};
 		C7D152392AC51B270064D59F = {
@@ -648,6 +661,7 @@
 				C7D152D42AC998900064D59F /* FetchPetListUseCase.swift */,
 				C727A41F2AD6E89500880111 /* RegisterPetUseCase.swift */,
 				C7C26FC42AE9866100A76B03 /* DeletePetUseCase.swift */,
+				C7C26FC92AE9FDCF00A76B03 /* UpdatePetUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -989,6 +1003,7 @@
 				C709AA5E2ADD198C004FA677 /* DetailPetHeaderViewController.swift in Sources */,
 				C7F5F4252ACE5BA500ACFC76 /* RegisterInputView.swift in Sources */,
 				C7F3E8B42AE4D7C0007621E1 /* WeightDTO.swift in Sources */,
+				C7C26FC82AE9FD3B00A76B03 /* UpdatePetViewModel.swift in Sources */,
 				C7D152A22AC855F60064D59F /* PetClassObject.swift in Sources */,
 				C727A4402AD99A6E00880111 /* UIImageView+.swift in Sources */,
 				C7273BA52AD43FB4004B7A6F /* DetailPetSpeciesModel.swift in Sources */,
@@ -1058,6 +1073,7 @@
 				C76A01EE2AD2676B0024D008 /* PetClassResponseDTO.swift in Sources */,
 				C76A01EC2AD265FB0024D008 /* SpeciesStorage.swift in Sources */,
 				C76A01F22AD26E550024D008 /* DetailSpecies.swift in Sources */,
+				C7C26FCA2AE9FDCF00A76B03 /* UpdatePetUseCase.swift in Sources */,
 				C7D152E42AC9A7F00064D59F /* Weight.swift in Sources */,
 				C7273BAB2AD444B5004B7A6F /* MorphModel.swift in Sources */,
 				C7D152DD2AC99B950064D59F /* Pet.swift in Sources */,

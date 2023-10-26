@@ -42,7 +42,7 @@ class PetObject: Object {
     func toDomain() -> Pet {
         guard let petClass = petClass?.toDomain() else { fatalError("Unknown PetClass") }
         guard let petSpecies = petSpecies?.toDomain() else { fatalError("") }
-        return .init(id: _id.stringValue, name: name, imageList: imagePathList.map{.init(imagePath: $0)}, petClass: petClass, petSpecies: petSpecies, detailSpecies: detailSpecies?.toDomain(), morph: morph?.toDomain(), adoptionDate: adoptionDate, birthDate: birthDate , gender: gender.toDomain())
+        return .init(id: _id.stringValue, name: name, imageList: imagePathList.map{.init(imagePath: $0)}, petClass: petClass, petSpecies: petSpecies, detailSpecies: detailSpecies?.toDomain(), morph: morph?.toDomain(), adoptionDate: adoptionDate, birthDate: birthDate , gender: gender.toDomain(), currentWeight: weights.last?.weight)
     }
 }
 

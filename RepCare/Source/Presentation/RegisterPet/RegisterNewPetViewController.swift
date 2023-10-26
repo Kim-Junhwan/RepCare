@@ -59,8 +59,12 @@ class RegisterNewPetViewController: BaseViewController {
     }
     
     private func bindName() {
+        viewModel.petName.subscribe(with: self) { owner, name in
+            owner.mainView.nameTextField.textField.text = name
+        }.disposed(by: disposeBag)
         mainView.nameTextField.textField.rx.text.orEmpty.subscribe(with: self) { owner, input in
             owner.viewModel.petName.accept(input)
+            owner.mainView.nameTextField.textField.text = input
         }.disposed(by: disposeBag)
     }
     
@@ -81,6 +85,9 @@ class RegisterNewPetViewController: BaseViewController {
     }
     
     private func bindGender() {
+        if let gender = viewModel.gender.value {
+            mainView.genderButtonList[gender.rawValue].isSelected = true
+        }
         mainView.genderButtonList.forEach { button in
             guard let gender = GenderModel(rawValue: button.tag) else {  return }
             button.rx.tap.bind { [weak self] in self?.viewModel.gender.accept(gender) }.disposed(by: disposeBag)
@@ -100,6 +107,9 @@ class RegisterNewPetViewController: BaseViewController {
     }
     
     private func bindWeight() {
+        if let weight = viewModel.currentWeight.value {
+            mainView.weightTextField.textField.text = "\(weight)"
+        }
         mainView.weightTextField.textField.rx.text.orEmpty.subscribe(with: self) { owner, fetchWeight in
             owner.viewModel.currentWeight.accept(Double(fetchWeight))
         }.disposed(by: disposeBag)
