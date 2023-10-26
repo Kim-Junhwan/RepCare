@@ -16,6 +16,8 @@ class RegisterNewPetViewController: BaseViewController {
     let viewModel: RegisterPetViewModel
     let disposeBag = DisposeBag()
     
+    var tapRegisterButtonClosure: (() -> Void)?
+    
     lazy var registerButton: UIBarButtonItem = {
         let barButton = UIBarButtonItem(title: viewModel.registerButtonTitle, style: .plain, target: self, action: #selector(tapRegisterButton))
         return barButton
@@ -158,16 +160,16 @@ class RegisterNewPetViewController: BaseViewController {
     }
     
     @objc func tapRegisterButton() {
-        
         do {
             try self.viewModel.register()
         } catch {
             showErrorAlert(title: "저장 에러", message: error.localizedDescription)
         }
         if navigationController?.viewControllers.count == 1 {
-            dismiss(animated: true)
+            dismiss(animated: true, completion: tapRegisterButtonClosure)
         } else {
             navigationController?.popViewController(animated: true)
+            tapRegisterButtonClosure?()
         }
         
     }

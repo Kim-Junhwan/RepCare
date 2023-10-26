@@ -50,6 +50,9 @@ final class PetListViewController: BaseViewController {
     
     @objc func showRegisterPetView() {
         let registerVC = viewModel.diContainer.makeRegisterViewController()
+        registerVC.tapRegisterButtonClosure = { [weak self] in
+            self?.viewModel.reloadPetList()
+        }
         navigationController?.pushViewController(registerVC, animated: true)
     }
 
