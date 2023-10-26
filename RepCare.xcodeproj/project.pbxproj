@@ -80,6 +80,7 @@
 		C7C26FBF2AE95E0C00A76B03 /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C26FBE2AE95E0C00A76B03 /* AppDIContainer.swift */; };
 		C7C26FC12AE95E4500A76B03 /* RealmDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C26FC02AE95E4500A76B03 /* RealmDIContainer.swift */; };
 		C7C26FC32AE9689800A76B03 /* PetListSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C26FC22AE9689800A76B03 /* PetListSceneDIContainer.swift */; };
+		C7C26FC52AE9866100A76B03 /* DeletePetUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C26FC42AE9866100A76B03 /* DeletePetUseCase.swift */; };
 		C7D152462AC51B270064D59F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152452AC51B270064D59F /* AppDelegate.swift */; };
 		C7D152482AC51B270064D59F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152472AC51B270064D59F /* SceneDelegate.swift */; };
 		C7D1524F2AC51B280064D59F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7D1524E2AC51B280064D59F /* Assets.xcassets */; };
@@ -205,6 +206,7 @@
 		C7C26FBE2AE95E0C00A76B03 /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
 		C7C26FC02AE95E4500A76B03 /* RealmDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDIContainer.swift; sourceTree = "<group>"; };
 		C7C26FC22AE9689800A76B03 /* PetListSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetListSceneDIContainer.swift; sourceTree = "<group>"; };
+		C7C26FC42AE9866100A76B03 /* DeletePetUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletePetUseCase.swift; sourceTree = "<group>"; };
 		C7D152422AC51B270064D59F /* RepCare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RepCare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7D152452AC51B270064D59F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7D152472AC51B270064D59F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -645,6 +647,7 @@
 			children = (
 				C7D152D42AC998900064D59F /* FetchPetListUseCase.swift */,
 				C727A41F2AD6E89500880111 /* RegisterPetUseCase.swift */,
+				C7C26FC42AE9866100A76B03 /* DeletePetUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -1041,6 +1044,7 @@
 				C7D152482AC51B270064D59F /* SceneDelegate.swift in Sources */,
 				C7F5F42D2ACE873F00ACFC76 /* ClassSpeciesMorphViewController.swift in Sources */,
 				C727A43C2AD940E200880111 /* RegisterPetQuery.swift in Sources */,
+				C7C26FC52AE9866100A76B03 /* DeletePetUseCase.swift in Sources */,
 				C70E59CC2ADECF2700428CDE /* TaskRepository.swift in Sources */,
 				C7D152D12AC93B3D0064D59F /* WeightObject.swift in Sources */,
 				C7D152DF2AC99BF90064D59F /* Morph.swift in Sources */,

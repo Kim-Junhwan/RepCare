@@ -9,4 +9,5 @@ import Foundation
 
 protocol PetImageRepository {
     func savePetImage(petId: String ,petImageList: [Data]) throws
+    func deletePetImage(petId: String) throws
 }

@@ -45,8 +45,13 @@ final class PetListSceneDIContainer {
     }
     
     private func makeDetailPetViewModel(pet: PetModel) -> DetailPetViewModel {
-        let viewModel = DetailPetViewModel(pet: pet)
+        let viewModel = DetailPetViewModel(pet: pet, deleteUseCase: makeDeleteUseCase())
         return viewModel
+    }
+    
+    private func makeDeleteUseCase() -> DeletePetUseCase {
+        let usecase = DefaultDeletePetUseCase(petImageRepository: appDIContainer.getPetImageRepository(), petRepository: appDIContainer.getPetRepository())
+        return usecase
     }
     
     private func makePetCalendatViewController(pet: PetModel) -> PetCalendarViewController {

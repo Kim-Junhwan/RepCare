@@ -18,6 +18,6 @@ protocol PetRepository {
     typealias petId = String
     
     func registerPet(pet: RegisterPetQuery) throws -> petId
-    func deletePet(pet: Pet)
+    func deletePet(petId: String) throws
     func fetchPetList(query: FetchPetListQuery, start: Int) -> PetRepositoryResponse
 }

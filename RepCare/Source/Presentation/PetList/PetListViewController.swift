@@ -99,6 +99,9 @@ extension PetListViewController: PetListViewDelegate {
     
     func selectPet(at index: Int) {
         let detailViewController = viewModel.diContainer.makeDetailPetViewController(pet: viewModel.petList.value[index])
+        detailViewController.updateClosure = {
+            self.viewModel.reloadPetList()
+        }
         navigationController?.pushViewController(detailViewController, animated: true)
     }
 }

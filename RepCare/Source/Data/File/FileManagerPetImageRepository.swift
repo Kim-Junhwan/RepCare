@@ -19,4 +19,10 @@ final class FileManaerPetImageRepository: PetImageRepository {
             try petImageList[images].write(to: imagePath)
         }
     }
+    
+    func deletePetImage(petId: String) throws {
+        guard let defaultDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+        let petImagePath = defaultDirectory.appendingPathComponent(petId, conformingTo: .directory)
+        try FileManager.default.removeItem(at: petImagePath)
+    }
 }

@@ -27,8 +27,8 @@ final class DefaultPetRepository: PetRepository {
         return registerPet._id.stringValue
     }
     
-    func deletePet(pet: Pet) {
-        
+    func deletePet(petId: String) throws {
+        try petStorage.deletePet(id: petId)
     }
     
     func fetchPetList(query: FetchPetListQuery, start: Int) -> PetRepositoryResponse {

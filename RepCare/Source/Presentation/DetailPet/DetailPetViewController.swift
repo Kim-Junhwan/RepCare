@@ -20,7 +20,15 @@ class DetailPetViewController: BaseViewController {
         return [
             UIAction(title: "개체 정보 수정", image: UIImage(systemName: "pencil"), handler: { (_) in
             }),
-            UIAction(title: "삭제", image: UIImage(systemName: "trash"), attributes: .destructive, handler: { (_) in
+            UIAction(title: "삭제", image: UIImage(systemName: "trash"), attributes: .destructive, handler: { _ in
+                do {
+                    try self.viewModel.deletePet()
+                    self.updateClosure?()
+                    self.navigationController?.popToRootViewController(animated: true)
+                } catch {
+                    print(error)
+                }
+                
             })
         ]
     }
@@ -38,6 +46,7 @@ class DetailPetViewController: BaseViewController {
     var petWeightViewController: PetWeightViewController
     lazy var tabViewControllers = [petCalenderViewController, petWeightViewController]
     let viewModel: DetailPetViewModel
+    var updateClosure: (()->Void)?
     
     init(headerViewController: DetailPetHeaderViewController, petCalenderViewController: PetCalendarViewController, petWeightViewController: PetWeightViewController, viewModel: DetailPetViewModel) {
         self.headerViewController = headerViewController
@@ -54,6 +63,7 @@ class DetailPetViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationBarAppearance()
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         navigationController?.navigationBar.tintColor = .white
     }
     

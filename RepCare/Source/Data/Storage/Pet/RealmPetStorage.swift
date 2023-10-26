@@ -47,4 +47,14 @@ extension RealmPetStorage: PetStorage {
         return pet
     }
     
+    func deletePet(id: String) throws {
+        guard let objectId = try? ObjectId(string: id) else { return }
+        guard let pet = realm.object(ofType: PetObject.self, forPrimaryKey: objectId) else { return }
+        try realm.write {
+            realm.delete(pet.weights)
+            realm.delete(pet.tasks)
+            realm.delete(pet)
+        }
+    }
+    
 }
