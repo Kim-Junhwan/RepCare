@@ -20,8 +20,10 @@ class DetailPetViewController: BaseViewController {
         return [
             UIAction(title: "개체 정보 수정", image: UIImage(systemName: "pencil"), handler: { [weak self] (_) in
                 guard let self else { return }
+                
                 let updateVC = self.viewModel.diContainer.makeUpdateViewController(pet: self.viewModel.pet)
-                self.present(updateVC, animated: true)
+                let nvc = UINavigationController(rootViewController: updateVC)
+                self.present(nvc, animated: true)
             }),
             UIAction(title: "삭제", image: UIImage(systemName: "trash"), attributes: .destructive, handler: { _ in
                 do {

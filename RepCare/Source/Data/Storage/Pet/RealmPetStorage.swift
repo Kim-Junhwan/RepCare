@@ -47,9 +47,28 @@ extension RealmPetStorage: PetStorage {
         return pet
     }
     
+    func updatePet(id: String, editPet: UpdatePetDTO) throws {
+        guard let petId = try? ObjectId(string: id) else { return }
+        guard let pet = realm.object(ofType: PetObject.self, forPrimaryKey: petId) else { throw RepositoryError.unknownPet }
+        let imagePathList = editPet.imagePathList.map { "\(pet._id.stringValue)/\($0)" }
+        try realm.write {
+            pet.name = editPet.name
+            pet.petClass = editPet.petClass
+            pet.petSpecies = editPet.petSpecies
+            pet.detailSpecies = editPet.detailSpecies
+            pet.morph = editPet.morph
+            pet.gender = editPet.gender
+            pet.adoptionDate = editPet.adoptionDate
+            pet.birthDate = editPet.birthDate
+            pet.weights = pet.weights.elements
+            pet.imagePathList.removeAll()
+            pet.imagePathList.append(objectsIn: imagePathList)
+        }
+    }
+    
     func deletePet(id: String) throws {
-        guard let objectId = try? ObjectId(string: id) else { return }
-        guard let pet = realm.object(ofType: PetObject.self, forPrimaryKey: objectId) else { return }
+        guard let petId = try? ObjectId(string: id) else { return }
+        guard let pet = realm.object(ofType: PetObject.self, forPrimaryKey: petId) else { throw RepositoryError.unknownPet }
         try realm.write {
             realm.delete(pet.weights)
             realm.delete(pet.tasks)

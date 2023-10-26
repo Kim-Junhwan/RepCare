@@ -107,7 +107,7 @@ class RegisterPetView: UIView {
     let weightTextField: RegisterInputView = {
         let view = RegisterInputView(inputView: .textField, isEssential: false)
          view.descriptionLabel.text = "현재무게"
-        view.textField.keyboardType = .numberPad
+        view.textField.keyboardType = .decimalPad
          return view
      }()
     

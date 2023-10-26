@@ -20,6 +20,13 @@ class RegisterPetViewModel {
     var currentWeight: BehaviorRelay<Double?> = .init(value: nil)
     let diContainer: PetListSceneDIContainer
     
+    var title: String {
+        return "개체 등록"
+    }
+    var registerButtonTitle: String {
+        return "등록"
+    }
+    
     lazy var canRegister = BehaviorRelay.combineLatest(petName, overPetSpecies, adoptionDate, gender) { name, petSpecies, adopDate, gender in
         return !name.isEmpty && (gender != nil) && (petSpecies != nil) && (adopDate != nil)
     }

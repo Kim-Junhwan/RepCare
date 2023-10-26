@@ -19,5 +19,6 @@ protocol PetRepository {
     
     func registerPet(pet: RegisterPetQuery) throws -> petId
     func deletePet(petId: String) throws
+    func updatePet(editPet: Pet) throws
     func fetchPetList(query: FetchPetListQuery, start: Int) -> PetRepositoryResponse
 }

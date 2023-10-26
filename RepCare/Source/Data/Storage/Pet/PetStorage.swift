@@ -12,4 +12,5 @@ protocol PetStorage {
     func fetchPetList(request: FetchPetListRequestDTO) -> FetchPetListResponseDTO
     func fetchPet(id: String) -> PetObject?
     func deletePet(id: String) throws
+    func updatePet(id: String ,editPet: UpdatePetDTO) throws
 }

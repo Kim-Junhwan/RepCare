@@ -16,7 +16,7 @@ final class AppDIContainer {
     }
     
     func getPetRepository() -> PetRepository {
-        let petRepository = DefaultPetRepository(petStorage: storageDIContainer.petStorage, speciesStroage: storageDIContainer.speciesStorage)
+        let petRepository = DefaultPetRepository(petStorage: storageDIContainer.petStorage, speciesStorage: storageDIContainer.speciesStorage, weightStorage: storageDIContainer.weightStorage)
         return petRepository
     }
     

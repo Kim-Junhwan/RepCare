@@ -40,7 +40,7 @@ final class PetListSceneDIContainer {
     }
     
     private func makeUpdateUseCase() -> UpdatePetUseCase {
-        let useCase = DefaultUpdatePetUseCase()
+        let useCase = DefaultUpdatePetUseCase(petRepository: appDIContainer.getPetRepository(), imageRepository: appDIContainer.getPetImageRepository())
         return useCase
     }
     

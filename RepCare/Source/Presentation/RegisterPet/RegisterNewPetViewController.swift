@@ -17,7 +17,7 @@ class RegisterNewPetViewController: BaseViewController {
     let disposeBag = DisposeBag()
     
     lazy var registerButton: UIBarButtonItem = {
-        let barButton = UIBarButtonItem(title: "등록", style: .plain, target: self, action: #selector(tapRegisterButton))
+        let barButton = UIBarButtonItem(title: viewModel.registerButtonTitle, style: .plain, target: self, action: #selector(tapRegisterButton))
         return barButton
     }()
     
@@ -97,7 +97,9 @@ class RegisterNewPetViewController: BaseViewController {
     private func bindAdoptionDate() {
         viewModel.adoptionDate.subscribe(with: self) { owner, adopDate in
             guard let adopDate else { return }
-            owner.mainView.adoptionDateButton.datePickerButton.setTitle(DateFormatter.yearMonthDateFormatter.string(from: adopDate), for: .normal) }.disposed(by: disposeBag)
+            owner.mainView.adoptionDateButton.datePickerButton.setTitle(DateFormatter.yearMonthDateFormatter.string(from: adopDate), for: .normal)
+            owner.mainView.adoptionDateButton.datePickerButton.datePicker.date = adopDate
+        }.disposed(by: disposeBag)
     }
     
     private func bindBirthDate() {
@@ -116,7 +118,7 @@ class RegisterNewPetViewController: BaseViewController {
     }
     
     override func configureView() {
-        title = "개체 등록"
+        title = viewModel.title
         view.addSubview(mainView)
         registerButton.isEnabled = false
         navigationItem.setRightBarButton(registerButton, animated: false)
@@ -162,7 +164,12 @@ class RegisterNewPetViewController: BaseViewController {
         } catch {
             showErrorAlert(title: "저장 에러", message: error.localizedDescription)
         }
-        navigationController?.popViewController(animated: true)
+        if navigationController?.viewControllers.count == 1 {
+            dismiss(animated: true)
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
+        
     }
     
     @objc func deleteImage(_ sender: DeleteButton) {
