@@ -13,4 +13,5 @@ protocol WeightRepository {
     func fetchAllWeight(petId: String) -> [Weight]
     func updateWeightAtDate(petId: String, date: Date, weight: Double) throws
     func checkRegisterWeightInDay(petId: String, date: Date) -> hasData
+    func deleteWeight(weightId: String) throws
 }

@@ -12,4 +12,6 @@ protocol WeightStorage {
     func fetchWeightList(pet: PetObject) -> [WeightObject]
     func updateStroage(weightDTO: WeightDTO) throws
     func checkPetHasDataAtDate(pet: PetObject, date: Date) -> Bool
+    func deleteWeight(weightId: String) throws
+    func deleteWeight(pet: PetObject, date: Date) throws
 }

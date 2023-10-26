@@ -109,8 +109,19 @@ final class PetWeightViewController: BaseViewController {
     private func makeCollectionViewLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
         let width = view.frame.width
-        layout.itemSize = .init(width: width, height: 50)
+        layout.itemSize = .init(width: width - 20, height: 50)
         return layout
+    }
+    
+    @objc private func deleteWeight(_ sender: UIButton) {
+        let deleteWeight = weightList[weightList.count-sender.tag-1]
+        do {
+            try weightRepository.deleteWeight(weightId: deleteWeight.id)
+            reloadView()
+        } catch {
+            showErrorAlert(title: "몸무게 삭제 실패", message: error.localizedDescription)
+        }
+        
     }
     
     deinit {
@@ -131,6 +142,7 @@ extension PetWeightViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeightCollectionViewCell.identifier, for: indexPath) as? WeightCollectionViewCell else { return .init() }
         if indexPath.row == 0 {
+            cell.deleteButton.isHidden = true
             cell.dateLabel.text = "날짜"
             cell.weightLabel.text = "무게(g)"
             cell.changeWeightLabel.text = "변화량(g)"
@@ -140,6 +152,8 @@ extension PetWeightViewController: UICollectionViewDataSource {
         let weight = reverseWeightList[indexPath.row-1]
         let lastWeight = indexPath.row >= weightList.count ? 0 : reverseWeightList[indexPath.row].weight
         cell.configureCell(date: weight.date, weight: weight.weight, change: weight.weight-lastWeight)
+        cell.deleteButton.tag = indexPath.row-1
+        cell.deleteButton.addTarget(self, action: #selector(self.deleteWeight(_:)), for: .touchUpInside)
         return cell
     }
     

@@ -50,4 +50,19 @@ final class RealmWeightStorage: WeightStorage {
             updateWeight.weight = weightDTO.weight
         })
     }
+    
+    func deleteWeight(weightId: String) throws {
+        guard let weightObjId = try? ObjectId(string: weightId) else { return }
+        guard let weightObj = realm.object(ofType: WeightObject.self, forPrimaryKey: weightObjId) else { return }
+        try realm.write {
+            realm.delete(weightObj)
+        }
+    }
+    
+    func deleteWeight(pet: PetObject, date: Date) throws {
+        guard let deleteWeight = pet.weights.filter({ $0.date == date }).first else { return }
+        try realm.write {
+            realm.delete(deleteWeight)
+        }
+    }
 }
