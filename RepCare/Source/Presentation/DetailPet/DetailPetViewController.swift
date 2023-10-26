@@ -20,8 +20,10 @@ class DetailPetViewController: BaseViewController {
         return [
             UIAction(title: "개체 정보 수정", image: UIImage(systemName: "pencil"), handler: { [weak self] (_) in
                 guard let self else { return }
-                
-                let updateVC = self.viewModel.diContainer.makeUpdateViewController(pet: self.viewModel.pet)
+                let updateVC = self.viewModel.diContainer.makeUpdateViewController(pet: self.viewModel.currentPet)
+                updateVC.tapRegisterButtonClosure = {
+                    try? self.viewModel.fetchDetailPetInfo()
+                }
                 let nvc = UINavigationController(rootViewController: updateVC)
                 self.present(nvc, animated: true)
             }),
@@ -68,7 +70,7 @@ class DetailPetViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationBarAppearance()
-        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        bind()
         navigationController?.navigationBar.tintColor = .white
     }
     
@@ -84,6 +86,12 @@ class DetailPetViewController: BaseViewController {
     override func setContraints() {
         profileViewController.view.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+    }
+    
+    func bind() {
+        viewModel.petDriver.drive(with: self) { owner, pet in
+            owner.headerViewController.setView(pet: pet)
         }
     }
     

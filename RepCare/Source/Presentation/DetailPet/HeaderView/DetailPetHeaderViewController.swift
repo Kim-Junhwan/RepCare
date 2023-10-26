@@ -10,17 +10,19 @@ import UIKit
 class DetailPetHeaderViewController: BaseViewController {
     
     private let mainView = DetailPetHeaderView()
-    let pet: PetModel
+    var pet: PetModel
     var imagePathList: [PetImageModel] {
         return pet.imagePath
     }
     
-    lazy var viewControllers: [UIViewController] = {
-        if imagePathList.isEmpty {
-            return [ImageViewController(petClass: pet.overSpecies.petClass)]
-        }
-        return imagePathList.map {ImageViewController(imagePath: $0)}
-    }()
+    var viewControllers: [UIViewController] = []
+    
+//    {
+//        if imagePathList.isEmpty {
+//            return [ImageViewController(petClass: pet.overSpecies.petClass)]
+//        }
+//        return imagePathList.map {ImageViewController(imagePath: $0)}
+//    }()
     
     init(pet: PetModel) {
         self.pet = pet
@@ -30,9 +32,22 @@ class DetailPetHeaderViewController: BaseViewController {
     override func configureView() {
         mainView.imagePageViewController.delegate = self
         mainView.imagePageViewController.dataSource = self
-        mainView.pageControl.numberOfPages = imagePathList.count
-        mainView.imagePageViewController.setViewControllers([viewControllers[0]], direction: .forward, animated: true)
         mainView.pageControl.addTarget(self, action: #selector(pageControlHandler), for: .valueChanged)
+    }
+    
+    func setView(pet: PetModel) {
+        mainView.setPetInfo(pet: pet)
+        mainView.pageControl.numberOfPages = pet.imagePath.count
+        setViewControllers(imagePathList: pet.imagePath)
+        mainView.imagePageViewController.setViewControllers([viewControllers[0]], direction: .forward, animated: true)
+    }
+    
+   private func setViewControllers(imagePathList: [PetImageModel]) {
+        if imagePathList.isEmpty {
+            viewControllers = [ImageViewController(petClass: pet.overSpecies.petClass)]
+            return
+        }
+        viewControllers = imagePathList.map {ImageViewController(imagePath: $0)}
     }
     
     required init?(coder: NSCoder) {
@@ -45,13 +60,17 @@ class DetailPetHeaderViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        mainView.setPetInfo(pet: pet)
+        setView(pet: pet)
     }
 
     @objc func pageControlHandler(_ sender: UIPageControl) {
         guard let currentViewController = mainView.imagePageViewController.viewControllers?.first, let currentIndex = viewControllers.firstIndex(of: currentViewController) else { return }
         let direction: UIPageViewController.NavigationDirection = (sender.currentPage > currentIndex) ? .forward : .reverse
         mainView.imagePageViewController.setViewControllers([viewControllers[sender.currentPage]], direction: direction, animated: true)
+    }
+    
+    func reload() {
+        
     }
 }
 

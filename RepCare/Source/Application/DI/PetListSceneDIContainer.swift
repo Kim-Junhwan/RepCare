@@ -60,7 +60,7 @@ final class PetListSceneDIContainer {
     }
     
     private func makeDetailPetViewModel(pet: PetModel) -> DetailPetViewModel {
-        let viewModel = DetailPetViewModel(pet: pet, deleteUseCase: makeDeleteUseCase(), diContainer: self)
+        let viewModel = DetailPetViewModel(pet: pet, deleteUseCase: makeDeleteUseCase(), diContainer: self, petRepository: appDIContainer.getPetRepository())
         return viewModel
     }
     

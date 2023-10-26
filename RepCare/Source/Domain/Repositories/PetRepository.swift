@@ -21,4 +21,5 @@ protocol PetRepository {
     func deletePet(petId: String) throws
     func updatePet(editPet: Pet) throws
     func fetchPetList(query: FetchPetListQuery, start: Int) -> PetRepositoryResponse
+    func fetchPet(petId: String) throws -> Pet
 }

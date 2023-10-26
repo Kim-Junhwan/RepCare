@@ -69,4 +69,9 @@ final class DefaultPetRepository: PetRepository {
         let fetchList = petStorage.fetchPetList(request: requestDTO)
         return .init(totalPetCount: fetchList.totalPetCount, start: fetchList.startIndex, petList: fetchList.petList.map { $0.toDomain() })
     }
+    
+    func fetchPet(petId: String) throws -> Pet {
+        guard let petObj = petStorage.fetchPet(id: petId) else { throw RepositoryError.unknownPet }
+        return petObj.toDomain()
+    }
 }

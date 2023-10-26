@@ -6,23 +6,37 @@
 //
 
 import Foundation
+import RxCocoa
 
 final class DetailPetViewModel {
     
-    let pet: PetModel
+    private let pet: BehaviorRelay<PetModel>
+    var petDriver: Driver<PetModel> {
+        return pet.asDriver()
+    }
+    var currentPet: PetModel {
+        return pet.value
+    }
     private let deleteUseCase: DeletePetUseCase
     let diContainer: PetListSceneDIContainer
+    let petRepository: PetRepository
     var images: [PetImageModel] {
-        return pet.imagePath
+        return pet.value.imagePath
     }
     
-    init(pet: PetModel, deleteUseCase: DeletePetUseCase, diContainer: PetListSceneDIContainer) {
-        self.pet = pet
+    init(pet: PetModel, deleteUseCase: DeletePetUseCase, diContainer: PetListSceneDIContainer, petRepository: PetRepository) {
+        self.pet = .init(value: pet)
         self.deleteUseCase = deleteUseCase
         self.diContainer = diContainer
+        self.petRepository = petRepository
+    }
+    
+    func fetchDetailPetInfo() throws {
+        let fetchPetInfo = try petRepository.fetchPet(petId: pet.value.id)
+        pet.accept(.init(pet: fetchPetInfo))
     }
     
     func deletePet() throws {
-        try deleteUseCase.deletePet(petId: pet.id)
+        try deleteUseCase.deletePet(petId: pet.value.id)
     }
 }
