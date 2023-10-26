@@ -28,7 +28,7 @@ final class PetWeightViewController: BaseViewController {
         return button
     }()
     
-    lazy var collectionView: UICollectionView = {
+    private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: makeCollectionViewLayout())
         collectionView.register(WeightChartView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: WeightChartView.identifier)
         collectionView.register(WeightCollectionViewCell.self, forCellWithReuseIdentifier: WeightCollectionViewCell.identifier)
@@ -58,8 +58,8 @@ final class PetWeightViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        weightList = weightRepository.fetchAllWeight(petId: pet.id).map { .init(date: $0.date, weight: $0.weight) }.sorted { $0.date < $1.date }
         
+        weightList = weightRepository.fetchAllWeight(petId: pet.id).map { .init(id: $0.id, date: $0.date, weight: $0.weight) }.sorted { $0.date < $1.date }
     }
     
     private func setChart(weightList: [PetWeightModel]) {
@@ -68,7 +68,7 @@ final class PetWeightViewController: BaseViewController {
         }
         var dataEntries: [ChartDataEntry] = []
         chartView?.xAxis.valueFormatter = IndexAxisValueFormatter(values: Array(weightList.map { DateFormatter.yearMonthDateFormatter.string(from: $0.date) }))
-        chartView?.xAxis.setLabelCount(min(6, weightList.count), force: false)
+        chartView?.xAxis.setLabelCount(min(4, weightList.count), force: false)
         chartView?.leftAxis.setLabelCount(weightList.count, force: false)
         for weight in weightList.enumerated() {
             let dataEntry = ChartDataEntry(x: Double(weight.offset), y: weight.element.weight)
@@ -83,7 +83,17 @@ final class PetWeightViewController: BaseViewController {
         lineDataSet.setCircleColor(.deepGreen)
         lineDataSet.drawCircleHoleEnabled = false
         self.chartView?.data = LineChartData(dataSet: lineDataSet)
-        
+    }
+    
+    func reloadView() {
+        if collectionView.dataSource == nil {
+            return
+        }
+        DispatchQueue.main.async {
+            self.weightList = self.weightRepository.fetchAllWeight(petId: self.pet.id).map { .init(id: $0.id, date: $0.date, weight: $0.weight) }
+            self.setChart(weightList: self.weightList)
+            self.collectionView.reloadData()
+        }
     }
     
     override func configureView() {
@@ -168,20 +178,19 @@ extension PetWeightViewController: WeightChartViewDelegate {
         present(nvc, animated: true)
     }
     
-    func reloadView() {
-        self.weightList = self.weightRepository.fetchAllWeight(petId: self.pet.id).map { .init(date: $0.date, weight: $0.weight) }
-        self.setChart(weightList: self.weightList)
-        self.collectionView.reloadSections([0])
-    }
-    
     func tapRegisterButton(date: Date, weight: Double, completion: @escaping (Bool) -> Void) {
         if weightRepository.checkRegisterWeightInDay(petId: pet.id, date: date) {
             completion(false)
         } else {
             completion(true)
-            try? weightRepository.registerWeight(petId: pet.id, date: date, weight: weight)
-            reloadView()
+            do {
+                try weightRepository.registerWeight(petId: pet.id, date: date, weight: weight)
+                reloadView()
+            } catch {
+                showErrorAlert(title: "무게 등록 실패", message: error.localizedDescription)
+            }
         }
+        collectionView.reloadData()
     }
     
     func updateWeight(date: Date, weight: Double) {

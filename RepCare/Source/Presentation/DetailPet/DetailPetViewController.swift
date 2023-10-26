@@ -8,6 +8,8 @@
 import UIKit
 import Pageboy
 import Tabman
+import RxSwift
+
 
 class DetailPetViewController: BaseViewController {
     
@@ -21,8 +23,10 @@ class DetailPetViewController: BaseViewController {
             UIAction(title: "개체 정보 수정", image: UIImage(systemName: "pencil"), handler: { [weak self] (_) in
                 guard let self else { return }
                 let updateVC = self.viewModel.diContainer.makeUpdateViewController(pet: self.viewModel.currentPet)
-                updateVC.tapRegisterButtonClosure = {
-                    try? self.viewModel.fetchDetailPetInfo()
+                updateVC.mainView.weightTextField.isHidden = true
+                updateVC.tapRegisterButtonClosure = { [weak self] in
+                    self?.isEditingPet = true
+                    try? self?.viewModel.fetchDetailPetInfo()
                 }
                 let nvc = UINavigationController(rootViewController: updateVC)
                 self.present(nvc, animated: true)
@@ -53,7 +57,9 @@ class DetailPetViewController: BaseViewController {
     var petWeightViewController: PetWeightViewController
     lazy var tabViewControllers = [petCalenderViewController, petWeightViewController]
     let viewModel: DetailPetViewModel
+    var isEditingPet: Bool = false
     var updateClosure: (()->Void)?
+    let disposeBag = DisposeBag()
     
     init(headerViewController: DetailPetHeaderViewController, petCalenderViewController: PetCalendarViewController, petWeightViewController: PetWeightViewController, viewModel: DetailPetViewModel) {
         self.headerViewController = headerViewController
@@ -92,7 +98,7 @@ class DetailPetViewController: BaseViewController {
     func bind() {
         viewModel.petDriver.drive(with: self) { owner, pet in
             owner.headerViewController.setView(pet: pet)
-        }
+        }.disposed(by: disposeBag)
     }
     
     private func setNavigationBarAppearance() {
@@ -105,6 +111,12 @@ class DetailPetViewController: BaseViewController {
         scrollApprearance.backgroundColor = UIColor.systemBackground
         navigationController?.navigationBar.standardAppearance = scrollApprearance
         navigationController?.navigationBar.isTranslucent = true
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        if isEditingPet {
+            updateClosure?()
+        }
     }
     
     deinit {

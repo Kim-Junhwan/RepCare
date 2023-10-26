@@ -8,6 +8,7 @@
 import Foundation
 
 struct PetWeightModel {
+    let id: String
     let date: Date
     let weight: Double
 }

@@ -37,4 +37,7 @@ final class DefaultWeightRepository: WeightRepository {
         return weightStroage.checkPetHasDataAtDate(pet: pet, date: date)
     }
     
+    func deleteWeight(weightId: String) throws {
+        try weightStroage.deleteWeight(weightId: weightId)
+    }
 }

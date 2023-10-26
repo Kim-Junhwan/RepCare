@@ -41,13 +41,6 @@ final class DefaultPetRepository: PetRepository {
         let reqeustDTO = UpdatePetDTO(pet: editPet, petClass: petClass, petSpecies: species, detailSpecies: detailSpecies, morph: morph)
         guard let pet = petStorage.fetchPet(id: editPet.id) else { throw RepositoryError.unknownPet }
         try petStorage.updatePet(id: editPet.id, editPet: reqeustDTO)
-        
-        guard let editAdoptionWeight = editPet.currentWeight else { return }
-        if weightStorage.checkPetHasDataAtDate(pet: pet, date: editPet.adoptionDate) {
-            try weightStorage.updateStroage(weightDTO: .init(pet: pet, weight: editAdoptionWeight, date: editPet.adoptionDate))
-        } else {
-            try weightStorage.registerWeight(weight: .init(pet: pet, weight: editAdoptionWeight, date: editPet.adoptionDate))
-        }
     }
     
     func fetchPetList(query: FetchPetListQuery, start: Int) -> PetRepositoryResponse {

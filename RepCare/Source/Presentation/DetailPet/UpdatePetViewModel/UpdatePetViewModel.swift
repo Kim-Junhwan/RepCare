@@ -27,7 +27,6 @@ final class UpdatePetViewModel: RegisterPetViewModel {
         super.init(diContainer: diContainer)
         self.adoptionDate.accept(pet.adoptionDate)
         self.hatchDate.accept(pet.hatchDate)
-        self.currentWeight.accept(pet.currentWeight)
         self.overPetSpecies.accept(pet.overSpecies)
         self.petImageList.accept(pet.imagePath.map { .init(image: configureImage(path: $0.imagePath), imageType: .cameraImage, id: UUID().uuidString) })
         self.gender.accept(pet.sex)
@@ -43,7 +42,7 @@ final class UpdatePetViewModel: RegisterPetViewModel {
         guard let species = overPetSpecies.value?.petSpecies else { return }
         guard let adoptionDate = adoptionDate.value else { return }
         guard let gender = gender.value else { return }
-        let editRequest = UpdatePetRequest(id: pet.id, name: petName.value, imageDataList: imageListData, petClass: petClass.toDomain(), petSpecies: species.toDomain(), detailSpecies: overPetSpecies.value?.detailSpecies?.toDomain(), morph: overPetSpecies.value?.morph?.toDomain(), adoptionDate: adoptionDate, birthDate: hatchDate.value, gender: gender.toDomain(), weight: currentWeight.value)
+        let editRequest = UpdatePetRequest(id: pet.id, name: petName.value, imageDataList: imageListData, petClass: petClass.toDomain(), petSpecies: species.toDomain(), detailSpecies: overPetSpecies.value?.detailSpecies?.toDomain(), morph: overPetSpecies.value?.morph?.toDomain(), adoptionDate: adoptionDate, birthDate: hatchDate.value, gender: gender.toDomain())
         try updatePetUseCase.updatePet(request: editRequest)
     }
     

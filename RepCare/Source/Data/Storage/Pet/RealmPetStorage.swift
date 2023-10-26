@@ -60,7 +60,6 @@ extension RealmPetStorage: PetStorage {
             pet.gender = editPet.gender
             pet.adoptionDate = editPet.adoptionDate
             pet.birthDate = editPet.birthDate
-            pet.weights = pet.weights.elements
             pet.imagePathList.removeAll()
             pet.imagePathList.append(objectsIn: imagePathList)
         }
