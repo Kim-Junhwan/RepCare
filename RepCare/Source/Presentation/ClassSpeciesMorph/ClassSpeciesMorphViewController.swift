@@ -35,7 +35,7 @@ class ClassSpeciesMorphViewController: BaseViewController {
     override func loadView() {
         view = mainView
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         mainView.configureDatasourceTwo(dataSource: makeDataource())
@@ -61,7 +61,7 @@ class ClassSpeciesMorphViewController: BaseViewController {
         viewModel.registerSpecies()
         self.dismiss(animated: true)
     }
-
+    
     @objc func tapDismissButton() {
         self.dismiss(animated: true)
     }
@@ -111,11 +111,14 @@ extension ClassSpeciesMorphViewController: UIContextMenuInteractionDelegate {
             
             let deleteAction = UIAction(title: "삭제", image: UIImage(systemName: "trash"), attributes: .destructive) { _ in
                 guard let section = Section(rawValue: indexPath.section ) else { return }
-                do {
-                    try self.viewModel.deleteSpecies(section: section, row: indexPath.row)
-                } catch {
-                    self.showErrorAlert(title: "수정 실패", message: error.localizedDescription)
+                self.showTaskAlert(title: "경고", message: "해당 작업을 수행하면 하위에 저장된 종 역시 삭제됩니다. 또한 기존에 저장된 애완동물의 종 역시 변경 될 수 있습니다.") {
+                    do {
+                        try self.viewModel.deleteSpecies(section: section, row: indexPath.row)
+                    } catch {
+                        self.showErrorAlert(title: "삭제 실패", message: error.localizedDescription)
+                    }
                 }
+                
             }
             if indexPath.section == 0 || indexPath.section == 1 {
                 return UIMenu(title: "", children: [updateAction])
@@ -128,42 +131,42 @@ extension ClassSpeciesMorphViewController: UIContextMenuInteractionDelegate {
 
 extension ClassSpeciesMorphViewController: UICollectionViewDelegate {
     
-//    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemsAt indexPaths: [IndexPath], point: CGPoint) -> UIContextMenuConfiguration? {
-//        print(point)
-//        print(collectionView.indexPathForItem(at: point))
-//        guard let indexPath = collectionView.indexPathForItem(at: point) else { return nil }
-//        guard let section = Section(rawValue: indexPath.section ), let currentSectionList = viewModel.speciesList.value[section] else { return nil }
-//        if indexPath.section == 0 || currentSectionList.count == indexPath.row+1 {
-//            return nil
-//        }
-//        
-//        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestAction in
-//            
-//            let updateAction = UIAction(title: "수정", image: UIImage(systemName: "pencil")) { action in
-//                self.showTextFiledAlert(title: "수정", message: "적용할 내용을 입력해주세요.", textFieldText: currentSectionList[indexPath.row].title) { text in
-//                    do {
-//                        try self.viewModel.updateSpecies(section: section, row: indexPath.row, editTitle: text)
-//                    } catch {
-//                        self.showErrorAlert(title: "수정 실패", message: error.localizedDescription)
-//                    }
-//                }
-//            }
-//            
-//            let deleteAction = UIAction(title: "삭제", image: UIImage(systemName: "trash"), attributes: .destructive) { _ in
-//                guard let section = Section(rawValue: indexPath.section ) else { return }
-//                do {
-//                    try self.viewModel.deleteSpecies(section: section, row: indexPath.row)
-//                } catch {
-//                    self.showErrorAlert(title: "수정 실패", message: error.localizedDescription)
-//                }
-//            }
-//            if indexPath.section == 0 || indexPath.section == 1 {
-//                return UIMenu(title: "", children: [updateAction])
-//            }
-//            return UIMenu(title: "", children: [updateAction, deleteAction])
-//        }
-//    }
-        
+    //    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemsAt indexPaths: [IndexPath], point: CGPoint) -> UIContextMenuConfiguration? {
+    //        print(point)
+    //        print(collectionView.indexPathForItem(at: point))
+    //        guard let indexPath = collectionView.indexPathForItem(at: point) else { return nil }
+    //        guard let section = Section(rawValue: indexPath.section ), let currentSectionList = viewModel.speciesList.value[section] else { return nil }
+    //        if indexPath.section == 0 || currentSectionList.count == indexPath.row+1 {
+    //            return nil
+    //        }
+    //
+    //        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestAction in
+    //
+    //            let updateAction = UIAction(title: "수정", image: UIImage(systemName: "pencil")) { action in
+    //                self.showTextFiledAlert(title: "수정", message: "적용할 내용을 입력해주세요.", textFieldText: currentSectionList[indexPath.row].title) { text in
+    //                    do {
+    //                        try self.viewModel.updateSpecies(section: section, row: indexPath.row, editTitle: text)
+    //                    } catch {
+    //                        self.showErrorAlert(title: "수정 실패", message: error.localizedDescription)
+    //                    }
+    //                }
+    //            }
+    //
+    //            let deleteAction = UIAction(title: "삭제", image: UIImage(systemName: "trash"), attributes: .destructive) { _ in
+    //                guard let section = Section(rawValue: indexPath.section ) else { return }
+    //                do {
+    //                    try self.viewModel.deleteSpecies(section: section, row: indexPath.row)
+    //                } catch {
+    //                    self.showErrorAlert(title: "수정 실패", message: error.localizedDescription)
+    //                }
+    //            }
+    //            if indexPath.section == 0 || indexPath.section == 1 {
+    //                return UIMenu(title: "", children: [updateAction])
+    //            }
+    //            return UIMenu(title: "", children: [updateAction, deleteAction])
+    //        }
+    //    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let selectSection = Section(rawValue: indexPath.section) else { return }
         let selectSectionArr = viewModel.speciesList.value[selectSection]
