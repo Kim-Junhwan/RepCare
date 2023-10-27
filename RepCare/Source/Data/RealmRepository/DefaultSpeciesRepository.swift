@@ -54,4 +54,12 @@ final class DefaultSpeciesRepository: SpeciesRepository {
         let requestDTO = MorphRequestDTO(detailSpeciesId: parentDetailSpecies.id)
         try speciesStroage.registerNewMorph(title: petMorph, request: requestDTO)
     }
+    
+    func updateSpecies(species: PetOverSpecies, id: String, editTitle: String) throws {
+        try speciesStroage.updateSpecies(species: species, id: id, title: editTitle)
+    }
+    
+    func deleteSpecies(species: PetOverSpecies, id: String) throws {
+        try speciesStroage.deleteSpecies(species: species, id: id)
+    }
 }

@@ -63,7 +63,9 @@ final class PetListViewModel {
     
     // MARK: - OUTPUT
     func loadNextPage() {
-        load(query: currentQuery)
+        if hasMorePage {
+            load(query: currentQuery)
+        }
     }
     
     func reloadPetList() {

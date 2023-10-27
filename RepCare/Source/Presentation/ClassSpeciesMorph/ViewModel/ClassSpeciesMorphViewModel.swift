@@ -90,6 +90,53 @@ final class ClassSpeciesMorphViewModel {
         }
     }
     
+    func deleteSpecies(section: Section, row: Int) throws {
+        print(section)
+        print(speciesList.value[section]?[row])
+       // guard let editSpecies = speciesList.value[section][row] else { return }
+        guard let deleteSpecies = speciesList.value[section]?[row] else { return }
+        let domainSection: PetOverSpecies
+        switch section {
+        case .species:
+            domainSection = .species
+            try repository.deleteSpecies(species: domainSection, id: deleteSpecies.id)
+            self.selectPetClass.accept(self.selectPetClass.value)
+        case .detailSpecies:
+            domainSection = .detailSpecies
+            try repository.deleteSpecies(species: domainSection, id: deleteSpecies.id)
+            self.selectSpecies.accept(self.selectSpecies.value)
+        case .morph:
+            domainSection = .morph
+            try repository.deleteSpecies(species: domainSection, id: deleteSpecies.id)
+            self.selectDetailSpecies.accept(self.selectDetailSpecies.value)
+        default:
+            fatalError()
+        }
+    }
+    
+    func updateSpecies(section: Section, row: Int, editTitle: String) throws {
+        guard let editSpecies = speciesList.value[section]?[row] else { return }
+        let domainSection: PetOverSpecies
+        switch section {
+        case .species:
+            domainSection = .species
+            try repository.updateSpecies(species: domainSection, id: editSpecies.id, editTitle: editTitle)
+            self.selectPetClass.accept(self.selectPetClass.value)
+        case .detailSpecies:
+            domainSection = .detailSpecies
+            try repository.updateSpecies(species: domainSection, id: editSpecies.id, editTitle: editTitle)
+            self.selectSpecies.accept(self.selectSpecies.value)
+        case .morph:
+            domainSection = .morph
+            try repository.updateSpecies(species: domainSection, id: editSpecies.id, editTitle: editTitle)
+            self.selectDetailSpecies.accept(self.selectDetailSpecies.value)
+        default:
+            fatalError()
+        }
+        
+        
+    }
+    
     private func fetchPetClass() {
         let fetchPetClass = repository.fetchPetClass().map { PetClassModel(petClass: $0) }
         self.fetchPetClassList = fetchPetClass

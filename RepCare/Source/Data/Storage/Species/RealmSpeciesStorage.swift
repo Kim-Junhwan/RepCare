@@ -8,6 +8,10 @@
 import Foundation
 import RealmSwift
 
+enum SpeciesStorageError: Error {
+    case unknownSpecies
+}
+
 final class RealmSpeciesStorage {
     private let realm: Realm
     
@@ -83,6 +87,60 @@ extension RealmSpeciesStorage: SpeciesStorage {
     
     func getMorph(id: String) -> MorphObject? {
         return realm.object(ofType: MorphObject.self, forPrimaryKey: makeObjectId(id: id))
+    }
+    
+    func updateSpecies(species: PetOverSpecies, id: String, title: String) throws {
+        guard let id = try? ObjectId(string: id) else { return }
+        switch species {
+        case .species:
+            guard let originSpecies = realm.object(ofType: PetSpeciesObject.self, forPrimaryKey: id) else { return }
+            try realm.write { originSpecies.title = title }
+        case .detailSpecies:
+            guard let originDetailSpecies = realm.object(ofType: DetailSpeciesObject.self, forPrimaryKey: id) else { return }
+            try realm.write { originDetailSpecies.title = title }
+        case .morph:
+            guard let originmorph = realm.object(ofType: MorphObject.self, forPrimaryKey: id) else { return }
+            try realm.write { originmorph.title = title }
+        default:
+            throw SpeciesStorageError.unknownSpecies
+        }
+    }
+    
+    func deleteSpecies(species: PetOverSpecies, id: String) throws {
+        guard let id = try? ObjectId(string: id) else { return }
+        switch species {
+        case .species:
+            guard let originSpecies = realm.object(ofType: PetSpeciesObject.self, forPrimaryKey: id) else { return }
+            try deleteSpecies(species: originSpecies)
+        case .detailSpecies:
+            guard let originDetailSpecies = realm.object(ofType: DetailSpeciesObject.self, forPrimaryKey: id) else { return }
+            try deleteDetailSpecies(detailSpeceis: originDetailSpecies)
+        case .morph:
+            guard let originmorph = realm.object(ofType: MorphObject.self, forPrimaryKey: id) else { return }
+            try deleteMorph(morph: originmorph)
+        default:
+            throw SpeciesStorageError.unknownSpecies
+        }
+    }
+    
+    private func deleteSpecies(species: PetSpeciesObject) throws {
+       try species.detailSpecies.forEach { try deleteDetailSpecies(detailSpeceis: $0) }
+        try realm.write {
+            realm.delete(species)
+        }
+    }
+    
+    private func deleteDetailSpecies(detailSpeceis: DetailSpeciesObject) throws {
+        try realm.write {
+            realm.delete(detailSpeceis.morph)
+            realm.delete(detailSpeceis)
+        }
+    }
+    
+    private func deleteMorph(morph: MorphObject) throws {
+        try realm.write {
+            realm.delete(morph)
+        }
     }
     
 }

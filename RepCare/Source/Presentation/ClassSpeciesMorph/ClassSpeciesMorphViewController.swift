@@ -8,7 +8,7 @@
 import UIKit
 import RxSwift
 
-class ClassSpeciesMorphViewController: UIViewController {
+class ClassSpeciesMorphViewController: BaseViewController {
     
     let mainView = SpeciesView()
     let viewModel: ClassSpeciesMorphViewModel
@@ -38,6 +38,7 @@ class ClassSpeciesMorphViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        mainView.configureDatasourceTwo(dataSource: makeDataource())
         configureCollectionView()
         bind()
         viewModel.viewDidLoad()
@@ -65,19 +66,110 @@ class ClassSpeciesMorphViewController: UIViewController {
         self.dismiss(animated: true)
     }
     
+    func makeDataource() -> UICollectionViewDiffableDataSource<Section, Item> {
+        let cellRegistration = UICollectionView.CellRegistration<SpeciesCell, Item> { cell, indexPath, itemIdentifier in
+            cell.titleLabel.text = itemIdentifier.title
+            if indexPath.section != 0 {
+                let interaction = UIContextMenuInteraction(delegate: self)
+                cell.addInteraction(interaction)
+            }
+        }
+        
+        return UICollectionViewDiffableDataSource<Section, Item>(collectionView: mainView.collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+            if itemIdentifier.isRegisterCell {
+                return collectionView.dequeueReusableCell(withReuseIdentifier: RegisterCollectionViewCell.identifier, for: indexPath)
+            }
+            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
+        })
+    }
+    
     deinit {
         print("deinit ClassSpeciesMorphViewController")
     }
 }
 
+extension ClassSpeciesMorphViewController: UIContextMenuInteractionDelegate {
+    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        guard let cellLocation = interaction.view?.frame.origin else {return nil}
+        guard let indexPath = mainView.collectionView.indexPathForItem(at: cellLocation) else { return nil }
+        guard let section = Section(rawValue: indexPath.section ), let currentSectionList = viewModel.speciesList.value[section] else { return nil }
+        if currentSectionList.count == indexPath.row+1 {
+            return nil
+        }
+        
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestAction in
+            
+            let updateAction = UIAction(title: "수정", image: UIImage(systemName: "pencil")) { action in
+                self.showTextFiledAlert(title: "수정", message: "적용할 내용을 입력해주세요.", textFieldText: currentSectionList[indexPath.row].title) { text in
+                    do {
+                        try self.viewModel.updateSpecies(section: section, row: indexPath.row, editTitle: text)
+                    } catch {
+                        self.showErrorAlert(title: "수정 실패", message: error.localizedDescription)
+                    }
+                }
+            }
+            
+            let deleteAction = UIAction(title: "삭제", image: UIImage(systemName: "trash"), attributes: .destructive) { _ in
+                guard let section = Section(rawValue: indexPath.section ) else { return }
+                do {
+                    try self.viewModel.deleteSpecies(section: section, row: indexPath.row)
+                } catch {
+                    self.showErrorAlert(title: "수정 실패", message: error.localizedDescription)
+                }
+            }
+            if indexPath.section == 0 || indexPath.section == 1 {
+                return UIMenu(title: "", children: [updateAction])
+            }
+            return UIMenu(title: "", children: [updateAction, deleteAction])
+        }
+    }
+    
+}
+
 extension ClassSpeciesMorphViewController: UICollectionViewDelegate {
+    
+//    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemsAt indexPaths: [IndexPath], point: CGPoint) -> UIContextMenuConfiguration? {
+//        print(point)
+//        print(collectionView.indexPathForItem(at: point))
+//        guard let indexPath = collectionView.indexPathForItem(at: point) else { return nil }
+//        guard let section = Section(rawValue: indexPath.section ), let currentSectionList = viewModel.speciesList.value[section] else { return nil }
+//        if indexPath.section == 0 || currentSectionList.count == indexPath.row+1 {
+//            return nil
+//        }
+//        
+//        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestAction in
+//            
+//            let updateAction = UIAction(title: "수정", image: UIImage(systemName: "pencil")) { action in
+//                self.showTextFiledAlert(title: "수정", message: "적용할 내용을 입력해주세요.", textFieldText: currentSectionList[indexPath.row].title) { text in
+//                    do {
+//                        try self.viewModel.updateSpecies(section: section, row: indexPath.row, editTitle: text)
+//                    } catch {
+//                        self.showErrorAlert(title: "수정 실패", message: error.localizedDescription)
+//                    }
+//                }
+//            }
+//            
+//            let deleteAction = UIAction(title: "삭제", image: UIImage(systemName: "trash"), attributes: .destructive) { _ in
+//                guard let section = Section(rawValue: indexPath.section ) else { return }
+//                do {
+//                    try self.viewModel.deleteSpecies(section: section, row: indexPath.row)
+//                } catch {
+//                    self.showErrorAlert(title: "수정 실패", message: error.localizedDescription)
+//                }
+//            }
+//            if indexPath.section == 0 || indexPath.section == 1 {
+//                return UIMenu(title: "", children: [updateAction])
+//            }
+//            return UIMenu(title: "", children: [updateAction, deleteAction])
+//        }
+//    }
+        
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let selectSection = Section(rawValue: indexPath.section) else { return }
         let selectSectionArr = viewModel.speciesList.value[selectSection]
-        
         if indexPath.section != 0 && indexPath.row+1 == selectSectionArr?.count {
             guard let registerSection = Section(rawValue: indexPath.section) else { return }
-            showRegisterAlert(section: registerSection)
+            showRegisterAlert(title: "종 등록", message: "텍스트를 입력하여 종을 등록하세요.", section: registerSection)
             return
         }
         if indexPath.section == 0 {
@@ -100,10 +192,27 @@ extension ClassSpeciesMorphViewController: UICollectionViewDelegate {
             }
             collectionView.deselectItem(at: IndexPath(row: item, section: indexPath.section), animated: false)
         }
+        
     }
     
-    private func showRegisterAlert(section: Section) {
-        let alert = UIAlertController(title: "종 등록", message: "텍스트를 입력하여 종을 등록하세요.", preferredStyle: .alert)
+    func showTextFiledAlert(title: String, message: String, textFieldText: String? = nil, action: ((String)-> Void)?) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addTextField { textField in
+            textField.text = textFieldText
+        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        let ok = UIAlertAction(title: "확인", style: .default) { _ in
+            guard let text = alert.textFields?.first?.text else { return }
+            action?(text)
+        }
+        
+        alert.addAction(cancel)
+        alert.addAction(ok)
+        present(alert, animated: true)
+    }
+    
+    private func showRegisterAlert(title: String, message: String ,section: Section) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addTextField()
         let cancel = UIAlertAction(title: "취소", style: .cancel)
         let ok = UIAlertAction(title: "확인", style: .default) { _ in

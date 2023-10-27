@@ -19,4 +19,6 @@ protocol SpeciesStorage {
     func registerNewSpecies(title: String, request: SpeciesRequestDTO) throws
     func registerNewDetailSpecies(title: String, request: DetailSpeciesRequestDTO) throws
     func registerNewMorph(title: String, request: MorphRequestDTO) throws
+    func updateSpecies(species: PetOverSpecies, id: String, title: String) throws
+    func deleteSpecies(species: PetOverSpecies, id: String) throws
 }

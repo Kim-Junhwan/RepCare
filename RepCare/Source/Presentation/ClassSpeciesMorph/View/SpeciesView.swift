@@ -25,7 +25,7 @@ class SpeciesView: UIView {
         return collectionView
     }()
     
-    private var dataSource: UICollectionViewDiffableDataSource<Section, Item>?
+    var dataSource: UICollectionViewDiffableDataSource<Section, Item>?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -35,6 +35,17 @@ class SpeciesView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configureDatasourceTwo(dataSource: UICollectionViewDiffableDataSource<Section, Item>?) {
+        self.dataSource = dataSource
+        
+        let headerRegistration = UICollectionView.SupplementaryRegistration<SpeciesHeaderView>(elementKind: ElementKind.sectionHeader) { supplementaryView, elementKind, indexPath in
+            supplementaryView.titleLabel.text = Section(rawValue: indexPath.section)?.title
+        }
+        dataSource?.supplementaryViewProvider = { (collectionView, elementKind, indexPath) in
+            return collectionView.dequeueConfiguredReusableSupplementary(using: headerRegistration, for: indexPath)
+        }
     }
     
     private func makeCollectionViewLayout() -> UICollectionViewLayout {
@@ -62,25 +73,6 @@ class SpeciesView: UIView {
     
     private func configureDataSource() {
         
-        let cellRegistration = UICollectionView.CellRegistration<SpeciesCell, Item> { cell, indexPath, itemIdentifier in
-            cell.titleLabel.text = itemIdentifier.title
-        }
-        
-        let headerRegistration = UICollectionView.SupplementaryRegistration<SpeciesHeaderView>(elementKind: ElementKind.sectionHeader) { supplementaryView, elementKind, indexPath in
-            supplementaryView.titleLabel.text = Section(rawValue: indexPath.section)?.title
-        }
-        
-        dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
-            if itemIdentifier.isRegisterCell {
-                return collectionView.dequeueReusableCell(withReuseIdentifier: RegisterCollectionViewCell.identifier, for: indexPath)
-            }
-            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
-        })
-        
-        dataSource?.supplementaryViewProvider = { (collectionView, elementKind, indexPath) in
-            return collectionView.dequeueConfiguredReusableSupplementary(using: headerRegistration, for: indexPath)
-        }
-        
     }
     
     func applyData(section: [Section: [Item]]) {
@@ -97,3 +89,5 @@ class SpeciesView: UIView {
     }
     
 }
+
+
