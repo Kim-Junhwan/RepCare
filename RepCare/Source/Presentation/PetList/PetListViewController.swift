@@ -11,6 +11,12 @@ import RxSwift
 
 final class PetListViewController: BaseViewController {
     
+    lazy var addPetButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(showRegisterPetView))
+        button.tintColor = .black
+        return button
+    }()
+    
     let mainView = PetListView()
     let viewModel: PetListViewModel
     let disposeBag = DisposeBag()
@@ -31,6 +37,7 @@ final class PetListViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
+        navigationItem.setRightBarButton(addPetButton, animated: false)
         mainView.petClassCollectionView.selectItem(at: [0,0], animated: false, scrollPosition: .init())
         mainView.collectionView(mainView.petClassCollectionView, didSelectItemAt: .init(row: 0, section: 0))
     }
@@ -45,7 +52,6 @@ final class PetListViewController: BaseViewController {
         mainView.delegate = self
         mainView.petClassCollectionView.dataSource = self
         mainView.petListCollectionView.dataSource = self
-        mainView.addPetButton.addTarget(self, action: #selector(showRegisterPetView), for: .touchUpInside)
     }
     
     @objc func showRegisterPetView() {
@@ -59,6 +65,7 @@ final class PetListViewController: BaseViewController {
 }
 
 extension PetListViewController: UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == mainView.petClassCollectionView {
             return PetClassModel.allCases.count
@@ -78,11 +85,10 @@ extension PetListViewController: UICollectionViewDataSource {
             return cell
         }
     }
-    
-    
 }
 
 extension PetListViewController: PetListViewDelegate {
+    
     func tapFilterButton() {
         
     }
@@ -106,5 +112,10 @@ extension PetListViewController: PetListViewDelegate {
             self.viewModel.reloadPetList()
         }
         navigationController?.pushViewController(detailViewController, animated: true)
+    }
+    
+    func loadNextPage(completion: @escaping () -> Void) {
+        viewModel.loadNextPage()
+        completion()
     }
 }

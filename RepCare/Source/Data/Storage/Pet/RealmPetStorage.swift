@@ -28,7 +28,8 @@ extension RealmPetStorage: PetStorage {
             petList = petList.where { $0.petSpecies.title.contains(searchKeyword) || $0.name.contains(searchKeyword) || $0.detailSpecies.title.contains(searchKeyword) || $0.morph.title.contains(searchKeyword) }
         }
         
-        return .init(totalPetCount: petList.count, startIndex: request.startIndex, petList: Array(petList))
+        let endIndex = min(request.startIndex+Rule.fetchPetCount, petList.count)
+        return .init(totalPetCount: petList.count, startIndex: request.startIndex, petList: Array(petList[request.startIndex..<endIndex]))
     }
     
     func registerPet(request: RegisterPetRequestDTO) throws -> PetObject {

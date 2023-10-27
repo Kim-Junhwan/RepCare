@@ -26,7 +26,7 @@ final class DefaultFetchPetListUseCase {
 
 extension DefaultFetchPetListUseCase: FetchPetListUseCase {
     func fetchPetList(request: FetchPetListRequest) -> PetPage {
-        let startIndex = request.start * Rule.fetchPetCount
+        let startIndex = (request.start-1) * Rule.fetchPetCount
         let response = petRepository.fetchPetList(query: request.query, start: startIndex)
         let currentPage = (response.start/Rule.fetchPetCount)+1
         let totalPage = response.totalPetCount % Rule.fetchPetCount == 0 ? response.totalPetCount/Rule.fetchPetCount : (response.totalPetCount/Rule.fetchPetCount)+1

@@ -597,7 +597,6 @@
 				C7D152ED2ACAA4160064D59F /* Base */,
 				C7D152602AC70B100064D59F /* PetList */,
 				C7D1525F2AC70B080064D59F /* Utils */,
-				C7F378A82AE8F77300281A35 /* LoadingView.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -734,6 +733,7 @@
 		C7F378AA2AE90BBC00281A35 /* Commmon */ = {
 			isa = PBXGroup;
 			children = (
+				C7F378A82AE8F77300281A35 /* LoadingView.swift */,
 				C7608D952AE0F39E001F03DA /* RegisterTaskViewController.swift */,
 			);
 			path = Commmon;

@@ -177,9 +177,6 @@ extension PetWeightViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension PetWeightViewController: WeightChartViewDelegate {
-    func tapEditButton() {
-        
-    }
     
     func tapRegisterWeightButton() {
         let vc = RegisterWeightViewController(date: Date())

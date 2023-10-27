@@ -39,7 +39,7 @@ final class DefaultUpdatePetUseCase: UpdatePetUseCase {
         
         try imageRepository.deletePetImage(petId: request.id)
         try imageRepository.savePetImage(petId: request.id, petImageList: request.imageDataList)
-        try petRepository.updatePet(editPet: .init(id: request.id, name: request.name, imageList: imageList, petClass: request.petClass, petSpecies: request.petSpecies, detailSpecies: request.detailSpecies, morph: request.morph, adoptionDate: request.adoptionDate, gender: request.gender, currentWeight: nil))
+        try petRepository.updatePet(editPet: .init(id: request.id, name: request.name, imageList: imageList, petClass: request.petClass, petSpecies: request.petSpecies, detailSpecies: request.detailSpecies, morph: request.morph, adoptionDate: request.adoptionDate, birthDate: request.birthDate, gender: request.gender, currentWeight: nil))
     }
     
 }

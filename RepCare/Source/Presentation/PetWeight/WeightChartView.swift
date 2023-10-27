@@ -10,7 +10,6 @@ import DGCharts
 
 protocol WeightChartViewDelegate: AnyObject {
     func tapRegisterWeightButton()
-    func tapEditButton()
 }
 
 class WeightChartView: UICollectionReusableView {
@@ -47,7 +46,6 @@ class WeightChartView: UICollectionReusableView {
         stackView.distribution = .fillProportionally
         stackView.spacing = 10
         stackView.addArrangedSubview(addWeightButton)
-        stackView.addArrangedSubview(editButton)
         return stackView
     }()
     
@@ -59,15 +57,6 @@ class WeightChartView: UICollectionReusableView {
        let button = UIButton(configuration: config)
         button.titleLabel?.numberOfLines = 1
         button.invalidateIntrinsicContentSize()
-        return button
-    }()
-    
-    let editButton: UIButton = {
-        var config = UIButton.Configuration.filled()
-        config.baseBackgroundColor = .lightDeepGreen
-        config.baseForegroundColor = .black
-        config.title = "편집"
-       let button = UIButton(configuration: config)
         return button
     }()
     
@@ -98,9 +87,6 @@ class WeightChartView: UICollectionReusableView {
         lineChart.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
             make.height.equalTo(lineChart.snp.width).multipliedBy(0.8)
-        }
-        editButton.snp.makeConstraints { make in
-            make.width.equalTo(60)
         }
         buttonStackView.snp.makeConstraints { make in
             make.top.equalTo(lineChart.snp.bottom).offset(10)

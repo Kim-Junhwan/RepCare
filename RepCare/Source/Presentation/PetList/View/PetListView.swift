@@ -14,6 +14,7 @@ protocol PetListViewDelegate: AnyObject {
     func reloadPetList(completion: @escaping () -> Void)
     func searchPetList(searchKeyword: String)
     func tapFilterButton()
+    func loadNextPage(completion: @escaping ()-> Void)
 }
 
 final class PetListView: UIView {
@@ -64,17 +65,14 @@ final class PetListView: UIView {
         return collectionView
     }()
     
-    let addPetButton: UIButton = {
-        var config = UIButton.Configuration.filled()
-        config.image = UIImage(systemName: "plus")
-        config.baseForegroundColor = .white
-        config.baseBackgroundColor = .lightDeepGreen
-        let button = UIButton(configuration: config)
-        button.clipsToBounds = true
-       return button
+    let footerRefreshView: UIActivityIndicatorView = {
+       let view = UIActivityIndicatorView()
+        view.hidesWhenStopped = false
+        return view
     }()
     
     weak var delegate: PetListViewDelegate?
+    var isFetching = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -91,18 +89,13 @@ final class PetListView: UIView {
         petListCollectionView.collectionViewLayout = makePetListCollectionViewLayout()
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        addPetButton.layer.cornerRadius = addPetButton.frame.height/2
-    }
-    
     private func configureView() {
         addSubview(searchBarStackView)
         searchBarStackView.addArrangedSubview(searchBar)
         searchBarStackView.addArrangedSubview(filterButton)
         addSubview(petClassCollectionView)
         addSubview(petListCollectionView)
-        addSubview(addPetButton)
+        addSubview(footerRefreshView)
         searchBar.delegate = self
         filterButton.addTarget(self, action: #selector(tapFilterButton), for: .touchUpInside)
     }
@@ -122,11 +115,10 @@ final class PetListView: UIView {
             make.leading.trailing.equalTo(safeAreaLayoutGuide)
             make.bottom.equalToSuperview()
         }
-        addPetButton.snp.makeConstraints { make in
-            make.width.height.equalTo(70)
-            make.bottom.trailing.equalTo(safeAreaLayoutGuide).inset(20)
+        footerRefreshView.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(0)
         }
-        
     }
     
     private func makePetClassCollectionViewLayout() -> UICollectionViewLayout {
@@ -162,6 +154,51 @@ final class PetListView: UIView {
 }
 
 extension PetListView: UICollectionViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let currentOffset = scrollView.contentOffset.y+scrollView.frame.height - scrollView.safeAreaInsets.bottom
+        let startAnimatingHeight: CGFloat = 80
+        
+        let contentSizeHeight = max(scrollView.contentSize.height, scrollView.frame.height)
+        let isBottomScroll = currentOffset > contentSizeHeight //스크롤이 contentSize보다 더 스크롤 중인가?
+        let playIndicatorAnimation = currentOffset >= contentSizeHeight + startAnimatingHeight //indicator 애니메이션을 실행 할 시점
+        
+        if isBottomScroll {
+            if playIndicatorAnimation {
+                isFetching = true
+                footerRefreshView.startAnimating()
+            } else {
+                isFetching = false
+                footerRefreshView.stopAnimating()
+            }
+            footerRefreshView.snp.updateConstraints { make in
+                make.height.equalTo(currentOffset - contentSizeHeight)
+            }
+            footerRefreshView.alpha = (footerRefreshView.frame.height / startAnimatingHeight)
+        } else {
+            
+        }
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if isFetching {
+            scrollView.setContentOffset(.init(x: .zero, y: scrollView.contentSize.height+80), animated: true)
+            delegate?.loadNextPage(completion: {
+                
+            })
+        }
+    }
+    
+//    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+//        if isFetching {
+//            delegate?.loadNextPage(completion: {
+//                self.isFetching = false
+//                self.footerRefreshView.stopAnimating()
+//                self.footerRefreshView.isHidden = true
+//            })
+//        }
+//    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == petClassCollectionView {
             delegate?.selectPetClass(petClass: .init(rawValue: indexPath.row) ?? .all)
