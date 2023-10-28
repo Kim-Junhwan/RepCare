@@ -9,18 +9,18 @@ import UIKit
 
 class ImageViewController: UIViewController {
     
-    private enum Sentence {
-        static let emptyImageIdentifier = "star"
-    }
-    
     let imageBaseView = UIView()
     let imageView: UIImageView = UIImageView(frame: .zero)
     let isEmptyImage: Bool
     
     init(imagePath: PetImageModel) {
-        isEmptyImage = false
+        do {
+           try  imageView.configureImageFromFilePath(path: imagePath.imagePath)
+            isEmptyImage = false
+        } catch {
+            isEmptyImage = true
+        }
         super.init(nibName: nil, bundle: nil)
-        imageView.configureImageFromFilePath(path: imagePath.imagePath)
     }
     
     init(petClass: PetClassModel) {

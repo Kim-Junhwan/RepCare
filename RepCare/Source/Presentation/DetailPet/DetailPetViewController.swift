@@ -32,13 +32,18 @@ class DetailPetViewController: BaseViewController {
                 self.present(nvc, animated: true)
             }),
             UIAction(title: "삭제", image: UIImage(systemName: "trash"), attributes: .destructive, handler: { _ in
-                do {
-                    try self.viewModel.deletePet()
-                    self.updateClosure?()
-                    self.navigationController?.popToRootViewController(animated: true)
-                } catch {
-                    print(error)
+                self.showTaskAlert(title: "경고", message: "해당 작업을 수행할 시, 저장된 개체의 데이터(사진, 몸무게, 작업 기록 등)가 모두 삭제됩니다.") {
+                    do {
+                        try self.viewModel.deletePet()
+                    } catch {
+                        self.showErrorAlert(title: "삭제 실패", message: error.localizedDescription)
+                    }
+                    
                 }
+                
+                self.updateClosure?()
+                self.navigationController?.popToRootViewController(animated: true)
+                
                 
             })
         ]
@@ -122,7 +127,7 @@ class DetailPetViewController: BaseViewController {
     deinit {
         print("deinit DetailPetVC")
     }
-
+    
 }
 
 extension DetailPetViewController: ProfileViewControllerDelegate, ProfileViewControllerDataSource {

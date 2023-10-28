@@ -8,8 +8,12 @@
 import Foundation
 import UIKit
 
+enum FetchFileImageError: Error {
+    case cannotFetchImage
+}
+
 extension UIImageView {
-    func configureImageFromFilePath(path: String) {
+    func configureImageFromFilePath(path: String) throws {
         guard let defaultPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
         let imagePath: String
         if #available(iOS 16.0, *) {
@@ -22,9 +26,7 @@ extension UIImageView {
                 self?.image = UIImage(data: imageFile)
             }
         } else {
-            DispatchQueue.main.async { [weak self] in
-                self?.image = UIImage(systemName: "star")
-            }
+            throw FetchFileImageError.cannotFetchImage
         }
     }
 }

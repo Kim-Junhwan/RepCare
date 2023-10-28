@@ -139,17 +139,25 @@ class PetCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    private func whenPetImageCannotRender(petClass: PetClassModel) {
+        petImageView.image = UIImage(named: petClass.image)?.withRenderingMode(.alwaysTemplate)
+        petImageView.snp.remakeConstraints { make in  make.width.height.equalTo(basePetImageView.snp.width).multipliedBy(0.5)
+            make.center.equalToSuperview()
+        }
+    }
+    
     func configureCell(pet: PetModel) {
         nameLabel.text = pet.name
         sexImageView.image = UIImage(named: pet.sex.image)
         if pet.imagePath.isEmpty {
-            petImageView.image = UIImage(named: pet.overSpecies.petClass.image)?.withRenderingMode(.alwaysTemplate)
-            petImageView.snp.remakeConstraints { make in  make.width.height.equalTo(basePetImageView.snp.width).multipliedBy(0.5)
-                make.center.equalToSuperview()
-            }
+            whenPetImageCannotRender(petClass: pet.overSpecies.petClass)
         } else {
             guard let imagePath = pet.imagePath.first?.imagePath else { return }
-            petImageView.configureImageFromFilePath(path: imagePath)
+            do {
+                try petImageView.configureImageFromFilePath(path: imagePath)
+            } catch {
+                whenPetImageCannotRender(petClass: pet.overSpecies.petClass)
+            }
         }
         if let morph = pet.overSpecies.morph {
             speciesLabel.text = pet.overSpecies.detailSpecies?.title
