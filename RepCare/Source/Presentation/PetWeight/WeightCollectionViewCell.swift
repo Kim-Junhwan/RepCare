@@ -85,4 +85,8 @@ class WeightCollectionViewCell: UICollectionViewCell {
         deleteButton.layer.cornerRadius = 15
     }
     
+    override func prepareForReuse() {
+        deleteButton.isHidden = false
+    }
+    
 }
