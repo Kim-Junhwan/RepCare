@@ -48,6 +48,15 @@ final class PetListView: UIView {
        return UIButton(configuration: config)
     }()
     
+    let emptyLabel: UILabel = {
+        let label = UILabel()
+        label.text = "등록된 개체가 없습니다. 우측 상단 버튼을 눌러 등록해주세요."
+        label.numberOfLines = 0
+        label.font = .boldSystemFont(ofSize: 20)
+        label.textColor = .systemGray4
+        return label
+    }()
+    
     lazy var petClassCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: makePetClassCollectionViewLayout())
         collectionView.register(PetClassCollectionViewCell.self, forCellWithReuseIdentifier: PetClassCollectionViewCell.identifier)
@@ -91,6 +100,7 @@ final class PetListView: UIView {
     
     private func configureView() {
         addSubview(searchBarStackView)
+        addSubview(emptyLabel)
         searchBarStackView.addArrangedSubview(searchBar)
         searchBarStackView.addArrangedSubview(filterButton)
         addSubview(petClassCollectionView)
@@ -101,6 +111,11 @@ final class PetListView: UIView {
     }
     
     private func setConstraints() {
+        emptyLabel.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.leading.trailing.lessThanOrEqualToSuperview().inset(30)
+        }
+        
         searchBarStackView.snp.makeConstraints { make in
             make.top.leading.trailing.equalTo(safeAreaLayoutGuide)
             make.height.equalTo(50)

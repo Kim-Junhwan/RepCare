@@ -44,6 +44,13 @@ final class PetListViewController: BaseViewController {
     
     private func bind() {
         viewModel.petList.asDriver().drive(with: self) { owner, petList in
+            if petList.isEmpty {
+                owner.mainView.emptyLabel.isHidden = false
+                owner.mainView.petListCollectionView.isHidden = true
+                return
+            }
+            owner.mainView.emptyLabel.isHidden = true
+            owner.mainView.petListCollectionView.isHidden = false
             owner.mainView.petListCollectionView.reloadData()
         }.disposed(by: disposeBag)
     }
