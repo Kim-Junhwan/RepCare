@@ -50,6 +50,8 @@ final class ClassSpeciesMorphViewModel {
     var fetchDetailSpeciesList: [DetailPetSpeciesModel] = []
     var fetchMorphList: [MorphModel] = []
     
+    var temporaryPetSpeceis: PetOverSpeciesModel?
+    
     let speciesList: BehaviorRelay<[Section: [Item]]> = .init(value: [.detailSpecies:[],.morph:[],.petClass:[],.species:[]])
     lazy var canRegister = BehaviorRelay<Bool>.combineLatest(selectPetClass, selectSpecies, selectDetailSpecies, selectMorph) { petClass, species, detailSpecies, morph in
         return (petClass != nil) && (species != nil)
@@ -61,9 +63,41 @@ final class ClassSpeciesMorphViewModel {
         self.repository = repository
     }
     
+    convenience init(petSpeceis: PetOverSpeciesModel? = nil, repository: SpeciesRepository) {
+        self.init(repository: repository)
+        guard let overPetSpecies = petSpeceis else { return }
+        temporaryPetSpeceis = petSpeceis
+        self.selectPetClass.accept(overPetSpecies.petClass)
+        self.selectSpecies.accept(overPetSpecies.petSpecies)
+        self.selectDetailSpecies.accept(overPetSpecies.detailSpecies)
+        self.selectMorph.accept(overPetSpecies.morph)
+    }
+    
     func viewDidLoad() {
         fetchPetClass()
         bind()
+    }
+    
+    func selectPetClass(petClass: PetClassModel?) {
+        selectPetClass.accept(petClass)
+        selectSpecies.accept(nil)
+        selectDetailSpecies.accept(nil)
+        selectMorph.accept(nil)
+    }
+    
+    func selectPetSpecies(species: PetSpeciesModel?) {
+        selectSpecies.accept(species)
+        selectDetailSpecies.accept(nil)
+        selectMorph.accept(nil)
+    }
+    
+    func selectDetailSpecies(detailSpecies: DetailPetSpeciesModel?) {
+        selectDetailSpecies.accept(detailSpecies)
+        selectMorph.accept(nil)
+    }
+    
+    func selectMorph(morph: MorphModel?) {
+        selectMorph.accept(morph)
     }
     
     func removeSection(sectionIndex: Int) {
@@ -91,9 +125,6 @@ final class ClassSpeciesMorphViewModel {
     }
     
     func deleteSpecies(section: Section, row: Int) throws {
-        print(section)
-        print(speciesList.value[section]?[row])
-       // guard let editSpecies = speciesList.value[section][row] else { return }
         guard let deleteSpecies = speciesList.value[section]?[row] else { return }
         let domainSection: PetOverSpecies
         switch section {
@@ -173,9 +204,6 @@ final class ClassSpeciesMorphViewModel {
     private func bind() {
         selectPetClass.compactMap({ return $0 }).subscribe(with: self) { owner, item in
             owner.fetchPetSpecies(petClass: item)
-            owner.selectSpecies.accept(nil)
-            owner.selectDetailSpecies.accept(nil)
-            owner.selectMorph.accept(nil)
         }.disposed(by: disposeBag)
         
         selectSpecies.compactMap({ return $0 }).subscribe { [weak self] item in
@@ -184,8 +212,6 @@ final class ClassSpeciesMorphViewModel {
             let fetchDetailSpecies = self.repository.fetchDetailSpecies(species: petSpecies)
             self.fetchDetailSpeciesList = fetchDetailSpecies.map { .init(detailSpecies: $0) }
             self.updateFetchSpeciesList(section: .detailSpecies, data: fetchDetailSpecies.map { Item(title: $0.detailSpecies, id: $0.id, isRegisterCell: false) })
-            self.selectDetailSpecies.accept(nil)
-            self.selectMorph.accept(nil)
         }.disposed(by: disposeBag)
         
         selectDetailSpecies.compactMap({ return $0 }).subscribe { [weak self] item in
@@ -194,7 +220,6 @@ final class ClassSpeciesMorphViewModel {
             let fetchMorph = self.repository.fetchMorph(detailSpecies: detailSpecies)
             self.fetchMorphList = fetchMorph.map { .init(morph: $0) }
             self.updateFetchSpeciesList(section: .morph, data: fetchMorph.map { Item(title: $0.morphName, id: $0.id, isRegisterCell: false) })
-            self.selectMorph.accept(nil)
         }.disposed(by: disposeBag)
     }
     

@@ -41,11 +41,24 @@ class ClassSpeciesMorphViewController: BaseViewController {
         super.viewDidLoad()
         mainView.configureDatasource(dataSource: makeDataource())
         configureCollectionView()
-        bind()
         viewModel.viewDidLoad()
         navigationItem.setLeftBarButton(dismissButton, animated: false)
         navigationItem.setRightBarButton(registerButton, animated: false)
         registerButton.isEnabled = false
+        bind()
+        loadSelected()
+    }
+    
+    func loadSelected() {
+        guard let tempSpecies = viewModel.temporaryPetSpeceis else { return }
+        let petClass = tempSpecies.petClass
+        mainView.collectionView.selectItem(at: IndexPath(row: petClass.rawValue, section: 0), animated: false, scrollPosition: .init())
+        guard let selectSpeciesIndex = viewModel.fetchSpeciesList.enumerated().first(where: { $0.element.id == tempSpecies.petSpecies.id })?.offset else { return }
+        mainView.collectionView.selectItem(at: IndexPath(row: selectSpeciesIndex, section: 1), animated: false, scrollPosition: .init())
+        guard let selectDetailSpeciesIndex = viewModel.fetchDetailSpeciesList.enumerated().first(where: { $0.element.id == tempSpecies.detailSpecies?.id })?.offset else { return }
+        mainView.collectionView.selectItem(at: IndexPath(row: selectDetailSpeciesIndex, section: 2), animated: false, scrollPosition: .init())
+        guard let selectMorphIndex = viewModel.fetchMorphList.enumerated().first(where: { $0.element.id == tempSpecies.morph?.id })?.offset else { return }
+        mainView.collectionView.selectItem(at: IndexPath(row: selectMorphIndex, section: 3), animated: false, scrollPosition: .init())
     }
     
     private func bind() {
@@ -144,16 +157,16 @@ extension ClassSpeciesMorphViewController: UICollectionViewDelegate {
         }
         if indexPath.section == 0 {
             let selectClass = viewModel.fetchPetClassList[indexPath.row]
-            viewModel.selectPetClass.accept(selectClass)
+            viewModel.selectPetClass(petClass: selectClass)
         } else if indexPath.section == 1 {
             let selectPetSpecies = viewModel.fetchSpeciesList[indexPath.row]
-            viewModel.selectSpecies.accept(selectPetSpecies)
+            viewModel.selectPetSpecies(species: selectPetSpecies)
         } else if indexPath.section == 2 {
             let selectDetailSpecies = viewModel.fetchDetailSpeciesList[indexPath.row]
-            viewModel.selectDetailSpecies.accept(selectDetailSpecies)
+            viewModel.selectDetailSpecies(detailSpecies: selectDetailSpecies)
         } else if indexPath.section == 3 {
             let selectMorph = viewModel.fetchMorphList[indexPath.row]
-            viewModel.selectMorph.accept(selectMorph)
+            viewModel.selectMorph(morph: selectMorph)
         }
         
         for item in 0..<selectSectionArr!.count {
@@ -202,13 +215,13 @@ extension ClassSpeciesMorphViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-            viewModel.selectPetClass.accept(nil)
+            viewModel.selectPetClass(petClass: nil)
         } else if indexPath.section == 1 {
-            viewModel.selectSpecies.accept(nil)
+            viewModel.selectPetSpecies(species: nil)
         } else if indexPath.section == 2 {
-            viewModel.selectDetailSpecies.accept(nil)
+            viewModel.selectDetailSpecies(detailSpecies: nil)
         } else if indexPath.section == 3 {
-            viewModel.selectMorph.accept(nil)
+            viewModel.selectMorph(morph: nil)
         }
         viewModel.removeSection(sectionIndex: indexPath.section)
     }

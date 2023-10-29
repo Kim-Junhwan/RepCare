@@ -41,7 +41,6 @@ class RegisterNewPetViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureDatasource()
-        
         bind()
         mainView.imageCollectionView.delegate = self
     }
@@ -190,7 +189,7 @@ class RegisterNewPetViewController: BaseViewController {
     }
     
     @objc func showSpeciesView() {
-        let vc = viewModel.diContainer.makeSpeciesViewController()
+        let vc = viewModel.diContainer.makeSpeciesViewController(petSpeciesModel: viewModel.overPetSpecies.value)
         vc.viewModel.tapRegisterClosure = { [weak self] in self?.viewModel.overPetSpecies.accept($0) }
         let nvc = UINavigationController(rootViewController: vc)
         nvc.modalPresentationStyle = .fullScreen

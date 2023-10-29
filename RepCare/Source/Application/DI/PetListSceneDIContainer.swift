@@ -24,11 +24,6 @@ final class PetListSceneDIContainer {
         return useCase
     }
     
-    private func makeSpeciesViewModel() -> ClassSpeciesMorphViewModel {
-        let viewModel = ClassSpeciesMorphViewModel(repository: appDIContainer.getSpeciesRepository())
-        return viewModel
-    }
-    
     private func makeRegisterViewModel() -> RegisterPetViewModel {
         let viewModel = RegisterPetViewModel(diContainer: self)
         return viewModel
@@ -54,8 +49,13 @@ final class PetListSceneDIContainer {
         return vc
     }
     
-    func makeSpeciesViewController() -> ClassSpeciesMorphViewController {
-        let vc = ClassSpeciesMorphViewController(viewModel: makeSpeciesViewModel())
+    private func makeSpeciesViewModel(petSpeciesModel: PetOverSpeciesModel? = nil) -> ClassSpeciesMorphViewModel {
+        let viewModel = ClassSpeciesMorphViewModel(petSpeceis: petSpeciesModel, repository: appDIContainer.getSpeciesRepository())
+        return viewModel
+    }
+    
+    func makeSpeciesViewController(petSpeciesModel: PetOverSpeciesModel? = nil) -> ClassSpeciesMorphViewController {
+        let vc = ClassSpeciesMorphViewController(viewModel: makeSpeciesViewModel(petSpeciesModel: petSpeciesModel))
         return vc
     }
     
