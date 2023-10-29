@@ -17,13 +17,6 @@ class DetailPetHeaderViewController: BaseViewController {
     
     var viewControllers: [UIViewController] = []
     
-//    {
-//        if imagePathList.isEmpty {
-//            return [ImageViewController(petClass: pet.overSpecies.petClass)]
-//        }
-//        return imagePathList.map {ImageViewController(imagePath: $0)}
-//    }()
-    
     init(pet: PetModel) {
         self.pet = pet
         super.init(nibName: nil, bundle: nil)
@@ -60,7 +53,6 @@ class DetailPetHeaderViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setView(pet: pet)
     }
 
     @objc func pageControlHandler(_ sender: UIPageControl) {
