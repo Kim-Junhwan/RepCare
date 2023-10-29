@@ -11,6 +11,11 @@ struct DetailPetSpeciesModel {
     let id: String
     let title: String
     
+    init(id: String, title: String) {
+        self.id = id
+        self.title = title
+    }
+    
     init(detailSpecies: DetailSpecies) {
         self.id = detailSpecies.id
         self.title = detailSpecies.detailSpecies

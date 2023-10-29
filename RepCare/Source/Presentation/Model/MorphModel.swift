@@ -11,6 +11,11 @@ struct MorphModel {
     let id: String
     let title: String
     
+    init(id: String, title: String) {
+        self.id = id
+        self.title = title
+    }
+    
     init(morph: Morph) {
         self.id = morph.id
         self.title = morph.morphName

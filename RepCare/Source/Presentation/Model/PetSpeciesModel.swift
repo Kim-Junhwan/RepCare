@@ -16,6 +16,11 @@ struct PetSpeciesModel {
         self.title = petSpecies.species
     }
     
+    init(id: String, title: String) {
+        self.id = id
+        self.title = title
+    }
+    
     func toDomain() -> Species {
         return .init(id: id, species: title)
     }

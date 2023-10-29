@@ -89,6 +89,13 @@ class SpeciesView: UIView {
         return snapShot
     }
     
+    func reloadSection(section: Section) {
+        guard let dataSource else { return }
+        var currentSnapshot = dataSource.snapshot()
+        currentSnapshot.reloadSections([section])
+        dataSource.apply(currentSnapshot)
+    }
+    
 }
 
 

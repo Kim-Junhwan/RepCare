@@ -31,9 +31,17 @@ enum Section: Int, CaseIterable {
 
 
 struct Item: Hashable {
-    let title: String
     let id: String
+    let title: String
     let isRegisterCell: Bool
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static func == (lhs: Item, rhs: Item) -> Bool {
+        return lhs.id == rhs.id
+    }
 }
 
 final class ClassSpeciesMorphViewModel {
@@ -165,15 +173,24 @@ final class ClassSpeciesMorphViewModel {
         case .species:
             domainSection = .species
             try repository.updateSpecies(species: domainSection, id: editSpecies.id, editTitle: editTitle)
+            if selectSpecies.value?.id == editSpecies.id {
+                selectSpecies.accept(.init(id: editSpecies.id, title: editTitle))
+            }
             self.selectPetClass.accept(self.selectPetClass.value)
         case .detailSpecies:
             domainSection = .detailSpecies
             try repository.updateSpecies(species: domainSection, id: editSpecies.id, editTitle: editTitle)
             self.selectSpecies.accept(self.selectSpecies.value)
+            if selectDetailSpecies.value?.id == editSpecies.id {
+                selectDetailSpecies.accept(.init(id: editSpecies.id, title: editTitle))
+            }
         case .morph:
             domainSection = .morph
             try repository.updateSpecies(species: domainSection, id: editSpecies.id, editTitle: editTitle)
             self.selectDetailSpecies.accept(self.selectDetailSpecies.value)
+            if selectMorph.value?.id == editSpecies.id {
+                selectMorph.accept(.init(id: editSpecies.id, title: editTitle))
+            }
         default:
             fatalError()
         }
@@ -184,11 +201,11 @@ final class ClassSpeciesMorphViewModel {
     private func fetchPetClass() {
         let fetchPetClass = repository.fetchPetClass().map { PetClassModel(petClass: $0) }
         self.fetchPetClassList = fetchPetClass
-        updateList(section: .petClass, data: fetchPetClass.map { Item(title: $0.title, id: UUID().uuidString, isRegisterCell: false) })
+        updateList(section: .petClass, data: fetchPetClass.map { Item(id: UUID().uuidString, title: $0.title, isRegisterCell: false) })
     }
     
     private func appendRegisterItem(data: [Item]) -> [Item] {
-        let registerItem = Item(title: "", id: UUID().uuidString, isRegisterCell: true)
+        let registerItem = Item(id: UUID().uuidString, title: "", isRegisterCell: true)
         
         return data+[registerItem]
     }
@@ -215,7 +232,7 @@ final class ClassSpeciesMorphViewModel {
     private func fetchPetSpecies(petClass: PetClassModel) {
         let fetchSpecies = self.repository.fetchSpecies(petClass: petClass.toDomain())
         self.fetchSpeciesList = fetchSpecies.map{ .init(petSpecies: $0) }
-        self.updateFetchSpeciesList(section: .species, data: fetchSpecies.map { Item(title: $0.species, id: $0.id, isRegisterCell: false) })
+        self.updateFetchSpeciesList(section: .species, data: fetchSpecies.map { Item(id: $0.id, title: $0.species, isRegisterCell: false) })
     }
     
     private func bind() {
@@ -228,7 +245,7 @@ final class ClassSpeciesMorphViewModel {
             guard let petSpecies = item.element?.toDomain() else { return }
             let fetchDetailSpecies = self.repository.fetchDetailSpecies(species: petSpecies)
             self.fetchDetailSpeciesList = fetchDetailSpecies.map { .init(detailSpecies: $0) }
-            self.updateFetchSpeciesList(section: .detailSpecies, data: fetchDetailSpecies.map { Item(title: $0.detailSpecies, id: $0.id, isRegisterCell: false) })
+            self.updateFetchSpeciesList(section: .detailSpecies, data: fetchDetailSpecies.map { Item(id: $0.id, title: $0.detailSpecies, isRegisterCell: false) })
         }.disposed(by: disposeBag)
         
         selectDetailSpecies.compactMap({ return $0 }).subscribe { [weak self] item in
@@ -236,7 +253,7 @@ final class ClassSpeciesMorphViewModel {
             guard let detailSpecies = item.element?.toDomain() else { return }
             let fetchMorph = self.repository.fetchMorph(detailSpecies: detailSpecies)
             self.fetchMorphList = fetchMorph.map { .init(morph: $0) }
-            self.updateFetchSpeciesList(section: .morph, data: fetchMorph.map { Item(title: $0.morphName, id: $0.id, isRegisterCell: false) })
+            self.updateFetchSpeciesList(section: .morph, data: fetchMorph.map { Item(id: $0.id, title: $0.morphName, isRegisterCell: false) })
         }.disposed(by: disposeBag)
     }
     

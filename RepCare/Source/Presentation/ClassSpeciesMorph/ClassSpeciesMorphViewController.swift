@@ -118,6 +118,7 @@ extension ClassSpeciesMorphViewController: UIContextMenuInteractionDelegate {
                 self.showTextFiledAlert(title: "수정", message: "적용할 내용을 입력해주세요.", textFieldText: currentSectionList[indexPath.row].title) { text in
                     do {
                         try self.viewModel.updateSpecies(section: section, row: indexPath.row, editTitle: text)
+                        self.mainView.reloadSection(section: section)
                     } catch {
                         self.showErrorAlert(title: "수정 실패", message: error.localizedDescription)
                     }
@@ -130,7 +131,6 @@ extension ClassSpeciesMorphViewController: UIContextMenuInteractionDelegate {
                 self.showTaskAlert(title: "경고", message: "해당 작업을 수행하면 하위에 저장된 종 역시 삭제됩니다. 또한 기존에 저장된 애완동물의 종 역시 변경 될 수 있습니다.") {
                     do {
                         try self.viewModel.deleteSpecies(section: section, row: indexPath.row)
-                        let sectionItemNumber = self.mainView.collectionView.numberOfItems(inSection: section.rawValue)
                     } catch {
                         self.showErrorAlert(title: "삭제 실패", message: error.localizedDescription)
                     }
