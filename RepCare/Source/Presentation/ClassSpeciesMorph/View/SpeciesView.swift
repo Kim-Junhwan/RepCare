@@ -29,7 +29,6 @@ class SpeciesView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configureDataSource()
         configureView()
     }
     
@@ -37,11 +36,16 @@ class SpeciesView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configureDatasourceTwo(dataSource: UICollectionViewDiffableDataSource<Section, Item>?) {
+    func configureDatasource(dataSource: UICollectionViewDiffableDataSource<Section, Item>?) {
         self.dataSource = dataSource
         
         let headerRegistration = UICollectionView.SupplementaryRegistration<SpeciesHeaderView>(elementKind: ElementKind.sectionHeader) { supplementaryView, elementKind, indexPath in
-            supplementaryView.titleLabel.text = Section(rawValue: indexPath.section)?.title
+            guard let section = Section(rawValue: indexPath.section) else { return }
+            if section == .petClass {
+                supplementaryView.descriptionLabel.isHidden = false
+                supplementaryView.descriptionLabel.text = "※ 종 / 상세 종 / 모프를 꾹 눌러서 수정 및 삭제할 수 있습니다."
+            }
+            supplementaryView.titleLabel.text = section.title
         }
         dataSource?.supplementaryViewProvider = { (collectionView, elementKind, indexPath) in
             return collectionView.dequeueConfiguredReusableSupplementary(using: headerRegistration, for: indexPath)
@@ -60,8 +64,9 @@ class SpeciesView: UIView {
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: ElementKind.sectionHeader, alignment: .top)
         section.contentInsets = .init(top: 0, leading: 10, bottom: 0, trailing: 10)
         section.boundarySupplementaryItems = [sectionHeader]
-        
-        return UICollectionViewCompositionalLayout(section: section)
+        let config = UICollectionViewCompositionalLayoutConfiguration()
+        config.interSectionSpacing = 10
+        return UICollectionViewCompositionalLayout(section: section, configuration: config)
     }
     
     private func configureView() {
@@ -69,10 +74,6 @@ class SpeciesView: UIView {
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-    }
-    
-    private func configureDataSource() {
-        
     }
     
     func applyData(section: [Section: [Item]]) {
