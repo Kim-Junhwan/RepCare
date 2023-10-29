@@ -29,21 +29,20 @@ class DetailPetViewController: BaseViewController {
                     try? self?.viewModel.fetchDetailPetInfo()
                 }
                 let nvc = UINavigationController(rootViewController: updateVC)
+                nvc.modalPresentationStyle = .fullScreen
                 self.present(nvc, animated: true)
             }),
-            UIAction(title: "삭제", image: UIImage(systemName: "trash"), attributes: .destructive, handler: { _ in
-                self.showTaskAlert(title: "경고", message: "해당 작업을 수행할 시, 저장된 개체의 데이터(사진, 몸무게, 작업 기록 등)가 모두 삭제됩니다.") {
+            UIAction(title: "삭제", image: UIImage(systemName: "trash"), attributes: .destructive, handler: { [weak self] _ in
+                self?.showTaskAlert(title: "경고", message: "해당 작업을 수행할 시, 저장된 개체의 데이터(사진, 몸무게, 작업 기록 등)가 모두 삭제됩니다.") { [weak self] in
                     do {
-                        try self.viewModel.deletePet()
+                        try self?.viewModel.deletePet()
                     } catch {
-                        self.showErrorAlert(title: "삭제 실패", message: error.localizedDescription)
+                        self?.showErrorAlert(title: "삭제 실패", message: error.localizedDescription)
                     }
                     
                 }
-                
-                self.updateClosure?()
-                self.navigationController?.popToRootViewController(animated: true)
-                
+                self?.updateClosure?()
+                self?.navigationController?.popToRootViewController(animated: true)
                 
             })
         ]

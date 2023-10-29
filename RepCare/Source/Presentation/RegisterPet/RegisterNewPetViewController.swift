@@ -18,6 +18,12 @@ class RegisterNewPetViewController: BaseViewController {
     
     var tapRegisterButtonClosure: (() -> Void)?
     
+    lazy var cancelButton: UIBarButtonItem = {
+        let barButton = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(dismissView))
+        barButton.tintColor = .red
+        return barButton
+    }()
+    
     lazy var registerButton: UIBarButtonItem = {
         let barButton = UIBarButtonItem(title: viewModel.registerButtonTitle, style: .plain, target: self, action: #selector(tapRegisterButton))
         return barButton
@@ -35,6 +41,7 @@ class RegisterNewPetViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureDatasource()
+        
         bind()
         mainView.imageCollectionView.delegate = self
     }
@@ -132,13 +139,16 @@ class RegisterNewPetViewController: BaseViewController {
         mainView.birthDayButton.datePickerButton.actionClosure = { [weak self] selectDate in
             self?.viewModel.hatchDate.accept(selectDate)
         }
+        if navigationController?.viewControllers.first == self {
+            navigationItem.setLeftBarButton(cancelButton, animated: false)
+        }
     }
     
     func configureDatasource() {
-        let imageCellRegistration = UICollectionView.CellRegistration<ImageCollectionViewCell, PetImageItem> { cell, indexPath, itemIdentifier in
+        let imageCellRegistration = UICollectionView.CellRegistration<ImageCollectionViewCell, PetImageItem> { [weak self] cell, indexPath, itemIdentifier in
             cell.configureCell(petImage: itemIdentifier)
-            cell.deleteButton.identifier = self.viewModel.petImageList.value[indexPath.row-1].id
-            cell.deleteButton.addTarget(self, action: #selector(self.deleteImage(_:)), for: .touchUpInside)
+            cell.deleteButton.identifier = self?.viewModel.petImageList.value[indexPath.row-1].id
+            cell.deleteButton.addTarget(self, action: #selector(self?.deleteImage(_:)), for: .touchUpInside)
         }
         
         mainView.dataSource = UICollectionViewDiffableDataSource<ImageCollectionViewSection, PetImageItem>(collectionView: mainView.imageCollectionView, cellProvider: { [weak self] collectionView, indexPath, itemIdentifier in
@@ -187,7 +197,12 @@ class RegisterNewPetViewController: BaseViewController {
         present(nvc, animated: true)
     }
     
+    @objc private func dismissView() {
+        dismiss(animated: true)
+    }
+    
     deinit {
+        removeFromParent()
         print("deinit ReggisterNewPet")
     }
 }
@@ -214,6 +229,7 @@ extension RegisterNewPetViewController: UICollectionViewDelegate {
         alert.addAction(cancel)
         present(alert, animated: true)
     }
+    
     func pick(sourceType: UIImagePickerController.SourceType) {
         let picker = UIImagePickerController()
         picker.sourceType = sourceType
@@ -260,6 +276,7 @@ extension RegisterNewPetViewController: PHPickerViewControllerDelegate {
                 guard let imageIdentifier = newImages[element.offset].assetIdentifier else { return }
                 petImageItemList.append(.init(image: imageList[element.offset], imageType: .galleryImage, id: imageIdentifier))
             }
+            
             owner.viewModel.petImageList.accept(owner.viewModel.petImageList.value + petImageItemList)
             LoadingView.hide()
         }.disposed(by: disposeBag)
