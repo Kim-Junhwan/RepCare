@@ -79,6 +79,7 @@ final class ClassSpeciesMorphViewModel {
     }
     
     func selectPetClass(petClass: PetClassModel?) {
+        removeUnderSection(section: .species)
         selectPetClass.accept(petClass)
         selectSpecies.accept(nil)
         selectDetailSpecies.accept(nil)
@@ -86,17 +87,20 @@ final class ClassSpeciesMorphViewModel {
     }
     
     func selectPetSpecies(species: PetSpeciesModel?) {
+        removeUnderSection(section: .species)
         selectSpecies.accept(species)
         selectDetailSpecies.accept(nil)
         selectMorph.accept(nil)
     }
     
     func selectDetailSpecies(detailSpecies: DetailPetSpeciesModel?) {
+        removeUnderSection(section: .detailSpecies)
         selectDetailSpecies.accept(detailSpecies)
         selectMorph.accept(nil)
     }
     
     func selectMorph(morph: MorphModel?) {
+        removeUnderSection(section: .morph)
         selectMorph.accept(morph)
     }
     
@@ -132,14 +136,23 @@ final class ClassSpeciesMorphViewModel {
             domainSection = .species
             try repository.deleteSpecies(species: domainSection, id: deleteSpecies.id)
             self.selectPetClass.accept(self.selectPetClass.value)
+            if selectSpecies.value?.id == deleteSpecies.id {
+                selectPetSpecies(species: nil)
+            }
         case .detailSpecies:
             domainSection = .detailSpecies
             try repository.deleteSpecies(species: domainSection, id: deleteSpecies.id)
             self.selectSpecies.accept(self.selectSpecies.value)
+            if selectDetailSpecies.value?.id == deleteSpecies.id {
+                selectDetailSpecies(detailSpecies: nil)
+            }
         case .morph:
             domainSection = .morph
             try repository.deleteSpecies(species: domainSection, id: deleteSpecies.id)
             self.selectDetailSpecies.accept(self.selectDetailSpecies.value)
+            if selectMorph.value?.id == deleteSpecies.id {
+                selectMorph(morph: nil)
+            }
         default:
             fatalError()
         }
@@ -183,9 +196,13 @@ final class ClassSpeciesMorphViewModel {
     private func updateList(section: Section, data: [Item]) {
         var origin = speciesList.value
         origin[section] = data
+        speciesList.accept(origin)
+    }
+    
+    private func removeUnderSection(section: Section) {
+        var origin = speciesList.value
         for sectionValue in (section.rawValue+1)..<Section.allCases.count {
             guard let removeSection = Section(rawValue: sectionValue) else { return }
-            
             origin[removeSection] = []
         }
         speciesList.accept(origin)

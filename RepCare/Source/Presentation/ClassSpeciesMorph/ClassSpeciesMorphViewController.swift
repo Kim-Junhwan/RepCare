@@ -130,6 +130,7 @@ extension ClassSpeciesMorphViewController: UIContextMenuInteractionDelegate {
                 self.showTaskAlert(title: "경고", message: "해당 작업을 수행하면 하위에 저장된 종 역시 삭제됩니다. 또한 기존에 저장된 애완동물의 종 역시 변경 될 수 있습니다.") {
                     do {
                         try self.viewModel.deleteSpecies(section: section, row: indexPath.row)
+                        let sectionItemNumber = self.mainView.collectionView.numberOfItems(inSection: section.rawValue)
                     } catch {
                         self.showErrorAlert(title: "삭제 실패", message: error.localizedDescription)
                     }
@@ -153,6 +154,7 @@ extension ClassSpeciesMorphViewController: UICollectionViewDelegate {
         if indexPath.section != 0 && indexPath.row+1 == selectSectionArr?.count {
             guard let registerSection = Section(rawValue: indexPath.section) else { return }
             showRegisterAlert(title: "종 등록", message: "텍스트를 입력하여 종을 등록하세요.", section: registerSection)
+            collectionView.deselectItem(at: indexPath, animated: false)
             return
         }
         if indexPath.section == 0 {
@@ -168,7 +170,6 @@ extension ClassSpeciesMorphViewController: UICollectionViewDelegate {
             let selectMorph = viewModel.fetchMorphList[indexPath.row]
             viewModel.selectMorph(morph: selectMorph)
         }
-        
         for item in 0..<selectSectionArr!.count {
             if item == indexPath.row {
                 continue
@@ -203,6 +204,7 @@ extension ClassSpeciesMorphViewController: UICollectionViewDelegate {
             guard let inputText = alert.textFields?.first?.text else { return }
             do {
                 try self.viewModel.registerNewSpecies(section: section, title: inputText)
+                let sectionItemNumber = self.mainView.collectionView.numberOfItems(inSection: section.rawValue)
             } catch {
                 
             }
