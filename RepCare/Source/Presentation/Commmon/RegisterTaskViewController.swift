@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import RxSwift
 
 final class RegisterTaskViewController: BaseViewController {
     lazy var cancelButton: UIBarButtonItem = {
@@ -78,6 +79,7 @@ final class RegisterTaskViewController: BaseViewController {
     let taskType: TaskModel
     var currentDate: Date
     var registerClosure: ((Date, TaskModel, String?) -> Void)?
+    let disposeBag = DisposeBag()
     
     init(taskType: TaskModel, date: Date) {
         self.taskType = taskType
@@ -93,6 +95,11 @@ final class RegisterTaskViewController: BaseViewController {
         super.viewDidLoad()
         title = taskType.title
         tapViewEndEdit()
+        if taskType == .memo {
+            memoTextField.rx.text.orEmpty.subscribe(with: self) { owner, str in
+                owner.registerButton.isEnabled = !str.isEmpty
+            }.disposed(by: disposeBag)
+        }
     }
     
     override func configureView() {
