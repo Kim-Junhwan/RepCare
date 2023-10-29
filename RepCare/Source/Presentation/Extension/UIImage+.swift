@@ -29,10 +29,19 @@ extension UIImage {
             kCGImageSourceShouldCacheImmediately:true,
             kCGImageSourceCreateThumbnailWithTransform:true
         ] as CFDictionary
-        guard let downsampledImage = CGImageSourceCreateThumbnailAtIndex(source, 0, downsampleOptions) else {
+        guard let downsampledCGImage = CGImageSourceCreateThumbnailAtIndex(source, 0, downsampleOptions) else {
             return self
         }
-        
-        return UIImage(cgImage: downsampledImage)
+        guard let downSampleImage = UIImage(cgImage: downsampledCGImage, scale: 1.0, orientation: imageOrientation).cgImage else { return self }
+        let rotateImage = UIImage(cgImage: downSampleImage, scale: 1.0, orientation: imageOrientation)
+        return rotateImage
+    }
+    
+    func orientImage() -> UIImage {
+        if imageOrientation == .up {
+            return self
+        }
+        guard let cgImage else { return self }
+        return UIImage(cgImage: cgImage, scale: 1.0, orientation: imageOrientation)
     }
 }

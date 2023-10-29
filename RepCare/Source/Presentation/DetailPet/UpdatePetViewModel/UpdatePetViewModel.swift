@@ -35,7 +35,7 @@ final class UpdatePetViewModel: RegisterPetViewModel {
     
     override func register() throws {
         let imageListData = petImageList.value.map({ image in
-            guard let imageData = image.image.pngData() else { fatalError() }
+            guard let imageData = image.image.jpegData(compressionQuality: 1.0) else { fatalError() }
             return imageData
         })
         guard let petClass = overPetSpecies.value?.petClass else { return }
@@ -50,9 +50,9 @@ final class UpdatePetViewModel: RegisterPetViewModel {
         guard let defaultPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return .init() }
         let imagePath: String
         if #available(iOS 16.0, *) {
-            imagePath = defaultPath.appendingPathComponent(path, conformingTo: .png).path()
+            imagePath = defaultPath.appendingPathComponent(path, conformingTo: .jpeg).path()
         } else {
-            imagePath = defaultPath.appendingPathComponent(path, conformingTo: .png).path
+            imagePath = defaultPath.appendingPathComponent(path, conformingTo: .jpeg).path
         }
         guard let image = UIImage(contentsOfFile: imagePath) else { return .init() }
         return image

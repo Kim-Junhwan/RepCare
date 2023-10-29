@@ -17,9 +17,9 @@ extension UIImageView {
         guard let defaultPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
         let imagePath: String
         if #available(iOS 16.0, *) {
-            imagePath = defaultPath.appendingPathComponent(path, conformingTo: .png).path()
+            imagePath = defaultPath.appendingPathComponent(path, conformingTo: .jpeg).path()
         } else {
-            imagePath = defaultPath.appendingPathComponent(path, conformingTo: .png).path
+            imagePath = defaultPath.appendingPathComponent(path, conformingTo: .jpeg).path
         }
         if let imageFile = FileManager.default.contents(atPath: imagePath) {
             DispatchQueue.main.async { [weak self] in

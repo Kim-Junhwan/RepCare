@@ -40,7 +40,7 @@ class RegisterPetViewModel {
     
     func register() throws {
         let imageListData = petImageList.value.map({ image in
-            guard let imageData = image.image.pngData() else { fatalError() }
+            guard let imageData = image.image.jpegData(compressionQuality: 1.0) else { fatalError() }
             return imageData
         })
         guard let petClass = overPetSpecies.value?.petClass else { return }
