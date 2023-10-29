@@ -14,7 +14,7 @@ protocol PetListViewDelegate: AnyObject {
     func reloadPetList(completion: @escaping () -> Void)
     func searchPetList(searchKeyword: String)
     func tapFilterButton()
-    func loadNextPage(completion: @escaping ()-> Void)
+    func loadNextPage(completion: (()-> Void)?)
 }
 
 final class PetListView: UIView {
@@ -164,6 +164,7 @@ extension PetListView: UICollectionViewDelegate {
         let playIndicatorAnimation = currentOffset >= contentSizeHeight + startAnimatingHeight //indicator 애니메이션을 실행 할 시점
         
         if isBottomScroll {
+            footerRefreshView.isHidden = false
             if playIndicatorAnimation {
                 isFetching = true
                 footerRefreshView.startAnimating()
@@ -176,28 +177,16 @@ extension PetListView: UICollectionViewDelegate {
             }
             footerRefreshView.alpha = (footerRefreshView.frame.height / startAnimatingHeight)
         } else {
-            
+            footerRefreshView.isHidden = true
         }
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         if isFetching {
             scrollView.setContentOffset(.init(x: .zero, y: scrollView.contentSize.height+80), animated: true)
-            delegate?.loadNextPage(completion: {
-                
-            })
+            delegate?.loadNextPage(completion: nil)
         }
     }
-    
-//    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-//        if isFetching {
-//            delegate?.loadNextPage(completion: {
-//                self.isFetching = false
-//                self.footerRefreshView.stopAnimating()
-//                self.footerRefreshView.isHidden = true
-//            })
-//        }
-//    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == petClassCollectionView {
