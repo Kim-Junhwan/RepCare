@@ -34,7 +34,7 @@ class RegisterInputView: UIView {
     
     let descriptionLabel: UILabel = {
         let label = UILabel()
-        
+        label.font = .boldSystemFont(ofSize: 17)
         return label
     }()
     

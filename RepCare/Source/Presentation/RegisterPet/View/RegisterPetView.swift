@@ -23,6 +23,12 @@ enum ImageCollectionViewSection {
 
 class RegisterPetView: UIView {
     
+    let imageLabel: UILabel = {
+       let label = UILabel()
+        label.text = "개체 사진"
+        label.font = .boldSystemFont(ofSize: 17)
+        return label
+    }()
     lazy var imageCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: makePetImageCollectionViewFlowLayout())
         collectionView.register(RegisterImageCollectionViewCell.self, forCellWithReuseIdentifier: RegisterImageCollectionViewCell.identifier)
@@ -33,7 +39,7 @@ class RegisterPetView: UIView {
     let mainStakView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.distribution = .equalSpacing
+        stackView.distribution = .fillProportionally
         stackView.alignment = .fill
         stackView.spacing = 10
         return stackView
@@ -106,7 +112,7 @@ class RegisterPetView: UIView {
     
     let weightTextField: RegisterInputView = {
         let view = RegisterInputView(inputView: .textField, isEssential: false)
-         view.descriptionLabel.text = "현재무게"
+         view.descriptionLabel.text = "현재무게 (g)"
         view.textField.keyboardType = .decimalPad
          return view
      }()
@@ -118,17 +124,12 @@ class RegisterPetView: UIView {
         super.init(frame: frame)
         configureView()
         setConstraints()
-        configureDataSource()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configureDataSource() {
-        
-        
-    }
     
     private func makePetImageCollectionViewFlowLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
@@ -139,6 +140,7 @@ class RegisterPetView: UIView {
     }
     
     func configureView() {
+        addSubview(imageLabel)
         addSubview(imageCollectionView)
         addSubview(mainStakView)
         genderStackView.addArrangedSubview(femaleButton)
@@ -161,13 +163,19 @@ class RegisterPetView: UIView {
     }
     
     private func setConstraints() {
+        imageLabel.snp.makeConstraints { make in
+            make.top.equalTo(safeAreaLayoutGuide).offset(10)
+            make.leading.trailing.equalTo(safeAreaLayoutGuide)
+        }
         imageCollectionView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalTo(safeAreaLayoutGuide)
+            make.top.equalTo(imageLabel.snp.bottom)
+            make.leading.trailing.equalTo(safeAreaLayoutGuide)
             make.height.equalTo(100)
         }
         mainStakView.snp.makeConstraints { make in
             make.top.equalTo(imageCollectionView.snp.bottom)
             make.leading.trailing.equalTo(safeAreaLayoutGuide)
+            make.bottom.lessThanOrEqualTo(safeAreaLayoutGuide)
         }
     }
     

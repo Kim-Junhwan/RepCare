@@ -21,6 +21,7 @@ class PetCollectionViewCell: UICollectionViewCell {
        let imageView = UIImageView()
         imageView.tintColor = .systemGray3
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
     }()
     

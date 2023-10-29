@@ -21,6 +21,7 @@ class ActionButton: UIButton {
     private func setLayout() {
         layer.borderWidth = 1.0
         layer.cornerRadius = 10.0
+        titleLabel?.font = .boldSystemFont(ofSize: 17)
         layer.borderColor = UIColor.systemGray3.cgColor
         setTitleColor(.black, for: .normal)
         setTitleColor(.deepGreen, for: .selected)

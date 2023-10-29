@@ -41,7 +41,7 @@ class TimelineCollectionViewCell: UICollectionViewCell {
     
     let titleLabel: UILabel = {
        let label = UILabel()
-        
+        label.font = .boldSystemFont(ofSize: 17)
         return label
     }()
     
@@ -50,6 +50,7 @@ class TimelineCollectionViewCell: UICollectionViewCell {
         label.numberOfLines = 0
         label.layer.cornerRadius = 10
         label.clipsToBounds = true
+        label.font = .systemFont(ofSize: 14)
         return label
     }()
     

@@ -37,6 +37,8 @@ class ImageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(imageBaseView)
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         imageBaseView.addSubview(imageView)
         imageBaseView.backgroundColor = .systemGray4
         imageBaseView.snp.makeConstraints { $0.edges.equalToSuperview() }
