@@ -257,6 +257,10 @@ extension PetCalenderView: FSCalendarDelegate, FSCalendarDataSource, FSCalendarD
         return datasource?.dayEventColor(date: date)
     }
     
+    func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, eventSelectionColorsFor date: Date) -> [UIColor]? {
+        return datasource?.dayEventColor(date: date)
+    }
+    
     private func getYearAndMonthCurrentCalendarPage(_ calendar: FSCalendar) -> (Int, Int) {
         let currentMonthYear = Calendar.current.dateComponents([.month, .year], from: calendar.currentPage)
         if let month = currentMonthYear.month, let year = currentMonthYear.year {
