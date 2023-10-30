@@ -36,13 +36,13 @@ class DetailPetViewController: BaseViewController {
                 self?.showTaskAlert(title: "경고", message: "해당 작업을 수행할 시, 저장된 개체의 데이터(사진, 몸무게, 작업 기록 등)가 모두 삭제됩니다.") { [weak self] in
                     do {
                         try self?.viewModel.deletePet()
+                        self?.updateClosure?()
+                        self?.navigationController?.popViewController(animated: true)
                     } catch {
                         self?.showErrorAlert(title: "삭제 실패", message: error.localizedDescription)
                     }
                     
                 }
-                self?.updateClosure?()
-                self?.navigationController?.popToRootViewController(animated: true)
                 
             })
         ]
