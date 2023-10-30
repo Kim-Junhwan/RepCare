@@ -8,6 +8,7 @@
 import Foundation
 import RxSwift
 import RxRelay
+import RxCocoa
 
 enum Section: Int, CaseIterable {
     case petClass
@@ -44,7 +45,7 @@ struct Item: Hashable {
     }
 }
 
-final class ClassSpeciesMorphViewModel {
+class ClassSpeciesMorphViewModel {
     
     private let repository: SpeciesRepository
     
@@ -61,10 +62,22 @@ final class ClassSpeciesMorphViewModel {
     var temporaryPetSpeceis: PetOverSpeciesModel?
     
     let speciesList: BehaviorRelay<[Section: [Item]]> = .init(value: [.detailSpecies:[],.morph:[],.petClass:[],.species:[]])
-    lazy var canRegister = BehaviorRelay<Bool>.combineLatest(selectPetClass, selectSpecies, selectDetailSpecies, selectMorph) { petClass, species, detailSpecies, morph in
+    lazy var canRegisterRelay = BehaviorRelay<Bool>.combineLatest(selectPetClass, selectSpecies, selectDetailSpecies, selectMorph) { petClass, species, detailSpecies, morph in
         return (petClass != nil) && (species != nil)
     }
+    var canRegister: Driver<Bool> {
+        return canRegisterRelay.asDriver(onErrorJustReturn: false)
+    }
     var tapRegisterClosure: ((PetOverSpeciesModel) -> Void)?
+    
+    var title: String {
+        return "종 선택"
+    }
+    
+    var registerButtonTitle: String {
+        return "적용"
+    }
+    
     let disposeBag = DisposeBag()
     
     init(repository: SpeciesRepository) {
@@ -80,6 +93,8 @@ final class ClassSpeciesMorphViewModel {
         self.selectDetailSpecies.accept(overPetSpecies.detailSpecies)
         self.selectMorph.accept(overPetSpecies.morph)
     }
+    
+    
     
     func viewDidLoad() {
         fetchPetClass()

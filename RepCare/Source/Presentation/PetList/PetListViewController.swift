@@ -97,7 +97,17 @@ extension PetListViewController: UICollectionViewDataSource {
 extension PetListViewController: PetListViewDelegate {
     
     func tapFilterButton() {
-        
+        let petClass: PetClassModel? = viewModel.currentQuery.petClass == .all ? nil : .init(petClass: viewModel.currentQuery.petClass)
+        let speceis: PetSpeciesModel? = viewModel.currentQuery.species.flatMap { .init(petSpecies: $0) }
+        let detailSpecies: DetailPetSpeciesModel? = viewModel.currentQuery.detailSpecies.flatMap { .init(detailSpecies: $0) }
+        let morph: MorphModel? = viewModel.currentQuery.morph.flatMap { .init(morph: $0) }
+        let vc = viewModel.diContainer.makeFilterSpeciesViewController(petClass: petClass, species: speceis, detailSpecies: detailSpecies, morph: morph)
+        let nvc = UINavigationController(rootViewController: vc)
+        vc.viewModel.tapRegisterClosure = { [weak self] overSpecies in
+            guard let filterPetClass = overSpecies.petClass else { return }
+            self?.viewModel.fetchFilteringPetList(petClass: filterPetClass, species: overSpecies.petSpecies, detailSpecies: overSpecies.detailSpecies, morph: overSpecies.morph, gender: nil)
+        }
+        present(nvc, animated: true)
     }
     
     func searchPetList(searchKeyword: String) {

@@ -54,6 +54,11 @@ final class PetListSceneDIContainer {
         return viewModel
     }
     
+    func makeFilterSpeciesViewController(petClass: PetClassModel?, species: PetSpeciesModel?, detailSpecies: DetailPetSpeciesModel?, morph: MorphModel?) -> ClassSpeciesMorphViewController {
+        let vc = ClassSpeciesMorphViewController(viewModel: FilterClassSpeciesViewModel(petClass: petClass, species: species, detailSpecies: detailSpecies, morph: morph, repository: appDIContainer.getSpeciesRepository()))
+        return vc
+    }
+    
     func makeSpeciesViewController(petSpeciesModel: PetOverSpeciesModel? = nil) -> ClassSpeciesMorphViewController {
         let vc = ClassSpeciesMorphViewController(viewModel: makeSpeciesViewModel(petSpeciesModel: petSpeciesModel))
         return vc

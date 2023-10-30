@@ -37,7 +37,7 @@ class DetailPetHeaderViewController: BaseViewController {
     
    private func setViewControllers(imagePathList: [PetImageModel]) {
         if imagePathList.isEmpty {
-            viewControllers = [ImageViewController(petClass: pet.overSpecies.petClass)]
+            viewControllers = [ImageViewController(petClass: pet.overSpecies.petClass ?? .reptile)]
             return
         }
         viewControllers = imagePathList.map {ImageViewController(imagePath: $0)}

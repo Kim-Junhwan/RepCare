@@ -119,11 +119,11 @@ class DetailPetHeaderView: UIView {
             speciesLabel.text = pet.overSpecies.detailSpecies?.title
             morphLabel.text = morph.title
         } else if let detailSpecies = pet.overSpecies.detailSpecies?.title {
-            speciesLabel.text = pet.overSpecies.petSpecies.title
+            speciesLabel.text = pet.overSpecies.petSpecies?.title
             morphLabel.text = detailSpecies
         } else {
-            speciesLabel.text = pet.overSpecies.petClass.title
-            morphLabel.text = pet.overSpecies.petSpecies.title
+            speciesLabel.text = pet.overSpecies.petClass?.title
+            morphLabel.text = pet.overSpecies.petSpecies?.title
         }
     }
 }

@@ -13,7 +13,7 @@ class ClassSpeciesMorphViewController: BaseViewController {
     let mainView = SpeciesView()
     let viewModel: ClassSpeciesMorphViewModel
     lazy var registerButton: UIBarButtonItem = {
-        let barButton = UIBarButtonItem(title: "등록", style: .plain, target: self, action: #selector(tapRegisterButton))
+        let barButton = UIBarButtonItem(title: viewModel.registerButtonTitle, style: .plain, target: self, action: #selector(tapRegisterButton))
         return barButton
     }()
     lazy var dismissButton: UIBarButtonItem = {
@@ -21,6 +21,7 @@ class ClassSpeciesMorphViewController: BaseViewController {
         barButton.tintColor = .red
         return barButton
     }()
+    var isEditSpecies: Bool = false
     
     let disposeBag = DisposeBag()
     
@@ -51,9 +52,10 @@ class ClassSpeciesMorphViewController: BaseViewController {
     
     func loadSelected() {
         guard let tempSpecies = viewModel.temporaryPetSpeceis else { return }
-        let petClass = tempSpecies.petClass
-        mainView.collectionView.selectItem(at: IndexPath(row: petClass.rawValue, section: 0), animated: false, scrollPosition: .init())
-        guard let selectSpeciesIndex = viewModel.fetchSpeciesList.enumerated().first(where: { $0.element.id == tempSpecies.petSpecies.id })?.offset else { return }
+        guard let petClass = tempSpecies.petClass else { return }
+        guard let selectPetClassIndex = viewModel.fetchPetClassList.enumerated().first(where: { $0.element == petClass })?.offset else { return }
+        mainView.collectionView.selectItem(at: IndexPath(row: selectPetClassIndex, section: 0), animated: false, scrollPosition: .init())
+        guard let selectSpeciesIndex = viewModel.fetchSpeciesList.enumerated().first(where: { $0.element.id == tempSpecies.petSpecies?.id })?.offset else { return }
         mainView.collectionView.selectItem(at: IndexPath(row: selectSpeciesIndex, section: 1), animated: false, scrollPosition: .init())
         guard let selectDetailSpeciesIndex = viewModel.fetchDetailSpeciesList.enumerated().first(where: { $0.element.id == tempSpecies.detailSpecies?.id })?.offset else { return }
         mainView.collectionView.selectItem(at: IndexPath(row: selectDetailSpeciesIndex, section: 2), animated: false, scrollPosition: .init())
@@ -63,12 +65,12 @@ class ClassSpeciesMorphViewController: BaseViewController {
     
     private func bind() {
         viewModel.speciesList.subscribe(with: self) { $0.mainView.applyData(section: $1) }.disposed(by: disposeBag)
-        viewModel.canRegister.subscribe(with: self) { $0.registerButton.isEnabled = $1 }.disposed(by: disposeBag)
+        viewModel.canRegister.drive(with: self) { $0.registerButton.isEnabled = $1 }.disposed(by: disposeBag)
     }
     
     func configureCollectionView() {
         mainView.collectionView.delegate = self
-        title = "종 선택"
+        title = viewModel.title
     }
     
     @objc func tapRegisterButton() {
@@ -204,11 +206,9 @@ extension ClassSpeciesMorphViewController: UICollectionViewDelegate {
             guard let inputText = alert.textFields?.first?.text else { return }
             do {
                 try self.viewModel.registerNewSpecies(section: section, title: inputText)
-                let sectionItemNumber = self.mainView.collectionView.numberOfItems(inSection: section.rawValue)
             } catch {
-                
+                showErrorAlert(title: "저장 실패", message: error.localizedDescription)
             }
-            
         }
         alert.addAction(cancel)
         alert.addAction(ok)

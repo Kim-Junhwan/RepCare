@@ -24,6 +24,15 @@ extension RealmPetStorage: PetStorage {
         if request.petClass != nil {
             petList = petList.where { $0.petClass == request.petClass }
         }
+        if let petSpecies = request.petSpecies {
+            petList = petList.where { $0.petSpecies == petSpecies }
+        }
+        if let detailSpecies = request.detailSpecies {
+            petList = petList.where { $0.detailSpecies == detailSpecies }
+        }
+        if let morph = request.morph {
+            petList = petList.where { $0.morph == morph }
+        }
         if let searchKeyword = request.searchKeyword, !searchKeyword.isEmpty {
             petList = petList.where { $0.petSpecies.title.contains(searchKeyword) || $0.name.contains(searchKeyword) || $0.detailSpecies.title.contains(searchKeyword) || $0.morph.title.contains(searchKeyword) }
         }

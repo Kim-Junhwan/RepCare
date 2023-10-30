@@ -8,12 +8,19 @@
 import Foundation
 
 struct PetOverSpeciesModel {
-    let petClass: PetClassModel
-    let petSpecies: PetSpeciesModel
+    let petClass: PetClassModel?
+    let petSpecies: PetSpeciesModel?
     let detailSpecies: DetailPetSpeciesModel?
     let morph: MorphModel?
     
     init(petClass: PetClassModel, petSpecies: PetSpeciesModel, detailSpecies: DetailPetSpeciesModel?, morph: MorphModel?) {
+        self.petClass = petClass
+        self.petSpecies = petSpecies
+        self.detailSpecies = detailSpecies
+        self.morph = morph
+    }
+    
+    init(petClass: PetClassModel?, petSpecies: PetSpeciesModel?, detailSpecies: DetailPetSpeciesModel?, morph: MorphModel?) {
         self.petClass = petClass
         self.petSpecies = petSpecies
         self.detailSpecies = detailSpecies

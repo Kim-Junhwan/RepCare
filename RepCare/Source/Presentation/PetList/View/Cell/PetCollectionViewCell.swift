@@ -151,24 +151,24 @@ class PetCollectionViewCell: UICollectionViewCell {
         nameLabel.text = pet.name
         sexImageView.image = UIImage(named: pet.sex.image)
         if pet.imagePath.isEmpty {
-            whenPetImageCannotRender(petClass: pet.overSpecies.petClass)
+            whenPetImageCannotRender(petClass: pet.overSpecies.petClass ?? .reptile)
         } else {
             guard let imagePath = pet.imagePath.first?.imagePath else { return }
             do {
                 try petImageView.configureImageFromFilePath(path: imagePath)
             } catch {
-                whenPetImageCannotRender(petClass: pet.overSpecies.petClass)
+                whenPetImageCannotRender(petClass: pet.overSpecies.petClass ?? .reptile)
             }
         }
         if let morph = pet.overSpecies.morph {
             speciesLabel.text = pet.overSpecies.detailSpecies?.title
             morphLabel.text = morph.title
         } else if let detailSpecies = pet.overSpecies.detailSpecies?.title {
-            speciesLabel.text = pet.overSpecies.petSpecies.title
+            speciesLabel.text = pet.overSpecies.petSpecies?.title
             morphLabel.text = detailSpecies
         } else {
-            speciesLabel.text = pet.overSpecies.petClass.title
-            morphLabel.text = pet.overSpecies.petSpecies.title
+            speciesLabel.text = pet.overSpecies.petClass?.title
+            morphLabel.text = pet.overSpecies.petSpecies?.title
         }
     }
     

@@ -79,8 +79,8 @@ class RegisterNewPetViewController: BaseViewController {
     private func bindSpecies() {
         viewModel.overPetSpecies.compactMap { $0 }.subscribe(with: self) { owner, currentSpecies in
             var speciesArr: [String] = []
-            speciesArr.append(currentSpecies.petClass.title)
-            speciesArr.append(currentSpecies.petSpecies.title)
+            speciesArr.append(currentSpecies.petClass?.title ?? "")
+            speciesArr.append(currentSpecies.petSpecies?.title ?? "")
             if let detailSpecies = currentSpecies.detailSpecies?.title {
                 speciesArr.append(detailSpecies)
             }
