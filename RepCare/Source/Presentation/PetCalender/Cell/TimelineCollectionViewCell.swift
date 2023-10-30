@@ -28,7 +28,6 @@ class TimelineCollectionViewCell: UICollectionViewCell {
         stackView.spacing = 10
         stackView.addArrangedSubview(logoImageView)
         stackView.addArrangedSubview(titleLabel)
-        stackView.addArrangedSubview(menuButton)
         return stackView
     }()
     
@@ -108,9 +107,6 @@ class TimelineCollectionViewCell: UICollectionViewCell {
         memoLabel.snp.makeConstraints { make in
             make.leading.equalTo(titleLabel.snp.leading)
         }
-        menuButton.snp.makeConstraints { make in
-            make.width.height.equalTo(40)
-        }
         layer.cornerRadius = 10
         logoImageView.layer.cornerRadius = 20
     }
@@ -126,11 +122,5 @@ class TimelineCollectionViewCell: UICollectionViewCell {
         } else {
             memoLabel.isHidden = true
         }
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        editClosure = nil
-        deleteClosure = nil
     }
 }
