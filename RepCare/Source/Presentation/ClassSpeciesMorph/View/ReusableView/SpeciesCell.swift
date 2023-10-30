@@ -40,6 +40,7 @@ final class SpeciesCell: UICollectionViewCell {
             make.center.equalToSuperview()
             make.top.bottom.equalToSuperview().inset(8)
             make.leading.trailing.equalToSuperview().inset(20)
+            make.width.lessThanOrEqualTo(UIScreen.main.bounds.width/2)
         }
     }
     

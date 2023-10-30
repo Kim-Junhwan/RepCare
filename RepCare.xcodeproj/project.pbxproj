@@ -22,6 +22,7 @@
 		C709AA6A2ADD41EA004FA677 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = C709AA692ADD41EA004FA677 /* FirebaseAnalyticsWithoutAdIdSupport */; };
 		C709AA6C2ADD41EA004FA677 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = C709AA6B2ADD41EA004FA677 /* FirebaseCrashlytics */; };
 		C709AA6E2ADD443F004FA677 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C709AA6D2ADD443F004FA677 /* GoogleService-Info.plist */; };
+		C70AF4C52AEFE39200DEE7CF /* FullScreenImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70AF4C42AEFE39200DEE7CF /* FullScreenImageViewController.swift */; };
 		C70E59CC2ADECF2700428CDE /* TaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E59CB2ADECF2700428CDE /* TaskRepository.swift */; };
 		C70E59CE2ADECFCE00428CDE /* RegisterTaskQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E59CD2ADECFCE00428CDE /* RegisterTaskQuery.swift */; };
 		C70E59D02ADED20500428CDE /* DefaultTaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E59CF2ADED20500428CDE /* DefaultTaskRepository.swift */; };
@@ -156,6 +157,7 @@
 		C709AA5B2ADCF733004FA677 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		C709AA5D2ADD198C004FA677 /* DetailPetHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPetHeaderViewController.swift; sourceTree = "<group>"; };
 		C709AA6D2ADD443F004FA677 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C70AF4C42AEFE39200DEE7CF /* FullScreenImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenImageViewController.swift; sourceTree = "<group>"; };
 		C70E59CB2ADECF2700428CDE /* TaskRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRepository.swift; sourceTree = "<group>"; };
 		C70E59CD2ADECFCE00428CDE /* RegisterTaskQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTaskQuery.swift; sourceTree = "<group>"; };
 		C70E59CF2ADED20500428CDE /* DefaultTaskRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTaskRepository.swift; sourceTree = "<group>"; };
@@ -746,6 +748,7 @@
 			children = (
 				C7F378A82AE8F77300281A35 /* LoadingView.swift */,
 				C7608D952AE0F39E001F03DA /* RegisterTaskViewController.swift */,
+				C70AF4C42AEFE39200DEE7CF /* FullScreenImageViewController.swift */,
 			);
 			path = Commmon;
 			sourceTree = "<group>";
@@ -1099,6 +1102,7 @@
 				C7D152DD2AC99B950064D59F /* Pet.swift in Sources */,
 				C709AA4F2ADB9652004FA677 /* PetCalendarViewController.swift in Sources */,
 				C76A01EA2AD264FC0024D008 /* RealmSpeciesStorage.swift in Sources */,
+				C70AF4C52AEFE39200DEE7CF /* FullScreenImageViewController.swift in Sources */,
 				C727A4202AD6E89500880111 /* RegisterPetUseCase.swift in Sources */,
 				C7F3E8B62AE4D9AF007621E1 /* RealmWeightStorage.swift in Sources */,
 				C7273BA92AD44048004B7A6F /* PetModel.swift in Sources */,
@@ -1270,6 +1274,7 @@
 				DEVELOPMENT_TEAM = SBAHW5F54N;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RepCare/Resource/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -1301,6 +1306,7 @@
 				DEVELOPMENT_TEAM = SBAHW5F54N;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RepCare/Resource/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

@@ -13,7 +13,7 @@ final class PetListViewController: BaseViewController {
     
     lazy var addPetButton: UIBarButtonItem = {
         let button = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(showRegisterPetView))
-        button.tintColor = .black
+        button.tintColor = .deepGreen
         return button
     }()
     

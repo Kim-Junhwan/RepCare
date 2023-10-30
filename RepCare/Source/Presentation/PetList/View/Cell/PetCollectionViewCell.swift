@@ -29,7 +29,7 @@ class PetCollectionViewCell: UICollectionViewCell {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .leading
-        stackView.distribution = .equalSpacing
+        stackView.distribution = .fill
         stackView.spacing = 10
         stackView.addArrangedSubview(petNameStackView)
         stackView.addArrangedSubview(morphStackView)
@@ -40,7 +40,7 @@ class PetCollectionViewCell: UICollectionViewCell {
        let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = 10
-        stackView.distribution = .fill
+        stackView.alignment = .center
         return stackView
     }()
     
@@ -52,14 +52,14 @@ class PetCollectionViewCell: UICollectionViewCell {
     
     let nameLabel: UILabel = {
        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.font = .systemFont(ofSize: 20, weight: .heavy)
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
     let morphStackView: UIStackView = {
         let stackView = UIStackView()
-         stackView.axis = .horizontal
+         stackView.axis = .vertical
          stackView.distribution = .fill
         stackView.alignment = .leading
         stackView.spacing = 5
@@ -68,19 +68,19 @@ class PetCollectionViewCell: UICollectionViewCell {
     
     let speciesLabel: UILabel = {
         let label = UILabel()
+        label.textColor = .systemGray
+        label.font = .systemFont(ofSize: 14, weight: .semibold)
         label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.8
          return label
-    }()
-    
-    let boundaryLabel: UILabel = {
-        let label = UILabel()
-        label.text = "|"
-        return label
     }()
     
     let morphLabel: UILabel = {
        let label = UILabel()
+        label.textColor = .systemGray
+        label.font = .systemFont(ofSize: 14, weight: .semibold)
         label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.8
         return label
     }()
     
@@ -112,7 +112,6 @@ class PetCollectionViewCell: UICollectionViewCell {
         petNameStackView.addArrangedSubview(nameLabel)
         petNameStackView.addArrangedSubview(sexImageView)
         morphStackView.addArrangedSubview(speciesLabel)
-        morphStackView.addArrangedSubview(boundaryLabel)
         morphStackView.addArrangedSubview(morphLabel)
     }
     

@@ -150,7 +150,7 @@ final class PetListView: UIView {
         let flowLayout = UICollectionViewFlowLayout()
         let viewWidth = frame.width
         let itemWidth = (viewWidth/2) - 15.0
-        flowLayout.itemSize = CGSize(width: itemWidth, height: itemWidth * 1.4)
+        flowLayout.itemSize = CGSize(width: itemWidth, height: itemWidth * 1.5)
         flowLayout.scrollDirection = .vertical
         flowLayout.minimumInteritemSpacing = 10.0
         flowLayout.sectionInset = .init(top: 10, left: 10.0, bottom: .zero, right: 10.0)
