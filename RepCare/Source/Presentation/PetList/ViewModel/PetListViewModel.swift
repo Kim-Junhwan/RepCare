@@ -8,10 +8,20 @@
 import Foundation
 import RxRelay
 import RxSwift
+import RxCocoa
 
 final class PetListViewModel {
     
     private let fetchPetListUseCase: FetchPetListUseCase
+    let queryRelay: BehaviorRelay<FetchPetListQuery> = .init(value: .init(petClass: .all, species: nil, detailSpecies: nil, morph: nil, searchKeyword: nil, gender: nil))
+    var queryDriver: Driver<FetchPetListQuery> {
+        return queryRelay.asDriver()
+    }
+    var isApplyFilter: Driver<Bool> {
+        return queryRelay.map { query in
+            return query.species != nil
+        }.asDriver(onErrorJustReturn: false)
+    }
     var currentQuery: FetchPetListQuery = .init(petClass: .all, species: nil, detailSpecies: nil, morph: nil, searchKeyword: nil, gender: nil)
     private var pages: [PetPage] = []
     
@@ -46,6 +56,7 @@ final class PetListViewModel {
     
     private func load(query: FetchPetListQuery) {
         let request = FetchPetListRequest(query: query, start: nextPage)
+        queryRelay.accept(query)
         currentQuery = query
         let fetchPage = fetchPetListUseCase.fetchPetList(request: request)
         appendPage(page: fetchPage)
@@ -74,13 +85,13 @@ final class PetListViewModel {
     }
     
     func fetchFilterPetClassPetList(petClass: PetClassModel) {
-        let query = FetchPetListQuery(petClass: petClass.toDomain(), species: nil, detailSpecies: nil, morph: nil, searchKeyword: nil, gender: nil)
+        let query = FetchPetListQuery(petClass: petClass.toDomain(), species: nil, detailSpecies: nil, morph: nil, searchKeyword: currentQuery.searchKeyword, gender: currentQuery.gender)
         resetPage()
         load(query: query)
     }
     
     func fetchFilteringPetList(petClass: PetClassModel, species: PetSpeciesModel?, detailSpecies: DetailPetSpeciesModel?, morph: MorphModel?, gender: GenderType?) {
-        let query = FetchPetListQuery(petClass: petClass.toDomain(), species: species?.toDomain(), detailSpecies: detailSpecies?.toDomain(), morph: morph?.toDomain(), searchKeyword: nil, gender: gender?.toDomain())
+        let query = FetchPetListQuery(petClass: petClass.toDomain(), species: species?.toDomain(), detailSpecies: detailSpecies?.toDomain(), morph: morph?.toDomain(), searchKeyword: currentQuery.searchKeyword, gender: gender?.toDomain())
         resetPage()
         load(query: query)
     }

@@ -38,8 +38,12 @@ final class PetListViewController: BaseViewController {
         super.viewDidLoad()
         bind()
         navigationItem.setRightBarButton(addPetButton, animated: false)
-        mainView.petClassCollectionView.selectItem(at: [0,0], animated: false, scrollPosition: .init())
-        mainView.collectionView(mainView.petClassCollectionView, didSelectItemAt: .init(row: 0, section: 0))
+        selectPetClassCode(petClass: .all)
+    }
+    
+    func selectPetClassCode(petClass: PetClassModel) {
+        mainView.petClassCollectionView.selectItem(at: .init(row: petClass.rawValue, section: 0), animated: false, scrollPosition: .init())
+        mainView.collectionView(mainView.petClassCollectionView, didSelectItemAt: .init(row: petClass.rawValue, section: 0))
     }
     
     private func bind() {
@@ -52,6 +56,14 @@ final class PetListViewController: BaseViewController {
             owner.mainView.emptyLabel.isHidden = true
             owner.mainView.petListCollectionView.isHidden = false
             owner.mainView.petListCollectionView.reloadData()
+        }.disposed(by: disposeBag)
+        
+        viewModel.queryDriver.drive(with: self) { owner, query in
+            owner.mainView.petClassCollectionView.selectItem(at: .init(row: PetClassModel(petClass: query.petClass).rawValue, section: 0), animated: false, scrollPosition: .init())
+        }.disposed(by: disposeBag)
+        
+        viewModel.isApplyFilter.drive(with: self) { owner, isFiltering in
+            owner.mainView.setFilterButtonIsFilteringStatus(isFiltering: isFiltering)
         }.disposed(by: disposeBag)
     }
     

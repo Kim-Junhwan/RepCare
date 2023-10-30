@@ -37,15 +37,16 @@ final class PetListView: UIView {
        let searchBar = UISearchBar()
         searchBar.searchBarStyle = .minimal
         searchBar.searchTextField.setToolbar()
+        searchBar.placeholder = "종 혹은 개체 이름을 입력하세요"
         return searchBar
     }()
     
     let filterButton: UIButton = {
         var config = UIButton.Configuration.plain()
-        config.image = UIImage(systemName: "slider.horizontal.3")
-        config.baseForegroundColor = .black
-            
-       return UIButton(configuration: config)
+        config.image = UIImage(systemName: "slider.horizontal.3")?.withRenderingMode(.alwaysTemplate)
+        let button = UIButton(configuration: config)
+        button.tintColor = .black
+       return button
     }()
     
     let emptyLabel: UILabel = {
@@ -165,6 +166,14 @@ final class PetListView: UIView {
     @objc func updatePetList() {
         delegate?.reloadPetList {
             self.petListCollectionView.refreshControl?.endRefreshing()
+        }
+    }
+    
+    func setFilterButtonIsFilteringStatus(isFiltering: Bool) {
+        if isFiltering {
+            filterButton.tintColor = .lightDeepGreen
+        } else {
+            filterButton.tintColor = .black
         }
     }
 }
