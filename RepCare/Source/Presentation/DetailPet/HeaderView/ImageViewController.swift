@@ -12,8 +12,10 @@ class ImageViewController: UIViewController {
     let imageBaseView = UIView()
     let imageView: UIImageView = UIImageView(frame: .zero)
     let isEmptyImage: Bool
+    let imagePath: String
     
     init(imagePath: PetImageModel) {
+        self.imagePath = imagePath.imagePath
         do {
            try  imageView.configureImageFromFilePath(path: imagePath.imagePath)
             isEmptyImage = false
@@ -25,6 +27,7 @@ class ImageViewController: UIViewController {
     
     init(petClass: PetClassModel) {
         isEmptyImage = true
+        self.imagePath = ""
         super.init(nibName: nil, bundle: nil)
         imageView.image = UIImage(named: petClass.image)?.withRenderingMode(.alwaysTemplate)
         imageView.tintColor = .systemGray2
@@ -36,6 +39,7 @@ class ImageViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showFullScreenImage)))
         view.addSubview(imageBaseView)
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -49,6 +53,14 @@ class ImageViewController: UIViewController {
             } else {
                 make.edges.equalToSuperview()
             }
+        }
+    }
+    
+    @objc func showFullScreenImage() {
+        if !isEmptyImage {
+            let fullScreenImage = FullScreenImageViewController(imagePath: imagePath)
+            fullScreenImage.modalPresentationStyle = .overFullScreen
+            present(fullScreenImage, animated: true)
         }
     }
 }
