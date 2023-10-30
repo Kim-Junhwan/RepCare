@@ -13,6 +13,8 @@ protocol PetCalenderViewDelegate: AnyObject {
     func changeCalenderMonth(date: Date)
     func selectTaskCell(task: TaskModel)
     func deselectCalendarDate(date: Date)
+    func editTimeLine(section: Int, row: Int)
+    func deleteTimeLine(section: Int, row: Int, currentMonth: Date)
 }
 
 protocol PetCalenderDataSource: AnyObject {
@@ -212,7 +214,6 @@ class PetCalenderView: UIView {
                 let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(50))
                 let timeLineHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: PetCalenderView.timeLineHeaderElementKind, alignment: .topLeading)
                 section.boundarySupplementaryItems = [timeLineHeader]
-                //section.interGroupSpacing = 10.0
                 section.contentInsets = .init(top: 0, leading: 10, bottom: 0, trailing: 10)
             } else if sectionKind.type == .empty {
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
@@ -238,6 +239,24 @@ class PetCalenderView: UIView {
 }
 
 extension PetCalenderView: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemsAt indexPaths: [IndexPath], point: CGPoint) -> UIContextMenuConfiguration? {
+        guard let pressIndexPath = indexPaths.first else { return nil }
+        if pressIndexPath.section < 2 {
+            return nil
+        }
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestAction in
+            
+            let updateAction = UIAction(title: "수정", image: UIImage(systemName: "pencil")) { [weak self] action in
+            }
+            
+            let deleteAction = UIAction(title: "삭제", image: UIImage(systemName: "trash"), attributes: .destructive) { [weak self] _ in
+                guard let currentMonth = self?.calendar?.currentPage else { return }
+                self?.delegate?.deleteTimeLine(section: pressIndexPath.section-2, row: pressIndexPath.row, currentMonth: currentMonth)
+            }
+            return UIMenu(title: "", children: [deleteAction])
+        }
+    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 0 {

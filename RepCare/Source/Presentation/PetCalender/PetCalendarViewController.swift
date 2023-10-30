@@ -76,6 +76,7 @@ final class PetCalendarViewController: BaseViewController {
         guard let day = Calendar.current.dateComponents([.day], from: date).day else { return }
         taskArr = [taskList]
         mainView.updateTaskList(tasks: [day:taskList])
+        
     }
     
     func fetchTaskForDate(date: Date) -> [DetailTaskModel] {
@@ -178,4 +179,24 @@ extension PetCalendarViewController: PetCalenderDataSource, PetCalenderViewDeleg
         return taskArr[section][row]
     }
     
+    func editTimeLine(section: Int, row: Int) {
+        
+    }
+    
+    func deleteTimeLine(section: Int, row: Int, currentMonth: Date) {
+        do {
+            try taskRepository.deleteTask(petId: pet.id, taskId: taskArr[section][row].id)
+            if isDateSelected {
+                updateTaskOnDay(date: currentDate, taskList: fetchTaskForDate(date: currentDate))
+                currentTaskMonthList = fetchTaskListForMonth(date: currentMonth)
+            } else {
+                try taskRepository.deleteTask(petId: pet.id, taskId: taskArr[section][row].id)
+                updateTaskList(tasks: fetchTaskListForMonth(date: currentMonth))
+            }
+            mainView.calendar?.reloadData()
+        } catch {
+            showErrorAlert(title: "삭제 실패", message: error.localizedDescription)
+        }
+        
+    }
 }

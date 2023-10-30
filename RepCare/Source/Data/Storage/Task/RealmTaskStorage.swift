@@ -46,5 +46,10 @@ final class RealmTaskStorage: TaskStorage {
         return Calendar.current.date(from: components)
     }
     
-    
+    func deleteTask(pet: PetObject, taskId: String) throws {
+        let deleteTask = pet.tasks.filter { $0._id.stringValue == taskId }
+        try realm.write {
+            realm.delete(deleteTask)
+        }
+    }
 }

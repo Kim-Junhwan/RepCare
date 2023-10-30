@@ -11,4 +11,5 @@ protocol TaskRepository {
     func registerTask(query: RegisterTaskQuery) throws
     func fetchTaskListInDate(petId: String ,date: Date) -> [DetailTask]
     func fetchTaskListInMonth(petId: String, month: Int, year: Int) -> Dictionary<Int, [DetailTask]>
+    func deleteTask(petId: String, taskId: String) throws
 }

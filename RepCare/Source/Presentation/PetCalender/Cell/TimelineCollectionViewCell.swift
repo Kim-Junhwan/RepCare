@@ -28,6 +28,7 @@ class TimelineCollectionViewCell: UICollectionViewCell {
         stackView.spacing = 10
         stackView.addArrangedSubview(logoImageView)
         stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(menuButton)
         return stackView
     }()
     
@@ -53,6 +54,32 @@ class TimelineCollectionViewCell: UICollectionViewCell {
         label.font = .systemFont(ofSize: 14)
         return label
     }()
+    
+    let menuButton: UIButton = {
+        var config = UIButton.Configuration.plain()
+        config.image = UIImage(named: "ellipsis")?.withRenderingMode(.alwaysTemplate).resizeImage(size: .init(width: 20, height: 20)).withTintColor(.white)
+        let button = UIButton(configuration: config)
+        return button
+    }()
+    
+    lazy var menu: UIMenu = {
+        let menu = UIMenu(title: "", children: menuItems)
+        return menu
+    }()
+    
+    var editClosure: (() -> Void)?
+    var deleteClosure: (() -> Void)?
+    
+    var menuItems: [UIAction] {
+        return [
+            UIAction(title: "수정", image: UIImage(systemName: "pencil"), handler: { [weak self] (_) in
+                self?.editClosure?()
+            }),
+            UIAction(title: "삭제", image: UIImage(systemName: "trash"), attributes: .destructive, handler: { [weak self] _ in
+                self?.deleteClosure?()
+            })
+        ]
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -81,6 +108,9 @@ class TimelineCollectionViewCell: UICollectionViewCell {
         memoLabel.snp.makeConstraints { make in
             make.leading.equalTo(titleLabel.snp.leading)
         }
+        menuButton.snp.makeConstraints { make in
+            make.width.height.equalTo(40)
+        }
         layer.cornerRadius = 10
         logoImageView.layer.cornerRadius = 20
     }
@@ -96,5 +126,11 @@ class TimelineCollectionViewCell: UICollectionViewCell {
         } else {
             memoLabel.isHidden = true
         }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        editClosure = nil
+        deleteClosure = nil
     }
 }

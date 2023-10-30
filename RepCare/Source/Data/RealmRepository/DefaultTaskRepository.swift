@@ -69,4 +69,9 @@ final class DefaultTaskRepository: TaskRepository {
         return dict
     }
     
+    func deleteTask(petId: String, taskId: String) throws {
+        guard let petObj = petStorage.fetchPet(id: petId) else { return }
+        try taskStorage.deleteTask(pet: petObj, taskId: taskId)
+    }
+    
 }

@@ -31,8 +31,6 @@ class TaskCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         configureView()
         setConstraints()
-        classImageView.image = UIImage(systemName: "star")
-        classLabel.text = "123"
     }
     
     required init?(coder: NSCoder) {
