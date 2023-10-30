@@ -11,6 +11,7 @@ import Foundation
 enum TaskType: String, PersistableEnum {
     case feed
     case clean
+    case mating
     case molt
     case spawn
     case memo
@@ -27,6 +28,8 @@ enum TaskType: String, PersistableEnum {
             return .spawn
         case .memo:
             return .memo
+        case .mating:
+            return .mating
         }
     }
 }

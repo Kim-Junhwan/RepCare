@@ -35,6 +35,8 @@ final class DefaultTaskRepository: TaskRepository {
                 task = .spawn
             case .memo:
                 task = .memo
+            case .mating:
+                task = .mating
             }
             try taskStorage.registerTask(request: .init(pet: pet, registerDate: query.registerDate, taskType: task, memo: query.memo))
         } else {

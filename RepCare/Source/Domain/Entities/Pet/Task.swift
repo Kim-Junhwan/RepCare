@@ -10,6 +10,7 @@ import Foundation
 enum Task {
     case feed
     case clean
+    case mating
     case molt
     case spawn
     case memo

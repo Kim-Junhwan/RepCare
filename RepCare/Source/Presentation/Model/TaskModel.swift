@@ -12,6 +12,7 @@ enum TaskModel: Int, CaseIterable {
     case feed
     case clean
     case molt
+    case mating
     case spawn
     case memo
     
@@ -27,6 +28,8 @@ enum TaskModel: Int, CaseIterable {
             return "산란"
         case .memo:
             return "메모"
+        case .mating:
+            return "메이팅"
         }
     }
     
@@ -42,6 +45,8 @@ enum TaskModel: Int, CaseIterable {
             return "Spawn"
         case .memo:
             return "Memo"
+        case .mating:
+            return "Mating"
         }
     }
     
@@ -57,6 +62,8 @@ enum TaskModel: Int, CaseIterable {
             return "TimeLineEgg"
         case .memo:
             return "TimeLineMemo"
+        case .mating:
+            return "TimeLineMating"
         }
     }
     
@@ -72,10 +79,12 @@ enum TaskModel: Int, CaseIterable {
             return .lightYellow
         case .memo:
             return .middleGray
+        case .mating:
+            return .red
         }
     }
     
-    func toDomain() ->  Task {
+    func toDomain() -> Task {
         switch self {
         case .feed:
             return .feed
@@ -87,6 +96,8 @@ enum TaskModel: Int, CaseIterable {
             return .spawn
         case .memo:
             return .memo
+        case .mating:
+            return .mating
         }
     }
     
@@ -102,6 +113,8 @@ enum TaskModel: Int, CaseIterable {
             self = .spawn
         case .memo:
             self = .memo
+        case .mating:
+            self = .mating
         }
     }
 }
