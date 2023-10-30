@@ -16,25 +16,21 @@ extension UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(UIViewController.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object:nil)
     }
     
-    @objc func keyboardWillShow(notification: NSNotification) {
-          if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-                  let keyboardRectangle = keyboardFrame.cgRectValue
-                  let keyboardHeight = keyboardRectangle.height
-              UIView.animate(withDuration: 1) {
-                  self.view.window?.frame.origin.y -= keyboardHeight
-              }
-          }
-      }
+    @objc func keyboardWillShow(_ sender: Notification) {
+        guard let keyboardFrame = sender.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue, let currentTextField = UIResponder.currentResponder as? UITextField else { return }
+        let keyboardTopY = keyboardFrame.cgRectValue.origin.y
+        let convertedTextFieldFrame = view.convert(currentTextField.frame, from: currentTextField.superview)
+        let textFieldBottomY = convertedTextFieldFrame.origin.y + convertedTextFieldFrame.size.height
+        if textFieldBottomY > keyboardTopY {
+            let textFieldTopY = convertedTextFieldFrame.origin.y
+            let newFrame = textFieldTopY - keyboardTopY/1.6
+            view.frame.origin.y -= newFrame
+        }
+    }
     
-    @objc func keyboardWillHide(notification: NSNotification) {
-        if self.view.window?.frame.origin.y != 0 {
-            if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
-                    let keyboardRectangle = keyboardFrame.cgRectValue
-                    let keyboardHeight = keyboardRectangle.height
-                UIView.animate(withDuration: 1) {
-                    self.view.window?.frame.origin.y += keyboardHeight
-                }
-            }
+    @objc func keyboardWillHide(_ sender: Notification) {
+        if view.frame.origin.y != 0 {
+            view.frame.origin.y = 0
         }
     }
 }

@@ -12,6 +12,9 @@ extension UITextField {
         guard let window = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
         let toolWidth = window.screen.bounds.width
         let toolBar = UIToolbar(frame: .init(origin: .zero, size: .init(width: toolWidth, height: 35.0)))
+        let appearance = UIToolbarAppearance()
+        appearance.configureWithOpaqueBackground()
+        toolBar.standardAppearance = appearance
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(tapDoneButton))
         toolBar.items = [flexibleSpace,doneButton]

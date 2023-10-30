@@ -43,6 +43,7 @@ class RegisterNewPetViewController: BaseViewController {
         configureDatasource()
         bind()
         mainView.imageCollectionView.delegate = self
+        setKeyboardObserver()
     }
     
     private func bind() {
