@@ -23,6 +23,7 @@
 		C709AA6C2ADD41EA004FA677 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = C709AA6B2ADD41EA004FA677 /* FirebaseCrashlytics */; };
 		C709AA6E2ADD443F004FA677 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C709AA6D2ADD443F004FA677 /* GoogleService-Info.plist */; };
 		C70AF4C52AEFE39200DEE7CF /* FullScreenImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70AF4C42AEFE39200DEE7CF /* FullScreenImageViewController.swift */; };
+		C70AF4C72AF03E5F00DEE7CF /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C70AF4C62AF03E5F00DEE7CF /* Settings.bundle */; };
 		C70E59CC2ADECF2700428CDE /* TaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E59CB2ADECF2700428CDE /* TaskRepository.swift */; };
 		C70E59CE2ADECFCE00428CDE /* RegisterTaskQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E59CD2ADECFCE00428CDE /* RegisterTaskQuery.swift */; };
 		C70E59D02ADED20500428CDE /* DefaultTaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E59CF2ADED20500428CDE /* DefaultTaskRepository.swift */; };
@@ -158,6 +159,7 @@
 		C709AA5D2ADD198C004FA677 /* DetailPetHeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPetHeaderViewController.swift; sourceTree = "<group>"; };
 		C709AA6D2ADD443F004FA677 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C70AF4C42AEFE39200DEE7CF /* FullScreenImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenImageViewController.swift; sourceTree = "<group>"; };
+		C70AF4C62AF03E5F00DEE7CF /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		C70E59CB2ADECF2700428CDE /* TaskRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRepository.swift; sourceTree = "<group>"; };
 		C70E59CD2ADECFCE00428CDE /* RegisterTaskQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTaskQuery.swift; sourceTree = "<group>"; };
 		C70E59CF2ADED20500428CDE /* DefaultTaskRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTaskRepository.swift; sourceTree = "<group>"; };
@@ -568,6 +570,7 @@
 				C7D1524E2AC51B280064D59F /* Assets.xcassets */,
 				C7D152502AC51B280064D59F /* LaunchScreen.storyboard */,
 				C7D152532AC51B280064D59F /* Info.plist */,
+				C70AF4C62AF03E5F00DEE7CF /* Settings.bundle */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -969,6 +972,7 @@
 			files = (
 				C709AA6E2ADD443F004FA677 /* GoogleService-Info.plist in Resources */,
 				C7D152522AC51B280064D59F /* LaunchScreen.storyboard in Resources */,
+				C70AF4C72AF03E5F00DEE7CF /* Settings.bundle in Resources */,
 				C70E59DC2ADEE73200428CDE /* repcare.realm in Resources */,
 				C7D1524F2AC51B280064D59F /* Assets.xcassets in Resources */,
 			);
