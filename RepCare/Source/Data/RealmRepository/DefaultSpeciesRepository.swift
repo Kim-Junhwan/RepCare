@@ -62,4 +62,8 @@ final class DefaultSpeciesRepository: SpeciesRepository {
     func deleteSpecies(species: PetOverSpecies, id: String) throws {
         try speciesStroage.deleteSpecies(species: species, id: id)
     }
+    
+    func checkSpeciesContains(parentSpecies species: PetOverSpecies, parentId: String, title: String) -> Bool {
+        return speciesStroage.checkSpeciesAlreadyExist(parentSpecies: species, parentId: parentId, title: title)
+    }
 }

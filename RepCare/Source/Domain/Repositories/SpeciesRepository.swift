@@ -17,4 +17,5 @@ protocol SpeciesRepository {
     func registerNewMorph(petMorph: String, parentDetailSpecies: DetailSpecies) throws
     func updateSpecies(species: PetOverSpecies, id: String, editTitle: String) throws
     func deleteSpecies(species: PetOverSpecies, id: String) throws
+    func checkSpeciesContains(parentSpecies: PetOverSpecies, parentId: String, title: String) -> Bool
 }

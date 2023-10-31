@@ -204,10 +204,14 @@ extension ClassSpeciesMorphViewController: UICollectionViewDelegate {
         let ok = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
             guard let self else { return }
             guard let inputText = alert.textFields?.first?.text, !inputText.isEmpty else { return }
-            do {
-                try self.viewModel.registerNewSpecies(section: section, title: inputText)
-            } catch {
-                showErrorAlert(title: "저장 실패", message: error.localizedDescription)
+            if self.viewModel.checkCanRegisterNewSpecies(section: section, title: inputText) {
+                do {
+                    try self.viewModel.registerNewSpecies(section: section, title: inputText)
+                } catch {
+                    showErrorAlert(title: "저장 실패", message: error.localizedDescription)
+                }
+            } else {
+                self.showErrorAlert(title: "중복된 이름", message: "이미 같은 이름을 가진 종이 존재합니다.")
             }
         }
         alert.addAction(cancel)

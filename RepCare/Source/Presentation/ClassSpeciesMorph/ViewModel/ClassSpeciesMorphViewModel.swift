@@ -132,19 +132,37 @@ class ClassSpeciesMorphViewModel {
         updateList(section: section, data: [])
     }
     
+    func checkCanRegisterNewSpecies(section: Section, title: String) -> Bool {
+        let trimmingTitle = title.trimmingCharacters(in: .whitespaces)
+        switch section {
+        case .species:
+            guard let selectClass = selectPetClass.value else { return false }
+            return repository.checkSpeciesContains(parentSpecies: .petClass, parentId: "\(selectClass.toDomain())", title: trimmingTitle)
+        case .detailSpecies:
+            guard let selectSpecies = selectSpecies.value?.toDomain() else { return false }
+            return repository.checkSpeciesContains(parentSpecies: .species, parentId: selectSpecies.id, title: trimmingTitle)
+        case .morph:
+            guard let selectDetailSpecies = selectDetailSpecies.value?.toDomain() else { return false }
+            return repository.checkSpeciesContains(parentSpecies: .detailSpecies, parentId: selectDetailSpecies.id, title: trimmingTitle)
+        default:
+            fatalError("unknown Section")
+        }
+    }
+    
     func registerNewSpecies(section: Section, title: String) throws {
+        let trimmingTitle = title.trimmingCharacters(in: .whitespaces)
         switch section {
         case .species:
             guard let selectClass = selectPetClass.value else { return }
-            try repository.registerNewSpecies(petSpecies: title, parentClass: selectClass.toDomain())
+            try repository.registerNewSpecies(petSpecies: trimmingTitle, parentClass: selectClass.toDomain())
             fetchPetSpecies(petClass: selectClass)
         case .detailSpecies:
             guard let selectSpecies = selectSpecies.value?.toDomain() else { return }
-            try repository.registerNewDetailSpecies(detailSpecies: title, parentSpecies: selectSpecies)
+            try repository.registerNewDetailSpecies(detailSpecies: trimmingTitle, parentSpecies: selectSpecies)
             self.selectSpecies.accept(self.selectSpecies.value)
         case .morph:
             guard let selectDetailSpecies = selectDetailSpecies.value?.toDomain() else { return }
-            try repository.registerNewMorph(petMorph: title, parentDetailSpecies: selectDetailSpecies)
+            try repository.registerNewMorph(petMorph: trimmingTitle, parentDetailSpecies: selectDetailSpecies)
             self.selectDetailSpecies.accept(self.selectDetailSpecies.value)
         default:
             fatalError("unknown Section")

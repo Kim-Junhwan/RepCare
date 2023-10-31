@@ -143,4 +143,36 @@ extension RealmSpeciesStorage: SpeciesStorage {
         }
     }
     
+    func checkSpeciesAlreadyExist(parentSpecies: PetOverSpecies, parentId: String , title: String) -> Bool {
+        if parentSpecies == .petClass {
+            let petClass: PetClass
+            if parentId == "reptile" {
+                petClass = .reptile
+            } else if parentId == "arthropod" {
+                petClass = .arthropod
+            } else if parentId == "amphibia" {
+                petClass = .amphibia
+            }else if parentId == "mammalia" {
+                petClass = .mammalia
+            } else if parentId == "etc" {
+                petClass = .etc
+            } else {
+                return false
+            }
+            let petClassObj = getPetClass(type: .init(petClass: petClass))
+            return !petClassObj.species.contains(where: { $0.title == title })
+        }
+        guard let id = try? ObjectId(string: parentId) else { return false }
+        switch parentSpecies {
+        
+        case .species:
+            guard let speciesObj = realm.object(ofType: PetSpeciesObject.self, forPrimaryKey: id) else { return true }
+            return !speciesObj.detailSpecies.contains { $0.title == title }
+        case .detailSpecies:
+            guard let detailSpeciesObj = realm.object(ofType: DetailSpeciesObject.self, forPrimaryKey: id) else { return true }
+            return !detailSpeciesObj.morph.contains { $0.title == title }
+        default:
+            fatalError()
+        }
+    }
 }

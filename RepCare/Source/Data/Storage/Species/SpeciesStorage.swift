@@ -21,4 +21,5 @@ protocol SpeciesStorage {
     func registerNewMorph(title: String, request: MorphRequestDTO) throws
     func updateSpecies(species: PetOverSpecies, id: String, title: String) throws
     func deleteSpecies(species: PetOverSpecies, id: String) throws
+    func checkSpeciesAlreadyExist(parentSpecies: PetOverSpecies, parentId: String, title: String) -> Bool
 }
