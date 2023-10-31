@@ -33,6 +33,7 @@ class DetailPetHeaderViewController: BaseViewController {
         mainView.pageControl.numberOfPages = pet.imagePath.count
         setViewControllers(imagePathList: pet.imagePath)
         mainView.imagePageViewController.setViewControllers([viewControllers[0]], direction: .forward, animated: true)
+        mainView.pageControl.currentPage = 0
     }
     
    private func setViewControllers(imagePathList: [PetImageModel]) {
