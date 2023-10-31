@@ -55,7 +55,7 @@ class DetailPetViewController: BaseViewController {
         return barButton
     }()
     
-    lazy var profileViewController = ProfileViewController(headerViewController: headerViewController, headerViewHeight: view.frame.width)
+    lazy var profileViewController = ProfileViewController(headerViewController: headerViewController, headerViewHeight: view.frame.width * 1.2)
     let headerViewController: DetailPetHeaderViewController
     var petCalenderViewController: PetCalendarViewController
     var petWeightViewController: PetWeightViewController

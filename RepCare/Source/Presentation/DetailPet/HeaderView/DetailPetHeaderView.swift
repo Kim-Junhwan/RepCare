@@ -41,16 +41,45 @@ class DetailPetHeaderView: UIView {
     let genderImageView: UIImageView = .init()
     let adoptionLabel: UILabel = UILabel()
     
+    lazy var classStackView: UIStackView = {
+        let stackView = UIStackView()
+         stackView.addArrangedSubview(petClassLabel)
+        stackView.addArrangedSubview(classSeparLabel)
+         stackView.addArrangedSubview(speciesLabel)
+         stackView.axis = .horizontal
+         stackView.spacing = 5
+         return stackView
+     }()
+    
+    let petClassLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .deepGreen
+        return label
+    }()
+    
+    let classSeparLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .lightDeepGreen
+        label.text = "·"
+        return label
+    }()
+    
+    let speciesLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .deepGreen
+        return label
+    }()
+    
     lazy var speciesStackView: UIStackView = {
         let stackView = UIStackView()
-         stackView.addArrangedSubview(speciesLabel)
+         stackView.addArrangedSubview(detailSpeciesLabel)
         stackView.addArrangedSubview(separLabel)
          stackView.addArrangedSubview(morphLabel)
          stackView.axis = .horizontal
          stackView.spacing = 5
          return stackView
      }()
-    let speciesLabel: UILabel = UILabel()
+    let detailSpeciesLabel: UILabel = UILabel()
     let separLabel: UILabel = {
         let label = UILabel()
         label.textColor = .lightDeepGreen
@@ -62,6 +91,7 @@ class DetailPetHeaderView: UIView {
     lazy var petInfoStackView: UIStackView = {
         let stackView = UIStackView()
          stackView.addArrangedSubview(onStackView)
+        stackView.addArrangedSubview(classStackView)
          stackView.addArrangedSubview(speciesStackView)
          stackView.axis = .vertical
         stackView.alignment = .leading
@@ -106,7 +136,7 @@ class DetailPetHeaderView: UIView {
             make.height.equalToSuperview()
             make.width.equalTo(genderImageView.snp.height).multipliedBy(1.0)
         }
-        speciesLabel.textColor = .deepGreen
+        detailSpeciesLabel.textColor = .deepGreen
         morphLabel.textColor = .deepGreen
     }
     
@@ -116,14 +146,21 @@ class DetailPetHeaderView: UIView {
         guard let difference = Calendar.current.dateComponents([.day], from: Date(), to: pet.adoptionDate).day else { return }
         adoptionLabel.text = "입양한지 \(abs(difference))일째"
         if let morph = pet.overSpecies.morph {
-            speciesLabel.text = pet.overSpecies.detailSpecies?.title
+            morphLabel.isHidden = false
+            speciesStackView.isHidden = false
+            detailSpeciesLabel.text = pet.overSpecies.detailSpecies?.title
             morphLabel.text = morph.title
-        } else if let detailSpecies = pet.overSpecies.detailSpecies?.title {
+            petClassLabel.text = pet.overSpecies.petClass?.title
             speciesLabel.text = pet.overSpecies.petSpecies?.title
-            morphLabel.text = detailSpecies
+        } else if let detailSpecies = pet.overSpecies.detailSpecies?.title {
+            morphLabel.isHidden = true
+            detailSpeciesLabel.text = detailSpecies
+            petClassLabel.text = pet.overSpecies.petClass?.title
+            speciesLabel.text = pet.overSpecies.petSpecies?.title
         } else {
-            speciesLabel.text = pet.overSpecies.petClass?.title
-            morphLabel.text = pet.overSpecies.petSpecies?.title
+            speciesStackView.isHidden = true
+            petClassLabel.text = pet.overSpecies.petClass?.title
+            speciesLabel.text = pet.overSpecies.petSpecies?.title
         }
     }
 }
