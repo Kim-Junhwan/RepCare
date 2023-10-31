@@ -31,7 +31,10 @@ class BaseViewController: UIViewController {
         let cancel = UIAlertAction(title: "취소", style: .cancel)
         alert.addAction(cancel)
         alert.addAction(ok)
-        present(alert, animated: true)
+        DispatchQueue.main.async {
+            self.present(alert, animated: true)
+        }
+        
     }
     
     func showTaskAlert(title: String?, message: String?, action: (() -> Void)?  = nil) {

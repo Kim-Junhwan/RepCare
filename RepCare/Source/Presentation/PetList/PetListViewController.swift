@@ -36,6 +36,7 @@ final class PetListViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         bind()
         navigationItem.setRightBarButton(addPetButton, animated: false)
         selectPetClassCode(petClass: .all)
