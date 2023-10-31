@@ -62,8 +62,7 @@ final class FullScreenImageViewController: BaseViewController {
         imageView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.centerY.equalToSuperview()
-            make.width.equalToSuperview()
-            make.height.equalTo(400)
+            make.width.height.equalToSuperview()
         }
         dismissButton.snp.makeConstraints { make in
             make.width.height.equalTo(50)
