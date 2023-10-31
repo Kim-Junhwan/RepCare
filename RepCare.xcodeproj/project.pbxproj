@@ -24,13 +24,13 @@
 		C709AA6E2ADD443F004FA677 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C709AA6D2ADD443F004FA677 /* GoogleService-Info.plist */; };
 		C70AF4C52AEFE39200DEE7CF /* FullScreenImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70AF4C42AEFE39200DEE7CF /* FullScreenImageViewController.swift */; };
 		C70AF4C72AF03E5F00DEE7CF /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C70AF4C62AF03E5F00DEE7CF /* Settings.bundle */; };
+		C70AF4C92AF0BD2900DEE7CF /* repcare.realm in Resources */ = {isa = PBXBuildFile; fileRef = C70AF4C82AF0BD2900DEE7CF /* repcare.realm */; };
 		C70E59CC2ADECF2700428CDE /* TaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E59CB2ADECF2700428CDE /* TaskRepository.swift */; };
 		C70E59CE2ADECFCE00428CDE /* RegisterTaskQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E59CD2ADECFCE00428CDE /* RegisterTaskQuery.swift */; };
 		C70E59D02ADED20500428CDE /* DefaultTaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E59CF2ADED20500428CDE /* DefaultTaskRepository.swift */; };
 		C70E59D42ADED3C100428CDE /* TaskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E59D32ADED3C100428CDE /* TaskStorage.swift */; };
 		C70E59D82ADED3F600428CDE /* RegisterTaskRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E59D72ADED3F600428CDE /* RegisterTaskRequestDTO.swift */; };
 		C70E59DA2ADED6A500428CDE /* RealmTaskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E59D92ADED6A500428CDE /* RealmTaskStorage.swift */; };
-		C70E59DC2ADEE73200428CDE /* repcare.realm in Resources */ = {isa = PBXBuildFile; fileRef = C70E59DB2ADEE73200428CDE /* repcare.realm */; };
 		C70E59DF2ADF9DD900428CDE /* FetchTaskListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E59DE2ADF9DD900428CDE /* FetchTaskListDTO.swift */; };
 		C7273B9B2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273B9A2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift */; };
 		C7273B9E2AD427B8004B7A6F /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273B9D2AD427B8004B7A6F /* UITextField+.swift */; };
@@ -160,13 +160,13 @@
 		C709AA6D2ADD443F004FA677 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C70AF4C42AEFE39200DEE7CF /* FullScreenImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenImageViewController.swift; sourceTree = "<group>"; };
 		C70AF4C62AF03E5F00DEE7CF /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		C70AF4C82AF0BD2900DEE7CF /* repcare.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = repcare.realm; sourceTree = "<group>"; };
 		C70E59CB2ADECF2700428CDE /* TaskRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRepository.swift; sourceTree = "<group>"; };
 		C70E59CD2ADECFCE00428CDE /* RegisterTaskQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTaskQuery.swift; sourceTree = "<group>"; };
 		C70E59CF2ADED20500428CDE /* DefaultTaskRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTaskRepository.swift; sourceTree = "<group>"; };
 		C70E59D32ADED3C100428CDE /* TaskStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStorage.swift; sourceTree = "<group>"; };
 		C70E59D72ADED3F600428CDE /* RegisterTaskRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTaskRequestDTO.swift; sourceTree = "<group>"; };
 		C70E59D92ADED6A500428CDE /* RealmTaskStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTaskStorage.swift; sourceTree = "<group>"; };
-		C70E59DB2ADEE73200428CDE /* repcare.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = repcare.realm; sourceTree = "<group>"; };
 		C70E59DE2ADF9DD900428CDE /* FetchTaskListDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchTaskListDTO.swift; sourceTree = "<group>"; };
 		C7273B9A2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7273B9D2AD427B8004B7A6F /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
@@ -565,7 +565,7 @@
 		C7D152592AC6D16C0064D59F /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				C70E59DB2ADEE73200428CDE /* repcare.realm */,
+				C70AF4C82AF0BD2900DEE7CF /* repcare.realm */,
 				C709AA6D2ADD443F004FA677 /* GoogleService-Info.plist */,
 				C7D1524E2AC51B280064D59F /* Assets.xcassets */,
 				C7D152502AC51B280064D59F /* LaunchScreen.storyboard */,
@@ -973,8 +973,8 @@
 				C709AA6E2ADD443F004FA677 /* GoogleService-Info.plist in Resources */,
 				C7D152522AC51B280064D59F /* LaunchScreen.storyboard in Resources */,
 				C70AF4C72AF03E5F00DEE7CF /* Settings.bundle in Resources */,
-				C70E59DC2ADEE73200428CDE /* repcare.realm in Resources */,
 				C7D1524F2AC51B280064D59F /* Assets.xcassets in Resources */,
+				C70AF4C92AF0BD2900DEE7CF /* repcare.realm in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
