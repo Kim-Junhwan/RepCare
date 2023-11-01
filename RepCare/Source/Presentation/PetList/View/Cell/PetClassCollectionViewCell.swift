@@ -64,7 +64,7 @@ final class PetClassCollectionViewCell: UICollectionViewCell {
     }
     
     func configureCell(petClass: PetClassModel) {
-        classImageView.image = UIImage(named: petClass.image)?.withRenderingMode(.alwaysTemplate)
+         classImageView.image = UIImage(named: petClass.image)?.withRenderingMode(.alwaysTemplate)
         classLabel.text = petClass.title
     }
     

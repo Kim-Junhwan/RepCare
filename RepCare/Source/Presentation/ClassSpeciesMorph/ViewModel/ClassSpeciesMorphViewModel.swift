@@ -62,7 +62,7 @@ class ClassSpeciesMorphViewModel {
     var temporaryPetSpeceis: PetOverSpeciesModel?
     
     let speciesList: BehaviorRelay<[Section: [Item]]> = .init(value: [.detailSpecies:[],.morph:[],.petClass:[],.species:[]])
-    lazy var canRegisterRelay = BehaviorRelay<Bool>.combineLatest(selectPetClass, selectSpecies, selectDetailSpecies, selectMorph) { petClass, species, detailSpecies, morph in
+    lazy var canRegisterRelay = Observable<Bool>.combineLatest(selectPetClass, selectSpecies, selectDetailSpecies, selectMorph) { petClass, species, detailSpecies, morph in
         return (petClass != nil) && (species != nil)
     }
     var canRegister: Driver<Bool> {
