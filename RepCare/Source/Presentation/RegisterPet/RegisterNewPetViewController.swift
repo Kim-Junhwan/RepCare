@@ -218,7 +218,7 @@ extension RegisterNewPetViewController: UICollectionViewDelegate {
     private func showCameraOrImagePickerActionSheet() {
         let alert = UIAlertController(title: "어떤 작업을 수행하시겠습니까?", message: nil, preferredStyle: .actionSheet)
         let camera = UIAlertAction(title: "카메라", style: .default) { [weak self] _ in
-            self?.showCamera()
+            self?.checkCameraAuthorization()
         }
         let imagePicker = UIAlertAction(title: "앨범", style: .default) { [weak self] _ in
             self?.showImagePicker()
@@ -230,20 +230,33 @@ extension RegisterNewPetViewController: UICollectionViewDelegate {
         present(alert, animated: true)
     }
     
-    func showCamera() {
-        if AVCaptureDevice.authorizationStatus(for: .video) == .authorized {
-            let picker = UIImagePickerController()
-            picker.sourceType = .camera
-            picker.allowsEditing = true
-            picker.delegate = self
-            present(picker, animated: true)
-        } else {
-            showAlert(title: "카메라 권한이 없습니다.", message: "개체 사진을 찍기 위해서 카메라 권한이 필요합니다. 설정화면에서 카메라 권한을 활성화해주세요. ") { _ in
-                guard let settingUrl = URL(string: UIApplication.openSettingsURLString) else { return }
-                UIApplication.shared.open(settingUrl)
+    func checkCameraAuthorization() {
+        AVCaptureDevice.requestAccess(for: .video) { bool in
+            if bool {
+                self.showCamera()
+            } else {
+                self.showRequestCameraAuthorizationAlert()
             }
         }
-        
+    }
+    
+    func showRequestCameraAuthorizationAlert() {
+        self.showAlert(title: "카메라 권한이 없습니다.", message: "개체 사진을 찍기 위해서 카메라 권한이 필요합니다. 설정화면에서 카메라 권한을 활성화해주세요. ") { _ in
+            guard let settingUrl = URL(string: UIApplication.openSettingsURLString) else { return }
+            UIApplication.shared.open(settingUrl)
+        }
+    }
+    
+    func showCamera() {
+        if AVCaptureDevice.authorizationStatus(for: .video) == .authorized {
+            DispatchQueue.main.async {
+                let picker = UIImagePickerController()
+                picker.sourceType = .camera
+                picker.allowsEditing = true
+                picker.delegate = self
+                self.present(picker, animated: true)
+            }
+        }
     }
     
     func showImagePicker() {
