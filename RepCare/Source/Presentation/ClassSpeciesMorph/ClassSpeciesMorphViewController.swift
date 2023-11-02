@@ -203,7 +203,7 @@ extension ClassSpeciesMorphViewController: UICollectionViewDelegate {
         let cancel = UIAlertAction(title: "취소", style: .cancel)
         let ok = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
             guard let self else { return }
-            guard let inputText = alert.textFields?.first?.text, !inputText.isEmpty else { return }
+            guard let inputText = alert.textFields?.first?.text?.trimmingCharacters(in: .whitespaces), !inputText.isEmpty else { return }
             if self.viewModel.checkCanRegisterNewSpecies(section: section, title: inputText) {
                 do {
                     try self.viewModel.registerNewSpecies(section: section, title: inputText)
