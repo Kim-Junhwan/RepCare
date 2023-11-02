@@ -36,3 +36,26 @@ xcode 15.0.1, 최소버전 iOS 15.0, swift 5.9
 
 # 주요 기능 및 인터페이스
 
+## 펫 리스트 및 필터링
+<p width="100%">
+  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/ce6d0d93-26fe-41df-8095-9bd12816b3e9" width="20%">
+  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/cd7770d8-368d-4673-a8d4-52600e272062" width="20%">
+  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/57e0b605-0461-477d-83ea-abccb87a64ec" width="20%">
+</p>
+
+## 개체 상세화면 및 작업 등록, 무게 추가
+<p width="100%">
+  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/9341288d-8839-404c-9c45-af91daa8a23f" width="19%">
+  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/f223646d-b532-40b4-87d1-2e5565442d40" width="19%">
+  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/274ce93f-4d45-4490-bc1d-44e6fef7bd02" width="19%">
+  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/e90cb4ac-c957-470e-bd8f-aca7fb6cfbbf" width="19%">
+  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/84d1c167-e5e0-4fcd-9bdb-b28b1e709528" width="19%">
+</p>
+
+## 개체 등록 및 정보 수정
+<p width="100%">
+
+<img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/61618aa9-34d2-49d3-843b-96b931f8c972" width="20%">
+<img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/0826ce9f-e656-4e86-9f08-c3503ab82f09" width="20%">
+  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/cc64af4f-102b-439d-bb4d-fa13b5704b9e" width="20%">
+</p>
