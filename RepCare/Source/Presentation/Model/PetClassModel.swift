@@ -36,7 +36,7 @@ enum PetClassModel: Int, CaseIterable {
     var image: String {
         switch self {
         case .all:
-            return "All"
+            return "AllLogo"
         case .reptile:
             return "Lizard"
         case .arthropod:
