@@ -54,8 +54,14 @@ xcode 15.0.1, 최소버전 iOS 15.0, swift 5.9
 
 ## 개체 등록 및 정보 수정
 <p width="100%">
-
 <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/61618aa9-34d2-49d3-843b-96b931f8c972" width="20%">
 <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/0826ce9f-e656-4e86-9f08-c3503ab82f09" width="20%">
-  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/cc64af4f-102b-439d-bb4d-fa13b5704b9e" width="20%">
+<img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/cc64af4f-102b-439d-bb4d-fa13b5704b9e" width="20%">
+</p>
+
+## 종 추가 및 수정
+<p width="100%">
+<img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/0bc846a7-35c5-4f3b-9174-efc7d384fed7" width="20%">
+<img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/b5f5bbd7-ebb9-4b69-98d0-cef35c0c495f" width="20%">
+<img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/28f3ab7c-8baf-481a-b84a-78c6ceb33478" width="20%">
 </p>
