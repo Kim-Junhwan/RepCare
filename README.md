@@ -84,8 +84,8 @@
 |이터레이션9|||||~ 2023/10/25|
 |||Calendar객체가 필요할때마다 생성했던 코드 제거|1h|1h|23|
 ||RegisterPetView|이미지 저장시 이미지가 회전되던 버그 수정|1h|7h|23|
-||PetListView|검색 기능 구현|1h|1h|24|
-||PetListView|필터링 기능 구현|1h|3h|24|
+||PetListView|검색 기능 구현|2h|1h|24|
+||PetListView|필터링 기능 구현|4h|3h|24|
 ||SelectSpeciesView|종 선택화면 UI 변경|1h|1h|24|
 |이터레이션10|||||~ 2023/10/30|
 ||DetailPetView|펫 삭제 기능 구현|2h|1h|25|
