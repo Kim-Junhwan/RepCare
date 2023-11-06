@@ -1,11 +1,11 @@
 # 렙케어
 
 <p width="100%">
-  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/fc9e7bb0-2e7b-4b6b-8ec4-e3bd6cf4fbc1" width="19%">
-  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/8c212999-5f27-4cdd-8f39-f9fa2614907a" width="19%">
-  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/a89ecd2d-afbd-4f20-8ec9-429cb7b1b245" width="19%">
-  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/c819f3aa-e724-4011-a127-39f366681f75" width="19%">
-  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/3d563cab-b056-47ea-bddd-c4baa5c2ea33" width="19%">
+  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/b1c0f38b-eb42-424c-8d9c-182d7a28ba07" width="19%">
+  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/8b819194-c1d3-4edb-ab7c-018a6b8f2707" width="19%">
+  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/fd0d5218-2c17-4cb8-9866-1f39b053b71f" width="19%">
+  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/8e94df68-5d9a-4c11-b107-89270d27d3e8" width="19%">
+  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/702b671e-bd17-4f38-94ee-cca94c8ea713" width="19%">
 </p>
 
 ## 프로젝트 한줄 소개
@@ -39,34 +39,36 @@ xcode 15.0.1, 최소버전 iOS 15.0, swift 5.9
 - UI 프레임워크: UIKit
 - 라이브러리 설치: Package Manager
 
+## 공수 산정
+
 # 주요 기능 및 인터페이스
 
 ## 펫 리스트 및 필터링
 <p width="100%">
-  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/ce6d0d93-26fe-41df-8095-9bd12816b3e9" width="20%">
-  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/cd7770d8-368d-4673-a8d4-52600e272062" width="20%">
-  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/57e0b605-0461-477d-83ea-abccb87a64ec" width="20%">
+  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/430b1c5d-1ef7-49bf-86e2-edd627bf611c" width="20%">
+  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/701a78d8-28fa-470b-a88d-14748d65b7b3" width="20%">
+  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/1bc94caa-e25e-4ab4-9e74-ed5c6d4899b0" width="20%">
 </p>
 
 ## 개체 상세화면 및 작업 등록, 무게 추가
 <p width="100%">
-  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/9341288d-8839-404c-9c45-af91daa8a23f" width="19%">
-  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/f223646d-b532-40b4-87d1-2e5565442d40" width="19%">
-  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/274ce93f-4d45-4490-bc1d-44e6fef7bd02" width="19%">
-  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/e90cb4ac-c957-470e-bd8f-aca7fb6cfbbf" width="19%">
-  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/84d1c167-e5e0-4fcd-9bdb-b28b1e709528" width="19%">
+  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/01a4bd4a-2d02-4323-9df3-9ad27fdaa018" width="19%">
+  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/ce2c0193-a657-4549-83f3-a3a2a6b661b1" width="19%">
+  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/f11866ac-1016-466d-a4bc-c29e60953156" width="19%">
+  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/3dca6ddb-469c-42ad-aacf-03bf49b8c0bf" width="19%">
+  <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/7b8cd3c0-7c60-46eb-bf08-e2438e836101" width="19%">
 </p>
 
 ## 개체 등록 및 정보 수정
 <p width="100%">
-<img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/61618aa9-34d2-49d3-843b-96b931f8c972" width="20%">
-<img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/0826ce9f-e656-4e86-9f08-c3503ab82f09" width="20%">
-<img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/cc64af4f-102b-439d-bb4d-fa13b5704b9e" width="20%">
+<img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/3a374715-b872-43fa-8521-8f89ba29f541" width="20%">
+<img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/43b39964-6b2c-4191-879b-eca00e564b87" width="20%">
 </p>
+
 
 ## 종 추가 및 수정
 <p width="100%">
-<img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/0bc846a7-35c5-4f3b-9174-efc7d384fed7" width="20%">
-<img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/b5f5bbd7-ebb9-4b69-98d0-cef35c0c495f" width="20%">
-<img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/28f3ab7c-8baf-481a-b84a-78c6ceb33478" width="20%">
+<img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/468dce80-428d-45b4-b004-2beaf76035c7" width="20%">
+<img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/caf41cb7-ed85-4b4d-a69b-7aa3853884a4" width="20%">
+<img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/5788d414-99a9-4c23-8198-b204e816ef03" width="20%">
 </p>
