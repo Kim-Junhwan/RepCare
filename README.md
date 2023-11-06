@@ -34,6 +34,11 @@ xcode 15.0.1, 최소버전 iOS 15.0, swift 5.9
 |FirebaseCrashlytics, AnalyticsWithoutAdidSupport|충돌 감지 및 앱 모니터링|
 |DGChart, Tabman, FSCalendar|UI 구현|
 
+## 기술 스택
+- 아키텍처 패턴: MVVM, MVC
+- UI 프레임워크: UIKit
+- 라이브러리 설치: Package Manager
+
 # 주요 기능 및 인터페이스
 
 ## 펫 리스트 및 필터링
