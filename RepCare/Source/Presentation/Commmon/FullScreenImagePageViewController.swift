@@ -15,6 +15,15 @@ final class FullScreenImagePageViewController: BaseViewController {
         return pageView
     }()
     
+    lazy var dismissButton: UIButton = {
+        var config = UIButton.Configuration.plain()
+        config.image = UIImage(systemName: "xmark")?.withRenderingMode(.alwaysTemplate).withTintColor(.white)
+       let button = UIButton(configuration: config)
+        button.tintColor = .white
+        button.addTarget(self, action: #selector(tapDismissButton), for: .touchUpInside)
+        return button
+    }()
+    
     private let imagePathList: [PetImageModel]
     private var viewControllers: [UIViewController] = []
     
@@ -29,18 +38,25 @@ final class FullScreenImagePageViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setViewControllers()
     }
     
     override func configureView() {
         viewControllers = imagePathList.map { FullScreenImageViewController(imagePath: $0.imagePath) }
         view.addSubview(imagePageViewController.view)
+        view.addSubview(dismissButton)
         imagePageViewController.dataSource = self
         imagePageViewController.setViewControllers([viewControllers[0]], direction: .forward, animated: true)
     }
     
-    private func setViewControllers() {
-        
+    override func setContraints() {
+        dismissButton.snp.makeConstraints { make in
+            make.width.height.equalTo(50)
+            make.leading.top.equalTo(view.safeAreaLayoutGuide)
+        }
+    }
+    
+    @objc private func tapDismissButton() {
+        dismiss(animated: true)
     }
     
 }
