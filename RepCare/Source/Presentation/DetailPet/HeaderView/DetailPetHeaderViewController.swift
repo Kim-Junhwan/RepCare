@@ -61,10 +61,6 @@ class DetailPetHeaderViewController: BaseViewController {
         let direction: UIPageViewController.NavigationDirection = (sender.currentPage > currentIndex) ? .forward : .reverse
         mainView.imagePageViewController.setViewControllers([viewControllers[sender.currentPage]], direction: direction, animated: true)
     }
-    
-    func reload() {
-        
-    }
 }
 
 extension DetailPetHeaderViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {

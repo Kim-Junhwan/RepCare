@@ -61,7 +61,8 @@ class ImageViewController: UIViewController {
     
     @objc func showFullScreenImage() {
         if !isEmptyImage {
-            let fullScreenImage = FullScreenImagePageViewController(imagePathList: imagePathList)
+            let selectIndex = Int(imagePathList.firstIndex { $0.imagePath == imagePath} ?? 0)
+            let fullScreenImage = FullScreenImagePageViewController(selectIndex: selectIndex, imagePathList: imagePathList)
             fullScreenImage.modalPresentationStyle = .overFullScreen
             present(fullScreenImage, animated: true)
         }

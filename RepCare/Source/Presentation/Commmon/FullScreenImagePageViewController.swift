@@ -26,9 +26,11 @@ final class FullScreenImagePageViewController: BaseViewController {
     
     private let imagePathList: [PetImageModel]
     private var viewControllers: [UIViewController] = []
+    private let selectIndex: Int
     
-    init(imagePathList: [PetImageModel]) {
+    init(selectIndex: Int ,imagePathList: [PetImageModel]) {
         self.imagePathList = imagePathList
+        self.selectIndex = selectIndex
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -45,10 +47,11 @@ final class FullScreenImagePageViewController: BaseViewController {
         view.addSubview(imagePageViewController.view)
         view.addSubview(dismissButton)
         imagePageViewController.dataSource = self
-        imagePageViewController.setViewControllers([viewControllers[0]], direction: .forward, animated: true)
+        imagePageViewController.setViewControllers([viewControllers[selectIndex]], direction: .forward, animated: true)
     }
     
     override func setContraints() {
+        view.backgroundColor = .black
         dismissButton.snp.makeConstraints { make in
             make.width.height.equalTo(50)
             make.leading.top.equalTo(view.safeAreaLayoutGuide)
