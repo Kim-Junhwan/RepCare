@@ -41,7 +41,7 @@ class DetailPetHeaderViewController: BaseViewController {
             viewControllers = [ImageViewController(petClass: pet.overSpecies.petClass ?? .reptile)]
             return
         }
-        viewControllers = imagePathList.map {ImageViewController(imagePath: $0)}
+       viewControllers = imagePathList.map {ImageViewController(imagePath: $0, imagePathList: imagePathList)}
     }
     
     required init?(coder: NSCoder) {
