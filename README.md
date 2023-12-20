@@ -142,3 +142,29 @@ xcode 15.0.1, 최소버전 iOS 15.0, swift 5.9
 <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/caf41cb7-ed85-4b4d-a69b-7aa3853884a4" width="20%">
 <img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/5788d414-99a9-4c23-8198-b204e816ef03" width="20%">
 </p>
+
+# 트러블 슈팅 및 도전
+
+## FileManager에 이미지 저장하고, 가져올 때 이미지가 회전된 채로 가지고 오던 문제
+
+<a href="https://sandclock-itblog.tistory.com/233">트러블슈팅 블로그 글</a>
+
+PHPicker로 카메라로 찍은 사진 또는 갤러리에서 가지고 온 이미지를 png() 함수를 통해 이미지 데이터를 디렉토리에 저장한 후, 저장한 이미지를 UIImage로 보여 줄 경우 다음과 같이 사진의 방향이 회전되던 문제가 발생했다. png() 대신에 jpeg()를 사용해서 jpeg 데이터 형식으로 이미지를 저장했더니 정상적으로 이미지가 나왔다.
+
+<p width=100%">
+<img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/9388b1b6-adc3-45b3-a822-0a14f59ff3ab" width="20%">
+<img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/766ce7dc-268a-48a2-b242-10ad7ed7974a" width="20%">
+</p>
+
+이러한 문제가 생긴 원인은 데이터를 읽어올때 파일의 형식 따라서 지원하는 메타데이터가 다르기 때문이다. 
+
+<img src ="https://github.com/Kim-Junhwan/RepCare/assets/58679737/e85bf6d7-1573-46cb-b81c-d4166f1538d8" width="40%">
+
+iOS에서는 사진을 찍을때 왼쪽 사진과 같이 세로모드로 찍어도 실제로는 오른쪽 사진처럼 이미지가 저장된다. 사진이 저장될 때 메타데이터로 회전된 사진의 방향이 함께 저장된다. UIImage에서 사진을 렌더링 하기 이전에 해당 메타데이터를 읽어 비트맵을 회전시킨 후 이미지를 렌더링 한다.
+이때 iOS에서 사진이 저장될때 HEIF 또는 JPEG로 사진이 저장되는데, iOS에서 이 파일 형식을 읽어오거나 저장할떄는 exif 데이터가 포함되있지만, png에서는 이를 포함하지 않는다. 기기에서 찍은 사진을 시뮬레이터에 넣고, png, jpeg 데이터로 각각 저장했을때 다음과 같이 메타데이터를 확인 할 수 있었다.
+
+<img width="841" alt="image" src="https://github.com/Kim-Junhwan/RepCare/assets/58679737/88eee940-da47-452b-ad72-6140a1f0b00e">
+
+따라서 png로 저장 할 시 이미지 회전 정보가 제외되어 저장되므로, 원래 저장된 파일 그대로 화면에 나온것이고, jpeg로 저장할 시 회전 정보가 있으므로 이미지가 제대로 나오게 된 것이다.
+
+## 
