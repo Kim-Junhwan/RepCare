@@ -167,4 +167,14 @@ iOS에서는 사진을 찍을때 왼쪽 사진과 같이 세로모드로 찍어�
 
 따라서 png로 저장 할 시 이미지 회전 정보가 제외되어 저장되므로, 원래 저장된 파일 그대로 화면에 나온것이고, jpeg로 저장할 시 회전 정보가 있으므로 이미지가 제대로 나오게 된 것이다.
 
-## 
+## NestedScroll View 구현
+
+인스타그램이나 트위터, 네이버 카페 앱등 프로필 화면에서 자주 사용되는 UI인 nestedScrollView를 두개의 ScrollView를 이용해서 구현. 상단 탭바는 TabMan 라이브러리를 사용했다.
+
+<p align="center"><img src="https://github.com/Kim-Junhwan/RepCare/assets/58679737/dc6e3701-91b8-495f-a341-ca08fa77dceb"></p>
+
+- overlay scrollview: 직접적인 스크롤이 일어나는 스크롤 뷰
+- container scrollview: UI가 들어갈 스크롤 뷰.
+- container scrollview Content View: HeaderView와 하단 탭바뷰로 구성
+
+KVO를 이용해 현재 선택된 탭바의 ScrollView의 contentSize의 height + height + 탭바의 높이를 계산하여 overlay scrollView의 contentSize의 height를 변경. 실제로 스크롤 되는 스크롤인 overlaySCrollView의 contentOffset의 값과 
