@@ -173,8 +173,30 @@ iOS에서는 사진을 찍을때 왼쪽 사진과 같이 세로모드로 찍어�
 
 <p align="center"><img src="https://github.com/Kim-Junhwan/RepCare/assets/58679737/dc6e3701-91b8-495f-a341-ca08fa77dceb"></p>
 
-- overlay scrollview: 직접적인 스크롤이 일어나는 스크롤 뷰
+- overlay scrollview: 스크롤의 contentOffset을 계산하는 스크롤 뷰
 - container scrollview: UI가 들어갈 스크롤 뷰.
 - container scrollview Content View: HeaderView와 하단 탭바뷰로 구성
 
-KVO를 이용해 현재 선택된 탭바의 ScrollView의 contentSize의 height + height + 탭바의 높이를 계산하여 overlay scrollView의 contentSize의 height를 변경. 실제로 스크롤 되는 스크롤인 overlaySCrollView의 contentOffset의 값과 
+KVO를 이용해 현재 선택된 탭바의 ScrollView의 contentSize의 height + height + 탭바의 높이를 계산하여 overlay scrollView의 contentSize의 height를 변경. overlayScrollView의 contentSize를 변경된 contentSize로 만듬. 그 후 containerScrollView와 overlayScrollView의 pan Gesture를 연결 후, overlayScrollView를 delegate로 contentOffset값을 받아서 containerScrollView의 contentOffset을 계산하는 방식으로 구현.
+
+```swift
+extension ProfileViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        contentOffsets[currentIndex] = scrollView.contentOffset.y
+        delegate?.scroll(contentOffset: scrollView.contentOffset)
+        let topHeight = bottomViewController.view.frame.minY - (delegate?.minHeaderHeight() ?? 0)
+        if scrollView.contentOffset.y < topHeight{
+            self.containerScrollView.contentOffset.y = scrollView.contentOffset.y
+            self.panViews.forEach({ (arg0) in
+                let (_, value) = arg0
+                (value as? UIScrollView)?.contentOffset.y = 0
+            })
+            contentOffsets.removeAll()
+        }else{
+            self.containerScrollView.contentOffset.y = topHeight
+            (self.panViews[currentIndex] as? UIScrollView)?.contentOffset.y = scrollView.contentOffset.y - self.containerScrollView.contentOffset.y
+        }
+        
+    }
+}
+```
