@@ -19,8 +19,6 @@
 		C709AA5C2ADCF733004FA677 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C709AA5B2ADCF733004FA677 /* ImageViewController.swift */; };
 		C709AA5E2ADD198C004FA677 /* DetailPetHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C709AA5D2ADD198C004FA677 /* DetailPetHeaderViewController.swift */; };
 		C709AA652ADD3D3E004FA677 /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = C709AA642ADD3D3E004FA677 /* DGCharts */; };
-		C709AA6A2ADD41EA004FA677 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = C709AA692ADD41EA004FA677 /* FirebaseAnalyticsWithoutAdIdSupport */; };
-		C709AA6C2ADD41EA004FA677 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = C709AA6B2ADD41EA004FA677 /* FirebaseCrashlytics */; };
 		C709AA6E2ADD443F004FA677 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C709AA6D2ADD443F004FA677 /* GoogleService-Info.plist */; };
 		C70AF4C52AEFE39200DEE7CF /* FullScreenImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70AF4C42AEFE39200DEE7CF /* FullScreenImageViewController.swift */; };
 		C70AF4C72AF03E5F00DEE7CF /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C70AF4C62AF03E5F00DEE7CF /* Settings.bundle */; };
@@ -55,12 +53,16 @@
 		C727A43C2AD940E200880111 /* RegisterPetQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C727A43B2AD940E200880111 /* RegisterPetQuery.swift */; };
 		C727A43E2AD95BDF00880111 /* FetchPetListRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C727A43D2AD95BDF00880111 /* FetchPetListRequestDTO.swift */; };
 		C727A4402AD99A6E00880111 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C727A43F2AD99A6E00880111 /* UIImageView+.swift */; };
+		C72885512AFDCE4D0066B83F /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = C72885502AFDCE4D0066B83F /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		C72885532AFDCE4D0066B83F /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = C72885522AFDCE4D0066B83F /* FirebaseCrashlytics */; };
+		C72885552AFDCE4D0066B83F /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = C72885542AFDCE4D0066B83F /* FirebaseMessaging */; };
 		C73A4E592ADDF6BB0069009B /* TimeLineHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73A4E582ADDF6BB0069009B /* TimeLineHeaderView.swift */; };
 		C73A4E5B2ADE101B0069009B /* TimelineCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73A4E5A2ADE101B0069009B /* TimelineCollectionViewCell.swift */; };
 		C73A4E672ADE49450069009B /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73A4E662ADE49450069009B /* Task.swift */; };
 		C73A4E692ADE4BF10069009B /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73A4E682ADE4BF10069009B /* TaskModel.swift */; };
 		C7460F122AE659AF00F0C3AC /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7460F112AE659AF00F0C3AC /* Date+.swift */; };
 		C74D4BEC2AE6BAF9005AE953 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74D4BEB2AE6BAF9005AE953 /* UIImage+.swift */; };
+		C753E4752AFA393200B6C208 /* PetCalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C753E4742AFA393200B6C208 /* PetCalendarViewModel.swift */; };
 		C7608D962AE0F39E001F03DA /* RegisterTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7608D952AE0F39E001F03DA /* RegisterTaskViewController.swift */; };
 		C7675F9A2AE2A6090054BC7A /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7675F992AE2A6090054BC7A /* PaddingLabel.swift */; };
 		C76A01EA2AD264FC0024D008 /* RealmSpeciesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76A01E92AD264FC0024D008 /* RealmSpeciesStorage.swift */; };
@@ -70,6 +72,7 @@
 		C76A01F42AD26E940024D008 /* DetailSpeciesRequest+ResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76A01F32AD26E940024D008 /* DetailSpeciesRequest+ResponseDTO.swift */; };
 		C76D3F892ADE943200DB6AB6 /* TaskObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76D3F882ADE943200DB6AB6 /* TaskObject.swift */; };
 		C776F6A72ADA8379006015AD /* DetailPetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C776F6A62ADA8379006015AD /* DetailPetViewController.swift */; };
+		C787CDF12B10DB08007CD73E /* FullScreenImagePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C787CDF02B10DB08007CD73E /* FullScreenImagePageViewController.swift */; };
 		C7988D182ADD60330011FF8D /* WeightChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7988D172ADD60330011FF8D /* WeightChartView.swift */; };
 		C7988D1A2ADD61F40011FF8D /* WeightCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7988D192ADD61F40011FF8D /* WeightCollectionViewCell.swift */; };
 		C7988D5B2ADDC38F0011FF8D /* PetWeightModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7988D5A2ADDC38F0011FF8D /* PetWeightModel.swift */; };
@@ -191,12 +194,14 @@
 		C727A43B2AD940E200880111 /* RegisterPetQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPetQuery.swift; sourceTree = "<group>"; };
 		C727A43D2AD95BDF00880111 /* FetchPetListRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchPetListRequestDTO.swift; sourceTree = "<group>"; };
 		C727A43F2AD99A6E00880111 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
+		C728854E2AFDC9100066B83F /* RepCare.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RepCare.entitlements; sourceTree = "<group>"; };
 		C73A4E582ADDF6BB0069009B /* TimeLineHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineHeaderView.swift; sourceTree = "<group>"; };
 		C73A4E5A2ADE101B0069009B /* TimelineCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineCollectionViewCell.swift; sourceTree = "<group>"; };
 		C73A4E662ADE49450069009B /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		C73A4E682ADE4BF10069009B /* TaskModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskModel.swift; sourceTree = "<group>"; };
 		C7460F112AE659AF00F0C3AC /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		C74D4BEB2AE6BAF9005AE953 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
+		C753E4742AFA393200B6C208 /* PetCalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetCalendarViewModel.swift; sourceTree = "<group>"; };
 		C7608D952AE0F39E001F03DA /* RegisterTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTaskViewController.swift; sourceTree = "<group>"; };
 		C7675F992AE2A6090054BC7A /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		C76A01E92AD264FC0024D008 /* RealmSpeciesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmSpeciesStorage.swift; sourceTree = "<group>"; };
@@ -206,6 +211,7 @@
 		C76A01F32AD26E940024D008 /* DetailSpeciesRequest+ResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailSpeciesRequest+ResponseDTO.swift"; sourceTree = "<group>"; };
 		C76D3F882ADE943200DB6AB6 /* TaskObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskObject.swift; sourceTree = "<group>"; };
 		C776F6A62ADA8379006015AD /* DetailPetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPetViewController.swift; sourceTree = "<group>"; };
+		C787CDF02B10DB08007CD73E /* FullScreenImagePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenImagePageViewController.swift; sourceTree = "<group>"; };
 		C7988D172ADD60330011FF8D /* WeightChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightChartView.swift; sourceTree = "<group>"; };
 		C7988D192ADD61F40011FF8D /* WeightCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7988D5A2ADDC38F0011FF8D /* PetWeightModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetWeightModel.swift; sourceTree = "<group>"; };
@@ -282,15 +288,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C72885552AFDCE4D0066B83F /* FirebaseMessaging in Frameworks */,
 				C709AA652ADD3D3E004FA677 /* DGCharts in Frameworks */,
+				C72885512AFDCE4D0066B83F /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				C7D152952AC7F9E40064D59F /* RxRelay in Frameworks */,
 				C7D152912AC7F9E40064D59F /* RxCocoa in Frameworks */,
 				C709AA492ADB8447004FA677 /* Tabman in Frameworks */,
+				C72885532AFDCE4D0066B83F /* FirebaseCrashlytics in Frameworks */,
 				C7D152672AC7DADC0064D59F /* RealmSwift in Frameworks */,
 				C7D1529E2AC7FAE80064D59F /* SnapKit in Frameworks */,
 				C7D152652AC7DADC0064D59F /* Realm in Frameworks */,
-				C709AA6C2ADD41EA004FA677 /* FirebaseCrashlytics in Frameworks */,
-				C709AA6A2ADD41EA004FA677 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				C7D152992AC7F9E40064D59F /* RxSwift in Frameworks */,
 				C7988D5E2ADDC6D30011FF8D /* FSCalendar in Frameworks */,
 			);
@@ -321,6 +328,7 @@
 			children = (
 				C709AA442ADB64F4004FA677 /* Cell */,
 				C709AA502ADB969E004FA677 /* View */,
+				C753E4732AFA392800B6C208 /* ViewModel */,
 				C709AA4E2ADB9652004FA677 /* PetCalendarViewController.swift */,
 			);
 			path = PetCalender;
@@ -496,6 +504,14 @@
 			path = Query;
 			sourceTree = "<group>";
 		};
+		C753E4732AFA392800B6C208 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C753E4742AFA393200B6C208 /* PetCalendarViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		C76A01E82AD264D00024D008 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
@@ -556,6 +572,7 @@
 		C7D152442AC51B270064D59F /* RepCare */ = {
 			isa = PBXGroup;
 			children = (
+				C728854E2AFDC9100066B83F /* RepCare.entitlements */,
 				C7D1525A2AC6D17B0064D59F /* Source */,
 				C7D152592AC6D16C0064D59F /* Resource */,
 			);
@@ -752,6 +769,7 @@
 				C7F378A82AE8F77300281A35 /* LoadingView.swift */,
 				C7608D952AE0F39E001F03DA /* RegisterTaskViewController.swift */,
 				C70AF4C42AEFE39200DEE7CF /* FullScreenImageViewController.swift */,
+				C787CDF02B10DB08007CD73E /* FullScreenImagePageViewController.swift */,
 			);
 			path = Commmon;
 			sourceTree = "<group>";
@@ -915,9 +933,10 @@
 				C7D1529D2AC7FAE80064D59F /* SnapKit */,
 				C709AA482ADB8447004FA677 /* Tabman */,
 				C709AA642ADD3D3E004FA677 /* DGCharts */,
-				C709AA692ADD41EA004FA677 /* FirebaseAnalyticsWithoutAdIdSupport */,
-				C709AA6B2ADD41EA004FA677 /* FirebaseCrashlytics */,
 				C7988D5D2ADDC6D30011FF8D /* FSCalendar */,
+				C72885502AFDCE4D0066B83F /* FirebaseAnalyticsWithoutAdIdSupport */,
+				C72885522AFDCE4D0066B83F /* FirebaseCrashlytics */,
+				C72885542AFDCE4D0066B83F /* FirebaseMessaging */,
 			);
 			productName = RepCare;
 			productReference = C7D152422AC51B270064D59F /* RepCare.app */;
@@ -953,8 +972,8 @@
 				C7D1529C2AC7FAE80064D59F /* XCRemoteSwiftPackageReference "SnapKit" */,
 				C709AA472ADB8447004FA677 /* XCRemoteSwiftPackageReference "Tabman" */,
 				C709AA632ADD3D3E004FA677 /* XCRemoteSwiftPackageReference "Charts" */,
-				C709AA682ADD41EA004FA677 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				C7988D5C2ADDC6D30011FF8D /* XCRemoteSwiftPackageReference "FSCalendar" */,
+				C728854F2AFDCE4D0066B83F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = C7D152432AC51B270064D59F /* Products */;
 			projectDirPath = "";
@@ -1014,6 +1033,7 @@
 				C727A4282AD6FA0600880111 /* PetStorage.swift in Sources */,
 				C73A4E5B2ADE101B0069009B /* TimelineCollectionViewCell.swift in Sources */,
 				C727A43E2AD95BDF00880111 /* FetchPetListRequestDTO.swift in Sources */,
+				C753E4752AFA393200B6C208 /* PetCalendarViewModel.swift in Sources */,
 				C7C390F52AEBB01F0053FB3A /* PetOverSpecies.swift in Sources */,
 				C70E59DA2ADED6A500428CDE /* RealmTaskStorage.swift in Sources */,
 				C7F5F43B2ACF112700ACFC76 /* MorphObject.swift in Sources */,
@@ -1085,6 +1105,7 @@
 				C7F5F42D2ACE873F00ACFC76 /* ClassSpeciesMorphViewController.swift in Sources */,
 				C727A43C2AD940E200880111 /* RegisterPetQuery.swift in Sources */,
 				C7C26FC52AE9866100A76B03 /* DeletePetUseCase.swift in Sources */,
+				C787CDF12B10DB08007CD73E /* FullScreenImagePageViewController.swift in Sources */,
 				C7C390F32AEA42E20053FB3A /* UpdatePetDTO.swift in Sources */,
 				C70E59CC2ADECF2700428CDE /* TaskRepository.swift in Sources */,
 				C7D152D12AC93B3D0064D59F /* WeightObject.swift in Sources */,
@@ -1272,6 +1293,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = RepCare/RepCare.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -1280,16 +1302,18 @@
 				INFOPLIST_FILE = RepCare/Resource/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "렙케어";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_NSCameraUsageDescription = "\"렙케어\"가 사진을 촬영하여 첨부 및 개체 사진을 등록하는 기능 사용을 위해 카메라를 사용 할 수 있도록 허용합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kimjunhwan.RepCare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1306,6 +1330,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = RepCare/RepCare.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SBAHW5F54N;
@@ -1313,16 +1338,18 @@
 				INFOPLIST_FILE = RepCare/Resource/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "렙케어";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
+				INFOPLIST_KEY_NSCameraUsageDescription = "\"렙케어\"가 사진을 촬영하여 첨부 및 개체 사진을 등록하는 기능 사용을 위해 카메라를 사용 할 수 있도록 허용합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kimjunhwan.RepCare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1374,12 +1401,12 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		C709AA682ADD41EA004FA677 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		C728854F2AFDCE4D0066B83F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 10.16.0;
+				minimumVersion = 10.17.0;
 			};
 		};
 		C7988D5C2ADDC6D30011FF8D /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
@@ -1427,15 +1454,20 @@
 			package = C709AA632ADD3D3E004FA677 /* XCRemoteSwiftPackageReference "Charts" */;
 			productName = DGCharts;
 		};
-		C709AA692ADD41EA004FA677 /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+		C72885502AFDCE4D0066B83F /* FirebaseAnalyticsWithoutAdIdSupport */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C709AA682ADD41EA004FA677 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = C728854F2AFDCE4D0066B83F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAnalyticsWithoutAdIdSupport;
 		};
-		C709AA6B2ADD41EA004FA677 /* FirebaseCrashlytics */ = {
+		C72885522AFDCE4D0066B83F /* FirebaseCrashlytics */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C709AA682ADD41EA004FA677 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = C728854F2AFDCE4D0066B83F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
+		};
+		C72885542AFDCE4D0066B83F /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C728854F2AFDCE4D0066B83F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
 		};
 		C7988D5D2ADDC6D30011FF8D /* FSCalendar */ = {
 			isa = XCSwiftPackageProductDependency;

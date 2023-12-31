@@ -36,11 +36,16 @@ final class ProfileViewController: UIViewController {
         scrollView.showsVerticalScrollIndicator = false
         return scrollView
     }()
+    
+    private var panScrollViewObservation: NSKeyValueObservation?
+    
     private var panViews: [Int: UIView] = [:] {
         didSet {
             if let scrollView = panViews[currentIndex] as? UIScrollView{
                 scrollView.panGestureRecognizer.require(toFail: overlayScrollView.panGestureRecognizer)
-                scrollView.addObserver(self, forKeyPath: #keyPath(UIScrollView.contentSize), options: .new, context: nil)
+                panScrollViewObservation = scrollView.observe(\.contentSize) { scroll, change in
+                    self.updateOverlayScrollContentSize(with: scroll)
+                }
             }
         }
     }
@@ -139,17 +144,6 @@ final class ProfileViewController: UIViewController {
         }
         return keywindow.safeAreaInsets.bottom 
     }
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if let obj = object as? UIScrollView, keyPath == #keyPath(UIScrollView.contentSize) {
-            if let scroll = self.panViews[currentIndex] as? UIScrollView, obj == scroll {
-                updateOverlayScrollContentSize(with: scroll)
-            }
-        }
-    }
-    
-
-    
 }
 
 extension ProfileViewController: UIScrollViewDelegate {

@@ -41,7 +41,7 @@ class DetailPetHeaderViewController: BaseViewController {
             viewControllers = [ImageViewController(petClass: pet.overSpecies.petClass ?? .reptile)]
             return
         }
-        viewControllers = imagePathList.map {ImageViewController(imagePath: $0)}
+       viewControllers = imagePathList.map {ImageViewController(imagePath: $0, imagePathList: imagePathList)}
     }
     
     required init?(coder: NSCoder) {
@@ -60,10 +60,6 @@ class DetailPetHeaderViewController: BaseViewController {
         guard let currentViewController = mainView.imagePageViewController.viewControllers?.first, let currentIndex = viewControllers.firstIndex(of: currentViewController) else { return }
         let direction: UIPageViewController.NavigationDirection = (sender.currentPage > currentIndex) ? .forward : .reverse
         mainView.imagePageViewController.setViewControllers([viewControllers[sender.currentPage]], direction: direction, animated: true)
-    }
-    
-    func reload() {
-        
     }
 }
 

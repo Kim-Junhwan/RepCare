@@ -33,7 +33,9 @@ class LoadingView {
     }
     
     public static func hide() {
-        guard let spinner = spinner else { return }
-        spinner.stopAnimating()
+        DispatchQueue.main.async {
+            guard let spinner = spinner else { return }
+            spinner.stopAnimating()
+        }
     }
 }

@@ -120,7 +120,8 @@ extension ClassSpeciesMorphViewController: UIContextMenuInteractionDelegate {
                 self.showTextFiledAlert(title: "수정", message: "적용할 내용을 입력해주세요.", textFieldText: currentSectionList[indexPath.row].title) { text in
                     do {
                         try self.viewModel.updateSpecies(section: section, row: indexPath.row, editTitle: text)
-                        self.mainView.reloadSection(section: section)
+                        guard let modifyItem = self.viewModel.speciesList.value[section]?[indexPath.row] else { return }
+                        self.mainView.reloadItem(item: modifyItem)
                     } catch {
                         self.showErrorAlert(title: "수정 실패", message: error.localizedDescription)
                     }

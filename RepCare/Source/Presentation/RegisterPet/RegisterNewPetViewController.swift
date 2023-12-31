@@ -262,8 +262,7 @@ extension RegisterNewPetViewController: UICollectionViewDelegate {
     func showImagePicker() {
         var config = PHPickerConfiguration(photoLibrary: .shared())
         config.filter = .images
-        config.preselectedAssetIdentifiers = viewModel.petImageList.value.filter { $0.imageType == .galleryImage }.map { $0.id }.compactMap { $0 }
-        config.selectionLimit = 5 - (viewModel.petImageList.value.filter { $0.imageType == .cameraImage }.count)
+        config.selectionLimit = 5 - viewModel.petImageList.value.count
         let picker = PHPickerViewController(configuration: config)
         picker.delegate = self
         present(picker, animated: true)
@@ -297,18 +296,20 @@ extension RegisterNewPetViewController: PHPickerViewControllerDelegate {
                 guard let imageIdentifier = newImages[element.offset].assetIdentifier else { return }
                 petImageItemList.append(.init(image: imageList[element.offset], imageType: .galleryImage, id: imageIdentifier))
             }
-            
             owner.viewModel.petImageList.accept(owner.viewModel.petImageList.value + petImageItemList)
             LoadingView.hide()
-        }.disposed(by: disposeBag)
+        } onError: { owner, error in
+            LoadingView.hide()
+            owner.showErrorAlert(title: "사진을 가져올 수 없습니다.", message: "사진을 가져올 수 없습니다. 다시 시도해주십시오.")
+        } .disposed(by: disposeBag)
     }
     
     func convertImage(provider: NSItemProvider) -> Observable<UIImage> {
         return Observable<UIImage>.create { observer in
             if provider.canLoadObject(ofClass: UIImage.self) {
                 provider.loadObject(ofClass: UIImage.self) { image, error in
-                    if let errror = error {
-                        observer.onError(error!)
+                    if let error = error {
+                        observer.onError(error)
                     } else {
                         guard let convertImage = image as? UIImage else { return }
                         DispatchQueue.main.async { [weak self] in

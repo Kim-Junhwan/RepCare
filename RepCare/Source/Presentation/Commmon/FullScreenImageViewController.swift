@@ -10,15 +10,6 @@ import UIKit
 
 final class FullScreenImageViewController: BaseViewController {
     
-    lazy var dismissButton: UIButton = {
-        var config = UIButton.Configuration.plain()
-        config.image = UIImage(systemName: "xmark")?.withRenderingMode(.alwaysTemplate).withTintColor(.white)
-       let button = UIButton(configuration: config)
-        button.tintColor = .white
-        button.addTarget(self, action: #selector(tapDismissButton), for: .touchUpInside)
-        return button
-    }()
-    
     lazy var scrollView: UIScrollView = {
        let scrollView = UIScrollView()
         scrollView.delegate = self
@@ -52,7 +43,6 @@ final class FullScreenImageViewController: BaseViewController {
     
     override func configureView() {
         view.addSubview(scrollView)
-        view.addSubview(dismissButton)
     }
     
     override func setContraints() {
@@ -64,14 +54,7 @@ final class FullScreenImageViewController: BaseViewController {
             make.centerY.equalToSuperview()
             make.width.height.equalToSuperview()
         }
-        dismissButton.snp.makeConstraints { make in
-            make.width.height.equalTo(50)
-            make.leading.top.equalTo(view.safeAreaLayoutGuide)
-        }
-    }
-    
-    @objc private func tapDismissButton() {
-        dismiss(animated: true)
+        
     }
 }
 

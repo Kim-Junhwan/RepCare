@@ -13,9 +13,11 @@ class ImageViewController: UIViewController {
     let imageView: UIImageView = UIImageView(frame: .zero)
     let isEmptyImage: Bool
     let imagePath: String
+    let imagePathList: [PetImageModel]
     
-    init(imagePath: PetImageModel) {
+    init(imagePath: PetImageModel, imagePathList: [PetImageModel]) {
         self.imagePath = imagePath.imagePath
+        self.imagePathList = imagePathList
         do {
            try  imageView.configureImageFromFilePath(path: imagePath.imagePath)
             isEmptyImage = false
@@ -28,6 +30,7 @@ class ImageViewController: UIViewController {
     init(petClass: PetClassModel) {
         isEmptyImage = true
         self.imagePath = ""
+        self.imagePathList = []
         super.init(nibName: nil, bundle: nil)
         imageView.image = UIImage(named: petClass.image)?.withRenderingMode(.alwaysTemplate)
         imageView.tintColor = .systemGray2
@@ -58,7 +61,8 @@ class ImageViewController: UIViewController {
     
     @objc func showFullScreenImage() {
         if !isEmptyImage {
-            let fullScreenImage = FullScreenImageViewController(imagePath: imagePath)
+            let selectIndex = Int(imagePathList.firstIndex { $0.imagePath == imagePath} ?? 0)
+            let fullScreenImage = FullScreenImagePageViewController(selectIndex: selectIndex, imagePathList: imagePathList)
             fullScreenImage.modalPresentationStyle = .overFullScreen
             present(fullScreenImage, animated: true)
         }
