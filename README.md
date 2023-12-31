@@ -167,6 +167,19 @@ iOS에서는 사진을 찍을때 왼쪽 사진과 같이 세로모드로 찍어�
 
 따라서 png로 저장 할 시 이미지 회전 정보가 제외되어 저장되므로, 원래 저장된 파일 그대로 화면에 나온것이고, jpeg로 저장할 시 회전 정보가 있으므로 이미지가 제대로 나오게 된 것이다.
 
+## DiffableDataSource에서 기존 Item의 값을 변경 한 후 apply 했을때 적용이 되니 않던 문제
+
+애완동물 종 선택 화면은 종을 추가 및 삭제하거나 세부적인 종이 나타날때 보다 자연스러워 지도록 UICollectionViewDiffableDataSource를 이용하여 애니메이션이 들어가도록 구현 했다. 
+새로운 종을 추가하거나 삭제, 수정을할때 <a href="https://developer.apple.com/documentation/uikit/uicollectionviewdiffabledatasource/3795617-apply">apply</a>를 이용하여 변경사항을 업데이트를 하였는데, 기존 종을 수정할 시 apply를 해도 셀의 내용이 변경이 되지 않는 이슈가 발생.
+
+![화면 기록 2023-12-31 오후 7 58 00 (1)](https://github.com/Kim-Junhwan/RepCare/assets/58679737/9bceea48-0317-4392-980e-2f6b5ac29e46)
+
+단순히 apply를 할 경우 UICollectionViewDiffableDataSource.CellProvider는 새로 추가되거나 바뀐 Item에 대해서만 호출이 된다. 따라서 기존에 존재하던 셀의 hash값이 변경되지 않았으므로 CellProvider가 호출 되지 않으므로 인해 값의 변경이 적용되지 않았던 것이다.
+그래서 apply가 아닌 항목을 reload를 해야 하는데, 이때 reloadItems, reloadSections, reconfigureItems등 reload하는 방법이 여럿 존재하는데 reloadData, reloadSections는 셀 자체를 새로운 셀로 교체하는 방식이고 reconfigureItems는 기존의 셀을 그대로 재사용하는 형식이다.
+나의 경우에는 셀을 재생성할 필요 없이 내부의 내용만 바꾸면 되므로 reconfigureItems를 이용하여 셀을 다시 재구성 하는 방식을 택했다.
+
+![화면 기록 2023-12-31 오후 11 07 38](https://github.com/Kim-Junhwan/RepCare/assets/58679737/1f7cd5fe-a079-4d13-bac5-6985ec4af7ca)
+
 ## NestedScroll View 구현
 
 인스타그램이나 트위터, 네이버 카페 앱등 프로필 화면에서 자주 사용되는 UI인 nestedScrollView를 두개의 ScrollView를 이용해서 구현. 상단 탭바는 TabMan 라이브러리를 사용했다.
