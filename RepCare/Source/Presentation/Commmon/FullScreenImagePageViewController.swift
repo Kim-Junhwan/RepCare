@@ -27,6 +27,8 @@ final class FullScreenImagePageViewController: BaseViewController {
     private let imagePathList: [PetImageModel]
     private var viewControllers: [UIViewController] = []
     private let selectIndex: Int
+    private var viewTransition: CGPoint = .init(x: 0, y: 0)
+    private var alpha: CGFloat = 1.0
     
     init(selectIndex: Int ,imagePathList: [PetImageModel]) {
         self.imagePathList = imagePathList
@@ -40,6 +42,7 @@ final class FullScreenImagePageViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(panDismiss)))
     }
     
     override func configureView() {
@@ -62,6 +65,27 @@ final class FullScreenImagePageViewController: BaseViewController {
         dismiss(animated: true)
     }
     
+    @objc func panDismiss(sender: UIPanGestureRecognizer) {
+        switch sender.state {
+        case .changed:
+            viewTransition = sender.translation(in: view)
+            UIView.animate(withDuration: 0.1, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut) {
+                self.view.transform = CGAffineTransform(translationX: 0, y: self.viewTransition.y)
+                self.view.alpha = 1 - (abs(self.viewTransition.y) / 300.0)
+            }
+        case .ended:
+            if abs(viewTransition.y) < 200 {
+                UIView.animate(withDuration: 0.1, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseOut) {
+                    self.view.transform = .identity
+                    self.view.alpha = 1
+                }
+            } else {
+                dismiss(animated: true)
+            }
+        default:
+            break
+        }
+    }
 }
 
 extension FullScreenImagePageViewController: UIPageViewControllerDataSource {
