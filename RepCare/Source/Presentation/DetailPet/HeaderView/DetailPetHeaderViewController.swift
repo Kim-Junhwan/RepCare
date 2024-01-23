@@ -41,7 +41,14 @@ class DetailPetHeaderViewController: BaseViewController {
             viewControllers = [ImageViewController(petClass: pet.overSpecies.petClass ?? .reptile)]
             return
         }
-       viewControllers = imagePathList.map {ImageViewController(imagePath: $0, imagePathList: imagePathList)}
+       viewControllers = imagePathList.map { image in
+           let imageController = ImageViewController(imagePath: image, imagePathList: imagePathList)
+           imageController.pagingBindingAction = { num in
+               self.mainView.imagePageViewController.setViewControllers([self.viewControllers[num]], direction: .forward, animated: false)
+               self.mainView.pageControl.currentPage = num
+           }
+           return imageController
+       }
     }
     
     required init?(coder: NSCoder) {

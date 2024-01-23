@@ -29,10 +29,12 @@ final class FullScreenImagePageViewController: BaseViewController {
     private let selectIndex: Int
     private var viewTransition: CGPoint = .init(x: 0, y: 0)
     private var alpha: CGFloat = 1.0
+    let pagingBindingAction: (Int) -> Void
     
-    init(selectIndex: Int ,imagePathList: [PetImageModel]) {
+    init(selectIndex: Int ,imagePathList: [PetImageModel], pagingBindingAction: @escaping (Int) -> Void) {
         self.imagePathList = imagePathList
         self.selectIndex = selectIndex
+        self.pagingBindingAction = pagingBindingAction
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -50,6 +52,7 @@ final class FullScreenImagePageViewController: BaseViewController {
         view.addSubview(imagePageViewController.view)
         view.addSubview(dismissButton)
         imagePageViewController.dataSource = self
+        imagePageViewController.delegate = self
         imagePageViewController.setViewControllers([viewControllers[selectIndex]], direction: .forward, animated: true)
     }
     
@@ -85,6 +88,13 @@ final class FullScreenImagePageViewController: BaseViewController {
         default:
             break
         }
+    }
+}
+
+extension FullScreenImagePageViewController: UIPageViewControllerDelegate {
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        guard let currentVC = pageViewController.viewControllers?.first, let currentIndex = viewControllers.firstIndex(of: currentVC) else { return }
+        pagingBindingAction(currentIndex)
     }
 }
 
