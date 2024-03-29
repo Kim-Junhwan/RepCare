@@ -36,6 +36,7 @@ class DetailPetHeaderView: UIView {
     let nameLabel:UILabel = {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 25)
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     let genderImageView: UIImageView = .init()
