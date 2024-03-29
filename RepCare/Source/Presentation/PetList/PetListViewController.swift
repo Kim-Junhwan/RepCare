@@ -17,6 +17,12 @@ final class PetListViewController: BaseViewController {
         return button
     }()
     
+    lazy var listModeButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(image: mainView.petListMode.modeImage, style: .plain, target: self, action: #selector(tapPetListModeButton))
+        button.tintColor = .deepGreen
+        return button
+    }()
+    
     let mainView = PetListView()
     let viewModel: PetListViewModel
     let disposeBag = DisposeBag()
@@ -36,9 +42,9 @@ final class PetListViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         bind()
         navigationItem.setRightBarButton(addPetButton, animated: false)
+        navigationItem.setLeftBarButton(listModeButton, animated: false)
         selectPetClassCode(petClass: .all)
     }
     
@@ -82,6 +88,9 @@ final class PetListViewController: BaseViewController {
         navigationController?.pushViewController(registerVC, animated: true)
     }
 
+    @objc func tapPetListModeButton() {
+        listModeButton.image = mainView.togglePetListMode().modeImage
+    }
 }
 
 extension PetListViewController: UICollectionViewDataSource {
@@ -100,10 +109,24 @@ extension PetListViewController: UICollectionViewDataSource {
             cell.configureCell(petClass: .init(rawValue: indexPath.row) ?? .etc)
             return cell
         } else {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PetCollectionViewCell.identifier, for: indexPath) as? PetCollectionViewCell else { return .init() }
-            cell.configureCell(pet: viewModel.petList.value[indexPath.row])
-            return cell
+            if mainView.petListMode == .grid {
+                return gridCollectionViewReusableCell(collectionView, cellForItemAt: indexPath)
+            } else {
+                return tableCollectionViewReusableCell(collectionView, cellForItemAt: indexPath)
+            }
         }
+    }
+    
+    private func gridCollectionViewReusableCell(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GridPetCollectionViewCell.identifier, for: indexPath) as? GridPetCollectionViewCell else { fatalError() }
+        cell.configureCell(pet: viewModel.petList.value[indexPath.row])
+        return cell
+    }
+    
+    private func tableCollectionViewReusableCell(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TablePetCollectionViewCell.identifier, for: indexPath) as? TablePetCollectionViewCell else { fatalError() }
+        cell.configureCell(pet: viewModel.petList.value[indexPath.row])
+        return cell
     }
 }
 
