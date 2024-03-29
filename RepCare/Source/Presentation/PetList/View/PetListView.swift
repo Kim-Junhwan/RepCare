@@ -17,6 +17,20 @@ protocol PetListViewDelegate: AnyObject {
     func loadNextPage(completion: (()-> Void)?)
 }
 
+enum PetListMode: String {
+    case grid
+    case table
+    
+    var modeImage: UIImage? {
+        switch self {
+        case .grid:
+            return UIImage(systemName: "list.bullet")
+        case .table:
+            return UIImage(systemName: "rectangle.split.2x2.fill")
+        }
+    }
+}
+
 final class PetListView: UIView {
     
     private enum Metric {
@@ -68,10 +82,12 @@ final class PetListView: UIView {
     
     lazy var petListCollectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
-        collectionView.register(PetCollectionViewCell.self, forCellWithReuseIdentifier: PetCollectionViewCell.identifier)
+        collectionView.register(GridPetCollectionViewCell.self, forCellWithReuseIdentifier: GridPetCollectionViewCell.identifier)
+        collectionView.register(TablePetCollectionViewCell.self, forCellWithReuseIdentifier: TablePetCollectionViewCell.identifier)
         collectionView.delegate = self
         collectionView.refreshControl = .init()
         collectionView.refreshControl?.addTarget(self, action: #selector(updatePetList), for: .valueChanged)
+        collectionView.contentInset = .init(top: 10, left: 0, bottom: 0, right: 0)
         return collectionView
     }()
     
@@ -83,6 +99,16 @@ final class PetListView: UIView {
     
     weak var delegate: PetListViewDelegate?
     var isFetching = false
+    @UserDefault(key: "petListMode", defaultValue: PetListMode.grid.rawValue)
+    private var _petListMode: String
+    var petListMode: PetListMode {
+        get {
+            return PetListMode(rawValue: _petListMode) ?? .grid
+        }
+        set {
+            self._petListMode = newValue.rawValue
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -96,7 +122,11 @@ final class PetListView: UIView {
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
-        petListCollectionView.collectionViewLayout = makePetListCollectionViewLayout()
+        if petListMode == .grid {
+            petListCollectionView.collectionViewLayout = makeGridPetListCollectionViewLayout()
+        } else {
+            petListCollectionView.collectionViewLayout = makeTablePetListCollectionViewLayout()
+        }
     }
     
     private func configureView() {
@@ -146,16 +176,25 @@ final class PetListView: UIView {
         return flowLayout
     }
     
-    private func makePetListCollectionViewLayout() -> UICollectionViewLayout {
+    private func makeGridPetListCollectionViewLayout() -> UICollectionViewLayout {
         let flowLayout = UICollectionViewFlowLayout()
         let viewWidth = frame.width
         let itemWidth = (viewWidth/2) - 15.0
         flowLayout.itemSize = CGSize(width: itemWidth, height: itemWidth * 1.5)
         flowLayout.scrollDirection = .vertical
         flowLayout.minimumInteritemSpacing = 10.0
-        flowLayout.sectionInset = .init(top: 10, left: 10.0, bottom: .zero, right: 10.0)
+        flowLayout.sectionInset = .init(top: .zero, left: 10.0, bottom: .zero, right: 10.0)
         flowLayout.minimumLineSpacing = 10.0
         flowLayout.minimumInteritemSpacing = 10.0
+        return flowLayout
+    }
+    
+    private func makeTablePetListCollectionViewLayout() -> UICollectionViewLayout {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.sectionInset = UIEdgeInsets(top: .zero, left: 10, bottom: .zero, right: 10)
+        let itemSize = petListCollectionView.frame.width - Double(20)
+        flowLayout.minimumLineSpacing = 5
+        flowLayout.itemSize = CGSize(width: itemSize, height: 90)
         return flowLayout
     }
     
@@ -167,6 +206,19 @@ final class PetListView: UIView {
         delegate?.reloadPetList {
             self.petListCollectionView.refreshControl?.endRefreshing()
         }
+    }
+    
+    func togglePetListMode() -> PetListMode {
+        if petListMode == .grid {
+            petListMode = .table
+            petListCollectionView.collectionViewLayout = makeTablePetListCollectionViewLayout()
+        } else {
+            petListMode = .grid
+            petListCollectionView.collectionViewLayout = makeGridPetListCollectionViewLayout()
+        }
+        petListCollectionView.reloadData()
+        petListCollectionView.setContentOffset(.init(x: 0, y: -10), animated: false)
+        return petListMode
     }
     
     func setFilterButtonIsFilteringStatus(isFiltering: Bool) {
