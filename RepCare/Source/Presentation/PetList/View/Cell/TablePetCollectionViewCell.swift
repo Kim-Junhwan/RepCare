@@ -30,6 +30,7 @@ class TablePetCollectionViewCell: UICollectionViewCell {
         stackView.alignment = .leading
         stackView.distribution = .equalSpacing
         stackView.addArrangedSubview(petNameStackView)
+        stackView.addArrangedSubview(adoptionDateLabel)
         stackView.addArrangedSubview(morphStackView)
         return stackView
     }()
@@ -72,11 +73,10 @@ class TablePetCollectionViewCell: UICollectionViewCell {
          return label
     }()
     
-    let morphLabel: UILabel = {
+    let adoptionDateLabel: UILabel = {
        let label = UILabel()
         label.textColor = .systemGray
         label.font = .systemFont(ofSize: 14, weight: .semibold)
-        label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.8
         return label
     }()
@@ -96,7 +96,6 @@ class TablePetCollectionViewCell: UICollectionViewCell {
         petImageView.image = nil
         nameLabel.text = nil
         speciesLabel.text = nil
-        morphLabel.text = nil
         petImageView.snp.remakeConstraints { make in  make.width.height.equalTo(basePetImageView.snp.width)
             make.center.equalToSuperview()
         }
@@ -109,7 +108,7 @@ class TablePetCollectionViewCell: UICollectionViewCell {
         petNameStackView.addArrangedSubview(nameLabel)
         petNameStackView.addArrangedSubview(sexImageView)
         morphStackView.addArrangedSubview(speciesLabel)
-        morphStackView.addArrangedSubview(morphLabel)
+        //morphStackView.addArrangedSubview(morphLabel)
     }
     
     private func setConstraints() {
@@ -144,6 +143,8 @@ class TablePetCollectionViewCell: UICollectionViewCell {
     func configureCell(pet: PetModel) {
         nameLabel.text = pet.name
         sexImageView.image = UIImage(named: pet.sex.image)
+        let adoptionDate = DateFormatter.yearMonthDateFormatter.string(from: pet.adoptionDate)
+        adoptionDateLabel.text = "입양일: \(adoptionDate)"
         if pet.imagePath.isEmpty {
             whenPetImageCannotRender(petClass: pet.overSpecies.petClass ?? .reptile)
         } else {
@@ -154,15 +155,15 @@ class TablePetCollectionViewCell: UICollectionViewCell {
                 whenPetImageCannotRender(petClass: pet.overSpecies.petClass ?? .reptile)
             }
         }
-        if let morph = pet.overSpecies.morph {
-            speciesLabel.text = pet.overSpecies.detailSpecies?.title
-            morphLabel.text = morph.title
-        } else if let detailSpecies = pet.overSpecies.detailSpecies?.title {
-            speciesLabel.text = pet.overSpecies.petSpecies?.title
-            morphLabel.text = detailSpecies
-        } else {
-            speciesLabel.text = pet.overSpecies.petClass?.title
-            morphLabel.text = pet.overSpecies.petSpecies?.title
-        }
+        setPetSpeciesLabel(species: pet.overSpecies)
+    }
+    
+    private func setPetSpeciesLabel(species: PetOverSpeciesModel) {
+        var speciesArr: [String?] = []
+        speciesArr.append(species.petClass?.title)
+        speciesArr.append(species.petSpecies?.title)
+        speciesArr.append(species.detailSpecies?.title)
+        speciesArr.append(species.morph?.title)
+        speciesLabel.text = speciesArr.compactMap({ $0 }).joined(separator: " · ")
     }
 }
