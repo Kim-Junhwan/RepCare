@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "free-icon-female-2404482.png",
+      "filename" : "female.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "free-icon-female-2404482@2x.png",
+      "filename" : "female@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "free-icon-female-2404482@3x.png",
+      "filename" : "female@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
