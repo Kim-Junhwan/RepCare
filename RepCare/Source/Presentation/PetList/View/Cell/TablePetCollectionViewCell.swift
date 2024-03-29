@@ -1,15 +1,14 @@
 //
-//  PetCollectionViewCell.swift
+//  PetTableCollectionViewCell.swift
 //  RepCare
 //
-//  Created by JunHwan Kim on 2023/10/02.
+//  Created by JunHwan Kim on 2024/03/29.
 //
 
 import UIKit
 
-class PetCollectionViewCell: UICollectionViewCell {
-    
-    static let identifier = "PetCollectionViewCell"
+class TablePetCollectionViewCell: UICollectionViewCell {
+    static let identifier = "TablePetCollectionViewCell"
     
     let basePetImageView: UIView = {
        let view = UIView()
@@ -29,8 +28,7 @@ class PetCollectionViewCell: UICollectionViewCell {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .leading
-        stackView.distribution = .fill
-        stackView.spacing = 10
+        stackView.distribution = .equalSpacing
         stackView.addArrangedSubview(petNameStackView)
         stackView.addArrangedSubview(morphStackView)
         return stackView
@@ -39,8 +37,7 @@ class PetCollectionViewCell: UICollectionViewCell {
     let petNameStackView: UIStackView = {
        let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 10
-        stackView.alignment = .center
+        stackView.spacing = 5
         return stackView
     }()
     
@@ -59,7 +56,7 @@ class PetCollectionViewCell: UICollectionViewCell {
     
     let morphStackView: UIStackView = {
         let stackView = UIStackView()
-         stackView.axis = .vertical
+         stackView.axis = .horizontal
          stackView.distribution = .fill
         stackView.alignment = .leading
         stackView.spacing = 5
@@ -120,22 +117,20 @@ class PetCollectionViewCell: UICollectionViewCell {
         layer.cornerRadius = 10.0
         clipsToBounds = true
         basePetImageView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
-            make.height.equalTo(basePetImageView.snp.width).multipliedBy(1.0)
+            make.top.bottom.leading.equalToSuperview()
+            make.width.equalTo(basePetImageView.snp.height).multipliedBy(1.0)
         }
         petImageView.snp.makeConstraints { make in
             make.width.height.equalTo(basePetImageView.snp.width)
             make.center.equalToSuperview()
         }
         sexImageView.snp.makeConstraints { make in
-            make.height.width.equalTo(snp.width).multipliedBy(0.1)
+            make.height.width.equalTo(20)
         }
         descriptionStackView.snp.makeConstraints { make in
-            make.top.equalTo(basePetImageView.snp.bottom).offset(10)
-            make.leading.trailing.equalToSuperview().inset(10)
-        }
-        petNameStackView.snp.makeConstraints { make in
-            make.width.equalToSuperview()
+            make.top.equalToSuperview().offset(10)
+            make.bottom.trailing.equalToSuperview().offset(-10)
+            make.leading.equalTo(basePetImageView.snp.trailing).offset(10)
         }
     }
     
@@ -170,5 +165,4 @@ class PetCollectionViewCell: UICollectionViewCell {
             morphLabel.text = pet.overSpecies.petSpecies?.title
         }
     }
-    
 }
