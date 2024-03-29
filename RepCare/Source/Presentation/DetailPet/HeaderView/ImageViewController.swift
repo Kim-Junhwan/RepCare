@@ -7,23 +7,30 @@
 
 import UIKit
 
-class ImageViewController: UIViewController {
+class ImageViewController: BaseViewController {
     
     let imageBaseView = UIView()
-    let imageView: UIImageView = UIImageView(frame: .zero)
+    let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.tintColor = .systemGray3
+        return imageView
+    }()
     let isEmptyImage: Bool
     let imagePath: String
     let imagePathList: [PetImageModel]
     var pagingBindingAction: ((Int) -> Void)?
     
-    init(imagePath: PetImageModel, imagePathList: [PetImageModel]) {
+    init(imagePath: PetImageModel, imagePathList: [PetImageModel], petClass: PetClassModel) {
         self.imagePath = imagePath.imagePath
         self.imagePathList = imagePathList
         do {
-           try  imageView.configureImageFromFilePath(path: imagePath.imagePath)
+            try  imageView.configureImageFromFilePath(path: imagePath.imagePath)
             isEmptyImage = false
         } catch {
             isEmptyImage = true
+            imageView.image = UIImage(named: petClass.image)?.withRenderingMode(.alwaysTemplate)
         }
         super.init(nibName: nil, bundle: nil)
     }
@@ -34,20 +41,19 @@ class ImageViewController: UIViewController {
         self.imagePathList = []
         super.init(nibName: nil, bundle: nil)
         imageView.image = UIImage(named: petClass.image)?.withRenderingMode(.alwaysTemplate)
-        imageView.tintColor = .systemGray2
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    
+    override func configureView() {
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(showFullScreenImage)))
         view.addSubview(imageBaseView)
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
         imageBaseView.addSubview(imageView)
+    }
+    
+    override func setContraints() {
         imageBaseView.backgroundColor = .systemGray4
         imageBaseView.snp.makeConstraints { $0.edges.equalToSuperview() }
         imageView.snp.makeConstraints { make in

@@ -37,12 +37,13 @@ class DetailPetHeaderViewController: BaseViewController {
     }
     
    private func setViewControllers(imagePathList: [PetImageModel]) {
+       guard let petClass = pet.overSpecies.petClass else { fatalError() }
         if imagePathList.isEmpty {
-            viewControllers = [ImageViewController(petClass: pet.overSpecies.petClass ?? .reptile)]
+            viewControllers = [ImageViewController(petClass: petClass)]
             return
         }
        viewControllers = imagePathList.map { image in
-           let imageController = ImageViewController(imagePath: image, imagePathList: imagePathList)
+           let imageController = ImageViewController(imagePath: image, imagePathList: imagePathList, petClass: petClass)
            imageController.pagingBindingAction = { num in
                self.mainView.imagePageViewController.setViewControllers([self.viewControllers[num]], direction: .forward, animated: false)
                self.mainView.pageControl.currentPage = num

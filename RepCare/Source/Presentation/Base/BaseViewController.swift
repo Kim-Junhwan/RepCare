@@ -17,13 +17,9 @@ class BaseViewController: UIViewController {
         setContraints()
     }
     
-    func configureView() {
-        
-    }
+    func configureView() {}
     
-    func setContraints() {
-        
-    }
+    func setContraints() {}
     
     func showAlert(title: String?, message: String?, action: ((UIAlertAction) -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
