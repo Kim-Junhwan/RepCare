@@ -20,7 +20,7 @@ class ImageViewController: BaseViewController {
     let isEmptyImage: Bool
     let imagePath: String
     let imagePathList: [PetImageModel]
-    var pagingBindingAction: ((Int) -> Void)?
+    var pageTapAction: ((Int)-> Void)?
     
     init(imagePath: PetImageModel, imagePathList: [PetImageModel], petClass: PetClassModel) {
         self.imagePath = imagePath.imagePath
@@ -69,11 +69,7 @@ class ImageViewController: BaseViewController {
     @objc func showFullScreenImage() {
         if !isEmptyImage {
             let selectIndex = Int(imagePathList.firstIndex { $0.imagePath == imagePath} ?? 0)
-            let fullScreenImage = FullScreenImagePageViewController(selectIndex: selectIndex, imagePathList: imagePathList) { pagingNum in
-                self.pagingBindingAction?(pagingNum)
-            }
-            fullScreenImage.modalPresentationStyle = .overFullScreen
-            present(fullScreenImage, animated: true)
+            self.pageTapAction?(selectIndex)
         }
     }
 }

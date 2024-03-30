@@ -44,12 +44,20 @@ class DetailPetHeaderViewController: BaseViewController {
         }
        viewControllers = imagePathList.map { image in
            let imageController = ImageViewController(imagePath: image, imagePathList: imagePathList, petClass: petClass)
-           imageController.pagingBindingAction = { num in
-               self.mainView.imagePageViewController.setViewControllers([self.viewControllers[num]], direction: .forward, animated: false)
-               self.mainView.pageControl.currentPage = num
+           imageController.pageTapAction = { num in
+               let fullScreenImagePaegVC = self.makeFullScreenImagePageViewController(tapPageIndex: num)
+               fullScreenImagePaegVC.modalPresentationStyle = .overFullScreen
+               self.present(fullScreenImagePaegVC, animated: true)
            }
            return imageController
        }
+    }
+    
+    private func makeFullScreenImagePageViewController(tapPageIndex: Int) -> FullScreenImagePageViewController {
+        return FullScreenImagePageViewController(selectIndex: tapPageIndex, imagePathList: imagePathList) { pagingNum in
+            self.mainView.imagePageViewController.setViewControllers([self.viewControllers[pagingNum]], direction: .forward, animated: false)
+            self.mainView.pageControl.currentPage = pagingNum
+        }
     }
     
     required init?(coder: NSCoder) {

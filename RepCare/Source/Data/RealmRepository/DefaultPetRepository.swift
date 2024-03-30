@@ -40,7 +40,7 @@ final class DefaultPetRepository: PetRepository {
         let morph = editPet.morph.flatMap { speciesStorage.getMorph(id:$0.id) }
         let reqeustDTO = UpdatePetDTO(pet: editPet, petClass: petClass, petSpecies: species, detailSpecies: detailSpecies, morph: morph)
         guard let pet = petStorage.fetchPet(id: editPet.id) else { throw RepositoryError.unknownPet }
-        try petStorage.updatePet(id: editPet.id, editPet: reqeustDTO)
+        try petStorage.updatePet(id: pet._id.stringValue, editPet: reqeustDTO)
     }
     
     func fetchPetList(query: FetchPetListQuery, start: Int) -> PetRepositoryResponse {

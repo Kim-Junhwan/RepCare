@@ -185,7 +185,7 @@ class RegisterNewPetViewController: BaseViewController {
     }
     
     @objc func deleteImage(_ sender: DeleteButton) {
-        var imageList = viewModel.petImageList.value
+        let imageList = viewModel.petImageList.value
         viewModel.petImageList.accept(imageList.filter { $0.id != sender.identifier })
     }
     
