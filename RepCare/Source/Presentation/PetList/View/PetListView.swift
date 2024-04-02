@@ -216,7 +216,6 @@ final class PetListView: UIView {
             petListMode = .grid
             petListCollectionView.collectionViewLayout = makeGridPetListCollectionViewLayout()
         }
-        petListCollectionView.reloadData()
         petListCollectionView.setContentOffset(.init(x: 0, y: -10), animated: false)
         return petListMode
     }

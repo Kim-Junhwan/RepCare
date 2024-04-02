@@ -11,21 +11,23 @@ import RxSwift
 
 final class PetListViewController: BaseViewController {
     
-    lazy var addPetButton: UIBarButtonItem = {
+    private lazy var addPetButton: UIBarButtonItem = {
         let button = UIBarButtonItem(image: UIImage(systemName: "plus"), style: .plain, target: self, action: #selector(showRegisterPetView))
         button.tintColor = .deepGreen
         return button
     }()
     
-    lazy var listModeButton: UIBarButtonItem = {
+    private lazy var listModeButton: UIBarButtonItem = {
         let button = UIBarButtonItem(image: mainView.petListMode.modeImage, style: .plain, target: self, action: #selector(tapPetListModeButton))
         button.tintColor = .deepGreen
         return button
     }()
     
-    let mainView = PetListView()
-    let viewModel: PetListViewModel
-    let disposeBag = DisposeBag()
+    private let mainView = PetListView()
+    private let viewModel: PetListViewModel
+    private let petClassListDataSource: PetClassDataSource = .init()
+    private lazy var petListDataSource: PetListDataSource = .init(petList: [], petListMode: mainView.petListMode)
+    private let disposeBag = DisposeBag()
     
     init(viewModel: PetListViewModel) {
         self.viewModel = viewModel
@@ -62,6 +64,7 @@ final class PetListViewController: BaseViewController {
             }
             owner.mainView.emptyLabel.isHidden = true
             owner.mainView.petListCollectionView.isHidden = false
+            owner.petListDataSource.petList = petList
             owner.mainView.petListCollectionView.reloadData()
         }.disposed(by: disposeBag)
         
@@ -76,8 +79,8 @@ final class PetListViewController: BaseViewController {
     
     override func configureView() {
         mainView.delegate = self
-        mainView.petClassCollectionView.dataSource = self
-        mainView.petListCollectionView.dataSource = self
+        mainView.petClassCollectionView.dataSource = petClassListDataSource
+        mainView.petListCollectionView.dataSource = petListDataSource
     }
     
     @objc func showRegisterPetView() {
@@ -89,44 +92,10 @@ final class PetListViewController: BaseViewController {
     }
 
     @objc func tapPetListModeButton() {
-        listModeButton.image = mainView.togglePetListMode().modeImage
-    }
-}
-
-extension PetListViewController: UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == mainView.petClassCollectionView {
-            return PetClassModel.allCases.count
-        } else {
-            return viewModel.petList.value.count
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == mainView.petClassCollectionView {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PetClassCollectionViewCell.identifier, for: indexPath) as? PetClassCollectionViewCell else { return .init() }
-            cell.configureCell(petClass: .init(rawValue: indexPath.row) ?? .etc)
-            return cell
-        } else {
-            if mainView.petListMode == .grid {
-                return gridCollectionViewReusableCell(collectionView, cellForItemAt: indexPath)
-            } else {
-                return tableCollectionViewReusableCell(collectionView, cellForItemAt: indexPath)
-            }
-        }
-    }
-    
-    private func gridCollectionViewReusableCell(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GridPetCollectionViewCell.identifier, for: indexPath) as? GridPetCollectionViewCell else { fatalError() }
-        cell.configureCell(pet: viewModel.petList.value[indexPath.row])
-        return cell
-    }
-    
-    private func tableCollectionViewReusableCell(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TablePetCollectionViewCell.identifier, for: indexPath) as? TablePetCollectionViewCell else { fatalError() }
-        cell.configureCell(pet: viewModel.petList.value[indexPath.row])
-        return cell
+        let toggleMode = mainView.togglePetListMode()
+        listModeButton.image = toggleMode.modeImage
+        petListDataSource.petListMode = toggleMode
+        mainView.petListCollectionView.reloadData()
     }
 }
 

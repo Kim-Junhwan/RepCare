@@ -74,6 +74,8 @@
 		C776F6A72ADA8379006015AD /* DetailPetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C776F6A62ADA8379006015AD /* DetailPetViewController.swift */; };
 		C77944F32BB5AA05003FE400 /* UserdefaultPropertyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77944F22BB5AA05003FE400 /* UserdefaultPropertyWrapper.swift */; };
 		C77944F52BB5CFA9003FE400 /* TablePetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77944F42BB5CFA9003FE400 /* TablePetCollectionViewCell.swift */; };
+		C77944FA2BBC0B5E003FE400 /* PetListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77944F92BBC0B5E003FE400 /* PetListDataSource.swift */; };
+		C77944FC2BBC0BCD003FE400 /* PetClassDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77944FB2BBC0BCD003FE400 /* PetClassDataSource.swift */; };
 		C787CDF12B10DB08007CD73E /* FullScreenImagePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C787CDF02B10DB08007CD73E /* FullScreenImagePageViewController.swift */; };
 		C7988D182ADD60330011FF8D /* WeightChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7988D172ADD60330011FF8D /* WeightChartView.swift */; };
 		C7988D1A2ADD61F40011FF8D /* WeightCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7988D192ADD61F40011FF8D /* WeightCollectionViewCell.swift */; };
@@ -215,6 +217,8 @@
 		C776F6A62ADA8379006015AD /* DetailPetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPetViewController.swift; sourceTree = "<group>"; };
 		C77944F22BB5AA05003FE400 /* UserdefaultPropertyWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserdefaultPropertyWrapper.swift; sourceTree = "<group>"; };
 		C77944F42BB5CFA9003FE400 /* TablePetCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TablePetCollectionViewCell.swift; sourceTree = "<group>"; };
+		C77944F92BBC0B5E003FE400 /* PetListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetListDataSource.swift; sourceTree = "<group>"; };
+		C77944FB2BBC0BCD003FE400 /* PetClassDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetClassDataSource.swift; sourceTree = "<group>"; };
 		C787CDF02B10DB08007CD73E /* FullScreenImagePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenImagePageViewController.swift; sourceTree = "<group>"; };
 		C7988D172ADD60330011FF8D /* WeightChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightChartView.swift; sourceTree = "<group>"; };
 		C7988D192ADD61F40011FF8D /* WeightCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -547,6 +551,15 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		C77944F82BBC0B4F003FE400 /* Datasource */ = {
+			isa = PBXGroup;
+			children = (
+				C77944F92BBC0B5E003FE400 /* PetListDataSource.swift */,
+				C77944FB2BBC0BCD003FE400 /* PetClassDataSource.swift */,
+			);
+			path = Datasource;
+			sourceTree = "<group>";
+		};
 		C7C26FBD2AE95E0200A76B03 /* DI */ = {
 			isa = PBXGroup;
 			children = (
@@ -658,6 +671,7 @@
 		C7D152602AC70B100064D59F /* PetList */ = {
 			isa = PBXGroup;
 			children = (
+				C77944F82BBC0B4F003FE400 /* Datasource */,
 				C7F5F4112ACD3FE600ACFC76 /* ViewModel */,
 				C7D152F02ACAA5AA0064D59F /* View */,
 				C7D152612AC70B3E0064D59F /* PetListViewController.swift */,
@@ -1125,6 +1139,7 @@
 				C7D152D12AC93B3D0064D59F /* WeightObject.swift in Sources */,
 				C7D152DF2AC99BF90064D59F /* Morph.swift in Sources */,
 				C73A4E592ADDF6BB0069009B /* TimeLineHeaderView.swift in Sources */,
+				C77944FA2BBC0B5E003FE400 /* PetListDataSource.swift in Sources */,
 				C76D3F892ADE943200DB6AB6 /* TaskObject.swift in Sources */,
 				C7D152622AC70B3E0064D59F /* PetListViewController.swift in Sources */,
 				C7A4C3092ACC18A300E299B0 /* PetClassCollectionViewCell.swift in Sources */,
@@ -1143,6 +1158,7 @@
 				C709AA4F2ADB9652004FA677 /* PetCalendarViewController.swift in Sources */,
 				C76A01EA2AD264FC0024D008 /* RealmSpeciesStorage.swift in Sources */,
 				C70AF4C52AEFE39200DEE7CF /* FullScreenImageViewController.swift in Sources */,
+				C77944FC2BBC0BCD003FE400 /* PetClassDataSource.swift in Sources */,
 				C727A4202AD6E89500880111 /* RegisterPetUseCase.swift in Sources */,
 				C7F3E8B62AE4D9AF007621E1 /* RealmWeightStorage.swift in Sources */,
 				C7273BA92AD44048004B7A6F /* PetModel.swift in Sources */,
@@ -1329,12 +1345,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kimjunhwan.RepCare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1365,12 +1382,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.3;
+				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kimjunhwan.RepCare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
