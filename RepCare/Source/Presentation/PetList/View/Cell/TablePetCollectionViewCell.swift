@@ -108,7 +108,6 @@ class TablePetCollectionViewCell: UICollectionViewCell {
         petNameStackView.addArrangedSubview(nameLabel)
         petNameStackView.addArrangedSubview(sexImageView)
         morphStackView.addArrangedSubview(speciesLabel)
-        //morphStackView.addArrangedSubview(morphLabel)
     }
     
     private func setConstraints() {

@@ -76,6 +76,8 @@
 		C77944F52BB5CFA9003FE400 /* TablePetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77944F42BB5CFA9003FE400 /* TablePetCollectionViewCell.swift */; };
 		C77944FA2BBC0B5E003FE400 /* PetListDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77944F92BBC0B5E003FE400 /* PetListDataSource.swift */; };
 		C77944FC2BBC0BCD003FE400 /* PetClassDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77944FB2BBC0BCD003FE400 /* PetClassDataSource.swift */; };
+		C77944FE2BBC5E4E003FE400 /* ImageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77944FD2BBC5E4E003FE400 /* ImageFetcher.swift */; };
+		C77945002BBFB416003FE400 /* ImageFetchOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77944FF2BBFB416003FE400 /* ImageFetchOperation.swift */; };
 		C787CDF12B10DB08007CD73E /* FullScreenImagePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C787CDF02B10DB08007CD73E /* FullScreenImagePageViewController.swift */; };
 		C7988D182ADD60330011FF8D /* WeightChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7988D172ADD60330011FF8D /* WeightChartView.swift */; };
 		C7988D1A2ADD61F40011FF8D /* WeightCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7988D192ADD61F40011FF8D /* WeightCollectionViewCell.swift */; };
@@ -219,6 +221,8 @@
 		C77944F42BB5CFA9003FE400 /* TablePetCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TablePetCollectionViewCell.swift; sourceTree = "<group>"; };
 		C77944F92BBC0B5E003FE400 /* PetListDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetListDataSource.swift; sourceTree = "<group>"; };
 		C77944FB2BBC0BCD003FE400 /* PetClassDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetClassDataSource.swift; sourceTree = "<group>"; };
+		C77944FD2BBC5E4E003FE400 /* ImageFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFetcher.swift; sourceTree = "<group>"; };
+		C77944FF2BBFB416003FE400 /* ImageFetchOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFetchOperation.swift; sourceTree = "<group>"; };
 		C787CDF02B10DB08007CD73E /* FullScreenImagePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenImagePageViewController.swift; sourceTree = "<group>"; };
 		C7988D172ADD60330011FF8D /* WeightChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightChartView.swift; sourceTree = "<group>"; };
 		C7988D192ADD61F40011FF8D /* WeightCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -556,6 +560,8 @@
 			children = (
 				C77944F92BBC0B5E003FE400 /* PetListDataSource.swift */,
 				C77944FB2BBC0BCD003FE400 /* PetClassDataSource.swift */,
+				C77944FD2BBC5E4E003FE400 /* ImageFetcher.swift */,
+				C77944FF2BBFB416003FE400 /* ImageFetchOperation.swift */,
 			);
 			path = Datasource;
 			sourceTree = "<group>";
@@ -1060,6 +1066,7 @@
 				C7F5F4232ACE5A2500ACFC76 /* CustomTextField.swift in Sources */,
 				C727A4282AD6FA0600880111 /* PetStorage.swift in Sources */,
 				C73A4E5B2ADE101B0069009B /* TimelineCollectionViewCell.swift in Sources */,
+				C77944FE2BBC5E4E003FE400 /* ImageFetcher.swift in Sources */,
 				C727A43E2AD95BDF00880111 /* FetchPetListRequestDTO.swift in Sources */,
 				C753E4752AFA393200B6C208 /* PetCalendarViewModel.swift in Sources */,
 				C7C390F52AEBB01F0053FB3A /* PetOverSpecies.swift in Sources */,
@@ -1177,6 +1184,7 @@
 				C7F5F4A72AD1025300ACFC76 /* DefaultSpeciesRepository.swift in Sources */,
 				C7E835E42AE576FA00AA0361 /* DateFormatter+.swift in Sources */,
 				C7D1525E2AC6E7AC0064D59F /* Color.swift in Sources */,
+				C77945002BBFB416003FE400 /* ImageFetchOperation.swift in Sources */,
 				C776F6A72ADA8379006015AD /* DetailPetViewController.swift in Sources */,
 				C7F378AD2AE90BE900281A35 /* FilterViewController.swift in Sources */,
 				C7273BB42AD678A5004B7A6F /* RegisterImageCollectionViewCell.swift in Sources */,
