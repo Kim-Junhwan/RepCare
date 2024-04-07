@@ -81,6 +81,7 @@ final class PetListViewController: BaseViewController {
         mainView.delegate = self
         mainView.petClassCollectionView.dataSource = petClassListDataSource
         mainView.petListCollectionView.dataSource = petListDataSource
+        mainView.petListCollectionView.prefetchDataSource = petListDataSource
     }
     
     @objc func showRegisterPetView() {

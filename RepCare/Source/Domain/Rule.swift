@@ -8,5 +8,5 @@
 import Foundation
 
 enum Rule {
-    static let fetchPetCount = 10
+    static let fetchPetCount = 20
 }
