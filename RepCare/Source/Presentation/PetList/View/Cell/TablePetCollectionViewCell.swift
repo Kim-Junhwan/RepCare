@@ -7,21 +7,14 @@
 
 import UIKit
 
-class TablePetCollectionViewCell: UICollectionViewCell {
+class TablePetCollectionViewCell: PetListCell {
+    
     static let identifier = "TablePetCollectionViewCell"
     
     let basePetImageView: UIView = {
        let view = UIView()
         view.backgroundColor = .systemGray5
         return view
-    }()
-    
-    let petImageView: UIImageView = {
-       let imageView = UIImageView()
-        imageView.tintColor = .systemGray3
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        return imageView
     }()
     
     lazy var descriptionStackView: UIStackView = {
@@ -93,6 +86,7 @@ class TablePetCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        petModel = nil
         petImageView.image = nil
         nameLabel.text = nil
         speciesLabel.text = nil
@@ -132,7 +126,7 @@ class TablePetCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    private func whenPetImageCannotRender(petClass: PetClassModel) {
+    override func whenPetImageCannotRender(petClass: PetClassModel) {
         petImageView.image = UIImage(named: petClass.image)?.withRenderingMode(.alwaysTemplate)
         petImageView.snp.remakeConstraints { make in  make.width.height.equalTo(basePetImageView.snp.width).multipliedBy(0.5)
             make.center.equalToSuperview()
@@ -140,20 +134,14 @@ class TablePetCollectionViewCell: UICollectionViewCell {
     }
     
     func configureCell(pet: PetModel) {
+        petModel = pet
         nameLabel.text = pet.name
         sexImageView.image = UIImage(named: pet.sex.image)
-        let adoptionDate = DateFormatter.yearMonthDateFormatter.string(from: pet.adoptionDate)
-        adoptionDateLabel.text = "입양일: \(adoptionDate)"
         if pet.imagePath.isEmpty {
             whenPetImageCannotRender(petClass: pet.overSpecies.petClass ?? .reptile)
-        } else {
-            guard let imagePath = pet.imagePath.first?.imagePath else { return }
-            do {
-                try petImageView.configureImageFromFilePath(path: imagePath)
-            } catch {
-                whenPetImageCannotRender(petClass: pet.overSpecies.petClass ?? .reptile)
-            }
         }
+        let adoptionDate = DateFormatter.yearMonthDateFormatter.string(from: pet.adoptionDate)
+        adoptionDateLabel.text = "입양일: \(adoptionDate)"
         setPetSpeciesLabel(species: pet.overSpecies)
     }
     

@@ -79,6 +79,7 @@
 		C77944FE2BBC5E4E003FE400 /* ImageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77944FD2BBC5E4E003FE400 /* ImageFetcher.swift */; };
 		C77945002BBFB416003FE400 /* ImageFetchOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77944FF2BBFB416003FE400 /* ImageFetchOperation.swift */; };
 		C77945022BC3B6FD003FE400 /* ThreadSafeDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77945012BC3B6FD003FE400 /* ThreadSafeDictionary.swift */; };
+		C77945042BC43F6D003FE400 /* PetListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C77945032BC43F6D003FE400 /* PetListCell.swift */; };
 		C787CDF12B10DB08007CD73E /* FullScreenImagePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C787CDF02B10DB08007CD73E /* FullScreenImagePageViewController.swift */; };
 		C7988D182ADD60330011FF8D /* WeightChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7988D172ADD60330011FF8D /* WeightChartView.swift */; };
 		C7988D1A2ADD61F40011FF8D /* WeightCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7988D192ADD61F40011FF8D /* WeightCollectionViewCell.swift */; };
@@ -225,6 +226,7 @@
 		C77944FD2BBC5E4E003FE400 /* ImageFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFetcher.swift; sourceTree = "<group>"; };
 		C77944FF2BBFB416003FE400 /* ImageFetchOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFetchOperation.swift; sourceTree = "<group>"; };
 		C77945012BC3B6FD003FE400 /* ThreadSafeDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreadSafeDictionary.swift; sourceTree = "<group>"; };
+		C77945032BC43F6D003FE400 /* PetListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetListCell.swift; sourceTree = "<group>"; };
 		C787CDF02B10DB08007CD73E /* FullScreenImagePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenImagePageViewController.swift; sourceTree = "<group>"; };
 		C7988D172ADD60330011FF8D /* WeightChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightChartView.swift; sourceTree = "<group>"; };
 		C7988D192ADD61F40011FF8D /* WeightCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -796,6 +798,7 @@
 				C7A4C3072ACC18A300E299B0 /* PetClassCollectionViewCell.swift */,
 				C7A4C3082ACC18A300E299B0 /* GridPetCollectionViewCell.swift */,
 				C77944F42BB5CFA9003FE400 /* TablePetCollectionViewCell.swift */,
+				C77945032BC43F6D003FE400 /* PetListCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1093,6 +1096,7 @@
 				C7F5F41C2ACD680400ACFC76 /* RegisterNewPetViewController.swift in Sources */,
 				C7BB170B2AE4445E00CCEBAB /* WeightRepository.swift in Sources */,
 				C70E59D42ADED3C100428CDE /* TaskStorage.swift in Sources */,
+				C77945042BC43F6D003FE400 /* PetListCell.swift in Sources */,
 				C7D152462AC51B270064D59F /* AppDelegate.swift in Sources */,
 				C7C26FBF2AE95E0C00A76B03 /* AppDIContainer.swift in Sources */,
 				C70E59DF2ADF9DD900428CDE /* FetchTaskListDTO.swift in Sources */,

@@ -7,22 +7,14 @@
 
 import UIKit
 
-class GridPetCollectionViewCell: UICollectionViewCell {
+class GridPetCollectionViewCell: PetListCell {
     
     static let identifier = "GridPetCollectionViewCell"
     
     let basePetImageView: UIView = {
-       let view = UIView()
+        let view = UIView()
         view.backgroundColor = .systemGray5
         return view
-    }()
-    
-    let petImageView: UIImageView = {
-       let imageView = UIImageView()
-        imageView.tintColor = .systemGray3
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        return imageView
     }()
     
     lazy var descriptionStackView: UIStackView = {
@@ -37,7 +29,7 @@ class GridPetCollectionViewCell: UICollectionViewCell {
     }()
     
     let petNameStackView: UIStackView = {
-       let stackView = UIStackView()
+        let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = 10
         stackView.alignment = .center
@@ -47,11 +39,11 @@ class GridPetCollectionViewCell: UICollectionViewCell {
     let sexImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-         return imageView
-     }()
+        return imageView
+    }()
     
     let nameLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.font = .systemFont(ofSize: 20, weight: .heavy)
         label.adjustsFontSizeToFitWidth = true
         return label
@@ -59,12 +51,12 @@ class GridPetCollectionViewCell: UICollectionViewCell {
     
     let morphStackView: UIStackView = {
         let stackView = UIStackView()
-         stackView.axis = .vertical
-         stackView.distribution = .fill
+        stackView.axis = .vertical
+        stackView.distribution = .fill
         stackView.alignment = .leading
         stackView.spacing = 5
-         return stackView
-     }()
+        return stackView
+    }()
     
     let speciesLabel: UILabel = {
         let label = UILabel()
@@ -72,11 +64,11 @@ class GridPetCollectionViewCell: UICollectionViewCell {
         label.font = .systemFont(ofSize: 14, weight: .semibold)
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.8
-         return label
+        return label
     }()
     
     let morphLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.textColor = .systemGray
         label.font = .systemFont(ofSize: 14, weight: .semibold)
         label.adjustsFontSizeToFitWidth = true
@@ -100,6 +92,7 @@ class GridPetCollectionViewCell: UICollectionViewCell {
         nameLabel.text = nil
         speciesLabel.text = nil
         morphLabel.text = nil
+        petModel = nil
         petImageView.snp.remakeConstraints { make in  make.width.height.equalTo(basePetImageView.snp.width)
             make.center.equalToSuperview()
         }
@@ -139,7 +132,7 @@ class GridPetCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    private func whenPetImageCannotRender(petClass: PetClassModel) {
+    override func whenPetImageCannotRender(petClass: PetClassModel) {
         petImageView.image = UIImage(named: petClass.image)?.withRenderingMode(.alwaysTemplate)
         petImageView.snp.remakeConstraints { make in  make.width.height.equalTo(basePetImageView.snp.width).multipliedBy(0.5)
             make.center.equalToSuperview()
@@ -147,17 +140,11 @@ class GridPetCollectionViewCell: UICollectionViewCell {
     }
     
     func configureCell(pet: PetModel) {
+        petModel = pet
         nameLabel.text = pet.name
         sexImageView.image = UIImage(named: pet.sex.image)
         if pet.imagePath.isEmpty {
             whenPetImageCannotRender(petClass: pet.overSpecies.petClass ?? .reptile)
-        } else {
-            guard let imagePath = pet.imagePath.first?.imagePath else { return }
-            do {
-                try petImageView.configureImageFromFilePath(path: imagePath)
-            } catch {
-                whenPetImageCannotRender(petClass: pet.overSpecies.petClass ?? .reptile)
-            }
         }
         if let morph = pet.overSpecies.morph {
             speciesLabel.text = pet.overSpecies.detailSpecies?.title
@@ -170,5 +157,4 @@ class GridPetCollectionViewCell: UICollectionViewCell {
             morphLabel.text = pet.overSpecies.petSpecies?.title
         }
     }
-    
 }
