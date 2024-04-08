@@ -11,7 +11,7 @@ import UIKit
 final class ImageFetcher {
     private let imageFetchingQueue = OperationQueue()
     private var imageCache = NSCache<NSString, UIImage>()
-    var loadingOperations: [String: ImageFetchOperation] = [:]
+    private var loadingOperations: ThreadSafeDictionary<String, ImageFetchOperation> = .init()
     
     func fetchImage(id: String, imagePath: String, completion: ((Result<UIImage, Error>)-> Void)? = nil) {
         if let cachedImage = imageCache.object(forKey: id as NSString) {
@@ -19,8 +19,8 @@ final class ImageFetcher {
         } else {
             if let dataFetchOperation = loadingOperations[id] {
                 if let fetchImage = dataFetchOperation.fetchedImage {
-                    loadingOperations.removeValue(forKey: id)
                     completion?(.success(fetchImage))
+                    loadingOperations.removeValue(forKey: id)
                 } else {
                     dataFetchOperation.loadingCompletion = completion
                 }
@@ -35,10 +35,11 @@ final class ImageFetcher {
             switch result {
             case .success(let fetchImage):
                 self.imageCache.setObject(fetchImage, forKey: id as NSString)
-                self.loadingOperations.removeValue(forKey: id)
                 completion?(.success(fetchImage))
+                self.loadingOperations.removeValue(forKey: id)
             case .failure(let error):
                 completion?(.failure(error))
+                self.loadingOperations.removeValue(forKey: id)
             }
         }
         imageFetchingQueue.addOperation(operation)
