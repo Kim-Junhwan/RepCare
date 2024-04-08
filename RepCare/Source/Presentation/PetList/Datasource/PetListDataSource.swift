@@ -35,38 +35,32 @@ final class PetListDataSource: NSObject, UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GridPetCollectionViewCell.identifier, for: indexPath) as? GridPetCollectionViewCell else { fatalError() }
         let pet = petList[indexPath.row]
         cell.configureCell(pet: pet)
-        if let petImage = pet.imagePath.first?.imagePath {
-            imageFetcher.fetchImage(id: pet.id, imagePath: petImage) { result in
-                switch result {
-                case .success(let fetchImage):
-                    DispatchQueue.main.async {
-                        cell.petImageView.image = fetchImage
-                    }
-                case .failure(_):
-                    print("Image fetch Fail")
-                }
-            }
-        }
         return cell
     }
     
     private func tableCollectionViewReusableCell(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TablePetCollectionViewCell.identifier, for: indexPath) as? TablePetCollectionViewCell else { fatalError() }
-        let pet = petList[indexPath.row]
         cell.configureCell(pet: petList[indexPath.row])
+        return cell
+    }
+    
+    func cancelFetchImage(indexPath: IndexPath) {
+        if indexPath.row < petList.count {
+            let pet = petList[indexPath.row]
+            imageFetcher.cancelFetchImage(id: pet.id)
+        }
+    }
+    
+    func petImageApply(cell: UICollectionViewCell, indexPath: IndexPath) {
+        guard let cell = cell as? PetListCell else { return }
+        let pet = petList[indexPath.row]
         if let petImage = pet.imagePath.first?.imagePath {
             imageFetcher.fetchImage(id: pet.id, imagePath: petImage) { result in
-                switch result {
-                case .success(let fetchImage):
-                    DispatchQueue.main.async {
-                        cell.petImageView.image = fetchImage
-                    }
-                case .failure(_):
-                    print("Image fetch Fail")
+                DispatchQueue.main.async {
+                    cell.applyImage(fetchResult: result)
                 }
             }
         }
-        return cell
     }
 }
 

@@ -140,4 +140,12 @@ extension PetListViewController: PetListViewDelegate {
     func loadNextPage(completion: (() -> Void)?) {
         viewModel.loadNextPage()
     }
+    
+    func petListCollectionView(willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        petListDataSource.petImageApply(cell: cell, indexPath: indexPath)
+    }
+    
+    func petListCollectionView(didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        petListDataSource.cancelFetchImage(indexPath: indexPath)
+    }
 }
