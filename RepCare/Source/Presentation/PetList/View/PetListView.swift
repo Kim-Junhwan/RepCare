@@ -15,6 +15,8 @@ protocol PetListViewDelegate: AnyObject {
     func searchPetList(searchKeyword: String)
     func tapFilterButton()
     func loadNextPage(completion: (()-> Void)?)
+    func petListCollectionView(willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath)
+    func petListCollectionView(didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath)
 }
 
 enum PetListMode: String {
@@ -269,6 +271,18 @@ extension PetListView: UICollectionViewDelegate {
             delegate?.selectPetClass(petClass: .init(rawValue: indexPath.row) ?? .all)
         } else if collectionView == petListCollectionView {
             delegate?.selectPet(at: indexPath.row)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if collectionView == petListCollectionView {
+            delegate?.petListCollectionView(didEndDisplaying: cell, forItemAt: indexPath)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if collectionView == petListCollectionView {
+            delegate?.petListCollectionView(willDisplay: cell, forItemAt: indexPath)
         }
     }
 }
