@@ -14,7 +14,7 @@ protocol PetListViewDelegate: AnyObject {
     func reloadPetList(completion: @escaping () -> Void)
     func searchPetList(searchKeyword: String)
     func tapFilterButton()
-    func loadNextPage(completion: (()-> Void)?)
+    func loadNextPage()
     func petListCollectionView(willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath)
     func petListCollectionView(didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath)
 }
@@ -49,19 +49,21 @@ final class PetListView: UIView {
         return stackView
     }()
     
-    let searchBar: UISearchBar = {
+    lazy var searchBar: UISearchBar = {
        let searchBar = UISearchBar()
         searchBar.searchBarStyle = .minimal
         searchBar.searchTextField.setToolbar()
         searchBar.placeholder = "종 혹은 개체 이름을 입력하세요"
+        searchBar.delegate = self
         return searchBar
     }()
     
-    let filterButton: UIButton = {
+    lazy var filterButton: UIButton = {
         var config = UIButton.Configuration.plain()
         config.image = UIImage(systemName: "slider.horizontal.3")?.withRenderingMode(.alwaysTemplate)
         let button = UIButton(configuration: config)
         button.tintColor = .black
+        button.addTarget(self, action: #selector(tapFilterButton), for: .touchUpInside)
        return button
     }()
     
@@ -86,10 +88,9 @@ final class PetListView: UIView {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
         collectionView.register(GridPetCollectionViewCell.self, forCellWithReuseIdentifier: GridPetCollectionViewCell.identifier)
         collectionView.register(TablePetCollectionViewCell.self, forCellWithReuseIdentifier: TablePetCollectionViewCell.identifier)
-        collectionView.delegate = self
         collectionView.refreshControl = .init()
         collectionView.refreshControl?.addTarget(self, action: #selector(updatePetList), for: .valueChanged)
-        collectionView.contentInset = .init(top: 10, left: 0, bottom: 0, right: 0)
+        collectionView.delegate = self
         return collectionView
     }()
     
@@ -139,8 +140,6 @@ final class PetListView: UIView {
         addSubview(petClassCollectionView)
         addSubview(petListCollectionView)
         addSubview(footerRefreshView)
-        searchBar.delegate = self
-        filterButton.addTarget(self, action: #selector(tapFilterButton), for: .touchUpInside)
     }
     
     private func setConstraints() {
@@ -159,7 +158,7 @@ final class PetListView: UIView {
             make.height.equalTo(Metric.petClassCellHeight)
         }
         petListCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(petClassCollectionView.snp_bottomMargin).offset(10)
+            make.top.equalTo(petClassCollectionView.snp_bottomMargin).offset(20)
             make.leading.trailing.equalTo(safeAreaLayoutGuide)
             make.bottom.equalToSuperview()
         }
@@ -234,35 +233,14 @@ final class PetListView: UIView {
 extension PetListView: UICollectionViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let currentOffset = scrollView.contentOffset.y+scrollView.frame.height - scrollView.safeAreaInsets.bottom
-        let startAnimatingHeight: CGFloat = 80
-        
-        let contentSizeHeight = max(scrollView.contentSize.height, scrollView.frame.height)
-        let isBottomScroll = currentOffset > contentSizeHeight //스크롤이 contentSize보다 더 스크롤 중인가?
-        let playIndicatorAnimation = currentOffset >= contentSizeHeight + startAnimatingHeight //indicator 애니메이션을 실행 할 시점
-        
-        if isBottomScroll {
-            footerRefreshView.isHidden = false
-            if playIndicatorAnimation {
-                isFetching = true
-                footerRefreshView.startAnimating()
-            } else {
-                isFetching = false
-                footerRefreshView.stopAnimating()
+        if scrollView == petListCollectionView {
+            let currentOffset = scrollView.contentOffset.y+scrollView.frame.height - scrollView.safeAreaInsets.bottom
+            let startAnimatingHeight: CGFloat = 80
+            let contentSizeHeight = max(scrollView.contentSize.height, scrollView.frame.height)
+            let isStartLoadingLocation = currentOffset >= contentSizeHeight - startAnimatingHeight
+            if isStartLoadingLocation {
+                delegate?.loadNextPage()
             }
-            footerRefreshView.snp.updateConstraints { make in
-                make.height.equalTo(currentOffset - contentSizeHeight)
-            }
-            footerRefreshView.alpha = (footerRefreshView.frame.height / startAnimatingHeight)
-        } else {
-            footerRefreshView.isHidden = true
-        }
-    }
-    
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        if isFetching {
-            scrollView.setContentOffset(.init(x: .zero, y: scrollView.contentSize.height+80), animated: true)
-            delegate?.loadNextPage(completion: nil)
         }
     }
     

@@ -13,7 +13,10 @@ import RxCocoa
 final class PetListViewModel {
     
     private let fetchPetListUseCase: FetchPetListUseCase
-    let queryRelay: BehaviorRelay<FetchPetListQuery> = .init(value: .init(petClass: .all, species: nil, detailSpecies: nil, morph: nil, searchKeyword: nil, gender: nil))
+    private let queryRelay: BehaviorRelay<FetchPetListQuery> = .init(value: .init(petClass: .all, species: nil, detailSpecies: nil, morph: nil, searchKeyword: nil, gender: nil))
+    private var pages: [PetPage] = []
+    private let disposeBag = DisposeBag()
+    
     var queryDriver: Driver<FetchPetListQuery> {
         return queryRelay.asDriver()
     }
@@ -23,20 +26,18 @@ final class PetListViewModel {
         }.asDriver(onErrorJustReturn: false)
     }
     var currentQuery: FetchPetListQuery = .init(petClass: .all, species: nil, detailSpecies: nil, morph: nil, searchKeyword: nil, gender: nil)
-    private var pages: [PetPage] = []
-    
     let petList: BehaviorRelay<[PetModel]> = .init(value: [])
     let diContainer: PetListSceneDIContainer
-    private let disposeBag = DisposeBag()
     
-    var currentPage: Int = 0
-    var totalPage: Int = 1
-    var hasMorePage: Bool {
+    private var currentPage: Int = 0
+    private var totalPage: Int = 1
+    private var hasMorePage: Bool {
         get {
             currentPage < totalPage
         }
     }
-    var nextPage: Int {
+    private var isLoadingNextPage: Bool = false
+    private var nextPage: Int {
         get {
             hasMorePage ? currentPage + 1 : currentPage
         }
@@ -55,11 +56,15 @@ final class PetListViewModel {
     }
     
     private func load(query: FetchPetListQuery) {
-        let request = FetchPetListRequest(query: query, start: nextPage)
-        queryRelay.accept(query)
-        currentQuery = query
-        let fetchPage = fetchPetListUseCase.fetchPetList(request: request)
-        appendPage(page: fetchPage)
+        if !isLoadingNextPage {
+            isLoadingNextPage = true
+            let request = FetchPetListRequest(query: query, start: nextPage)
+            queryRelay.accept(query)
+            currentQuery = query
+            let fetchPage = fetchPetListUseCase.fetchPetList(request: request)
+            appendPage(page: fetchPage)
+            isLoadingNextPage = false
+        }
     }
     
     private func appendPage(page: PetPage) {
@@ -74,7 +79,7 @@ final class PetListViewModel {
     
     // MARK: - OUTPUT
     func loadNextPage() {
-        if hasMorePage {
+        if hasMorePage && !isLoadingNextPage {
             load(query: currentQuery)
         }
     }

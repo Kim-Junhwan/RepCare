@@ -5,7 +5,7 @@
 //  Created by JunHwan Kim on 2024/04/09.
 //
 
-import Foundation
+import UIKit
 
 class PetListCell: UICollectionViewCell {
     var petModel: PetModel?

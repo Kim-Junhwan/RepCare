@@ -137,7 +137,7 @@ extension PetListViewController: PetListViewDelegate {
         navigationController?.pushViewController(detailViewController, animated: true)
     }
     
-    func loadNextPage(completion: (() -> Void)?) {
+    func loadNextPage() {
         viewModel.loadNextPage()
     }
     
