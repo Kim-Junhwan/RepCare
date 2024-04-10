@@ -10,8 +10,8 @@ import UIKit
 
 final class ImageFetcher {
     private let imageFetchingQueue = OperationQueue()
-    private var imageCache = NSCache<NSString, UIImage>()
-    private var loadingOperations: ThreadSafeDictionary<String, ImageFetchOperation> = .init()
+    private let imageCache = NSCache<NSString, UIImage>()
+    private let loadingOperations: ThreadSafeDictionary<String, ImageFetchOperation> = .init()
     
     func fetchImage(id: String, imagePath: String, completion: ((Result<UIImage, Error>)-> Void)? = nil) {
         if let cachedImage = imageCache.object(forKey: id as NSString) {

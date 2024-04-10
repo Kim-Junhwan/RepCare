@@ -29,6 +29,7 @@
 		C70E59D82ADED3F600428CDE /* RegisterTaskRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E59D72ADED3F600428CDE /* RegisterTaskRequestDTO.swift */; };
 		C70E59DA2ADED6A500428CDE /* RealmTaskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E59D92ADED6A500428CDE /* RealmTaskStorage.swift */; };
 		C70E59DF2ADF9DD900428CDE /* FetchTaskListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E59DE2ADF9DD900428CDE /* FetchTaskListDTO.swift */; };
+		C718B9C82BC710D500059B86 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = C718B9C72BC710D500059B86 /* PrivacyInfo.xcprivacy */; };
 		C719D1D02AF12929001296B9 /* repcare.realm in Resources */ = {isa = PBXBuildFile; fileRef = C719D1CF2AF12929001296B9 /* repcare.realm */; };
 		C7273B9B2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273B9A2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift */; };
 		C7273B9E2AD427B8004B7A6F /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273B9D2AD427B8004B7A6F /* UITextField+.swift */; };
@@ -178,6 +179,7 @@
 		C70E59D72ADED3F600428CDE /* RegisterTaskRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTaskRequestDTO.swift; sourceTree = "<group>"; };
 		C70E59D92ADED6A500428CDE /* RealmTaskStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTaskStorage.swift; sourceTree = "<group>"; };
 		C70E59DE2ADF9DD900428CDE /* FetchTaskListDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchTaskListDTO.swift; sourceTree = "<group>"; };
+		C718B9C72BC710D500059B86 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		C719D1CF2AF12929001296B9 /* repcare.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = repcare.realm; sourceTree = "<group>"; };
 		C7273B9A2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7273B9D2AD427B8004B7A6F /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
@@ -608,6 +610,7 @@
 		C7D152442AC51B270064D59F /* RepCare */ = {
 			isa = PBXGroup;
 			children = (
+				C718B9C72BC710D500059B86 /* PrivacyInfo.xcprivacy */,
 				C728854E2AFDC9100066B83F /* RepCare.entitlements */,
 				C7D1525A2AC6D17B0064D59F /* Source */,
 				C7D152592AC6D16C0064D59F /* Resource */,
@@ -1029,6 +1032,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C718B9C82BC710D500059B86 /* PrivacyInfo.xcprivacy in Resources */,
 				C709AA6E2ADD443F004FA677 /* GoogleService-Info.plist in Resources */,
 				C7D152522AC51B280064D59F /* LaunchScreen.storyboard in Resources */,
 				C70AF4C72AF03E5F00DEE7CF /* Settings.bundle in Resources */,
@@ -1343,7 +1347,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RepCare/RepCare.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = SBAHW5F54N;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1361,7 +1365,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kimjunhwan.RepCare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1381,7 +1385,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = RepCare/RepCare.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = SBAHW5F54N;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RepCare/Resource/Info.plist;
@@ -1398,7 +1402,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kimjunhwan.RepCare;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
