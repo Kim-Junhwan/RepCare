@@ -100,6 +100,8 @@
 		C7C26FC82AE9FD3B00A76B03 /* UpdatePetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C26FC72AE9FD3B00A76B03 /* UpdatePetViewModel.swift */; };
 		C7C26FCA2AE9FDCF00A76B03 /* UpdatePetUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C26FC92AE9FDCF00A76B03 /* UpdatePetUseCase.swift */; };
 		C7C31ECA2AEC31CB008CC215 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C31EC92AEC31CB008CC215 /* UIViewController+.swift */; };
+		C7C35B922BCAD3500052F9A0 /* PetFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C35B912BCAD3500052F9A0 /* PetFeed.swift */; };
+		C7C35B942BCAD37C0052F9A0 /* PetSupplement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C35B932BCAD37C0052F9A0 /* PetSupplement.swift */; };
 		C7C390F32AEA42E20053FB3A /* UpdatePetDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C390F22AEA42E20053FB3A /* UpdatePetDTO.swift */; };
 		C7C390F52AEBB01F0053FB3A /* PetOverSpecies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C390F42AEBB01F0053FB3A /* PetOverSpecies.swift */; };
 		C7D152462AC51B270064D59F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152452AC51B270064D59F /* AppDelegate.swift */; };
@@ -247,6 +249,8 @@
 		C7C26FC72AE9FD3B00A76B03 /* UpdatePetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePetViewModel.swift; sourceTree = "<group>"; };
 		C7C26FC92AE9FDCF00A76B03 /* UpdatePetUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePetUseCase.swift; sourceTree = "<group>"; };
 		C7C31EC92AEC31CB008CC215 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		C7C35B912BCAD3500052F9A0 /* PetFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetFeed.swift; sourceTree = "<group>"; };
+		C7C35B932BCAD37C0052F9A0 /* PetSupplement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSupplement.swift; sourceTree = "<group>"; };
 		C7C390F22AEA42E20053FB3A /* UpdatePetDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePetDTO.swift; sourceTree = "<group>"; };
 		C7C390F42AEBB01F0053FB3A /* PetOverSpecies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetOverSpecies.swift; sourceTree = "<group>"; };
 		C7D152422AC51B270064D59F /* RepCare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RepCare.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -591,6 +595,15 @@
 			path = UpdatePetViewModel;
 			sourceTree = "<group>";
 		};
+		C7C35B902BCACFD40052F9A0 /* PetFeed */ = {
+			isa = PBXGroup;
+			children = (
+				C7C35B912BCAD3500052F9A0 /* PetFeed.swift */,
+				C7C35B932BCAD37C0052F9A0 /* PetSupplement.swift */,
+			);
+			path = PetFeed;
+			sourceTree = "<group>";
+		};
 		C7D152392AC51B270064D59F = {
 			isa = PBXGroup;
 			children = (
@@ -756,6 +769,7 @@
 		C7D152D72AC999190064D59F /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				C7C35B902BCACFD40052F9A0 /* PetFeed */,
 				C727A4382AD93DA400880111 /* Query */,
 				C7D152E72AC9BA660064D59F /* Pet */,
 			);
@@ -1140,6 +1154,7 @@
 				C7F5F4212ACE551600ACFC76 /* ActionButton.swift in Sources */,
 				C709AA542ADBB46A004FA677 /* PetWeightViewController.swift in Sources */,
 				C7273B9B2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift in Sources */,
+				C7C35B942BCAD37C0052F9A0 /* PetSupplement.swift in Sources */,
 				C7D152E12AC99F980064D59F /* Gender.swift in Sources */,
 				C7D152E62AC9B5100064D59F /* PetRepository.swift in Sources */,
 				C709AA5A2ADC3690004FA677 /* ProfileViewController.swift in Sources */,
@@ -1194,6 +1209,7 @@
 				C7988D1A2ADD61F40011FF8D /* WeightCollectionViewCell.swift in Sources */,
 				C77944F52BB5CFA9003FE400 /* TablePetCollectionViewCell.swift in Sources */,
 				C7F5F4A72AD1025300ACFC76 /* DefaultSpeciesRepository.swift in Sources */,
+				C7C35B922BCAD3500052F9A0 /* PetFeed.swift in Sources */,
 				C7E835E42AE576FA00AA0361 /* DateFormatter+.swift in Sources */,
 				C7D1525E2AC6E7AC0064D59F /* Color.swift in Sources */,
 				C77945002BBFB416003FE400 /* ImageFetchOperation.swift in Sources */,
