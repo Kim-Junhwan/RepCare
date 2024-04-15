@@ -102,6 +102,7 @@
 		C7C31ECA2AEC31CB008CC215 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C31EC92AEC31CB008CC215 /* UIViewController+.swift */; };
 		C7C35B922BCAD3500052F9A0 /* PetFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C35B912BCAD3500052F9A0 /* PetFeed.swift */; };
 		C7C35B942BCAD37C0052F9A0 /* PetSupplement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C35B932BCAD37C0052F9A0 /* PetSupplement.swift */; };
+		C7C35B962BCD16CF0052F9A0 /* PetFeedRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C35B952BCD16CF0052F9A0 /* PetFeedRepository.swift */; };
 		C7C390F32AEA42E20053FB3A /* UpdatePetDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C390F22AEA42E20053FB3A /* UpdatePetDTO.swift */; };
 		C7C390F52AEBB01F0053FB3A /* PetOverSpecies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C390F42AEBB01F0053FB3A /* PetOverSpecies.swift */; };
 		C7D152462AC51B270064D59F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152452AC51B270064D59F /* AppDelegate.swift */; };
@@ -251,6 +252,7 @@
 		C7C31EC92AEC31CB008CC215 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		C7C35B912BCAD3500052F9A0 /* PetFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetFeed.swift; sourceTree = "<group>"; };
 		C7C35B932BCAD37C0052F9A0 /* PetSupplement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSupplement.swift; sourceTree = "<group>"; };
+		C7C35B952BCD16CF0052F9A0 /* PetFeedRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetFeedRepository.swift; sourceTree = "<group>"; };
 		C7C390F22AEA42E20053FB3A /* UpdatePetDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePetDTO.swift; sourceTree = "<group>"; };
 		C7C390F42AEBB01F0053FB3A /* PetOverSpecies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetOverSpecies.swift; sourceTree = "<group>"; };
 		C7D152422AC51B270064D59F /* RepCare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RepCare.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -762,6 +764,7 @@
 				C727A4212AD6E8D700880111 /* PetImageRepository.swift */,
 				C70E59CB2ADECF2700428CDE /* TaskRepository.swift */,
 				C7BB170A2AE4445E00CCEBAB /* WeightRepository.swift */,
+				C7C35B952BCD16CF0052F9A0 /* PetFeedRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -1162,6 +1165,7 @@
 				C709AA572ADBB64E004FA677 /* DetailPetViewModel.swift in Sources */,
 				C727A4222AD6E8D700880111 /* PetImageRepository.swift in Sources */,
 				C7F3E8B82AE4DDDA007621E1 /* RegisterWeightViewController.swift in Sources */,
+				C7C35B962BCD16CF0052F9A0 /* PetFeedRepository.swift in Sources */,
 				C709AA462ADB650B004FA677 /* TaskCollectionViewCell.swift in Sources */,
 				C7D152482AC51B270064D59F /* SceneDelegate.swift in Sources */,
 				C7F5F42D2ACE873F00ACFC76 /* ClassSpeciesMorphViewController.swift in Sources */,
