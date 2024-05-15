@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 final class UpdatePetViewModel: RegisterPetViewModel {
-    
     let updatePetUseCase: UpdatePetUseCase
     let pet: PetModel
     

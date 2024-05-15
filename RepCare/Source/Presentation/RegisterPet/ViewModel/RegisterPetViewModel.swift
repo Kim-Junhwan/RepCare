@@ -16,8 +16,9 @@ class RegisterPetViewModel {
     let overPetSpecies: BehaviorRelay<PetOverSpeciesModel?> = .init(value: nil)
     let gender: BehaviorRelay<GenderModel?> = .init(value: nil)
     let adoptionDate: BehaviorRelay<Date?> = .init(value: nil)
-    var hatchDate: BehaviorRelay<Date?> = .init(value: nil)
-    var currentWeight: BehaviorRelay<Double?> = .init(value: nil)
+    let hatchDate: BehaviorRelay<Date?> = .init(value: nil)
+    let currentWeight: BehaviorRelay<Double?> = .init(value: nil)
+    let isLoading: PublishRelay<Bool> = .init()
     let diContainer: PetListSceneDIContainer
     
     var title: String {
@@ -39,6 +40,7 @@ class RegisterPetViewModel {
     }
     
     func register() throws {
+        isLoading.accept(true)
         let imageListData = petImageList.value.map({ image in
             guard let imageData = image.image.jpegData(compressionQuality: 1.0) else { fatalError() }
             return imageData
@@ -48,6 +50,7 @@ class RegisterPetViewModel {
         guard let adoptionDate = adoptionDate.value else { return }
         guard let gender = gender.value else { return }
         try registerUseCase?.registerPet(request: .init(name: petName.value, imageDataList: imageListData, petClass: petClass.toDomain(), petSpecies: species.toDomain(), detailSpecies: overPetSpecies.value?.detailSpecies?.toDomain(), morph: overPetSpecies.value?.morph?.toDomain(), adoptionDate: adoptionDate, birthDate: hatchDate.value, gender: gender.toDomain(), weight: currentWeight.value))
+        isLoading.accept(false)
     }
     
     deinit {

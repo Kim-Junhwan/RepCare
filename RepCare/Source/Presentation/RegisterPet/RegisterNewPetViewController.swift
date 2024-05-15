@@ -55,6 +55,19 @@ class RegisterNewPetViewController: BaseViewController {
         bindAdoptionDate()
         bindBirthDate()
         bindWeight()
+        bindLoading()
+    }
+    
+    private func bindLoading() {
+        viewModel.isLoading
+            .asDriver(onErrorJustReturn: false)
+            .drive(with: self) { owner, isLoading in
+                if isLoading {
+                    owner.showLoadingView()
+                } else {
+                    owner.hideLoadingView()
+                }
+            }.disposed(by: disposeBag)
     }
     
     private func bindImage() {
