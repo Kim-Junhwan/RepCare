@@ -93,6 +93,7 @@
 		C7A4C30A2ACC18A300E299B0 /* GridPetCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7A4C3082ACC18A300E299B0 /* GridPetCollectionViewCell.swift */; };
 		C7B499DA2AD2819B00DD325F /* MorphReqeust+ResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B499D92AD2819B00DD325F /* MorphReqeust+ResponseDTO.swift */; };
 		C7BB170B2AE4445E00CCEBAB /* WeightRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BB170A2AE4445E00CCEBAB /* WeightRepository.swift */; };
+		C7BDF1F82BF7A95B005B57BE /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BDF1F72BF7A95B005B57BE /* MainTabBarViewController.swift */; };
 		C7C26FBF2AE95E0C00A76B03 /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C26FBE2AE95E0C00A76B03 /* AppDIContainer.swift */; };
 		C7C26FC12AE95E4500A76B03 /* RealmDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C26FC02AE95E4500A76B03 /* RealmDIContainer.swift */; };
 		C7C26FC32AE9689800A76B03 /* PetListSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C26FC22AE9689800A76B03 /* PetListSceneDIContainer.swift */; };
@@ -243,6 +244,7 @@
 		C7A4C3082ACC18A300E299B0 /* GridPetCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GridPetCollectionViewCell.swift; sourceTree = "<group>"; };
 		C7B499D92AD2819B00DD325F /* MorphReqeust+ResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MorphReqeust+ResponseDTO.swift"; sourceTree = "<group>"; };
 		C7BB170A2AE4445E00CCEBAB /* WeightRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightRepository.swift; sourceTree = "<group>"; };
+		C7BDF1F72BF7A95B005B57BE /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		C7C26FBE2AE95E0C00A76B03 /* AppDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
 		C7C26FC02AE95E4500A76B03 /* RealmDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDIContainer.swift; sourceTree = "<group>"; };
 		C7C26FC22AE9689800A76B03 /* PetListSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetListSceneDIContainer.swift; sourceTree = "<group>"; };
@@ -579,6 +581,14 @@
 			path = Datasource;
 			sourceTree = "<group>";
 		};
+		C7BDF1F62BF7A93B005B57BE /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				C7BDF1F72BF7A95B005B57BE /* MainTabBarViewController.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
 		C7C26FBD2AE95E0200A76B03 /* DI */ = {
 			isa = PBXGroup;
 			children = (
@@ -671,6 +681,7 @@
 		C7D1525C2AC6E7910064D59F /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				C7BDF1F62BF7A93B005B57BE /* TabBar */,
 				C7F378AB2AE90BDA00281A35 /* Filter */,
 				C7F378AA2AE90BBC00281A35 /* Commmon */,
 				C709AA582ADC366E004FA677 /* ProfileViewController */,
@@ -1120,6 +1131,7 @@
 				C77945042BC43F6D003FE400 /* PetListCell.swift in Sources */,
 				C7D152462AC51B270064D59F /* AppDelegate.swift in Sources */,
 				C7C26FBF2AE95E0C00A76B03 /* AppDIContainer.swift in Sources */,
+				C7BDF1F82BF7A95B005B57BE /* MainTabBarViewController.swift in Sources */,
 				C70E59DF2ADF9DD900428CDE /* FetchTaskListDTO.swift in Sources */,
 				C7A266E52AEFA84C00199533 /* UIResponder+.swift in Sources */,
 				C7F378A92AE8F77300281A35 /* LoadingView.swift in Sources */,
