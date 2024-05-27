@@ -8,20 +8,10 @@
 import Foundation
 
 final class PetListSceneDIContainer {
-    private let appDIContainer: AppDIContainer
+    private let domainContainer: DomainDIContainer
     
-    init(appDIContainer: AppDIContainer) {
-        self.appDIContainer = appDIContainer
-    }
-    
-    func makeFetchPetListUseCase() -> FetchPetListUseCase {
-        let useCase = DefaultFetchPetListUseCase(petRepository: appDIContainer.getPetRepository())
-        return useCase
-    }
-    
-    func makeRegisterUseCase () -> DefaultRegisterPetUseCase {
-        let useCase = DefaultRegisterPetUseCase(petRepository: appDIContainer.getPetRepository(), petImageRepository: appDIContainer.getPetImageRepository())
-        return useCase
+    init(domainContainer: DomainDIContainer) {
+        self.domainContainer = domainContainer
     }
     
     private func makeRegisterViewModel() -> RegisterPetViewModel {
@@ -34,13 +24,8 @@ final class PetListSceneDIContainer {
         return vc
     }
     
-    private func makeUpdateUseCase() -> UpdatePetUseCase {
-        let useCase = DefaultUpdatePetUseCase(petRepository: appDIContainer.getPetRepository(), imageRepository: appDIContainer.getPetImageRepository())
-        return useCase
-    }
-    
     private func makeUpdateViewModel(pet: PetModel) -> UpdatePetViewModel {
-        let viewModel = UpdatePetViewModel(updatePetUseCase: makeUpdateUseCase() , pet: pet, diContainer: self)
+        let viewModel = UpdatePetViewModel(updatePetUseCase: domainContainer.makeUpdateUseCase(), pet: pet, diContainer: self)
         return viewModel
     }
     
@@ -50,12 +35,12 @@ final class PetListSceneDIContainer {
     }
     
     private func makeSpeciesViewModel(petSpeciesModel: PetOverSpeciesModel? = nil) -> ClassSpeciesMorphViewModel {
-        let viewModel = ClassSpeciesMorphViewModel(petSpeceis: petSpeciesModel, repository: appDIContainer.getSpeciesRepository())
+        let viewModel = ClassSpeciesMorphViewModel(petSpeceis: petSpeciesModel, repository: domainContainer.dataContainer.speciesRepository)
         return viewModel
     }
     
     func makeFilterSpeciesViewController(petClass: PetClassModel?, species: PetSpeciesModel?, detailSpecies: DetailPetSpeciesModel?, morph: MorphModel?) -> ClassSpeciesMorphViewController {
-        let vc = ClassSpeciesMorphViewController(viewModel: FilterClassSpeciesViewModel(petClass: petClass, species: species, detailSpecies: detailSpecies, morph: morph, repository: appDIContainer.getSpeciesRepository()))
+        let vc = ClassSpeciesMorphViewController(viewModel: FilterClassSpeciesViewModel(petClass: petClass, species: species, detailSpecies: detailSpecies, morph: morph, repository: domainContainer.dataContainer.speciesRepository))
         return vc
     }
     
@@ -65,22 +50,17 @@ final class PetListSceneDIContainer {
     }
     
     private func makeDetailPetViewModel(pet: PetModel) -> DetailPetViewModel {
-        let viewModel = DetailPetViewModel(pet: pet, deleteUseCase: makeDeleteUseCase(), diContainer: self, petRepository: appDIContainer.getPetRepository())
+        let viewModel = DetailPetViewModel(pet: pet, deleteUseCase: domainContainer.makeDeleteUseCase(), diContainer: self, petRepository: domainContainer.dataContainer.petRepository)
         return viewModel
     }
     
-    private func makeDeleteUseCase() -> DeletePetUseCase {
-        let usecase = DefaultDeletePetUseCase(petImageRepository: appDIContainer.getPetImageRepository(), petRepository: appDIContainer.getPetRepository())
-        return usecase
-    }
-    
     private func makePetCalendatViewController(pet: PetModel) -> PetCalendarViewController {
-        let vc = PetCalendarViewController(taskRepository: appDIContainer.getTaskRepository(), pet: pet)
+        let vc = PetCalendarViewController(taskRepository: domainContainer.dataContainer.taskRepository, pet: pet)
         return vc
     }
     
     private func makeWeightViewController(pet: PetModel) -> PetWeightViewController {
-        let vc = PetWeightViewController(weightRepository: appDIContainer.getWeightRepository(), pet: pet)
+        let vc = PetWeightViewController(weightRepository: domainContainer.dataContainer.weightRepository, pet: pet)
         return vc
     }
     
@@ -92,6 +72,12 @@ final class PetListSceneDIContainer {
     
     private func makeDetailPetHeaderViewController(pet: PetModel) -> DetailPetHeaderViewController {
         let vc = DetailPetHeaderViewController(pet: pet)
+        return vc
+    }
+    
+    func makePetListController() ->  PetListViewController {
+        let vm = PetListViewModel(fetchPetListUseCase: domainContainer.makeFetchPetListUseCase())
+        let vc = PetListViewController(viewModel: vm, petListSceneDIContainer: self)
         return vc
     }
 }

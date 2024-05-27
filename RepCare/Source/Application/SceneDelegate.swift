@@ -10,16 +10,16 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-    let storageContainer = RealmDIContainer()
-    lazy var appDIContainer = AppDIContainer(storageDIContainer: storageContainer)
-    lazy var petListDIContainer = PetListSceneDIContainer(appDIContainer: appDIContainer)
+    private lazy var storageContainer = RealmDIContainer()
+    private lazy var domainDIContainer = DomainDIContainer(dataContainer: DataContainer(storageContainer: storageContainer))
+    private lazy var petListSceneDIContainer = PetListSceneDIContainer(domainContainer: domainDIContainer)
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         
-        let nvc = UINavigationController(rootViewController: PetListViewController(viewModel: .init(diContainer: petListDIContainer)))
+        let nvc = UINavigationController(rootViewController: petListSceneDIContainer.makePetListController())
         window?.rootViewController = nvc
         window?.makeKeyAndVisible()
     }

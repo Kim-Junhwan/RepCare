@@ -17,7 +17,7 @@ protocol StorageDIContainer {
 
 final class RealmDIContainer: StorageDIContainer {
     
-    let realm: Realm = {
+    private let realm: Realm = {
         guard let realmPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("repcare.realm", conformingTo: .data) else {fatalError()}
         do {
             let bundleRealm = try Realm(fileURL: realmPath)
