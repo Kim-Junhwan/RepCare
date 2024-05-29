@@ -96,6 +96,8 @@
 		C7BDF1F82BF7A95B005B57BE /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BDF1F72BF7A95B005B57BE /* MainTabBarViewController.swift */; };
 		C7BDF1FC2BF9C4CB005B57BE /* DataContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BDF1FB2BF9C4CB005B57BE /* DataContainer.swift */; };
 		C7BDF2002C037F15005B57BE /* DomainDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BDF1FF2C037F15005B57BE /* DomainDIContainer.swift */; };
+		C7BDF2072C04908C005B57BE /* PetInfoInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BDF2062C04908C005B57BE /* PetInfoInputViewController.swift */; };
+		C7BDF2092C076C5B005B57BE /* PetInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BDF2082C076C5B005B57BE /* PetInfoViewModel.swift */; };
 		C7C26FC12AE95E4500A76B03 /* RealmDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C26FC02AE95E4500A76B03 /* RealmDIContainer.swift */; };
 		C7C26FC32AE9689800A76B03 /* PetListSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C26FC22AE9689800A76B03 /* PetListSceneDIContainer.swift */; };
 		C7C26FC52AE9866100A76B03 /* DeletePetUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C26FC42AE9866100A76B03 /* DeletePetUseCase.swift */; };
@@ -248,6 +250,8 @@
 		C7BDF1F72BF7A95B005B57BE /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		C7BDF1FB2BF9C4CB005B57BE /* DataContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataContainer.swift; sourceTree = "<group>"; };
 		C7BDF1FF2C037F15005B57BE /* DomainDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainDIContainer.swift; sourceTree = "<group>"; };
+		C7BDF2062C04908C005B57BE /* PetInfoInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetInfoInputViewController.swift; sourceTree = "<group>"; };
+		C7BDF2082C076C5B005B57BE /* PetInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetInfoViewModel.swift; sourceTree = "<group>"; };
 		C7C26FC02AE95E4500A76B03 /* RealmDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDIContainer.swift; sourceTree = "<group>"; };
 		C7C26FC22AE9689800A76B03 /* PetListSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetListSceneDIContainer.swift; sourceTree = "<group>"; };
 		C7C26FC42AE9866100A76B03 /* DeletePetUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletePetUseCase.swift; sourceTree = "<group>"; };
@@ -591,6 +595,14 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
+		C7BDF2012C048DC9005B57BE /* PetInfoInput */ = {
+			isa = PBXGroup;
+			children = (
+				C7F5F41D2ACE371700ACFC76 /* View */,
+			);
+			path = PetInfoInput;
+			sourceTree = "<group>";
+		};
 		C7C26FBD2AE95E0200A76B03 /* DI */ = {
 			isa = PBXGroup;
 			children = (
@@ -840,6 +852,7 @@
 		C7F378AA2AE90BBC00281A35 /* Commmon */ = {
 			isa = PBXGroup;
 			children = (
+				C7BDF2012C048DC9005B57BE /* PetInfoInput */,
 				C7F378A82AE8F77300281A35 /* LoadingView.swift */,
 				C7608D952AE0F39E001F03DA /* RegisterTaskViewController.swift */,
 				C70AF4C42AEFE39200DEE7CF /* FullScreenImageViewController.swift */,
@@ -886,7 +899,6 @@
 			isa = PBXGroup;
 			children = (
 				C7F5F4282ACE86E800ACFC76 /* ViewModel */,
-				C7F5F41D2ACE371700ACFC76 /* View */,
 				C7F5F41B2ACD680400ACFC76 /* RegisterNewPetViewController.swift */,
 			);
 			path = RegisterPet;
@@ -895,9 +907,11 @@
 		C7F5F41D2ACE371700ACFC76 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				C7F5F4992ACFD1C700ACFC76 /* CustomView */,
 				C7273BB02AD62D9C004B7A6F /* Cell */,
+				C7F5F4992ACFD1C700ACFC76 /* CustomView */,
 				C7F5F41E2ACE372D00ACFC76 /* RegisterPetView.swift */,
+				C7BDF2062C04908C005B57BE /* PetInfoInputViewController.swift */,
+				C7BDF2082C076C5B005B57BE /* PetInfoViewModel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1131,6 +1145,7 @@
 				C7F5F41C2ACD680400ACFC76 /* RegisterNewPetViewController.swift in Sources */,
 				C7BB170B2AE4445E00CCEBAB /* WeightRepository.swift in Sources */,
 				C70E59D42ADED3C100428CDE /* TaskStorage.swift in Sources */,
+				C7BDF2072C04908C005B57BE /* PetInfoInputViewController.swift in Sources */,
 				C77945042BC43F6D003FE400 /* PetListCell.swift in Sources */,
 				C7D152462AC51B270064D59F /* AppDelegate.swift in Sources */,
 				C7BDF1F82BF7A95B005B57BE /* MainTabBarViewController.swift in Sources */,
@@ -1157,6 +1172,7 @@
 				C7675F9A2AE2A6090054BC7A /* PaddingLabel.swift in Sources */,
 				C7608D962AE0F39E001F03DA /* RegisterTaskViewController.swift in Sources */,
 				C7F5F4AA2AD18FC200ACFC76 /* SpeciesRequest+ResponseDTO.swift in Sources */,
+				C7BDF2092C076C5B005B57BE /* PetInfoViewModel.swift in Sources */,
 				C7460F122AE659AF00F0C3AC /* Date+.swift in Sources */,
 				C7D152EF2ACAA4250064D59F /* BaseViewController.swift in Sources */,
 				C73A4E672ADE49450069009B /* Task.swift in Sources */,
