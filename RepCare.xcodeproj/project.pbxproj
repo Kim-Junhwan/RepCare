@@ -102,6 +102,8 @@
 		C7C31ECA2AEC31CB008CC215 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C31EC92AEC31CB008CC215 /* UIViewController+.swift */; };
 		C7C390F32AEA42E20053FB3A /* UpdatePetDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C390F22AEA42E20053FB3A /* UpdatePetDTO.swift */; };
 		C7C390F52AEBB01F0053FB3A /* PetOverSpecies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C390F42AEBB01F0053FB3A /* PetOverSpecies.swift */; };
+		C7CB1B792D6B0368008A4078 /* DetailPetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CB1B782D6B0368008A4078 /* DetailPetView.swift */; };
+		C7CB1B7D2D6B49EE008A4078 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CB1B7C2D6B49EE008A4078 /* TabBar.swift */; };
 		C7D152462AC51B270064D59F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152452AC51B270064D59F /* AppDelegate.swift */; };
 		C7D152482AC51B270064D59F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152472AC51B270064D59F /* SceneDelegate.swift */; };
 		C7D1524F2AC51B280064D59F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7D1524E2AC51B280064D59F /* Assets.xcassets */; };
@@ -249,6 +251,8 @@
 		C7C31EC92AEC31CB008CC215 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		C7C390F22AEA42E20053FB3A /* UpdatePetDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePetDTO.swift; sourceTree = "<group>"; };
 		C7C390F42AEBB01F0053FB3A /* PetOverSpecies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetOverSpecies.swift; sourceTree = "<group>"; };
+		C7CB1B782D6B0368008A4078 /* DetailPetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPetView.swift; sourceTree = "<group>"; };
+		C7CB1B7C2D6B49EE008A4078 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		C7D152422AC51B270064D59F /* RepCare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RepCare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7D152452AC51B270064D59F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7D152472AC51B270064D59F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -549,6 +553,7 @@
 				C709AA552ADBB642004FA677 /* ViewModel */,
 				C709AA3F2ADA9367004FA677 /* View */,
 				C776F6A62ADA8379006015AD /* DetailPetViewController.swift */,
+				C7CB1B782D6B0368008A4078 /* DetailPetView.swift */,
 			);
 			path = DetailPet;
 			sourceTree = "<group>";
@@ -589,6 +594,22 @@
 				C7C26FC72AE9FD3B00A76B03 /* UpdatePetViewModel.swift */,
 			);
 			path = UpdatePetViewModel;
+			sourceTree = "<group>";
+		};
+		C7CB1B7A2D6B49D5008A4078 /* UIComponent */ = {
+			isa = PBXGroup;
+			children = (
+				C7CB1B7B2D6B49E1008A4078 /* Tabbar */,
+			);
+			path = UIComponent;
+			sourceTree = "<group>";
+		};
+		C7CB1B7B2D6B49E1008A4078 /* Tabbar */ = {
+			isa = PBXGroup;
+			children = (
+				C7CB1B7C2D6B49EE008A4078 /* TabBar.swift */,
+			);
+			path = Tabbar;
 			sourceTree = "<group>";
 		};
 		C7D152392AC51B270064D59F = {
@@ -656,6 +677,7 @@
 		C7D1525C2AC6E7910064D59F /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				C7CB1B7A2D6B49D5008A4078 /* UIComponent */,
 				C7F378AB2AE90BDA00281A35 /* Filter */,
 				C7F378AA2AE90BBC00281A35 /* Commmon */,
 				C709AA582ADC366E004FA677 /* ProfileViewController */,
@@ -1170,6 +1192,7 @@
 				C7C31ECA2AEC31CB008CC215 /* UIViewController+.swift in Sources */,
 				C76A01F22AD26E550024D008 /* DetailSpecies.swift in Sources */,
 				C7C26FCA2AE9FDCF00A76B03 /* UpdatePetUseCase.swift in Sources */,
+				C7CB1B7D2D6B49EE008A4078 /* TabBar.swift in Sources */,
 				C7D152E42AC9A7F00064D59F /* Weight.swift in Sources */,
 				C77944F32BB5AA05003FE400 /* UserdefaultPropertyWrapper.swift in Sources */,
 				C7273BAB2AD444B5004B7A6F /* MorphModel.swift in Sources */,
@@ -1191,6 +1214,7 @@
 				C727A43A2AD93DB300880111 /* FetchPetListQuery.swift in Sources */,
 				C7F5F4362ACE8A6400ACFC76 /* SpeciesView.swift in Sources */,
 				C7F5F42A2ACE870300ACFC76 /* RegisterPetViewModel.swift in Sources */,
+				C7CB1B792D6B0368008A4078 /* DetailPetView.swift in Sources */,
 				C7988D1A2ADD61F40011FF8D /* WeightCollectionViewCell.swift in Sources */,
 				C77944F52BB5CFA9003FE400 /* TablePetCollectionViewCell.swift in Sources */,
 				C7F5F4A72AD1025300ACFC76 /* DefaultSpeciesRepository.swift in Sources */,
@@ -1349,7 +1373,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = SBAHW5F54N;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RepCare/Resource/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "렙케어";
@@ -1386,7 +1410,7 @@
 				CODE_SIGN_ENTITLEMENTS = RepCare/RepCare.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = SBAHW5F54N;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RepCare/Resource/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "렙케어";
