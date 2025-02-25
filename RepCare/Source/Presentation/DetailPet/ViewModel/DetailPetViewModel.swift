@@ -10,6 +10,20 @@ import RxCocoa
 
 final class DetailPetViewModel {
     
+    enum DetailPetTabBarType: CaseIterable {
+        case calendar_timeLine
+        case weight
+        
+        var title: String {
+            switch self {
+            case .calendar_timeLine:
+                "캘린더 / 타임라인"
+            case .weight:
+                "무게"
+            }
+        }
+    }
+    
     private let pet: BehaviorRelay<PetModel>
     var petDriver: Driver<PetModel> {
         return pet.asDriver()

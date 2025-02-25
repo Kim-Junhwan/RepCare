@@ -16,12 +16,13 @@ struct TabBarItem: Identifiable {
 struct TabBar: View {
     
     let buttonList: [TabBarItem]
+    @Binding var selectItemId: String
     
     var body: some View {
         ZStack {
-            HStack {
+            HStack(spacing: 0) {
                 ForEach(buttonList) { item in
-                    Tab(title: item.title, onClick: item.onClick, isSelect: true)
+                    Tab(title: item.title, onClick: item.onClick, isSelect: item.id == selectItemId)
                 }
             }
         }
@@ -40,14 +41,18 @@ struct Tab: View {
         ZStack(alignment: .bottom) {
             Button(action: onClick) {
                 Text(title)
+                    .fontWeight(isSelect ? .bold : .regular)
+                    .foregroundStyle(isSelect ? .deepGreen : .black)
+                    .frame(maxWidth: .infinity)
             }
-            .frame(maxWidth: .infinity)
             .frame(height: 48)
+            .frame(maxWidth: .infinity)
             
             if isSelect {
                 Rectangle()
-                    .fill(.red)
+                    .fill(.deepGreen)
                     .frame(height: 3)
+                    .frame(maxWidth: .infinity)
             }
         }
     }
@@ -57,7 +62,7 @@ struct Tab: View {
     VStack {
         TabBar(
             buttonList: [.init(id: "1", title: "Test1", onClick: {}),
-                         .init(id: "2", title: "Test2", onClick: {})]
+                         .init(id: "2", title: "Test2", onClick: {})], selectItemId: .constant("2")
         )
     }
     .frame(maxWidth: .infinity, alignment: .top)

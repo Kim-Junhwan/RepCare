@@ -596,20 +596,28 @@
 			path = UpdatePetViewModel;
 			sourceTree = "<group>";
 		};
-		C7CB1B7A2D6B49D5008A4078 /* UIComponent */ = {
-			isa = PBXGroup;
-			children = (
-				C7CB1B7B2D6B49E1008A4078 /* Tabbar */,
-			);
-			path = UIComponent;
-			sourceTree = "<group>";
-		};
 		C7CB1B7B2D6B49E1008A4078 /* Tabbar */ = {
 			isa = PBXGroup;
 			children = (
 				C7CB1B7C2D6B49EE008A4078 /* TabBar.swift */,
 			);
 			path = Tabbar;
+			sourceTree = "<group>";
+		};
+		C7CB1B852D6DF859008A4078 /* UIComponent */ = {
+			isa = PBXGroup;
+			children = (
+				C7CB1B862D6DFE49008A4078 /* Text */,
+				C7CB1B7B2D6B49E1008A4078 /* Tabbar */,
+			);
+			path = UIComponent;
+			sourceTree = "<group>";
+		};
+		C7CB1B862D6DFE49008A4078 /* Text */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Text;
 			sourceTree = "<group>";
 		};
 		C7D152392AC51B270064D59F = {
@@ -655,6 +663,7 @@
 		C7D1525A2AC6D17B0064D59F /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				C7CB1B852D6DF859008A4078 /* UIComponent */,
 				C77944F12BB5A9F6003FE400 /* Utils */,
 				C7D152A32AC8566C0064D59F /* Domain */,
 				C7D1529F2AC8234F0064D59F /* Data */,
@@ -677,7 +686,6 @@
 		C7D1525C2AC6E7910064D59F /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				C7CB1B7A2D6B49D5008A4078 /* UIComponent */,
 				C7F378AB2AE90BDA00281A35 /* Filter */,
 				C7F378AA2AE90BBC00281A35 /* Commmon */,
 				C709AA582ADC366E004FA677 /* ProfileViewController */,
