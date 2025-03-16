@@ -29,6 +29,8 @@
 		C70E59D82ADED3F600428CDE /* RegisterTaskRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E59D72ADED3F600428CDE /* RegisterTaskRequestDTO.swift */; };
 		C70E59DA2ADED6A500428CDE /* RealmTaskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E59D92ADED6A500428CDE /* RealmTaskStorage.swift */; };
 		C70E59DF2ADF9DD900428CDE /* FetchTaskListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E59DE2ADF9DD900428CDE /* FetchTaskListDTO.swift */; };
+		C70E7AC02D75A3FA005C1884 /* DetailPetCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E7ABF2D75A3FA005C1884 /* DetailPetCalendarView.swift */; };
+		C70E7AC22D75A40B005C1884 /* DetailPetWeightView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70E7AC12D75A40B005C1884 /* DetailPetWeightView.swift */; };
 		C718B9C82BC710D500059B86 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = C718B9C72BC710D500059B86 /* PrivacyInfo.xcprivacy */; };
 		C719D1D02AF12929001296B9 /* repcare.realm in Resources */ = {isa = PBXBuildFile; fileRef = C719D1CF2AF12929001296B9 /* repcare.realm */; };
 		C7273B9B2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7273B9A2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift */; };
@@ -64,6 +66,8 @@
 		C7460F122AE659AF00F0C3AC /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7460F112AE659AF00F0C3AC /* Date+.swift */; };
 		C74D4BEC2AE6BAF9005AE953 /* UIImage+.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74D4BEB2AE6BAF9005AE953 /* UIImage+.swift */; };
 		C753E4752AFA393200B6C208 /* PetCalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C753E4742AFA393200B6C208 /* PetCalendarViewModel.swift */; };
+		C75C75182D86C84500B2BFE7 /* RPTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75C75172D86C84500B2BFE7 /* RPTextEditor.swift */; };
+		C75C751B2D86D37E00B2BFE7 /* RPBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75C751A2D86D37E00B2BFE7 /* RPBaseView.swift */; };
 		C7608D962AE0F39E001F03DA /* RegisterTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7608D952AE0F39E001F03DA /* RegisterTaskViewController.swift */; };
 		C7675F9A2AE2A6090054BC7A /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7675F992AE2A6090054BC7A /* PaddingLabel.swift */; };
 		C76A01EA2AD264FC0024D008 /* RealmSpeciesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76A01E92AD264FC0024D008 /* RealmSpeciesStorage.swift */; };
@@ -108,7 +112,7 @@
 		C7D152482AC51B270064D59F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152472AC51B270064D59F /* SceneDelegate.swift */; };
 		C7D1524F2AC51B280064D59F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7D1524E2AC51B280064D59F /* Assets.xcassets */; };
 		C7D152522AC51B280064D59F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7D152502AC51B280064D59F /* LaunchScreen.storyboard */; };
-		C7D1525E2AC6E7AC0064D59F /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D1525D2AC6E7AC0064D59F /* Color.swift */; };
+		C7D1525E2AC6E7AC0064D59F /* DefaultColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D1525D2AC6E7AC0064D59F /* DefaultColor.swift */; };
 		C7D152622AC70B3E0064D59F /* PetListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D152612AC70B3E0064D59F /* PetListViewController.swift */; };
 		C7D152652AC7DADC0064D59F /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = C7D152642AC7DADC0064D59F /* Realm */; };
 		C7D152672AC7DADC0064D59F /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = C7D152662AC7DADC0064D59F /* RealmSwift */; };
@@ -181,6 +185,8 @@
 		C70E59D72ADED3F600428CDE /* RegisterTaskRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTaskRequestDTO.swift; sourceTree = "<group>"; };
 		C70E59D92ADED6A500428CDE /* RealmTaskStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTaskStorage.swift; sourceTree = "<group>"; };
 		C70E59DE2ADF9DD900428CDE /* FetchTaskListDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchTaskListDTO.swift; sourceTree = "<group>"; };
+		C70E7ABF2D75A3FA005C1884 /* DetailPetCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPetCalendarView.swift; sourceTree = "<group>"; };
+		C70E7AC12D75A40B005C1884 /* DetailPetWeightView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPetWeightView.swift; sourceTree = "<group>"; };
 		C718B9C72BC710D500059B86 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		C719D1CF2AF12929001296B9 /* repcare.realm */ = {isa = PBXFileReference; lastKnownFileType = file; path = repcare.realm; sourceTree = "<group>"; };
 		C7273B9A2AD2E71E004B7A6F /* RegisterCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -214,6 +220,8 @@
 		C7460F112AE659AF00F0C3AC /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		C74D4BEB2AE6BAF9005AE953 /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
 		C753E4742AFA393200B6C208 /* PetCalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetCalendarViewModel.swift; sourceTree = "<group>"; };
+		C75C75172D86C84500B2BFE7 /* RPTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPTextEditor.swift; sourceTree = "<group>"; };
+		C75C751A2D86D37E00B2BFE7 /* RPBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPBaseView.swift; sourceTree = "<group>"; };
 		C7608D952AE0F39E001F03DA /* RegisterTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterTaskViewController.swift; sourceTree = "<group>"; };
 		C7675F992AE2A6090054BC7A /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		C76A01E92AD264FC0024D008 /* RealmSpeciesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmSpeciesStorage.swift; sourceTree = "<group>"; };
@@ -259,7 +267,7 @@
 		C7D1524E2AC51B280064D59F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C7D152512AC51B280064D59F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C7D152532AC51B280064D59F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C7D1525D2AC6E7AC0064D59F /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		C7D1525D2AC6E7AC0064D59F /* DefaultColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultColor.swift; sourceTree = "<group>"; };
 		C7D152612AC70B3E0064D59F /* PetListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetListViewController.swift; sourceTree = "<group>"; };
 		C7D152A12AC855F60064D59F /* PetClassObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetClassObject.swift; sourceTree = "<group>"; };
 		C7D152A72AC8F9D60064D59F /* PetSpeciesObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSpeciesObject.swift; sourceTree = "<group>"; };
@@ -534,6 +542,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		C75C75192D86D36F00B2BFE7 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				C75C751A2D86D37E00B2BFE7 /* RPBaseView.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		C76A01E82AD264D00024D008 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
@@ -554,6 +570,8 @@
 				C709AA3F2ADA9367004FA677 /* View */,
 				C776F6A62ADA8379006015AD /* DetailPetViewController.swift */,
 				C7CB1B782D6B0368008A4078 /* DetailPetView.swift */,
+				C70E7AC12D75A40B005C1884 /* DetailPetWeightView.swift */,
+				C70E7ABF2D75A3FA005C1884 /* DetailPetCalendarView.swift */,
 			);
 			path = DetailPet;
 			sourceTree = "<group>";
@@ -607,6 +625,7 @@
 		C7CB1B852D6DF859008A4078 /* UIComponent */ = {
 			isa = PBXGroup;
 			children = (
+				C75C75192D86D36F00B2BFE7 /* Base */,
 				C7CB1B862D6DFE49008A4078 /* Text */,
 				C7CB1B7B2D6B49E1008A4078 /* Tabbar */,
 			);
@@ -616,6 +635,7 @@
 		C7CB1B862D6DFE49008A4078 /* Text */ = {
 			isa = PBXGroup;
 			children = (
+				C75C75172D86C84500B2BFE7 /* RPTextEditor.swift */,
 			);
 			path = Text;
 			sourceTree = "<group>";
@@ -706,7 +726,7 @@
 		C7D1525F2AC70B080064D59F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				C7D1525D2AC6E7AC0064D59F /* Color.swift */,
+				C7D1525D2AC6E7AC0064D59F /* DefaultColor.swift */,
 				C7675F992AE2A6090054BC7A /* PaddingLabel.swift */,
 			);
 			path = Utils;
@@ -1119,7 +1139,9 @@
 				C7273BA12AD43DC2004B7A6F /* PetClassModel.swift in Sources */,
 				C7C26FC32AE9689800A76B03 /* PetListSceneDIContainer.swift in Sources */,
 				C709AA5E2ADD198C004FA677 /* DetailPetHeaderViewController.swift in Sources */,
+				C75C751B2D86D37E00B2BFE7 /* RPBaseView.swift in Sources */,
 				C7F5F4252ACE5BA500ACFC76 /* RegisterInputView.swift in Sources */,
+				C70E7AC22D75A40B005C1884 /* DetailPetWeightView.swift in Sources */,
 				C7F3E8B42AE4D7C0007621E1 /* WeightDTO.swift in Sources */,
 				C7C26FC82AE9FD3B00A76B03 /* UpdatePetViewModel.swift in Sources */,
 				C7D152A22AC855F60064D59F /* PetClassObject.swift in Sources */,
@@ -1177,6 +1199,7 @@
 				C709AA572ADBB64E004FA677 /* DetailPetViewModel.swift in Sources */,
 				C727A4222AD6E8D700880111 /* PetImageRepository.swift in Sources */,
 				C7F3E8B82AE4DDDA007621E1 /* RegisterWeightViewController.swift in Sources */,
+				C75C75182D86C84500B2BFE7 /* RPTextEditor.swift in Sources */,
 				C709AA462ADB650B004FA677 /* TaskCollectionViewCell.swift in Sources */,
 				C7D152482AC51B270064D59F /* SceneDelegate.swift in Sources */,
 				C7F5F42D2ACE873F00ACFC76 /* ClassSpeciesMorphViewController.swift in Sources */,
@@ -1196,6 +1219,7 @@
 				C70E59D82ADED3F600428CDE /* RegisterTaskRequestDTO.swift in Sources */,
 				C7F3E8B12AE4D6B5007621E1 /* WeightStorage.swift in Sources */,
 				C76A01EE2AD2676B0024D008 /* PetClassResponseDTO.swift in Sources */,
+				C70E7AC02D75A3FA005C1884 /* DetailPetCalendarView.swift in Sources */,
 				C76A01EC2AD265FB0024D008 /* SpeciesStorage.swift in Sources */,
 				C7C31ECA2AEC31CB008CC215 /* UIViewController+.swift in Sources */,
 				C76A01F22AD26E550024D008 /* DetailSpecies.swift in Sources */,
@@ -1227,7 +1251,7 @@
 				C77944F52BB5CFA9003FE400 /* TablePetCollectionViewCell.swift in Sources */,
 				C7F5F4A72AD1025300ACFC76 /* DefaultSpeciesRepository.swift in Sources */,
 				C7E835E42AE576FA00AA0361 /* DateFormatter+.swift in Sources */,
-				C7D1525E2AC6E7AC0064D59F /* Color.swift in Sources */,
+				C7D1525E2AC6E7AC0064D59F /* DefaultColor.swift in Sources */,
 				C77945002BBFB416003FE400 /* ImageFetchOperation.swift in Sources */,
 				C776F6A72ADA8379006015AD /* DetailPetViewController.swift in Sources */,
 				C7F378AD2AE90BE900281A35 /* FilterViewController.swift in Sources */,
@@ -1381,7 +1405,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = SBAHW5F54N;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RepCare/Resource/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "렙케어";
@@ -1418,7 +1442,7 @@
 				CODE_SIGN_ENTITLEMENTS = RepCare/RepCare.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = SBAHW5F54N;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = RepCare/Resource/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "렙케어";

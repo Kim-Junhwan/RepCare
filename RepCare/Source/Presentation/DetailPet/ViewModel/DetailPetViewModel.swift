@@ -13,6 +13,7 @@ final class DetailPetViewModel {
     enum DetailPetTabBarType: CaseIterable {
         case calendar_timeLine
         case weight
+        case petPhoto
         
         var title: String {
             switch self {
@@ -20,6 +21,8 @@ final class DetailPetViewModel {
                 "캘린더 / 타임라인"
             case .weight:
                 "무게"
+            case .petPhoto:
+                "개체 사진"
             }
         }
     }

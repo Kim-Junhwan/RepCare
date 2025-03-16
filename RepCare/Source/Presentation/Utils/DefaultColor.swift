@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum Color {
+enum DefaultColor {
     static let deepGreen = UIColor(named: "DeepGreen")
     static let lightDeepGreen = UIColor(named: "LightDeepGreen")
     static let lightGreen = UIColor(named: "LightGreen")
